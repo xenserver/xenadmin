@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return Messages.START_UPGRADE;
         }
 
-        protected override List<CheckGroup> GenerateChecks(Pool_patch patch)
+        protected override List<CheckGroup> GenerateChecks()
         {
             var groups = new List<CheckGroup>();
 

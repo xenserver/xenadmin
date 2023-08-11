@@ -221,7 +221,22 @@ namespace XenAdmin.Controls
             contextMenuStrip1.Show(dataGridViewEx1, dataGridViewEx1.PointToClient(MousePosition));
         }
 
-        
+        private void dataGridViewEx1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
+                e.ColumnIndex < dataGridViewEx1.ColumnCount && e.RowIndex < dataGridViewEx1.RowCount)
+            {
+                var row = dataGridViewEx1.Rows[e.RowIndex] as DataGridViewExRow;
+                var cell = row?.Cells[e.ColumnIndex];
+
+                if (row != null && row.Enabled && cell is DataGridViewLinkCell)
+                    dataGridViewEx1.Cursor = Cursors.Hand;
+                else
+                    dataGridViewEx1.Cursor = Cursors.Default;
+            }
+        }
+
+
         private void CopyMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(dataGridViewEx1.SelectedRows[0].Cells[1].Value);
@@ -315,13 +330,14 @@ namespace XenAdmin.Controls
             }
         }
 
-        private void AddRow(DataGridViewCell keyCell, DataGridViewCell valueCell, DataGridViewCell noteCell, params ToolStripMenuItem[] contextMenuItems)
+        private void AddRow(DataGridViewCell keyCell, DataGridViewCell valueCell, DataGridViewCell noteCell, bool enabled, params ToolStripMenuItem[] contextMenuItems)
         {
             var r = new DataGridViewExRow();
             r.Cells.AddRange(keyCell, valueCell, noteCell ?? new DataGridViewTextBoxCell());
             r.Tag = contextMenuItems;
 
             dataGridViewEx1.Rows.Add(r);
+            r.Enabled = enabled;
 
             if (inLayout)
                 return;
@@ -366,32 +382,41 @@ namespace XenAdmin.Controls
         public void AddEntry(string key, string value, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new DataGridViewTextBoxCell { Value = value };
-            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
+            AddRow(CreateKeyCell(key), valueCell, null, true, contextMenuItems);
         }
 
         public void AddEntry(string key, string value, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new DataGridViewTextBoxCell { Value = value };
-            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
+            AddRow(CreateKeyCell(key), valueCell, null, true, contextMenuItems);
             valueCell.Style.ForeColor = fontColor;
         }
 
         public void AddEntry(string key, FolderListItem value, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new FolderCell(value); // CA-33311
-            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
+            AddRow(CreateKeyCell(key), valueCell, null, true, contextMenuItems);
         }
 
         internal void AddEntryLink(string key, string value, Command command, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new DataGridViewLinkCell { Value = value, Tag = command };
-            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
+            AddRow(CreateKeyCell(key), valueCell, null, true, contextMenuItems);
         }
 
         internal void AddEntryLink(string key, string value, Action action, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new DataGridViewLinkCell { Value = value, Tag = action };
-            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
+            AddRow(CreateKeyCell(key), valueCell, null, true, contextMenuItems);
+        }
+
+        internal void AddEntryWithNoteLink(string key, string value, string note, Action action, bool enabled, params ToolStripMenuItem[] contextMenuItems)
+        {
+            var valueCell = new DataGridViewTextBoxCell { Value = value };
+            var noteCell = new DataGridViewLinkCell { Value = note, Tag = action };
+            if (!enabled)
+                noteCell.LinkColor = SystemColors.GrayText;
+            AddRow(CreateKeyCell(key), valueCell, noteCell, enabled, contextMenuItems);
         }
 
         internal void AddEntryWithNoteLink(string key, string value, string note, Action action, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
@@ -400,7 +425,7 @@ namespace XenAdmin.Controls
             var noteCell = new DataGridViewLinkCell { Value = note, Tag = action };
             valueCell.Style.ForeColor = fontColor;
             valueCell.Style.SelectionForeColor = fontColor;
-            AddRow(CreateKeyCell(key), valueCell, noteCell, contextMenuItems);
+            AddRow(CreateKeyCell(key), valueCell, noteCell, true, contextMenuItems);
         }
 
         public void UpdateEntryValueWithKey(string Key, string newValue, bool visible)

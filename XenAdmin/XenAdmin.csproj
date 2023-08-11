@@ -94,6 +94,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Actions\GUIActions\ConfigYumRepoAction.cs" />
     <Compile Include="Actions\GUIActions\ExportResourceReportAction.cs" />
     <Compile Include="Actions\GUIActions\DismissAlertsAction.cs" />
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
@@ -102,9 +103,11 @@
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
+    <Compile Include="Alerts\Types\CssExpiryAlert.cs" />
     <Compile Include="Alerts\Types\FailedLoginAttemptAlert.cs" />
     <Compile Include="Alerts\Types\CertificateAlert.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
+    <Compile Include="Alerts\Types\OutOfSyncWithCdnAlert.cs" />
     <Compile Include="Alerts\Types\HotfixEligibilityAlert.cs" />
     <Compile Include="Alerts\Types\LeafCoalesceAlert.cs" />
     <Compile Include="Alerts\Types\PolicyAlert.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\PoolUpdatesCommand.cs" />
     <Compile Include="Commands\VtpmCommand.cs" />
     <Compile Include="Controls\ClientIdControl.cs">
       <SubType>UserControl</SubType>
@@ -238,6 +242,7 @@
     </Compile>
     <Compile Include="Core\HiddenFeatures.cs" />
     <Compile Include="Core\Metadata.cs" />
+    <Compile Include="Core\RepoDescriptor.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
@@ -254,6 +259,7 @@
     <Compile Include="Diagnostics\Checks\PVGuestsCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
+    <Compile Include="Diagnostics\Checks\OutOfSyncWithCdnCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
@@ -278,6 +284,7 @@
     <Compile Include="Diagnostics\Problems\HostProblem\ConflictingUpdatePresent.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\NotLicensedForAutomatedUpdatesWarning.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\CdnOutOfSyncProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\ServerSelectionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\VSwitchControllerProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\EuaNotFoundProblem.cs" />
@@ -309,6 +316,12 @@
     <Compile Include="Dialogs\ClientIdDialog.Designer.cs">
       <DependentUpon>ClientIdDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ServerUpdates\ConfigUpdatesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ServerUpdates\ConfigUpdatesDialog.Designer.cs">
+      <DependentUpon>ConfigUpdatesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ConversionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +342,18 @@
     </Compile>
     <Compile Include="Dialogs\InstallCertificateDialog.Designer.cs">
       <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ServerUpdates\ConfigLcmUpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ServerUpdates\ConfigLcmUpdatesPage.Designer.cs">
+      <DependentUpon>ConfigLcmUpdatesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ServerUpdates\ConfigCdnUpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ServerUpdates\ConfigCdnUpdatesPage.Designer.cs">
+      <DependentUpon>ConfigCdnUpdatesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\VtpmManagementPage.cs">
       <SubType>UserControl</SubType>
@@ -525,6 +550,9 @@
     <Compile Include="TabPages\BaseTabPage.Designer.cs">
       <DependentUpon>BaseTabPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\CdnUpdates\CdnExpandableRow.cs" />
+    <Compile Include="TabPages\CdnUpdates\CdnExtensions.cs" />
+    <Compile Include="TabPages\CdnUpdates\CdnExpandableTextAndImageCell.cs" />
     <Compile Include="TabPages\DockerDetailsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -536,6 +564,12 @@
     </Compile>
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\ManageCdnUpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\ManageCdnUpdatesPage.Designer.cs">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\NotificationsBasePage.cs">
       <SubType>UserControl</SubType>
@@ -870,6 +904,7 @@
     <Compile Include="Wizards\ImportWizard\ImportBootOptionPage.Designer.cs">
       <DependentUpon>ImportBootOptionPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyCdnUpdatesPlanAction.cs" />
     <Compile Include="Wizards\WizardHelpers.cs" />
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.cs">
@@ -1692,6 +1727,15 @@
     <EmbeddedResource Include="Dialogs\ClientIdDialog.zh-CN.resx">
       <DependentUpon>ClientIdDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigUpdatesDialog.ja.resx">
+      <DependentUpon>ConfigUpdatesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigUpdatesDialog.resx">
+      <DependentUpon>ConfigUpdatesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigUpdatesDialog.zh-CN.resx">
+      <DependentUpon>ConfigUpdatesDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConversionDialog.ja.resx">
       <DependentUpon>ConversionDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1850,6 +1894,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InstallCertificateDialog.zh-CN.resx">
       <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigLcmUpdatesPage.ja.resx">
+      <DependentUpon>ConfigLcmUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigLcmUpdatesPage.resx">
+      <DependentUpon>ConfigLcmUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigLcmUpdatesPage.zh-CN.resx">
+      <DependentUpon>ConfigLcmUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigCdnUpdatesPage.ja.resx">
+      <DependentUpon>ConfigCdnUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigCdnUpdatesPage.resx">
+      <DependentUpon>ConfigCdnUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ServerUpdates\ConfigCdnUpdatesPage.zh-CN.resx">
+      <DependentUpon>ConfigCdnUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VtpmManagementPage.ja.resx">
       <DependentUpon>VtpmManagementPage.cs</DependentUpon>
@@ -2241,6 +2303,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageCdnUpdatesPage.ja.resx">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageCdnUpdatesPage.resx">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageCdnUpdatesPage.zh-CN.resx">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.ja.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
@@ -4495,12 +4566,15 @@
     <None Include="Images\linx_16x.png" />
     <None Include="Images\yinhekylin_16x.png" />
     <None Include="Images\pool_32.png" />
+    <None Include="Images\pool_unpatched.png" />
+    <None Include="Images\livepatch_16.png" />
     <Content Include="Images\queued.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <None Include="Images\rightArrowLong_Blue_16.png" />
     <Content Include="Images\save_to_disk.png" />
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />

@@ -100,7 +100,11 @@ namespace XenAPI
             bool coordinator_bias,
             XenRef<Secret> telemetry_uuid,
             telemetry_frequency telemetry_frequency,
-            DateTime telemetry_next_collection)
+            DateTime telemetry_next_collection,
+            DateTime last_update_sync,
+            update_sync_frequency update_sync_frequency,
+            long update_sync_day,
+            bool update_sync_enabled)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -152,6 +156,10 @@ namespace XenAPI
             this.telemetry_uuid = telemetry_uuid;
             this.telemetry_frequency = telemetry_frequency;
             this.telemetry_next_collection = telemetry_next_collection;
+            this.last_update_sync = last_update_sync;
+            this.update_sync_frequency = update_sync_frequency;
+            this.update_sync_day = update_sync_day;
+            this.update_sync_enabled = update_sync_enabled;
         }
 
         /// <summary>
@@ -224,6 +232,10 @@ namespace XenAPI
             telemetry_uuid = record.telemetry_uuid;
             telemetry_frequency = record.telemetry_frequency;
             telemetry_next_collection = record.telemetry_next_collection;
+            last_update_sync = record.last_update_sync;
+            update_sync_frequency = record.update_sync_frequency;
+            update_sync_day = record.update_sync_day;
+            update_sync_enabled = record.update_sync_enabled;
         }
 
         /// <summary>
@@ -334,6 +346,14 @@ namespace XenAPI
                 telemetry_frequency = (telemetry_frequency)Helper.EnumParseDefault(typeof(telemetry_frequency), Marshalling.ParseString(table, "telemetry_frequency"));
             if (table.ContainsKey("telemetry_next_collection"))
                 telemetry_next_collection = Marshalling.ParseDateTime(table, "telemetry_next_collection");
+            if (table.ContainsKey("last_update_sync"))
+                last_update_sync = Marshalling.ParseDateTime(table, "last_update_sync");
+            if (table.ContainsKey("update_sync_frequency"))
+                update_sync_frequency = (update_sync_frequency)Helper.EnumParseDefault(typeof(update_sync_frequency), Marshalling.ParseString(table, "update_sync_frequency"));
+            if (table.ContainsKey("update_sync_day"))
+                update_sync_day = Marshalling.ParseLong(table, "update_sync_day");
+            if (table.ContainsKey("update_sync_enabled"))
+                update_sync_enabled = Marshalling.ParseBool(table, "update_sync_enabled");
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
@@ -394,7 +414,11 @@ namespace XenAPI
                 Helper.AreEqual2(this._coordinator_bias, other._coordinator_bias) &&
                 Helper.AreEqual2(this._telemetry_uuid, other._telemetry_uuid) &&
                 Helper.AreEqual2(this._telemetry_frequency, other._telemetry_frequency) &&
-                Helper.AreEqual2(this._telemetry_next_collection, other._telemetry_next_collection);
+                Helper.AreEqual2(this._telemetry_next_collection, other._telemetry_next_collection) &&
+                Helper.AreEqual2(this._last_update_sync, other._last_update_sync) &&
+                Helper.AreEqual2(this._update_sync_frequency, other._update_sync_frequency) &&
+                Helper.AreEqual2(this._update_sync_day, other._update_sync_day) &&
+                Helper.AreEqual2(this._update_sync_enabled, other._update_sync_enabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -1057,6 +1081,50 @@ namespace XenAPI
         public static DateTime get_telemetry_next_collection(Session session, string _pool)
         {
             return session.JsonRpcClient.pool_get_telemetry_next_collection(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the last_update_sync field of the given pool.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static DateTime get_last_update_sync(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_last_update_sync(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the update_sync_frequency field of the given pool.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static update_sync_frequency get_update_sync_frequency(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_update_sync_frequency(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the update_sync_day field of the given pool.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static long get_update_sync_day(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_update_sync_day(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the update_sync_enabled field of the given pool.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_update_sync_enabled(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_update_sync_enabled(session.opaque_ref, _pool);
         }
 
         /// <summary>
@@ -2822,6 +2890,56 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Configure periodic update synchronization to sync updates from a remote CDN
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_update_sync_frequency">The frequency at which updates are synchronized from a remote CDN: daily or weekly.</param>
+        /// <param name="_update_sync_day">The day of the week the update synchronization will happen, based on pool's local timezone. Valid values are 0 to 6, 0 being Sunday. For 'daily' schedule, the value is ignored.</param>
+        public static void configure_update_sync(Session session, string _pool, update_sync_frequency _update_sync_frequency, long _update_sync_day)
+        {
+            session.JsonRpcClient.pool_configure_update_sync(session.opaque_ref, _pool, _update_sync_frequency, _update_sync_day);
+        }
+
+        /// <summary>
+        /// Configure periodic update synchronization to sync updates from a remote CDN
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_update_sync_frequency">The frequency at which updates are synchronized from a remote CDN: daily or weekly.</param>
+        /// <param name="_update_sync_day">The day of the week the update synchronization will happen, based on pool's local timezone. Valid values are 0 to 6, 0 being Sunday. For 'daily' schedule, the value is ignored.</param>
+        public static XenRef<Task> async_configure_update_sync(Session session, string _pool, update_sync_frequency _update_sync_frequency, long _update_sync_day)
+        {
+          return session.JsonRpcClient.async_pool_configure_update_sync(session.opaque_ref, _pool, _update_sync_frequency, _update_sync_day);
+        }
+
+        /// <summary>
+        /// enable or disable periodic update synchronization depending on the value
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">true - enable periodic update synchronization, false - disable it</param>
+        public static void set_update_sync_enabled(Session session, string _pool, bool _value)
+        {
+            session.JsonRpcClient.pool_set_update_sync_enabled(session.opaque_ref, _pool, _value);
+        }
+
+        /// <summary>
+        /// enable or disable periodic update synchronization depending on the value
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">true - enable periodic update synchronization, false - disable it</param>
+        public static XenRef<Task> async_set_update_sync_enabled(Session session, string _pool, bool _value)
+        {
+          return session.JsonRpcClient.async_pool_set_update_sync_enabled(session.opaque_ref, _pool, _value);
+        }
+
+        /// <summary>
         /// Return a list of all the pools known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3748,5 +3866,79 @@ namespace XenAPI
             }
         }
         private DateTime _telemetry_next_collection = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// time of the last update sychronization
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
+        public virtual DateTime last_update_sync
+        {
+            get { return _last_update_sync; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_update_sync))
+                {
+                    _last_update_sync = value;
+                    NotifyPropertyChanged("last_update_sync");
+                }
+            }
+        }
+        private DateTime _last_update_sync = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// The frequency at which updates are synchronized from a remote CDN: daily or weekly.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        [JsonConverter(typeof(update_sync_frequencyConverter))]
+        public virtual update_sync_frequency update_sync_frequency
+        {
+            get { return _update_sync_frequency; }
+            set
+            {
+                if (!Helper.AreEqual(value, _update_sync_frequency))
+                {
+                    _update_sync_frequency = value;
+                    NotifyPropertyChanged("update_sync_frequency");
+                }
+            }
+        }
+        private update_sync_frequency _update_sync_frequency = update_sync_frequency.weekly;
+
+        /// <summary>
+        /// The day of the week the update synchronizations will be scheduled, based on pool's local timezone. Ignored when update_sync_frequency is daily
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        public virtual long update_sync_day
+        {
+            get { return _update_sync_day; }
+            set
+            {
+                if (!Helper.AreEqual(value, _update_sync_day))
+                {
+                    _update_sync_day = value;
+                    NotifyPropertyChanged("update_sync_day");
+                }
+            }
+        }
+        private long _update_sync_day = 0;
+
+        /// <summary>
+        /// Whether periodic update synchronization is enabled or not
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        public virtual bool update_sync_enabled
+        {
+            get { return _update_sync_enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _update_sync_enabled))
+                {
+                    _update_sync_enabled = value;
+                    NotifyPropertyChanged("update_sync_enabled");
+                }
+            }
+        }
+        private bool _update_sync_enabled = false;
     }
 }

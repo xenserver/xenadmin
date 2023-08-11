@@ -138,7 +138,8 @@ namespace XenAPI
             string reference_label,
             domain_type domain_type,
             Dictionary<string, string> NVRAM,
-            List<update_guidances> pending_guidances)
+            List<update_guidances> pending_guidances,
+            List<update_guidances> recommended_guidances)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -228,6 +229,7 @@ namespace XenAPI
             this.domain_type = domain_type;
             this.NVRAM = NVRAM;
             this.pending_guidances = pending_guidances;
+            this.recommended_guidances = recommended_guidances;
         }
 
         /// <summary>
@@ -338,6 +340,7 @@ namespace XenAPI
             domain_type = record.domain_type;
             NVRAM = record.NVRAM;
             pending_guidances = record.pending_guidances;
+            recommended_guidances = record.recommended_guidances;
         }
 
         /// <summary>
@@ -524,6 +527,8 @@ namespace XenAPI
                 NVRAM = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "NVRAM"));
             if (table.ContainsKey("pending_guidances"))
                 pending_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "pending_guidances"));
+            if (table.ContainsKey("recommended_guidances"))
+                recommended_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "recommended_guidances"));
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -622,7 +627,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._reference_label, other._reference_label) &&
                 Helper.AreEqual2(this._domain_type, other._domain_type) &&
                 Helper.AreEqual2(this._NVRAM, other._NVRAM) &&
-                Helper.AreEqual2(this._pending_guidances, other._pending_guidances);
+                Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
+                Helper.AreEqual2(this._recommended_guidances, other._recommended_guidances);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1878,6 +1884,17 @@ namespace XenAPI
         public static List<update_guidances> get_pending_guidances(Session session, string _vm)
         {
             return session.JsonRpcClient.vm_get_pending_guidances(session.opaque_ref, _vm);
+        }
+
+        /// <summary>
+        /// Get the recommended_guidances field of the given VM.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static List<update_guidances> get_recommended_guidances(Session session, string _vm)
+        {
+            return session.JsonRpcClient.vm_get_recommended_guidances(session.opaque_ref, _vm);
         }
 
         /// <summary>
@@ -5834,5 +5851,23 @@ namespace XenAPI
             }
         }
         private List<update_guidances> _pending_guidances = new List<update_guidances>() {};
+
+        /// <summary>
+        /// The set of recommended guidances after applying updates
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        public virtual List<update_guidances> recommended_guidances
+        {
+            get { return _recommended_guidances; }
+            set
+            {
+                if (!Helper.AreEqual(value, _recommended_guidances))
+                {
+                    _recommended_guidances = value;
+                    NotifyPropertyChanged("recommended_guidances");
+                }
+            }
+        }
+        private List<update_guidances> _recommended_guidances = new List<update_guidances>() {};
     }
 }

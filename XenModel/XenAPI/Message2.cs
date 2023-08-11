@@ -34,6 +34,11 @@ namespace XenAPI
     {
         public enum MessageType
         {
+            PERIODIC_UPDATE_SYNC_FAILED,
+            UPDATES_FEATURE_EXPIRED,
+            UPDATES_FEATURE_EXPIRING_WARNING,
+            UPDATES_FEATURE_EXPIRING_MAJOR,
+            UPDATES_FEATURE_EXPIRING_CRITICAL,
             TLS_VERIFICATION_EMERGENCY_DISABLED,
             FAILED_LOGIN_ATTEMPTS,
             HOST_INTERNAL_CERTIFICATE_EXPIRING_07,
@@ -143,6 +148,16 @@ namespace XenAPI
             {
                 switch (this.name)
                 {
+                    case "PERIODIC_UPDATE_SYNC_FAILED":
+                        return MessageType.PERIODIC_UPDATE_SYNC_FAILED;
+                    case "UPDATES_FEATURE_EXPIRED":
+                        return MessageType.UPDATES_FEATURE_EXPIRED;
+                    case "UPDATES_FEATURE_EXPIRING_WARNING":
+                        return MessageType.UPDATES_FEATURE_EXPIRING_WARNING;
+                    case "UPDATES_FEATURE_EXPIRING_MAJOR":
+                        return MessageType.UPDATES_FEATURE_EXPIRING_MAJOR;
+                    case "UPDATES_FEATURE_EXPIRING_CRITICAL":
+                        return MessageType.UPDATES_FEATURE_EXPIRING_CRITICAL;
                     case "TLS_VERIFICATION_EMERGENCY_DISABLED":
                         return MessageType.TLS_VERIFICATION_EMERGENCY_DISABLED;
                     case "FAILED_LOGIN_ATTEMPTS":

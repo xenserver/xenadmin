@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 
@@ -49,17 +50,17 @@ namespace XenAPI
 
         public string FriendlyName()
         {
-            return FriendlyNameManager.GetFriendlyName(string.Format("Role.{0}.NameLabel", name_label.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName($"Role.{name_label.ToLowerInvariant()}.NameLabel");
         }
 
         public static string FriendlyName(string role)
         {
-            return FriendlyNameManager.GetFriendlyName(string.Format("Role.{0}.NameLabel", role.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName($"Role.{role.ToLowerInvariant()}.NameLabel");
         }
 
         public string FriendlyDescription()
         {
-            return FriendlyNameManager.GetFriendlyName(string.Format("Role.{0}.Description", this.name_label.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName($"Role.{name_label.ToLowerInvariant()}.Description");
         }
 
         public override string Name()
@@ -70,7 +71,7 @@ namespace XenAPI
         /// <summary>
         /// Currently all RBAC roles can be arranged in a rank so that each one has all the privileges of the next. Use this function for sorting based on this ordering.
         /// </summary>
-        public int RoleRank()
+        private int RoleRank()
         {
             switch (name_label.ToLowerInvariant())
             {
@@ -102,14 +103,14 @@ namespace XenAPI
         );
 
         /// <summary>
-        /// Takes a list of role objects and returns as a comma separated friendly string
+        /// Takes a list of role objects and returns as a comma separated friendly string.
+        /// Note that it excludes xapi internal roles.
         /// </summary>
-        public static string FriendlyCSVRoleList(List<Role> roles)
+        public static string FriendlyCsvRoleList(List<Role> roles)
         {
-            if (roles == null)
-                return "";
-
-            return String.Join(", ", roles.ConvertAll(r => r.FriendlyName()).ToArray());
+            return roles == null
+                ? string.Empty
+                : string.Join(", ", roles.Where(r => !r._is_internal).Select(r => r.FriendlyName()));
         }
 
         /// <summary>

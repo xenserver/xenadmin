@@ -36,39 +36,29 @@ namespace XenAdmin.Controls
 {
     public class DataGridViewTextAndImageCell : DataGridViewTextBoxCell
     {
-
-      
         public Image Image { get; set; }
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
         {
+            var indent = 0;
+
             if (Image != null)
             {
-                base.Paint(graphics, clipBounds,
-                           new Rectangle(cellBounds.X + Image.Width, cellBounds.Y, cellBounds.Width - Image.Height,cellBounds.Height),
-                           rowIndex, cellState, value, formattedValue,errorText, cellStyle, advancedBorderStyle, paintParts);
+                var color = (cellState & DataGridViewElementStates.Selected) != 0
+                    ? DataGridView.DefaultCellStyle.SelectionBackColor
+                    : DataGridView.DefaultCellStyle.BackColor;
 
-                if ((cellState & DataGridViewElementStates.Selected) != 0)
-                {
-                    using (var brush = new SolidBrush(DataGridView.DefaultCellStyle.SelectionBackColor))
-                        graphics.FillRectangle(
-                            brush, cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
-                }
-                else
-                {
-                    using (var brush = new SolidBrush(DataGridView.DefaultCellStyle.BackColor))
-                        graphics.FillRectangle(brush,
-                                               cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
-                }
-                graphics.DrawImage(Image, cellBounds.X, cellBounds.Y+2, Image.Width,
-                                         Math.Min(Image.Height,cellBounds.Height));
+                using (var brush = new SolidBrush(color))
+                    graphics.FillRectangle(brush, cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
 
-            }
-            else
-            {
-                base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
+                graphics.DrawImage(Image, cellBounds.X, cellBounds.Y + 2, Image.Width, Math.Min(Image.Height, cellBounds.Height));
+
+                indent += Image.Width;
             }
 
+            var textBounds = new Rectangle(cellBounds.X + indent, cellBounds.Y, cellBounds.Width - indent, cellBounds.Height);
+
+            base.Paint(graphics, clipBounds, textBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
         }
     }
 }

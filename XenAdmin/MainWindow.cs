@@ -60,6 +60,7 @@ using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
 using XenAdmin.Controls.GradientPanel;
+using XenAdmin.Dialogs.ServerUpdates;
 using XenAdmin.Help;
 
 namespace XenAdmin
@@ -104,6 +105,8 @@ namespace XenAdmin
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
         internal readonly UsbPage UsbPage = new UsbPage();
 
+        private readonly NotificationsBasePage[] _notificationPages;
+
         private ActionBase statusBarAction;
 
         private bool IgnoreTabChanges;
@@ -113,6 +116,7 @@ namespace XenAdmin
         /// Without this Resize_End is triggered even when window is moved around and not resized
         /// </summary>
         private bool mainWindowResized;
+        FormWindowState lastState = FormWindowState.Normal;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
 
@@ -137,6 +141,14 @@ namespace XenAdmin
         static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
 
         public event Action CloseSplashRequested;
+
+        private readonly CollectionChangeEventHandler PoolCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler MessageCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler HostCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler VMCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler SRCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler FolderCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler TaskCollectionChangedWithInvoke;
 
         public MainWindow(string[] args)
         {
@@ -203,6 +215,8 @@ namespace XenAdmin
 
             #endregion
 
+            _notificationPages = new NotificationsBasePage[] { alertPage, updatesPage, cdnUpdatesPage, eventsPage };
+
             PoolCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Pool>);
             MessageCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MessageCollectionChanged);
             HostCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Host>);
@@ -249,7 +263,9 @@ namespace XenAdmin
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
 
-            statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
+            statusButtonAlerts.Visible = statusButtonUpdates.Visible = statusButtonCdnUpdates.Visible = statusButtonProgress.Visible = statusButtonErrors.Visible = false;
+            statusButtonUpdates.ToolTipText = string.Format(statusButtonUpdates.ToolTipText, BrandManager.ProductVersion821);
+            statusButtonCdnUpdates.ToolTipText = string.Format(statusButtonCdnUpdates.ToolTipText, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
         }
 
         private void RegisterEvents()
@@ -258,6 +274,7 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.RegisterEventHandlers();
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged += Updates_CollectionChanged;
+            Updates.CdnUpdateInfoChanged += Cdn_UpdateInfoChanged;
             Updates.CheckForClientUpdatesStarted += ClientUpdatesCheck_Started;
             Updates.CheckForClientUpdatesCompleted += ClientUpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
@@ -273,6 +290,7 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged -= Updates_CollectionChanged;
+            Updates.CdnUpdateInfoChanged -= Cdn_UpdateInfoChanged;
             Updates.CheckForClientUpdatesStarted -= ClientUpdatesCheck_Started;
             Updates.CheckForClientUpdatesCompleted -= ClientUpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
@@ -376,11 +394,14 @@ namespace XenAdmin
         {
             base.OnShown(e);
             TheTabControl.Visible = true;
-            alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+
+            foreach (var page in _notificationPages)
+            {
+                page.Visible = false;
+                page.FiltersChanged += NotificationsPage_FiltersChanged;
+            }
+
             SetFiltersLabel();
-            alertPage.FiltersChanged += NotificationsPage_FiltersChanged;
-            updatesPage.FiltersChanged += NotificationsPage_FiltersChanged;
-            eventsPage.FiltersChanged += NotificationsPage_FiltersChanged;
             navigationPane.FocusTreeView();
         }
 
@@ -464,7 +485,7 @@ namespace XenAdmin
                     else
                         return;
 
-                    UpdateErrorStatusLabel();
+                    UpdateErrorStatusButton();
                     break;
             }
         }
@@ -488,7 +509,7 @@ namespace XenAdmin
             Program.Invoke(this, () =>
             {
                 UpdateStatusProgressBar(action);
-                UpdateErrorStatusLabel();
+                UpdateErrorStatusButton();
             });
         }
 
@@ -526,29 +547,18 @@ namespace XenAdmin
             }
         }
 
-        private void UpdateErrorStatusLabel()
+        private void UpdateErrorStatusButton()
         {
+            int progressCount = ConnectionsManager.History.Count(a => !a.IsCompleted);
+            statusButtonProgress.Text = progressCount.ToString();
+            statusButtonProgress.Visible = progressCount > 0;
+
             int errorCount = ConnectionsManager.History.Count(a =>
                 a.IsCompleted && !a.Succeeded && !(a is CancellingAction ca && ca.Cancelled));
 
             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
-
-            var errorText = errorCount == 1
-                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR
-                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS, errorCount);
-
-            int progressCount = ConnectionsManager.History.Count(a => !a.IsCompleted);
-            var progressText = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS, progressCount);
-
-            if (errorCount > 0 && progressCount > 0)
-                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS,
-                    string.Format(Messages.STRING_COMMA_SPACE_STRING, errorText, progressText));
-            else if (errorCount > 0)
-                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS, errorText);
-            else if (progressCount > 0)
-                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS, progressText);
-
-            statusLabelErrors.Visible = errorCount > 0 || progressCount > 0;
+            statusButtonErrors.Text = errorCount.ToString();
+            statusButtonErrors.Visible = errorCount > 0;
 
             if (eventsPage.Visible)
             {
@@ -621,8 +631,6 @@ namespace XenAdmin
                         var result = dlg.ShowDialog(this) == DialogResult.Yes;
 
                         Properties.Settings.Default.AllowXenCenterUpdates = result;
-                        Properties.Settings.Default.AllowPatchesUpdates = result;
-                        Properties.Settings.Default.AllowXenServerUpdates = result;
                         Properties.Settings.Default.SeenAllowUpdatesDialog = true;
 
                         if (result && dlg.IsCheckBoxChecked)
@@ -754,7 +762,6 @@ namespace XenAdmin
 
         #endregion
 
-
         /// <summary>
         /// Manages UI and network updates whenever hosts are added and removed
         /// </summary>
@@ -766,14 +773,6 @@ namespace XenAdmin
             //Program.AssertOnEventThread();
             Program.BeginInvoke(Program.MainWindow, () => XenConnectionCollectionChanged(e));
         }
-        
-        private readonly CollectionChangeEventHandler PoolCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler MessageCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler HostCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler VMCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler SRCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler FolderCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler TaskCollectionChangedWithInvoke = null;
 
         private void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
         {
@@ -876,7 +875,11 @@ namespace XenAdmin
         {
             CloseActiveWizards(connection);
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
-            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
+
+            if (Helpers.CloudOrGreater(connection))
+                Updates.RemoveCdnInfoForConnection(connection);
+            else
+                Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
 
             RequestRefreshTreeView();
         }
@@ -1042,10 +1045,56 @@ namespace XenAdmin
                 }
             }
 
-            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
-            Updates.CheckHotfixEligibility(connection);
-            RequestRefreshTreeView();
+            if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease &&
+                !Helpers.CloudOrGreater(coordinator))
+            {
+                Program.BeginInvoke(Program.MainWindow, () =>
+                {
+                    if (Properties.Settings.Default.SeenAllowCfuUpdatesDialog)
+                        return;
+                    
+                    Properties.Settings.Default.SeenAllowCfuUpdatesDialog = true;
+                    Settings.TrySaveSettings();
 
+                    bool launch;
+                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE_CFU, BrandManager.BrandConsole, BrandManager.ProductVersion821),
+                               ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                           {
+                               HelpButton = true,
+                               HelpNameSetter = "AllowUpdatesDialog",
+                               ShowCheckbox = false
+                           })
+                    {
+                        launch = dlg.ShowDialog(this) == DialogResult.Yes;
+                    }
+
+                    if (launch)
+                    {
+                        using (var dialog = new ConfigUpdatesDialog())
+                        {
+                            dialog.SelectLcmTab();
+                            dialog.ShowDialog(this);
+                        }
+                    }
+                });
+            }
+
+            if (Helpers.CloudOrGreater(connection))
+            {
+                if (YumRepoNotConfiguredAlert.TryCreate(connection, out var alert) || OutOfSyncWithCdnAlert.TryCreate(connection, out alert))
+                    Alert.AddAlert(alert);
+
+                if (connection.Session.IsLocalSuperuser || connection.Session.Roles.Any(r =>
+                        r.name_label == Role.MR_ROLE_POOL_OPERATOR || r.name_label == Role.MR_ROLE_POOL_ADMIN))
+                    Updates.CheckForCdnUpdates(coordinator.Connection);
+            }
+            else
+            {
+                Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
+                Updates.CheckHotfixEligibility(connection);
+            }
+
+            RequestRefreshTreeView();
             CheckTlsVerification(connection);
         }
 
@@ -1109,7 +1158,7 @@ namespace XenAdmin
             }
         }
 
-        void MessageCollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void MessageCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
 
@@ -1126,7 +1175,7 @@ namespace XenAdmin
             }
         }
 
-        void CollectionChanged<T>(object sender, CollectionChangeEventArgs e) where T : XenObject<T>
+        private void CollectionChanged<T>(object sender, CollectionChangeEventArgs e) where T : XenObject<T>
         {
             Program.AssertOnEventThread();
 
@@ -1167,9 +1216,16 @@ namespace XenAdmin
 
         private void Pool_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
-            Pool pool = (Pool)obj;
+            if (!(obj is Pool pool))
+                return;
+
             switch (e.PropertyName)
             {
+                case "allowed_operations":
+                    if (cdnUpdatesPage.Visible && Helpers.CloudOrGreater(pool.Connection))
+                        cdnUpdatesPage.UpdateButtonEnablement();
+                    break;
+
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
@@ -1231,7 +1287,9 @@ namespace XenAdmin
 
         private void VM_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
-            VM vm = (VM)obj;
+            if (!(obj is VM vm))
+                return;
+
             switch (e.PropertyName)
             {
                 case "allowed_operations":
@@ -1241,15 +1299,21 @@ namespace XenAdmin
                     break;
 
                 case "power_state":
-                case "other_config": // other_config may contain HideFromXenCenter
                     UpdateToolbars();
-                    // Make all vms have the correct start times
-                    UpdateBodgedTime(vm, e.PropertyName);
+                    vm.SetBodgeStartupTime(DateTime.UtcNow);
+                    break;
+
+                case "other_config":
+                    UpdateToolbars(); //other_config may contain HideFromXenCenter
+
+                    DateTime newTime = vm.LastShutdownTime();
+                    if (newTime != DateTime.MinValue && newTime.Ticks > vm.GetBodgeStartupTime().Ticks)
+                        vm.SetBodgeStartupTime(newTime);
                     break;
             }
         }
 
-        void o_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void o_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -1257,26 +1321,9 @@ namespace XenAdmin
                 case "power_state":
                 case "is_a_template":
                 case "enabled":
-                case "other_config": // other_config may contain HideFromXenCenter
-                    UpdateToolbars();
-                    break;
-            }
-        }
-
-        // Update bodged startup time if the powerstate goes to running (vm started from halted), otherconfig last shutdown changed (vm rebooted) or start time changed (occurs a few seconds after start)
-        private void UpdateBodgedTime(VM vm, string p)
-        {
-            if (vm == null)
-                return;
-            if (p == "power_state")
-            {
-                vm.SetBodgeStartupTime(DateTime.UtcNow); // always newer than current bodge startup time
-            }
-            else if (p == "other_config" && vm.other_config.ContainsKey("last_shutdown_time"))
-            {
-                DateTime newTime = vm.LastShutdownTime();
-                if (newTime != DateTime.MinValue && newTime.Ticks > vm.GetBodgeStartupTime().Ticks)
-                    vm.SetBodgeStartupTime(newTime); // only update if is newer than current bodge startup time
+                case "other_config":
+                    UpdateToolbars();  //other_config may contain HideFromXenCenter
+                break;
             }
         }
 
@@ -1306,7 +1353,7 @@ namespace XenAdmin
             GC.Collect();
         }
 
-        void connection_ConnectionReconnecting(IXenConnection conn)
+        private void connection_ConnectionReconnecting(IXenConnection conn)
         {
             if (Program.Exiting)
                 return;
@@ -1317,7 +1364,7 @@ namespace XenAdmin
         private List<Host> hostsInInvalidState = new List<Host>();
 
         // called whenever Xen objects on the server change state
-        void Connection_XenObjectsUpdated(object sender, EventArgs e)
+        private void Connection_XenObjectsUpdated(object sender, EventArgs e)
         {
             if (Program.Exiting)
                 return;
@@ -1342,7 +1389,7 @@ namespace XenAdmin
             Program.Invoke(this, navigationPane.RequestRefreshTreeView);
         }
 
-        void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -2513,14 +2560,11 @@ namespace XenAdmin
 
         private string TabHelpID()
         {
-            if (alertPage.Visible)
-                return alertPage.HelpID;
-
-            if (updatesPage.Visible)
-                return updatesPage.HelpID;
-
-            if (eventsPage.Visible)
-                return eventsPage.HelpID;
+            foreach (var page in _notificationPages)
+            {
+                if (page.Visible)
+                    return alertPage.HelpID;
+            }
 
             if (TheTabControl.SelectedTab.Controls.Count > 0 && TheTabControl.SelectedTab.Controls[0] is IControlWithHelp ctrl)
                 return ctrl.HelpID + getSelectedXenModelObjectType();
@@ -2602,17 +2646,38 @@ namespace XenAdmin
 
         private void SetFiltersLabel()
         {
-            labelFiltersOnOff.Visible = alertPage.Visible || updatesPage.Visible || eventsPage.Visible;
-            bool filterIsOn = alertPage.Visible && alertPage.FilterIsOn ||
-                              updatesPage.Visible && updatesPage.FilterIsOn ||
-                              eventsPage.Visible && eventsPage.FilterIsOn;
-            labelFiltersOnOff.Text = filterIsOn ? Messages.FILTERS_ON : Messages.FILTERS_OFF;
+            labelFiltersOnOff.Visible = _notificationPages.Any(p => p.Visible);
+
+            labelFiltersOnOff.Text = _notificationPages.Any(p => p.Visible && p.FilterIsOn)
+                ? Messages.FILTERS_ON
+                : Messages.FILTERS_OFF;
         }
 
         private void eventsPage_GoToXenObjectRequested(IXenObject obj)
         {
             navigationPane.SwitchToInfrastructureMode();
             navigationPane.SelectObject(obj);
+        }
+
+        private void Cdn_UpdateInfoChanged(IXenConnection obj)
+        {
+            Program.Invoke(this, () =>
+            {
+                int cdnUpdatesCount = Updates.CdnUpdateInfoPerConnection.Values.SelectMany(info => info.Updates).Distinct().Count();
+
+                navigationPane.UpdateNotificationsButton(NotificationsSubMode.UpdatesFromCdn, cdnUpdatesCount);
+
+                statusButtonCdnUpdates.Text = cdnUpdatesCount.ToString();
+                statusButtonCdnUpdates.Visible = cdnUpdatesCount > 0;
+
+                if (cdnUpdatesPage.Visible)
+                {
+                    TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.UpdatesFromCdn, cdnUpdatesCount);
+                    TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.UpdatesFromCdn, cdnUpdatesCount);
+                }
+            });
+
+            RequestRefreshTreeView();
         }
 
         private void Updates_CollectionChanged(CollectionChangeEventArgs e)
@@ -2622,10 +2687,8 @@ namespace XenAdmin
                     int updatesCount = Updates.UpdateAlerts.Count;
                     navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
 
-                    statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
-                    statusLabelUpdates.Visible = updatesCount > 0;
-
-                    SetUpdateAlert();
+                    statusButtonUpdates.Text = updatesCount.ToString();
+                    statusButtonUpdates.Visible = updatesCount > 0;
 
                     if (updatesPage.Visible)
                     {
@@ -2633,6 +2696,8 @@ namespace XenAdmin
                         TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
                     }
                 });
+
+            RequestRefreshTreeView();//to update item icons
         }
 
         private void ClientUpdatesCheck_Completed()
@@ -2640,13 +2705,13 @@ namespace XenAdmin
             Program.Invoke(this, () =>
             {
                 toolStripMenuItemCfu.Enabled = true;
-                SetUpdateAlert();
+                SetClientUpdateAlert();
             });            
         }
 
-        private void SetUpdateAlert()
+        private void SetClientUpdateAlert()
         {
-            updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
+            updateAlert = Updates.ClientUpdateAlerts.FirstOrDefault();
             if (updateAlert != null)
                 relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
             updateClientToolStripMenuItem.Visible = updateAlert != null;
@@ -2771,7 +2836,7 @@ namespace XenAdmin
             DoSearch(Search.SearchForFolder(path));
         }
 
-        void SearchPanel_SearchChanged()
+        private void SearchPanel_SearchChanged()
         {
             if (SearchMode)
                 History.ReplaceHistoryItem(new SearchHistoryItem(SearchPage.Search));
@@ -2898,7 +2963,7 @@ namespace XenAdmin
             pluginMenuItemStartIndexes[viewToolStripMenuItem] = viewToolStripMenuItem.DropDownItems.IndexOf(toolStripSeparator24) + 1;
         }
 
-        void navigationPane_DragDropCommandActivated(string cmdText)
+        private void navigationPane_DragDropCommandActivated(string cmdText)
         {
             SetStatusBar(null, cmdText);
         }
@@ -2921,29 +2986,12 @@ namespace XenAdmin
 
         private void navigationPane_NotificationsSubModeChanged(NotificationsSubModeItem submodeItem)
         {
-            switch (submodeItem.SubMode)
+            foreach (var page in _notificationPages)
             {
-                case NotificationsSubMode.Alerts:
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
-                    if (eventsPage.Visible)
-                        eventsPage.HidePage();
-                    alertPage.ShowPage();
-                    break;
-                case NotificationsSubMode.Updates:
-                    if (alertPage.Visible)
-                        alertPage.HidePage();
-                    if (eventsPage.Visible)
-                        eventsPage.HidePage();
-                    updatesPage.ShowPage();
-                break;
-                case NotificationsSubMode.Events:
-                    if (alertPage.Visible)
-                        alertPage.HidePage();
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
-                    eventsPage.ShowPage();
-                break;
+                if (page.NotificationsSubMode == submodeItem.SubMode)
+                    page.ShowPage();
+                else if (page.Visible)
+                    page.HidePage();
             }
 
             SetFiltersLabel();
@@ -2966,12 +3014,12 @@ namespace XenAdmin
             {
                 bool tabControlWasVisible = TheTabControl.Visible;
                 TheTabControl.Visible = true;
-                if (alertPage.Visible)
-                    alertPage.HidePage();
-                if (updatesPage.Visible)
-                    updatesPage.HidePage();
-                if (eventsPage.Visible)
-                    eventsPage.HidePage();
+
+                foreach (var page in _notificationPages)
+                {
+                    if (page.Visible)
+                        page.HidePage();
+                }
 
                 // force an update of the selected tab when switching back from Notification view, 
                 // as some tabs ignore the update events when not visible (e.g. Snapshots, HA)
@@ -3024,8 +3072,8 @@ namespace XenAdmin
                 var count = Alert.NonDismissingAlertCount;
                 navigationPane.UpdateNotificationsButton(NotificationsSubMode.Alerts, count);
 
-                statusLabelAlerts.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_STATUS, count);
-                statusLabelAlerts.Visible = count > 0;
+                statusButtonAlerts.Text = count.ToString();
+                statusButtonAlerts.Visible = count > 0;
 
                 if (alertPage.Visible)
                 {
@@ -3243,7 +3291,6 @@ namespace XenAdmin
             SetSplitterDistance();
         }
 
-        FormWindowState lastState = FormWindowState.Normal;
         private void MainWindow_Resize(object sender, EventArgs e)
         {
             TabPage t = TheTabControl.SelectedTab;
@@ -3298,17 +3345,27 @@ namespace XenAdmin
             SetTitleLabelMaxWidth();
         }
 
-        private void statusLabelAlerts_Click(object sender, EventArgs e)
+        private void statusButtonAlerts_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Alerts);
         }
 
-        private void statusLabelUpdates_Click(object sender, EventArgs e)
+        private void statusButtonUpdates_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Updates);
         }
 
-        private void statusLabelErrors_Click(object sender, EventArgs e)
+        private void statusButtonCdnUpdates_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.UpdatesFromCdn);
+        }
+
+        private void statusButtonErrors_Click(object sender, EventArgs e)
+        { 
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
+        }
+
+        private void statusButtonProgress_ButtonClick(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }
@@ -3327,6 +3384,12 @@ namespace XenAdmin
         private void toolStripMenuItemCfu_Click(object sender, EventArgs e)
         {
             Updates.CheckForClientUpdates(true);
+        }
+
+        private void configureUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new ConfigUpdatesDialog())
+                dialog.ShowDialog(this);
         }
     }
 }

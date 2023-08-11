@@ -119,81 +119,39 @@
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
-  <data name="labelWithoutAutomatedUpdates.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="labelWithoutAutomatedUpdates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="labelWithoutAutomatedUpdates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelWithoutAutomatedUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
-  </data>
-  <data name="labelWithoutAutomatedUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 6</value>
-  </data>
-  <data name="labelWithoutAutomatedUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 13</value>
-  </data>
-  <data name="labelWithoutAutomatedUpdates.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labelWithoutAutomatedUpdates.Text" xml:space="preserve">
-    <value>Select an update to be download or browse your computer for an update or supplemental pack file.</value>
-  </data>
-  <data name="&gt;&gt;labelWithoutAutomatedUpdates.Name" xml:space="preserve">
-    <value>labelWithoutAutomatedUpdates</value>
-  </data>
-  <data name="&gt;&gt;labelWithoutAutomatedUpdates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelWithoutAutomatedUpdates.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelWithoutAutomatedUpdates.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="labelWithAutomatedUpdates.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelWithAutomatedUpdates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="labelWithAutomatedUpdates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelWithAutomatedUpdates.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelBlurb.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="labelWithAutomatedUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 6</value>
+  <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
   </data>
-  <data name="labelWithAutomatedUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 26</value>
-  </data>
-  <data name="labelWithAutomatedUpdates.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="labelWithAutomatedUpdates.Text" xml:space="preserve">
-    <value>Select Automated Updates, choose an update to download, or browse your computer for an update or supplemental pack file.</value>
+  <data name="labelBlurb.Text" xml:space="preserve">
+    <value>labelBlurb</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatedUpdates.Name" xml:space="preserve">
-    <value>labelWithAutomatedUpdates</value>
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+    <value>labelBlurb</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatedUpdates.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatedUpdates.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelWithAutomatedUpdates.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="AutomatedUpdatesRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -202,19 +160,19 @@
     <value>NoControl</value>
   </data>
   <data name="AutomatedUpdatesRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 63</value>
+    <value>3, 25</value>
   </data>
   <data name="AutomatedUpdatesRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
   <data name="AutomatedUpdatesRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 17</value>
+    <value>117, 17</value>
   </data>
   <data name="AutomatedUpdatesRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="AutomatedUpdatesRadioButton.Text" xml:space="preserve">
-    <value>&amp;Automated Updates</value>
+    <value>&amp;Automated updates</value>
   </data>
   <data name="&gt;&gt;AutomatedUpdatesRadioButton.Name" xml:space="preserve">
     <value>AutomatedUpdatesRadioButton</value>
@@ -226,28 +184,28 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;AutomatedUpdatesRadioButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="automatedUpdatesOptionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="automatedUpdatesOptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="automatedUpdatesOptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="automatedUpdatesOptionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 83</value>
+    <value>20, 45</value>
+  </data>
+  <data name="automatedUpdatesOptionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
   </data>
   <data name="automatedUpdatesOptionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 13</value>
+    <value>154, 13</value>
   </data>
   <data name="automatedUpdatesOptionLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="automatedUpdatesOptionLabel.Text" xml:space="preserve">
-    <value>{0} will download and install all released updates on the current version, usually with only a single reboot at the end.
+    <value>automatedUpdatesOptionLabel
 </value>
   </data>
   <data name="&gt;&gt;automatedUpdatesOptionLabel.Name" xml:space="preserve">
@@ -260,7 +218,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;automatedUpdatesOptionLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="downloadUpdateRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -269,7 +227,7 @@
     <value>NoControl</value>
   </data>
   <data name="downloadUpdateRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 108</value>
+    <value>3, 70</value>
   </data>
   <data name="downloadUpdateRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
@@ -278,7 +236,7 @@
     <value>181, 17</value>
   </data>
   <data name="downloadUpdateRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
     <value>&amp;Download update or new version</value>
@@ -293,67 +251,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="RefreshListButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="RefreshListButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="RefreshListButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 326</value>
-  </data>
-  <data name="RefreshListButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 27</value>
-  </data>
-  <data name="RefreshListButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="RefreshListButton.Text" xml:space="preserve">
-    <value>&amp;Refresh List</value>
-  </data>
-  <data name="&gt;&gt;RefreshListButton.Name" xml:space="preserve">
-    <value>RefreshListButton</value>
-  </data>
-  <data name="&gt;&gt;RefreshListButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RefreshListButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;RefreshListButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="RestoreDismUpdatesButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="RestoreDismUpdatesButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="RestoreDismUpdatesButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 326</value>
-  </data>
-  <data name="RestoreDismUpdatesButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 27</value>
-  </data>
-  <data name="RestoreDismUpdatesButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="RestoreDismUpdatesButton.Text" xml:space="preserve">
-    <value>Restore Dismissed &amp;Updates</value>
-  </data>
-  <data name="&gt;&gt;RestoreDismUpdatesButton.Name" xml:space="preserve">
-    <value>RestoreDismUpdatesButton</value>
-  </data>
-  <data name="&gt;&gt;RestoreDismUpdatesButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RestoreDismUpdatesButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;RestoreDismUpdatesButton.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="selectFromDiskRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -362,7 +260,7 @@
     <value>NoControl</value>
   </data>
   <data name="selectFromDiskRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 368</value>
+    <value>3, 378</value>
   </data>
   <data name="selectFromDiskRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
@@ -371,7 +269,7 @@
     <value>240, 17</value>
   </data>
   <data name="selectFromDiskRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="selectFromDiskRadioButton.Text" xml:space="preserve">
     <value>&amp;Select update or supplemental pack from disk</value>
@@ -386,7 +284,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;selectFromDiskRadioButton.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -407,7 +305,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 10</value>
+    <value>3, 8</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -437,10 +335,10 @@
     <value>Left, Right</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 6</value>
+    <value>61, 4</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 20</value>
+    <value>436, 20</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -464,10 +362,10 @@
     <value>NoControl</value>
   </data>
   <data name="BrowseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 3</value>
+    <value>503, 3</value>
   </data>
   <data name="BrowseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 27</value>
+    <value>75, 23</value>
   </data>
   <data name="BrowseButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -488,19 +386,22 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>Top</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 391</value>
+    <value>20, 398</value>
+  </data>
+  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 33</value>
+    <value>581, 29</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -512,103 +413,19 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="fileNameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="BrowseButton" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="tableLayoutPanelSpinner.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tableLayoutPanelSpinner.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tableLayoutPanelSpinner.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="tableLayoutPanelSpinner.ColumnCount" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>tableLayoutPanelSpinner</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 4</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 13</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Checking for updates...</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>tableLayoutPanelSpinner</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanelSpinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 81</value>
-  </data>
-  <data name="tableLayoutPanelSpinner.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanelSpinner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="tableLayoutPanelSpinner.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelSpinner.Name" xml:space="preserve">
-    <value>tableLayoutPanelSpinner</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelSpinner.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelSpinner.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelSpinner.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanelSpinner.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="ColumnUpdate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -659,13 +476,13 @@
     <value>Fill</value>
   </data>
   <data name="dataGridViewPatches.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="dataGridViewPatches.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="dataGridViewPatches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 189</value>
+    <value>575, 241</value>
   </data>
   <data name="dataGridViewPatches.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -677,34 +494,103 @@
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewPatches.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;dataGridViewPatches.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="RefreshListButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RefreshListButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RefreshListButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 250</value>
+  </data>
+  <data name="RefreshListButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 23</value>
+  </data>
+  <data name="RefreshListButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="RefreshListButton.Text" xml:space="preserve">
+    <value>&amp;Refresh List</value>
+  </data>
+  <data name="&gt;&gt;RefreshListButton.Name" xml:space="preserve">
+    <value>RefreshListButton</value>
+  </data>
+  <data name="&gt;&gt;RefreshListButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RefreshListButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;RefreshListButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="RestoreDismUpdatesButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RestoreDismUpdatesButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RestoreDismUpdatesButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 250</value>
+  </data>
+  <data name="RestoreDismUpdatesButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 23</value>
+  </data>
+  <data name="RestoreDismUpdatesButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="RestoreDismUpdatesButton.Text" xml:space="preserve">
+    <value>Restore Dismissed &amp;Updates</value>
+  </data>
+  <data name="&gt;&gt;RestoreDismUpdatesButton.Name" xml:space="preserve">
+    <value>RestoreDismUpdatesButton</value>
+  </data>
+  <data name="&gt;&gt;RestoreDismUpdatesButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RestoreDismUpdatesButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;RestoreDismUpdatesButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 131</value>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 90</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 189</value>
+  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 0, 0</value>
   </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 276</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dataGridViewPatches" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="RefreshListButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="RestoreDismUpdatesButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -713,7 +599,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>601, 427</value>
@@ -734,7 +620,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelWithoutAutomatedUpdates" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelWithAutomatedUpdates" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="AutomatedUpdatesRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="automatedUpdatesOptionLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="downloadUpdateRadioButton" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="RefreshListButton" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="RestoreDismUpdatesButton" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="selectFromDiskRadioButton" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="tableLayoutPanel2" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AutomatedUpdatesRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="automatedUpdatesOptionLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="downloadUpdateRadioButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="selectFromDiskRadioButton" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="_backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

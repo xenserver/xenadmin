@@ -97,7 +97,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://docs.xenserver.com/.
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/.
         /// </summary>
         public static string DOCS_URL {
             get {

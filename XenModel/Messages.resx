@@ -138,6 +138,9 @@
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Activating Multiple Virtual Disks</value>
   </data>
+  <data name="ACTION_APPLY_CDN_UPDATES_TITLE" xml:space="preserve">
+    <value>Installing updates on {0}...</value>
+  </data>
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>Changing control domain memory settings on '{0}'</value>
   </data>
@@ -1831,8 +1834,44 @@ This alarm is set to be triggered when the total throughput exceeds {4}.</value>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(Showing first {0} entries)</value>
   </data>
+  <data name="ALERT_CDN_OUT_OF_SYNC_DESCRIPTION" xml:space="preserve">
+    <value>The last synchronization with the update channel took place on {0}.</value>
+  </data>
+  <data name="ALERT_CDN_OUT_OF_SYNC_TITLE" xml:space="preserve">
+    <value>You have not synchronized with the update channel in {0} days.</value>
+  </data>
+  <data name="ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK" xml:space="preserve">
+    <value>Configure Updates</value>
+  </data>
+  <data name="ALERT_CDN_REPO_NOT_CONFIGURED_DESCRIPTION" xml:space="preserve">
+    <value>Configuring an update channel will allow your system to synchronize and retrieve available updates.</value>
+  </data>
+  <data name="ALERT_CDN_REPO_NOT_CONFIGURED_TITLE" xml:space="preserve">
+    <value>You have not configured an update channel on '{0}'</value>
+  </data>
   <data name="ALERT_CPUS_SUB_TEXT" xml:space="preserve">
     <value>When CPU usage exceeds {0}% for {1} min(s)</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>Your Customer Success Services (CSS) agreement expired on {0}.</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRED_LINK_TEXT" xml:space="preserve">
+    <value>Renew CSS Agreement</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRED_TITLE" xml:space="preserve">
+    <value>Your CSS agreement has expired</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>Your Customer Success Services (CSS) agreement will expire on {0}.</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>Your CSS agreement is expiring in {0} day(s)</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>Your CSS agreement is expiring in {0} hour(s)</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>Your CSS agreement is expiring in {0} minute(s)</value>
   </data>
   <data name="ALERT_DISK_SUB_TEXT" xml:space="preserve">
     <value>When disk usage exceeds {0} for {1} min(s)</value>
@@ -1973,7 +2012,10 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>&amp;Show internet proxy settings</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for {1} updates and new versions of the application?</value>
+    <value>Would you like {0} to periodically check the internet for new versions of the application?</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_MESSAGE_CFU" xml:space="preserve">
+    <value>You can configure {0} to periodically check the internet for updates and new versions for servers running {1} or earlier. Would you like to do so?</value>
   </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
@@ -2594,6 +2636,35 @@ This will cancel compilation of the status report.</value>
   <data name="CDDRIVE_MAX_ALLOWED_VBDS" xml:space="preserve">
     <value>The DVD drive cannot be created, because you have reached the maximum number of virtual disks allowed for this virtual machine.</value>
   </data>
+  <data name="CDN_GUIDANCE_EVACUATE_HOST" xml:space="preserve">
+    <value>Migrate VMs off this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_REBOOT_HOST" xml:space="preserve">
+    <value>Reboot this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE" xml:space="preserve">
+    <value>Live patch failed. Reboot this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_RESTART_DEVICE_MODEL" xml:space="preserve">
+    <value>Reboot VMs running on this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>Restart Toolstack</value>
+  </data>
+  <data name="CDN_LIVEPATCHES_IN_UPDATE" xml:space="preserve">
+    <value>This update live patches the following components: {0}</value>
+  </data>
+  <data name="CDN_PENDING_GUIDANCES_FAILURE" xml:space="preserve">
+    <value>The following tasks will need to be performed manually for the installed updates to take effect:
+{0}</value>
+  </data>
+  <data name="CDN_PENDING_GUIDANCES_KEY" xml:space="preserve">
+    <value>Pending tasks on {0}</value>
+  </data>
+  <data name="CDN_PENDING_GUIDANCES_VALUE" xml:space="preserve">
+    <value>The following tasks need to be performed for the latest installed updates to take effect:
+{0}</value>
+  </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>The trusted CA certificate '{0}' of '{1}' expired on {2}.</value>
   </data>
@@ -2807,6 +2878,12 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host memory check</value>
   </data>
+  <data name="CHECKING_LAST_CDN_SYNC_DESCRIPTION" xml:space="preserve">
+    <value>Has synchronized within the past week</value>
+  </data>
+  <data name="CHECKING_LAST_CDN_SYNC_TILE" xml:space="preserve">
+    <value>Checking date of last synchronization with update channel</value>
+  </data>
   <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
     <value>Power On mode check</value>
   </data>
@@ -2940,6 +3017,15 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   </data>
   <data name="COMPRESSING_FILES" xml:space="preserve">
     <value>Compressing appliance files...</value>
+  </data>
+  <data name="CONFIG_CDN_UPDATES_TAB_TITLE" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="CONFIG_LCM_UPDATES_TAB_TITLE" xml:space="preserve">
+    <value>{0} or earlier</value>
+  </data>
+  <data name="CONFIG_UPDATES_MENU_ITEM" xml:space="preserve">
+    <value>&amp;Configure Updates...</value>
   </data>
   <data name="CONFIGURE_HA" xml:space="preserve">
     <value>Configure HA</value>
@@ -7074,6 +7160,52 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
     <value>End of Life for express customers</value>
   </data>
+  <data name="HOTFIX_POST_UPDATE_ACTIONS" xml:space="preserve">
+    <value>Post-update tasks to be performed:
+{0}</value>
+  </data>
+  <data name="HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS" xml:space="preserve">
+    <value>This server will be live patched. If live patch fails, a server reboot will be required.</value>
+  </data>
+  <data name="HOTFIX_RPMS_TO_INSTALL" xml:space="preserve">
+    <value>{0} packages will be updated</value>
+  </data>
+  <data name="HOTFIX_TYPE_BUG_FIX_MANY" xml:space="preserve">
+    <value>{0} bug fixes</value>
+  </data>
+  <data name="HOTFIX_TYPE_BUG_FIX_ONE" xml:space="preserve">
+    <value>1 bug fix</value>
+  </data>
+  <data name="HOTFIX_TYPE_FOUNDATIONAL_MANY" xml:space="preserve">
+    <value>{0} foundational changes</value>
+  </data>
+  <data name="HOTFIX_TYPE_FOUNDATIONAL_ONE" xml:space="preserve">
+    <value>1 foundational change</value>
+  </data>
+  <data name="HOTFIX_TYPE_IMPROVEMENT_MANY" xml:space="preserve">
+    <value>{0} improvements</value>
+  </data>
+  <data name="HOTFIX_TYPE_IMPROVEMENT_ONE" xml:space="preserve">
+    <value>1 improvement</value>
+  </data>
+  <data name="HOTFIX_TYPE_NEW_FEATURE_MANY" xml:space="preserve">
+    <value>{0} new features</value>
+  </data>
+  <data name="HOTFIX_TYPE_NEW_FEATURE_ONE" xml:space="preserve">
+    <value>1 new feature</value>
+  </data>
+  <data name="HOTFIX_TYPE_PREVIEW_FEATURE_MANY" xml:space="preserve">
+    <value>{0} feature previews</value>
+  </data>
+  <data name="HOTFIX_TYPE_PREVIEW_FEATURE_ONE" xml:space="preserve">
+    <value>1 feature preview</value>
+  </data>
+  <data name="HOTFIX_TYPE_SECURITY_FIX_MANY" xml:space="preserve">
+    <value>{0} security fixes</value>
+  </data>
+  <data name="HOTFIX_TYPE_SECURITY_FIX_ONE" xml:space="preserve">
+    <value>1 security fix</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>Hourly; at {0} minutes past each hour</value>
   </data>
@@ -7460,6 +7592,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="INCORRECT_OLD_PASSWORD" xml:space="preserve">
     <value>Incorrect old password</value>
+  </data>
+  <data name="INDETERMINABLE" xml:space="preserve">
+    <value>Indeterminable</value>
   </data>
   <data name="INFO_DISK_MODE" xml:space="preserve">
     <value>Disk snapshots are not currently available for this VM</value>
@@ -9828,6 +9963,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NOT_ATTACHED_TO" xml:space="preserve">
     <value>not attached to</value>
   </data>
+  <data name="NOT_CONFIGURED" xml:space="preserve">
+    <value>Not configured</value>
+  </data>
   <data name="NOT_CONTAINED_IN" xml:space="preserve">
     <value>not contained in</value>
   </data>
@@ -9939,26 +10077,11 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_READ" xml:space="preserve">
     <value>Alerts</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_ALERTS_STATUS" xml:space="preserve">
-    <value>Alerts: {0}</value>
-  </data>
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_UNREAD" xml:space="preserve">
     <value>Alerts ({0})</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>Events</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
-    <value>Events: {0}</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
-    <value>1 error</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
-    <value>{0} errors</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
-    <value>{0} in progress</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>Events ({0} errors)</value>
@@ -9968,9 +10091,6 @@ When you configure an NFS storage repository, you simply provide the host name o
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
     <value>Updates</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
-    <value>Updates: {0}</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
     <value>Updates ({0})</value>
@@ -10192,6 +10312,9 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN" xml:space="preserve">
+    <value>Install Updates</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
     <value>Uploading and installing updates</value>
   </data>
@@ -10312,8 +10435,32 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
     <value>Deleting update installation files</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL" xml:space="preserve">
+    <value>{0} will download and install all released updates on the current version, usually with only a single reboot at the end.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN" xml:space="preserve">
+    <value>{0} will install all released updates on the current version, usually with only a single reboot at the end.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB" xml:space="preserve">
+    <value>Select Automated Updates, choose an update to download, or browse your computer for an update or supplemental pack file.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN" xml:space="preserve">
+    <value>Select Automated Updates, or browse your computer for a supplemental pack file.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED" xml:space="preserve">
+    <value>Browse your computer for an update or supplemental pack file.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED" xml:space="preserve">
+    <value>Select an update to download, or browse your computer for an update or supplemental pack file.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>Choose Update File</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO" xml:space="preserve">
+    <value>&amp;Select an update or supplemental pack from disk</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN" xml:space="preserve">
+    <value>&amp;Select a supplemental pack from disk</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO" xml:space="preserve">
     <value>The file you have selected is a Base Installation ISO file and cannot be used to update your system. Please select an Update ISO file, or use the Rolling Pool Upgrade wizard instead to upgrade to a new version.</value>
@@ -10322,7 +10469,7 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Select Update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>Choose an existing update to install or upload a new one</value>
+    <value>Choose the update you want to install</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>{0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip</value>
@@ -10967,9 +11114,6 @@ Click Previous if you need to go back and specify a different network location o
   </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
     <value>MemorySR</value>
-  </data>
-  <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
-    <value>Not configured</value>
   </data>
   <data name="PVS_CACHE_STORAGE_CANNOT_BE_CHANGED" xml:space="preserve">
     <value>This PVS cache storage cannot be changed because it is in use.</value>
@@ -12842,9 +12986,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES" xml:space="preserve">
     <value>Updates</value>
   </data>
-  <data name="UPDATES_DESC" xml:space="preserve">
-    <value>Automatically check for {0} or {1} updates</value>
-  </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>For the update to take effect after application, the following action is required:
  </value>
@@ -12897,11 +13038,32 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
     <value>Download {0}</value>
   </data>
+  <data name="UPDATES_GENERAL_TAB_CONFIG" xml:space="preserve">
+    <value>Configure Updates...</value>
+  </data>
   <data name="UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY" xml:space="preserve">
     <value>(full application required)</value>
   </data>
+  <data name="UPDATES_GENERAL_TAB_LAST_SYNCED" xml:space="preserve">
+    <value>Last synchronized</value>
+  </data>
+  <data name="UPDATES_GENERAL_TAB_REPO" xml:space="preserve">
+    <value>Update channel</value>
+  </data>
+  <data name="UPDATES_GENERAL_TAB_SYNC_NOW" xml:space="preserve">
+    <value>Synchronize Now</value>
+  </data>
+  <data name="UPDATES_MENU_ITEM" xml:space="preserve">
+    <value>&amp;Updates</value>
+  </data>
+  <data name="UPDATES_OPTIONS_DESC" xml:space="preserve">
+    <value>Automatically check for {0} updates</value>
+  </data>
+  <data name="UPDATES_OPTIONS_TITLE" xml:space="preserve">
+    <value>{0} Updates</value>
+  </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
-    <value>Install Update</value>
+    <value>Install Updates</value>
   </data>
   <data name="UPDATES_WIZARD_ACTIONS_FOR_HOST" xml:space="preserve">
     <value>Actions for server '{0}'</value>
@@ -12915,11 +13077,17 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES_WIZARD_APPLY_UPDATE" xml:space="preserve">
     <value>&amp;Install update</value>
   </data>
+  <data name="UPDATES_WIZARD_APPLY_UPDATES" xml:space="preserve">
+    <value>&amp;Install updates</value>
+  </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
     <value>Installing update {0} on {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
     <value>Installing update on {0} servers...</value>
+  </data>
+  <data name="UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN" xml:space="preserve">
+    <value>Installing updates on {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_BROKEN_SR_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the '{1}' storage repository is broken.</value>
@@ -13086,6 +13254,9 @@ Please check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>Rebooting {0}...</value>
+  </data>
+  <data name="UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST" xml:space="preserve">
+    <value>Refreshing the updates list for {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>Deleting update installation file {0} from {1}... </value>
@@ -14847,5 +15018,76 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CHECK_FOR_UPDATES" xml:space="preserve">
+    <value>Retrieving list of available updates for {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE" xml:space="preserve">
+    <value>Disabling repository {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_ENABLE" xml:space="preserve">
+    <value>Enabling repository {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_INTRODUCE" xml:space="preserve">
+    <value>Introducing repository {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_TITLE" xml:space="preserve">
+    <value>Configuring {0} to retrieve updates from the {1} repo...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_PROXY_CONFIG_TITLE" xml:space="preserve">
+    <value>Configuring proxy for accessing the update channel</value>
+  </data>
+  <data name="YUM_REPO_ACTION_PROXY_DISABLE_TITLE" xml:space="preserve">
+    <value>Disabling proxy for accessing the update channel</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNC_SCHEDULE_CONFIG_TITLE" xml:space="preserve">
+    <value>Configuring periodic synchronization with the update channel...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNC_SCHEDULE_DISABLE_TITLE" xml:space="preserve">
+    <value>Disabling periodic synchronization with the update channel...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNC_SCHEDULE_ENABLE_TITLE" xml:space="preserve">
+    <value>Enabling periodic synchronization with the update channel...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNCING_TITLE" xml:space="preserve">
+    <value>Synchronizing {0} with update channel...</value>
+  </data>
+  <data name="YUM_REPO_BASE" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="YUM_REPO_EARLY_ACCESS" xml:space="preserve">
+    <value>Early Access</value>
+  </data>
+  <data name="YUM_REPO_NORMAL" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="YUM_REPO_PROXY" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="YUM_REPO_SYNC_AFTER_CONFIG" xml:space="preserve">
+    <value>{0} recommends that you synchronize the selected pool(s) or standalone host(s) with the specified update channel as soon as possible to retrieve the latest available updates.
+
+Do you want to synchronize immediately?</value>
+  </data>
+  <data name="YUM_REPO_SYNC_ALL_CONFIRMATION" xml:space="preserve">
+    <value>Are you sure you want to synchronize all connected pools or standalone servers with their respective update channel?</value>
+  </data>
+  <data name="YUM_REPO_SYNC_FILTER_CONFIRMATION" xml:space="preserve">
+    <value>You have applied filters to the list of pools or standalone servers. Do you want to synchronize all connected systems with their respective update channel, or only the systems you have chosen to view?</value>
+  </data>
+  <data name="YUM_REPO_SYNC_IN_PROGRESS" xml:space="preserve">
+    <value>Synchronization with the update channel is in progress. Please try again later.</value>
+  </data>
+  <data name="YUM_REPO_SYNC_MENU_ITEM" xml:space="preserve">
+    <value>&amp;Synchronize with update channel</value>
+  </data>
+  <data name="YUM_REPO_SYNC_YES_ALL_BUTTON" xml:space="preserve">
+    <value>Synchronize &amp;all</value>
+  </data>
+  <data name="YUM_REPO_SYNC_YES_BUTTON" xml:space="preserve">
+    <value>&amp;Yes, Synchronize</value>
+  </data>
+  <data name="YUM_REPO_SYNC_YES_VISIBLE_BUTTON" xml:space="preserve">
+    <value>Only synchronize &amp;visible</value>
   </data>
 </root>

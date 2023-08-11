@@ -90,6 +90,7 @@ namespace XenAPI
         public const string PATCH_ALREADY_APPLIED = "PATCH_ALREADY_APPLIED";
         public const string UPDATE_ALREADY_APPLIED = "UPDATE_ALREADY_APPLIED";
         public const string UPDATE_ALREADY_EXISTS = "UPDATE_ALREADY_EXISTS";
+        public const string UPDATES_REQUIRE_RECOMMENDED_GUIDANCE = "UPDATES_REQUIRE_RECOMMENDED_GUIDANCE";
         public const string MEMORY_CONSTRAINT_VIOLATION = "MEMORY_CONSTRAINT_VIOLATION";
         public const string VIF_NOT_IN_MAP = "VIF_NOT_IN_MAP";
 
@@ -107,7 +108,7 @@ namespace XenAPI
             // Current Role(s)
             failure.ErrorDescription[1] = Session.FriendlyRoleDescription();
             // Authorized roles
-            failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
+            failure.ErrorDescription[2] = Role.FriendlyCsvRoleList(authRoles);
             failure.ParseExceptionMessage();
         }
     }

@@ -39,68 +39,51 @@ namespace XenAdmin.Wizards.PatchingWizard
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelWithoutAutomatedUpdates = new System.Windows.Forms.Label();
-            this.labelWithAutomatedUpdates = new System.Windows.Forms.Label();
+            this.labelBlurb = new System.Windows.Forms.Label();
             this.AutomatedUpdatesRadioButton = new System.Windows.Forms.RadioButton();
             this.automatedUpdatesOptionLabel = new System.Windows.Forms.Label();
             this.downloadUpdateRadioButton = new System.Windows.Forms.RadioButton();
-            this.RefreshListButton = new System.Windows.Forms.Button();
-            this.RestoreDismUpdatesButton = new System.Windows.Forms.Button();
             this.selectFromDiskRadioButton = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.fileNameTextBox = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanelSpinner = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewPatches = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webPageColumn = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.RefreshListButton = new System.Windows.Forms.Button();
+            this.RestoreDismUpdatesButton = new System.Windows.Forms.Button();
             this._backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanelSpinner.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatches)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelWithoutAutomatedUpdates, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelWithAutomatedUpdates, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.AutomatedUpdatesRadioButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.automatedUpdatesOptionLabel, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.downloadUpdateRadioButton, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.RefreshListButton, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.RestoreDismUpdatesButton, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.selectFromDiskRadioButton, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AutomatedUpdatesRadioButton, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.automatedUpdatesOptionLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.downloadUpdateRadioButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.selectFromDiskRadioButton, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // labelWithoutAutomatedUpdates
+            // labelBlurb
             // 
-            resources.ApplyResources(this.labelWithoutAutomatedUpdates, "labelWithoutAutomatedUpdates");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelWithoutAutomatedUpdates, 3);
-            this.labelWithoutAutomatedUpdates.Name = "labelWithoutAutomatedUpdates";
-            // 
-            // labelWithAutomatedUpdates
-            // 
-            resources.ApplyResources(this.labelWithAutomatedUpdates, "labelWithAutomatedUpdates");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelWithAutomatedUpdates, 3);
-            this.labelWithAutomatedUpdates.Name = "labelWithAutomatedUpdates";
+            resources.ApplyResources(this.labelBlurb, "labelBlurb");
+            this.labelBlurb.Name = "labelBlurb";
             // 
             // AutomatedUpdatesRadioButton
             // 
             resources.ApplyResources(this.AutomatedUpdatesRadioButton, "AutomatedUpdatesRadioButton");
             this.AutomatedUpdatesRadioButton.Checked = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.AutomatedUpdatesRadioButton, 3);
             this.AutomatedUpdatesRadioButton.Name = "AutomatedUpdatesRadioButton";
             this.AutomatedUpdatesRadioButton.TabStop = true;
             this.AutomatedUpdatesRadioButton.UseVisualStyleBackColor = true;
@@ -110,36 +93,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             // automatedUpdatesOptionLabel
             // 
             resources.ApplyResources(this.automatedUpdatesOptionLabel, "automatedUpdatesOptionLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.automatedUpdatesOptionLabel, 2);
             this.automatedUpdatesOptionLabel.Name = "automatedUpdatesOptionLabel";
             // 
             // downloadUpdateRadioButton
             // 
             resources.ApplyResources(this.downloadUpdateRadioButton, "downloadUpdateRadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.downloadUpdateRadioButton, 3);
             this.downloadUpdateRadioButton.Name = "downloadUpdateRadioButton";
             this.downloadUpdateRadioButton.UseVisualStyleBackColor = true;
             this.downloadUpdateRadioButton.CheckedChanged += new System.EventHandler(this.downloadUpdateRadioButton_CheckedChanged);
             this.downloadUpdateRadioButton.TabStopChanged += new System.EventHandler(this.downloadUpdateRadioButton_TabStopChanged);
             // 
-            // RefreshListButton
-            // 
-            resources.ApplyResources(this.RefreshListButton, "RefreshListButton");
-            this.RefreshListButton.Name = "RefreshListButton";
-            this.RefreshListButton.UseVisualStyleBackColor = true;
-            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
-            // 
-            // RestoreDismUpdatesButton
-            // 
-            resources.ApplyResources(this.RestoreDismUpdatesButton, "RestoreDismUpdatesButton");
-            this.RestoreDismUpdatesButton.Name = "RestoreDismUpdatesButton";
-            this.RestoreDismUpdatesButton.UseVisualStyleBackColor = true;
-            this.RestoreDismUpdatesButton.Click += new System.EventHandler(this.RestoreDismUpdatesButton_Click);
-            // 
             // selectFromDiskRadioButton
             // 
             resources.ApplyResources(this.selectFromDiskRadioButton, "selectFromDiskRadioButton");
-            this.tableLayoutPanel1.SetColumnSpan(this.selectFromDiskRadioButton, 3);
             this.selectFromDiskRadioButton.Name = "selectFromDiskRadioButton";
             this.selectFromDiskRadioButton.UseVisualStyleBackColor = true;
             this.selectFromDiskRadioButton.CheckedChanged += new System.EventHandler(this.selectFromDiskRadioButton_CheckedChanged);
@@ -148,7 +114,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.fileNameTextBox, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.BrowseButton, 2, 0);
@@ -173,35 +138,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
-            // panel1
+            // tableLayoutPanel3
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 2);
-            this.panel1.Controls.Add(this.tableLayoutPanelSpinner);
-            this.panel1.Controls.Add(this.dataGridViewPatches);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // tableLayoutPanelSpinner
-            // 
-            resources.ApplyResources(this.tableLayoutPanelSpinner, "tableLayoutPanelSpinner");
-            this.tableLayoutPanelSpinner.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanelSpinner.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanelSpinner.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanelSpinner.Name = "tableLayoutPanelSpinner";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.ajax_loader;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.BackColor = System.Drawing.SystemColors.Window;
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.dataGridViewPatches, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.RefreshListButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.RestoreDismUpdatesButton, 1, 1);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // dataGridViewPatches
             // 
@@ -215,6 +158,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnDescription,
             this.ColumnDate,
             this.webPageColumn});
+            this.tableLayoutPanel3.SetColumnSpan(this.dataGridViewPatches, 2);
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -241,6 +185,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.dataGridViewPatches.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPatches_CellContentClick);
             this.dataGridViewPatches.SelectionChanged += new System.EventHandler(this.dataGridViewPatches_SelectionChanged);
             this.dataGridViewPatches.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewPatches_SortCompare);
+            this.dataGridViewPatches.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridViewPatches_Paint);
             this.dataGridViewPatches.Enter += new System.EventHandler(this.dataGridViewPatches_Enter);
             // 
             // ColumnUpdate
@@ -288,6 +233,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.webPageColumn.ReadOnly = true;
             this.webPageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // RefreshListButton
+            // 
+            resources.ApplyResources(this.RefreshListButton, "RefreshListButton");
+            this.RefreshListButton.Name = "RefreshListButton";
+            this.RefreshListButton.UseVisualStyleBackColor = true;
+            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
+            // 
+            // RestoreDismUpdatesButton
+            // 
+            resources.ApplyResources(this.RestoreDismUpdatesButton, "RestoreDismUpdatesButton");
+            this.RestoreDismUpdatesButton.Name = "RestoreDismUpdatesButton";
+            this.RestoreDismUpdatesButton.UseVisualStyleBackColor = true;
+            this.RestoreDismUpdatesButton.Click += new System.EventHandler(this.RestoreDismUpdatesButton_Click);
+            // 
             // _backgroundWorker
             // 
             this._backgroundWorker.WorkerSupportsCancellation = true;
@@ -304,11 +263,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.tableLayoutPanelSpinner.ResumeLayout(false);
-            this.tableLayoutPanelSpinner.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatches)).EndInit();
             this.ResumeLayout(false);
 
@@ -324,20 +280,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.RadioButton selectFromDiskRadioButton;
         private System.Windows.Forms.Button RefreshListButton;
         private System.Windows.Forms.RadioButton downloadUpdateRadioButton;
-        private System.Windows.Forms.Label labelWithAutomatedUpdates;
+        private System.Windows.Forms.Label labelBlurb;
         private System.Windows.Forms.Button RestoreDismUpdatesButton;
         private System.Windows.Forms.Label automatedUpdatesOptionLabel;
         private System.Windows.Forms.RadioButton AutomatedUpdatesRadioButton;
-        private System.Windows.Forms.Label labelWithoutAutomatedUpdates;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSpinner;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
         private System.ComponentModel.BackgroundWorker _backgroundWorker;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }

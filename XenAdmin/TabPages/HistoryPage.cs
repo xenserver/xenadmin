@@ -37,6 +37,7 @@ using System.Windows.Forms;
 
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
@@ -69,7 +70,6 @@ namespace XenAdmin.TabPages
         protected override void RefreshPage()
         {
             toolStripDdbFilterLocation.InitializeHostList();
-            toolStripDdbFilterLocation.BuildFilterList();
             BuildRowList();
         }
 
@@ -86,6 +86,8 @@ namespace XenAdmin.TabPages
         }
 
         public override string HelpID => "EventsPane";
+
+        public override NotificationsSubMode NotificationsSubMode => NotificationsSubMode.Events;
 
         #endregion
 

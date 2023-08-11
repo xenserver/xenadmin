@@ -31,6 +31,7 @@
 
 using System;
 using System.Windows.Forms;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Help;
 
 namespace XenAdmin.TabPages
@@ -66,7 +67,7 @@ namespace XenAdmin.TabPages
             DeregisterEventHandlers();
         }
 
-        
+        public virtual NotificationsSubMode NotificationsSubMode { get; }
 
         public virtual string HelpID => "";
 

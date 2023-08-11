@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
@@ -42,6 +43,7 @@ using System.Linq;
 using System.Xml;
 using DiscUtils.Iso9660;
 using XenCenterLib;
+using XenAdmin.Wizards.CrossPoolMigrateWizard;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -53,24 +55,96 @@ namespace XenAdmin.Wizards.PatchingWizard
         public event Action UpdateAlertFromWebSelected;
 
         private bool CheckForUpdatesInProgress;
-        public XenServerPatchAlert UpdateAlertFromWeb;
-        public XenServerPatchAlert AlertFromFileOnDisk;
-        public bool FileFromDiskHasUpdateXml { get; private set; }
         private bool firstLoad = true;
         private string unzippedUpdateFilePath;
+        private bool _isNewGeneration;
 
         public PatchingWizard_SelectPatchPage()
         {
             InitializeComponent();
-
-            automatedUpdatesOptionLabel.Text = string.Format(automatedUpdatesOptionLabel.Text, BrandManager.BrandConsole, BrandManager.CompanyNameShort);
-            
-            tableLayoutPanelSpinner.Visible = false;
-
-            labelWithAutomatedUpdates.Visible =
-                automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = false;
-            downloadUpdateRadioButton.Checked = true;
         }
+
+        #region Propeties
+
+        public WizardMode WizardMode
+        {
+            get
+            {
+                if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
+                    return WizardMode.AutomatedUpdates;
+
+                var updateAlert = downloadUpdateRadioButton.Visible && downloadUpdateRadioButton.Checked
+                    ? UpdateAlertFromWeb
+                    : selectFromDiskRadioButton.Checked
+                        ? AlertFromFileOnDisk
+                        : null;
+                
+                if (updateAlert != null && updateAlert.NewServerVersion != null)
+                    return WizardMode.NewVersion;
+                
+                return WizardMode.SingleUpdate;
+            }
+        }
+
+        public bool IsNewGeneration
+        {
+            get => _isNewGeneration;
+            set
+            {
+                _isNewGeneration = value;
+
+                downloadUpdateRadioButton.Visible = dataGridViewPatches.Visible
+                    = RefreshListButton.Visible = RestoreDismUpdatesButton.Visible = !_isNewGeneration;
+
+                tableLayoutPanel1.SuspendLayout();
+                try
+                {
+                    if (_isNewGeneration)
+                    {
+                        tableLayoutPanel1.RowStyles[4].SizeType = SizeType.AutoSize;
+                        tableLayoutPanel1.RowStyles[4].Height = 0;
+                        tableLayoutPanel1.RowStyles[6].SizeType = SizeType.Percent;
+                        tableLayoutPanel1.RowStyles[6].Height = 100;
+                    }
+                    else
+                    {
+                        tableLayoutPanel1.RowStyles[6].SizeType = SizeType.AutoSize;
+                        tableLayoutPanel1.RowStyles[6].Height = 0;
+                        tableLayoutPanel1.RowStyles[4].SizeType = SizeType.Percent;
+                        tableLayoutPanel1.RowStyles[4].Height = 100;
+                    }
+                }
+                finally
+                {
+                    tableLayoutPanel1.ResumeLayout();
+                }
+            }
+    }
+
+        public XenServerPatchAlert UpdateAlertFromWeb { get; set; }
+        
+        public XenServerPatchAlert AlertFromFileOnDisk { get; set; }
+        
+        public bool FileFromDiskHasUpdateXml { get; private set; }
+        
+        public KeyValuePair<XenServerPatch, string> PatchFromDisk { get; private set; }
+
+        /// <summary>
+        /// List to store unzipped files to be removed later by PatchingWizard
+        /// </summary>
+        public List<string> UnzippedUpdateFiles { get; } = new List<string>();
+
+        public string FilePath
+        {
+            get => fileNameTextBox.Text;
+            set => fileNameTextBox.Text = value;
+        }
+
+        public UpdateType SelectedUpdateType { get; private set; }
+
+        public string SelectedPatchFilePath { get; private set; }
+
+        #endregion
 
         private void RegisterEvents()
         {
@@ -92,6 +166,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 StartCheckForUpdates(); //call this before setting CheckForUpdatesInProgress
                 CheckForUpdatesInProgress = true;
+                dataGridViewPatches.Invalidate();
             });
         }
 
@@ -101,6 +176,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 StartCheckForUpdates(); //call this before setting CheckForUpdatesInProgress
                 CheckForUpdatesInProgress = true;
+                dataGridViewPatches.Invalidate();
             });
         }
 
@@ -109,6 +185,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             Program.Invoke(Program.MainWindow, ()=>
             {
                 CheckForUpdatesInProgress = false;
+                dataGridViewPatches.Invalidate();
                 FinishCheckForUpdates(); //call this after setting CheckForUpdatesInProgress
             });
         }
@@ -119,7 +196,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
 
             dataGridViewPatches.Rows.Clear();
-            tableLayoutPanelSpinner.Visible = true;
             RestoreDismUpdatesButton.Enabled = false;
             RefreshListButton.Enabled = false;
             OnPageUpdated();
@@ -130,7 +206,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (CheckForUpdatesInProgress || _backgroundWorker.IsBusy)
                 return;
 
-            tableLayoutPanelSpinner.Visible = false;
             PopulatePatchesBox();
             RefreshListButton.Enabled = true;
             RestoreDismUpdatesButton.Enabled = true;
@@ -150,13 +225,31 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (direction == PageLoadedDirection.Forward)
             {
                 //if any connected host is licensed for automated updates
-                bool automatedUpdatesPossible =
-                    ConnectionsManager.XenConnectionsCopy.Any(
+                bool automatedUpdatesPossible = ConnectionsManager.XenConnectionsCopy.Any(
                         c => c != null && c.Cache.Hosts.Any(h => !Host.RestrictBatchHotfixApply(h)));
 
-                labelWithAutomatedUpdates.Visible =
-                    automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = automatedUpdatesPossible;
-                labelWithoutAutomatedUpdates.Visible = !automatedUpdatesPossible;
+                automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = automatedUpdatesPossible;
+
+                if (_isNewGeneration)
+                {
+                    labelBlurb.Text = automatedUpdatesPossible
+                        ? Messages.PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN
+                        : Messages.PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED;
+
+                    automatedUpdatesOptionLabel.Text = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN, BrandManager.BrandConsole);
+
+                    selectFromDiskRadioButton.Text = Messages.PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN;
+                }
+                else
+                {
+                    labelBlurb.Text = automatedUpdatesPossible 
+                        ? Messages.PATCHINGWIZARD_SELECTPATCHPAGE_BLURB
+                        : Messages.PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED;
+
+                    automatedUpdatesOptionLabel.Text = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL, BrandManager.BrandConsole);
+
+                    selectFromDiskRadioButton.Text = Messages.PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO;
+                }
 
                 if (firstLoad)
                 {
@@ -167,46 +260,34 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         downloadUpdateRadioButton.Checked = true;
                 }
+                else if (_isNewGeneration && downloadUpdateRadioButton.Checked)
+                {
+                    if (automatedUpdatesPossible)
+                        AutomatedUpdatesRadioButton.Checked = true;
+                    else
+                        selectFromDiskRadioButton.Checked = true;
+                }
                 else if (!automatedUpdatesPossible && AutomatedUpdatesRadioButton.Checked)
                 {
                     downloadUpdateRadioButton.Checked = true;
                 }
 
-                StartCheckForUpdates(); //call this before starting the _backgroundWorker
-                _backgroundWorker.RunWorkerAsync();
+                if (!IsNewGeneration)
+                {
+                    StartCheckForUpdates(); //call this before starting the _backgroundWorker
+                    _backgroundWorker.RunWorkerAsync();
+                }
             }
 
             firstLoad = false;
         }
 
-        private bool IsInAutomatedUpdatesMode =>
-            AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked;
-
-        public WizardMode WizardMode
-        {
-            get
-            {
-                if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
-                    return WizardMode.AutomatedUpdates;
-                var updateAlert = downloadUpdateRadioButton.Checked
-                    ? UpdateAlertFromWeb
-                    : selectFromDiskRadioButton.Checked
-                        ? AlertFromFileOnDisk
-                        : null;
-                if (updateAlert != null && updateAlert.NewServerVersion != null)
-                    return WizardMode.NewVersion;
-                return WizardMode.SingleUpdate;
-            }
-        }
-
-        public KeyValuePair<XenServerPatch, string> PatchFromDisk { get; private set; }
-
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                if ((IsInAutomatedUpdatesMode || downloadUpdateRadioButton.Checked) &&
-                    !Updates.CheckCanDownloadUpdates())
+                if ((AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked || downloadUpdateRadioButton.Checked) &&
+                    !Updates.CheckCanDownloadUpdates() && !IsNewGeneration)
                 {
                     cancel = true;
                     using (var errDlg = new ClientIdDialog())
@@ -214,9 +295,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
-                if (IsInAutomatedUpdatesMode)
+                if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
                 {
-                    if (!Updates.CheckForServerUpdates(userRequested: true, async: false, this))
+                    if (!_isNewGeneration && !Updates.CheckForServerUpdates(userRequested: true, asynchronous: false, this))
                     {
                         cancel = true;
                         return;
@@ -451,7 +532,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (CheckForUpdatesInProgress || _backgroundWorker.IsBusy)
                 return false;
 
-            if (IsInAutomatedUpdatesMode)
+            if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
                 return true;
 
             if (downloadUpdateRadioButton.Checked)
@@ -479,21 +560,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return !CheckForUpdatesInProgress && !_backgroundWorker.IsBusy;
         }
 
-        /// <summary>
-        /// List to store unzipped files to be removed later by PatchingWizard
-        /// </summary>
-        public List<string> UnzippedUpdateFiles { get; } = new List<string>();
-
-        public string FilePath
-        {
-            get => fileNameTextBox.Text;
-            set => fileNameTextBox.Text = value;
-        }
-
-        public UpdateType SelectedUpdateType { get; private set; }
-
-        public string SelectedPatchFilePath { get; private set; }
-
         private void _backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches);
@@ -504,7 +570,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             FinishCheckForUpdates();
         }
 
+
         #region DataGridView
+
+        private void dataGridViewPatches_Paint(object sender, PaintEventArgs e)
+        {
+            if (!CheckForUpdatesInProgress)
+                return;
+
+            var size = e.Graphics.MeasureString(Messages.AVAILABLE_UPDATES_SEARCHING, Font);
+
+            using (var brush = new SolidBrush(SystemColors.WindowText))
+                e.Graphics.DrawString(Messages.AVAILABLE_UPDATES_SEARCHING, Font, brush,
+                    (dataGridViewPatches.Width - size.Width) / 2, (dataGridViewPatches.Height - size.Height) / 2);
+        }
 
         private void dataGridViewPatches_SelectionChanged(object sender, EventArgs e)
         {

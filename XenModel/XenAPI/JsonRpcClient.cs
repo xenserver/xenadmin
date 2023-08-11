@@ -1158,6 +1158,34 @@ namespace XenAPI
             return Rpc<DateTime>("pool.get_telemetry_next_collection", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public DateTime pool_get_last_update_sync(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenDateTimeConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<DateTime>("pool.get_last_update_sync", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public update_sync_frequency pool_get_update_sync_frequency(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new update_sync_frequencyConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<update_sync_frequency>("pool.get_update_sync_frequency", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public long pool_get_update_sync_day(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<long>("pool.get_update_sync_day", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public bool pool_get_update_sync_enabled(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("pool.get_update_sync_enabled", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public void pool_set_name_label(string session, string _pool, string _name_label)
         {
             var converters = new List<JsonConverter> {};
@@ -2199,6 +2227,34 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.pool.reset_telemetry_uuid", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public void pool_configure_update_sync(string session, string _pool, update_sync_frequency _update_sync_frequency, long _update_sync_day)
+        {
+            var converters = new List<JsonConverter> {new update_sync_frequencyConverter()};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.configure_update_sync", new JArray(session, _pool ?? "", _update_sync_frequency.StringOf(), _update_sync_day), serializer);
+        }
+
+        public XenRef<Task> async_pool_configure_update_sync(string session, string _pool, update_sync_frequency _update_sync_frequency, long _update_sync_day)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new update_sync_frequencyConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.configure_update_sync", new JArray(session, _pool ?? "", _update_sync_frequency.StringOf(), _update_sync_day), serializer);
+        }
+
+        public void pool_set_update_sync_enabled(string session, string _pool, bool _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_update_sync_enabled", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_pool_set_update_sync_enabled(string session, string _pool, bool _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.set_update_sync_enabled", new JArray(session, _pool ?? "", _value), serializer);
         }
 
         public List<XenRef<Pool>> pool_get_all(string session)
@@ -3319,6 +3375,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<List<update_guidances>>("VM.get_pending_guidances", new JArray(session, _vm ?? ""), serializer);
+        }
+
+        public List<update_guidances> vm_get_recommended_guidances(string session, string _vm)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<update_guidances>>("VM.get_recommended_guidances", new JArray(session, _vm ?? ""), serializer);
         }
 
         public void vm_set_name_label(string session, string _vm, string _label)
@@ -6331,6 +6394,27 @@ namespace XenAPI
             return Rpc<bool>("host.get_https_only", new JArray(session, _host ?? ""), serializer);
         }
 
+        public List<update_guidances> host_get_recommended_guidances(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<update_guidances>>("host.get_recommended_guidances", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public latest_synced_updates_applied_state host_get_latest_synced_updates_applied(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new latest_synced_updates_applied_stateConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<latest_synced_updates_applied_state>("host.get_latest_synced_updates_applied", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public bool host_get_toolstack_restart_required_after_update(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("host.get_toolstack_restart_required_after_update", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_set_name_label(string session, string _host, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -7344,6 +7428,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.host.set_https_only", new JArray(session, _host ?? "", _value), serializer);
+        }
+
+        public void host_apply_recommended_guidances(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("host.apply_recommended_guidances", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_host_apply_recommended_guidances(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.host.apply_recommended_guidances", new JArray(session, _host ?? ""), serializer);
         }
 
         public List<XenRef<Host>> host_get_all(string session)

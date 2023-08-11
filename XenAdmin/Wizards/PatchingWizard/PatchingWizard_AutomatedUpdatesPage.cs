@@ -31,8 +31,10 @@
 using System.Collections.Generic;
 using XenAPI;
 using System.Linq;
+using System.Text;
 using XenAdmin.Core;
 using XenAdmin.Alerts;
+using XenAdmin.Wizards.PatchingWizard.PlanActions;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -41,8 +43,10 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { private get; set; }
-      
+        public bool IsNewGeneration { get; set; }
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
+        public bool PostUpdateTasksAutomatically { private get; set; }
+        public Dictionary<Pool, StringBuilder> ManualTextInstructions { private get; set; }
 
         public PatchingWizard_AutomatedUpdatesPage()
         {
@@ -51,7 +55,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region XenTabPage overrides
 
-        public override string Text => Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
+        public override string Text => IsNewGeneration
+            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN
+            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
 
         public override string PageTitle => Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE;
 
@@ -63,9 +69,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string BlurbText()
         {
-            return string.Format(WizardMode == WizardMode.AutomatedUpdates
-                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
-                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE,
+            return string.Format(WizardMode == WizardMode.NewVersion
+                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE
+                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE,
                 BrandManager.BrandConsole);
         }
 
@@ -86,8 +92,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string SuccessMessagePerPool(Pool pool)
         {
+            var sb = new StringBuilder(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE).AppendLine();
 
-            return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
+            if (IsNewGeneration && !PostUpdateTasksAutomatically && ManualTextInstructions != null && ManualTextInstructions.ContainsKey(pool))
+            {
+                sb.AppendLine(Messages.PATCHINGWIZARD_SINGLEUPDATE_MANUAL_POST_UPDATE);
+                sb.Append(ManualTextInstructions[pool]).AppendLine();
+            }
+
+            return sb.ToString();
         }
 
         protected override string FailureMessagePerPool(bool multipleErrors)
@@ -112,6 +125,29 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
+            if (Helpers.CloudOrGreater(pool.Connection))
+            {
+                applicableHosts = new List<Host>();
+                var hostPlans = new List<HostPlan>();
+
+                if (Updates.CdnUpdateInfoPerConnection.TryGetValue(pool.Connection, out var updateInfo))
+                {
+                    var allHosts = pool.Connection.Cache.Hosts.ToList();
+                    allHosts.Sort();
+
+                    foreach (var server in allHosts)
+                    {
+                        var hostUpdateInfo = updateInfo.HostsWithUpdates.FirstOrDefault(c => c.HostOpaqueRef == server.opaque_ref);
+                        if (hostUpdateInfo?.UpdateIDs?.Length == 0)
+                            continue;
+
+                        hostPlans.Add(GetCdnUpdatePlanActionsForHost(server, updateInfo, hostUpdateInfo));
+                    }
+                }
+
+                return hostPlans;
+            }
+
             bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
             var minimalPatches = WizardMode == WizardMode.NewVersion
@@ -131,6 +167,39 @@ namespace XenAdmin.Wizards.PatchingWizard
             applicableHosts = new List<Host>(hosts);
             return hosts.Select(h => GetUpdatePlanActionsForHost(h, hosts, minimalPatches, uploadedPatches, PatchFromDisk)).ToList();
         }
+
         #endregion
+
+        private HostPlan GetCdnUpdatePlanActionsForHost(Host host, CdnPoolUpdateInfo poolUpdateInfo, CdnHostUpdateInfo hostUpdateInfo)
+        {
+            var planActionsPerHost = new List<PlanAction>();
+            var delayedActionsPerHost = new List<PlanAction>();
+
+            if (hostUpdateInfo.RecommendedGuidance.Length > 0 && PostUpdateTasksAutomatically)
+            {
+                if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                {
+                    planActionsPerHost.Add(new EvacuateHostPlanAction(host));
+                    delayedActionsPerHost.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
+                }
+                else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack))
+                {
+                    delayedActionsPerHost.Add(new RestartAgentPlanAction(host));
+                }
+                else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost))
+                {
+                    planActionsPerHost.Add(new EvacuateHostPlanAction(host));
+                }
+                else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartDeviceModel))
+                {
+                    delayedActionsPerHost.Add(new RebootVMsPlanAction(host, host.GetRunningVMs()));
+                }
+            }
+
+            planActionsPerHost.Add(new ApplyCdnUpdatesPlanAction(host, poolUpdateInfo));
+            delayedActionsPerHost.Add(new CheckForCdnUpdatesPlanAction(host.Connection));
+
+            return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);
+        }
     }
 }

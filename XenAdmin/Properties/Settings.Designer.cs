@@ -917,5 +917,18 @@ namespace XenAdmin.Properties {
                 this["AllowPatchesUpdates"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool SeenAllowCfuUpdatesDialog {
+            get {
+                return ((bool)(this["SeenAllowCfuUpdatesDialog"]));
+            }
+            set {
+                this["SeenAllowCfuUpdatesDialog"] = value;
+            }
+        }
     }
 }

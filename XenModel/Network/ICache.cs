@@ -46,21 +46,22 @@ namespace XenAdmin.Network
         Feature[] Features { get; }
         Folder[] Folders { get; }
         GPU_group[] GPU_groups { get; }
-        Host_cpu[] Host_cpus { get; }
         Host[] Hosts { get; }
+        Host_cpu[] Host_cpus { get; }
         Message[] Messages { get; }
         XenAPI.Network[] Networks { get; }
         PBD[] PBDs { get; }
         PCI[] PCIs { get; }
         PGPU[] PGPUs { get; }
         PIF[] PIFs { get; }
+        Pool[] Pools { get; }
         Pool_patch[] Pool_patches { get; }
         Pool_update[] Pool_updates { get; }
-        Pool[] Pools { get; }
-        PVS_site[] PVS_sites { get; }
-        PVS_server[] PVS_servers { get; }
-        PVS_proxy[] PVS_proxies { get; }
         PVS_cache_storage[] PVS_cache_storages { get; }
+        PVS_proxy[] PVS_proxies { get; }
+        PVS_server[] PVS_servers { get; }
+        PVS_site[] PVS_sites { get; }
+        Repository[] Repositories { get; }
         Role[] Roles { get; }
         SM[] SMs { get; }
         SR[] SRs { get; }

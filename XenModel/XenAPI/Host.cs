@@ -115,7 +115,9 @@ namespace XenAPI
             List<update_guidances> pending_guidances,
             bool tls_verification_enabled,
             DateTime last_software_update,
-            bool https_only)
+            bool https_only,
+            List<update_guidances> recommended_guidances,
+            latest_synced_updates_applied_state latest_synced_updates_applied)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -182,6 +184,8 @@ namespace XenAPI
             this.tls_verification_enabled = tls_verification_enabled;
             this.last_software_update = last_software_update;
             this.https_only = https_only;
+            this.recommended_guidances = recommended_guidances;
+            this.latest_synced_updates_applied = latest_synced_updates_applied;
         }
 
         /// <summary>
@@ -269,6 +273,8 @@ namespace XenAPI
             tls_verification_enabled = record.tls_verification_enabled;
             last_software_update = record.last_software_update;
             https_only = record.https_only;
+            recommended_guidances = record.recommended_guidances;
+            latest_synced_updates_applied = record.latest_synced_updates_applied;
         }
 
         /// <summary>
@@ -409,6 +415,10 @@ namespace XenAPI
                 last_software_update = Marshalling.ParseDateTime(table, "last_software_update");
             if (table.ContainsKey("https_only"))
                 https_only = Marshalling.ParseBool(table, "https_only");
+            if (table.ContainsKey("recommended_guidances"))
+                recommended_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "recommended_guidances"));
+            if (table.ContainsKey("latest_synced_updates_applied"))
+                latest_synced_updates_applied = (latest_synced_updates_applied_state)Helper.EnumParseDefault(typeof(latest_synced_updates_applied_state), Marshalling.ParseString(table, "latest_synced_updates_applied"));
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -484,7 +494,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
                 Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
                 Helper.AreEqual2(this._last_software_update, other._last_software_update) &&
-                Helper.AreEqual2(this._https_only, other._https_only);
+                Helper.AreEqual2(this._https_only, other._https_only) &&
+                Helper.AreEqual2(this._recommended_guidances, other._recommended_guidances) &&
+                Helper.AreEqual2(this._latest_synced_updates_applied, other._latest_synced_updates_applied);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1317,6 +1329,28 @@ namespace XenAPI
         public static bool get_https_only(Session session, string _host)
         {
             return session.JsonRpcClient.host_get_https_only(session.opaque_ref, _host);
+        }
+
+        /// <summary>
+        /// Get the recommended_guidances field of the given host.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<update_guidances> get_recommended_guidances(Session session, string _host)
+        {
+            return session.JsonRpcClient.host_get_recommended_guidances(session.opaque_ref, _host);
+        }
+
+        /// <summary>
+        /// Get the latest_synced_updates_applied field of the given host.
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static latest_synced_updates_applied_state get_latest_synced_updates_applied(Session session, string _host)
+        {
+            return session.JsonRpcClient.host_get_latest_synced_updates_applied(session.opaque_ref, _host);
         }
 
         /// <summary>
@@ -3028,6 +3062,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// apply all recommended guidances both on the host and on all HVM VMs on the host after updates are applied on the host
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static void apply_recommended_guidances(Session session, string _host)
+        {
+            session.JsonRpcClient.host_apply_recommended_guidances(session.opaque_ref, _host);
+        }
+
+        /// <summary>
+        /// apply all recommended guidances both on the host and on all HVM VMs on the host after updates are applied on the host
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_apply_recommended_guidances(Session session, string _host)
+        {
+          return session.JsonRpcClient.async_host_apply_recommended_guidances(session.opaque_ref, _host);
+        }
+
+        /// <summary>
         /// Return a list of all the hosts known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -4220,5 +4276,42 @@ namespace XenAPI
             }
         }
         private bool _https_only = false;
+
+        /// <summary>
+        /// The set of recommended guidances after applying updates
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        public virtual List<update_guidances> recommended_guidances
+        {
+            get { return _recommended_guidances; }
+            set
+            {
+                if (!Helper.AreEqual(value, _recommended_guidances))
+                {
+                    _recommended_guidances = value;
+                    NotifyPropertyChanged("recommended_guidances");
+                }
+            }
+        }
+        private List<update_guidances> _recommended_guidances = new List<update_guidances>() {};
+
+        /// <summary>
+        /// Default as 'unknown', 'yes' if the host is up to date with updates synced from remote CDN, otherwise 'no'
+        /// Experimental. First published in 23.18.0.
+        /// </summary>
+        [JsonConverter(typeof(latest_synced_updates_applied_stateConverter))]
+        public virtual latest_synced_updates_applied_state latest_synced_updates_applied
+        {
+            get { return _latest_synced_updates_applied; }
+            set
+            {
+                if (!Helper.AreEqual(value, _latest_synced_updates_applied))
+                {
+                    _latest_synced_updates_applied = value;
+                    NotifyPropertyChanged("latest_synced_updates_applied");
+                }
+            }
+        }
+        private latest_synced_updates_applied_state _latest_synced_updates_applied = latest_synced_updates_applied_state.unknown;
     }
 }

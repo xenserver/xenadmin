@@ -40,7 +40,7 @@ namespace XenAdmin.Controls
         [Browsable(true)]
         public event Action FilterChanged;
 
-        private bool internalUpdating;
+        private bool _internalUpdating;
 
         private ToolStripMenuItem toolStripMenuItem0;
         private ToolStripMenuItem toolStripMenuItem1;
@@ -53,69 +53,66 @@ namespace XenAdmin.Controls
         public FilterSeveritiesToolStripDropDownButton()
         {
             toolStripMenuItem0 = new ToolStripMenuItem
-                                     {
-                                         Text = Messages.SEVERITY_FILTER_0,
-                                         Checked = true,
-                                         CheckOnClick = true,
-                                         Image = Images.StaticImages.alert6_16,
-                                         ToolTipText = Messages.SEVERITY_FILTER_0_DETAIL
-                                     };
+            {
+                Text = Messages.SEVERITY_FILTER_0,
+                Image = Images.StaticImages.alert6_16,
+                ToolTipText = Messages.SEVERITY_FILTER_0_DETAIL
+            };
+
             toolStripMenuItem1 = new ToolStripMenuItem
-                                     {
-                                         Text = Messages.SEVERITY_FILTER_1,
-                                         Checked = true,
-                                         CheckOnClick = true,
-                                         Image = Images.StaticImages.alert1_16,
-                                         ToolTipText = Messages.SEVERITY_FILTER_1_DETAIL
-                                     };
+            {
+                Text = Messages.SEVERITY_FILTER_1,
+                Image = Images.StaticImages.alert1_16,
+                ToolTipText = Messages.SEVERITY_FILTER_1_DETAIL
+            };
+
             toolStripMenuItem2 = new ToolStripMenuItem
-                                     {
-                                         Text = Messages.SEVERITY_FILTER_2,
-                                         Checked = true,
-                                         CheckOnClick = true,
-                                         Image = Images.StaticImages.alert2_16,
-                                         ToolTipText = Messages.SEVERITY_FILTER_2_DETAIL
-                                     };
+            {
+                Text = Messages.SEVERITY_FILTER_2,
+                Image = Images.StaticImages.alert2_16,
+                ToolTipText = Messages.SEVERITY_FILTER_2_DETAIL
+            };
+
             toolStripMenuItem3 = new ToolStripMenuItem
-                                     {
-                                         Text = Messages.SEVERITY_FILTER_3,
-                                         Checked = true,
-                                         CheckOnClick = true,
-                                         Image = Images.StaticImages.alert3_16,
-                                         ToolTipText = Messages.SEVERITY_FILTER_3_DETAIL
-                                     };
+            {
+                Text = Messages.SEVERITY_FILTER_3,
+                Image = Images.StaticImages.alert3_16,
+                ToolTipText = Messages.SEVERITY_FILTER_3_DETAIL
+            };
+
             toolStripMenuItem4 = new ToolStripMenuItem
-                                     {
-                                         Text = Messages.SEVERITY_FILTER_4,
-                                         Checked = true,
-                                         CheckOnClick = true,
-                                         Image = Images.StaticImages.alert4_16,
-                                         ToolTipText = Messages.SEVERITY_FILTER_4_DETAIL
-                                     };
+            {
+                Text = Messages.SEVERITY_FILTER_4,
+                Image = Images.StaticImages.alert4_16,
+                ToolTipText = Messages.SEVERITY_FILTER_4_DETAIL
+            };
+
             toolStripMenuItem5 = new ToolStripMenuItem
-                                     {
-                                         Text = Messages.SEVERITY_FILTER_5,
-                                         Checked = true,
-                                         CheckOnClick = true,
-                                         Image = Images.StaticImages.alert5_16,
-                                         ToolTipText = Messages.SEVERITY_FILTER_5_DETAIL
-                                     };
+            {
+                Text = Messages.SEVERITY_FILTER_5,
+                Image = Images.StaticImages.alert5_16,
+                ToolTipText = Messages.SEVERITY_FILTER_5_DETAIL
+            };
+
             toolStripMenuItemAll = new ToolStripMenuItem
-                {
-                    Text = Messages.FILTER_SHOW_ALL,
-                    Enabled = false
-                };
+            {
+                Text = Messages.FILTER_SHOW_ALL,
+                Enabled = false
+            };
+
             DropDownItems.AddRange(new ToolStripItem[]
-                                       {
-                                           toolStripMenuItem1,
-                                           toolStripMenuItem2,
-                                           toolStripMenuItem3,
-                                           toolStripMenuItem4,
-                                           toolStripMenuItem5,
-                                           toolStripMenuItem0,
-                                           new ToolStripSeparator(),
-                                           toolStripMenuItemAll
-                                       });
+            {
+                toolStripMenuItem1,
+                toolStripMenuItem2,
+                toolStripMenuItem3,
+                toolStripMenuItem4,
+                toolStripMenuItem5,
+                toolStripMenuItem0,
+                new ToolStripSeparator(),
+                toolStripMenuItemAll
+            });
+
+            NormalizeItems(toolStripMenuItem0, toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem4, toolStripMenuItem5);
 
             toolStripMenuItem0.CheckedChanged += Item_CheckedChanged;
             toolStripMenuItem1.CheckedChanged += Item_CheckedChanged;
@@ -125,18 +122,23 @@ namespace XenAdmin.Controls
             toolStripMenuItem5.CheckedChanged += Item_CheckedChanged;
         }
 
-        public bool FilterIsOn
+        private void NormalizeItems(params ToolStripMenuItem[] items)
         {
-            get
+            foreach (var item  in items)
             {
-                return !toolStripMenuItem0.Checked
-                    || !toolStripMenuItem1.Checked
-                    || !toolStripMenuItem2.Checked
-                    || !toolStripMenuItem3.Checked
-                    || !toolStripMenuItem4.Checked
-                    || !toolStripMenuItem5.Checked;
+                item.Checked = true;
+                item.CheckOnClick = true;
+                item.ImageScaling = ToolStripItemImageScaling.None;
             }
         }
+
+        public bool FilterIsOn =>
+            !toolStripMenuItem0.Checked ||
+            !toolStripMenuItem1.Checked ||
+            !toolStripMenuItem2.Checked ||
+            !toolStripMenuItem3.Checked ||
+            !toolStripMenuItem4.Checked ||
+            !toolStripMenuItem5.Checked;
 
         public bool HideBySeverity(AlertPriority priority)
         {
@@ -154,14 +156,14 @@ namespace XenAdmin.Controls
 
             if (e.ClickedItem == toolStripMenuItemAll)
             {
-                internalUpdating = true;
+                _internalUpdating = true;
                 toolStripMenuItem0.Checked = true;
                 toolStripMenuItem1.Checked = true;
                 toolStripMenuItem2.Checked = true;
                 toolStripMenuItem3.Checked = true;
                 toolStripMenuItem4.Checked = true;
                 toolStripMenuItem5.Checked = true;
-                internalUpdating = false;
+                _internalUpdating = false;
                 
                 Item_CheckedChanged(null, null);
             }
@@ -169,12 +171,10 @@ namespace XenAdmin.Controls
 
         private void Item_CheckedChanged(object sender, EventArgs e)
         {
-            if (!internalUpdating)
+            if (!_internalUpdating)
             {
                 toolStripMenuItemAll.Enabled = FilterIsOn;
-
-                if (FilterChanged != null)
-                    FilterChanged();
+                FilterChanged?.Invoke();
             }
         }
     }

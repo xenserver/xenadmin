@@ -49,7 +49,7 @@
             // 
             // labelCopyright
             // 
-            this.labelCopyright.BackColor = System.Drawing.Color.White;
+            this.labelCopyright.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.labelCopyright, "labelCopyright");
             this.labelCopyright.Name = "labelCopyright";
             // 

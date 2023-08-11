@@ -44,6 +44,7 @@ using XenAdmin.Help;
 using System.Threading;
 using XenAdmin.Actions;
 using System.IO;
+using XenAdmin.Controls.MainWindowControls;
 
 
 namespace XenAdmin.TabPages
@@ -78,7 +79,6 @@ namespace XenAdmin.TabPages
         protected override void RefreshPage()
         {
             toolStripDropDownButtonServerFilter.InitializeHostList();
-            toolStripDropDownButtonServerFilter.BuildFilterList();
             Rebuild();
         }
 
@@ -93,6 +93,8 @@ namespace XenAdmin.TabPages
         }
 
         public override string HelpID => "AlertSummaryDialog";
+
+        public override NotificationsSubMode NotificationsSubMode => NotificationsSubMode.Alerts;
 
         #endregion
 
@@ -648,11 +650,11 @@ namespace XenAdmin.TabPages
 
         private void DismissAlerts(params Alert[] alerts)
         {
-            var groups = from Alert alert in alerts
-                         where alert != null && alert.AllowedToDismiss()
-                         group alert by alert.Connection
-                         into g
-                         select new { Connection = g.Key, Alerts = g };
+            var groups = (from Alert alert in alerts
+                where alert != null && alert.AllowedToDismiss()
+                group alert by alert.Connection
+                into g
+                select new { Connection = g.Key, Alerts = g }).ToList();
 
             foreach (var g in groups)
             {
@@ -669,18 +671,18 @@ namespace XenAdmin.TabPages
         {
             var items = new List<ToolStripItem>();
 
-            if (alert.AllowedToDismiss())
-            {
-                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
-                dismiss.Click += ToolStripMenuItemDismiss_Click;
-                items.Add(dismiss);
-            }
-
             if (!string.IsNullOrEmpty(alert.FixLinkText) && alert.FixLinkAction != null)
             {
                 var fix = new ToolStripMenuItem(alert.FixLinkText);
                 fix.Click += ToolStripMenuItemFix_Click;
                 items.Add(fix);
+            }
+
+            if (alert.AllowedToDismiss())
+            {
+                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+                dismiss.Click += ToolStripMenuItemDismiss_Click;
+                items.Add(dismiss);
             }
 
             if (!string.IsNullOrEmpty(alert.HelpID))

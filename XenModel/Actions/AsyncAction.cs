@@ -422,8 +422,8 @@ namespace XenAdmin.Actions
 
             bool ableToCompleteAction = Role.CanPerform(rbacMethodList, Connection, out var allowedRoles);
 
-            log.DebugFormat("Roles able to complete action: {0}", Role.FriendlyCSVRoleList(allowedRoles));
-            log.DebugFormat("Subject {0} has roles: {1}", Connection.Session.UserLogName(), Role.FriendlyCSVRoleList(Connection.Session.Roles));
+            log.DebugFormat("Roles able to complete action: {0}", Role.FriendlyCsvRoleList(allowedRoles));
+            log.DebugFormat("Subject {0} has roles: {1}", Connection.Session.UserLogName(), Role.FriendlyCsvRoleList(Connection.Session.Roles));
 
             if (ableToCompleteAction)
             {
