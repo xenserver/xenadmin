@@ -197,6 +197,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             planActionsPerHost.Add(new ApplyCdnUpdatesPlanAction(host, poolUpdateInfo));
+            delayedActionsPerHost.Add(new CheckForCdnUpdatesPlanAction(host.Connection));
 
             return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);
         }

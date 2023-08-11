@@ -30,6 +30,7 @@
 
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAPI;
 
 
@@ -60,6 +61,21 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN, host.Name()));
             new ApplyUpdatesFromCdnAction(host, _updateInfo).RunSync(session);
+        }
+    }
+
+
+    class CheckForCdnUpdatesPlanAction : PlanActionWithSession
+    {
+        public CheckForCdnUpdatesPlanAction(IXenConnection connection)
+            : base(connection)
+        {
+        }
+
+        protected override void RunWithSession(ref Session session)
+        {
+            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST, Connection.Name));
+            Updates.CheckForCdnUpdates(Connection, true);
         }
     }
 }

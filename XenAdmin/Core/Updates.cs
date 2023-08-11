@@ -120,22 +120,25 @@ namespace XenAdmin.Core
             CdnUpdateInfoChanged?.Invoke(connection);
         }
 
-        public static void CheckForCdnUpdates(IXenConnection connection)
+        public static void CheckForCdnUpdates(IXenConnection connection, bool isPlanAction = false)
         {
             var pool = Helpers.GetPoolOfOne(connection);
             if (pool == null)
                 return;
 
-            if (Helpers.XapiEqualOrGreater_23_18_0(connection))
+            if (!isPlanAction)
             {
-                if (pool.last_update_sync == Util.GetUnixMinDateTime() ||
-                    connection.Cache.Hosts.All(h => h.latest_synced_updates_applied == latest_synced_updates_applied_state.yes))
-                    return;
-            }
-            else
-            {
-                if (pool.repositories.Count == 0)
-                    return;
+                if (Helpers.XapiEqualOrGreater_23_18_0(connection))
+                {
+                    if (pool.last_update_sync == Util.GetUnixMinDateTime() ||
+                        connection.Cache.Hosts.All(h => h.latest_synced_updates_applied == latest_synced_updates_applied_state.yes))
+                        return;
+                }
+                else
+                {
+                    if (pool.repositories.Count == 0)
+                        return;
+                }
             }
 
             if (!pool.allowed_operations.Contains(pool_allowed_operations.get_updates))
@@ -143,7 +146,11 @@ namespace XenAdmin.Core
 
             var action = new CheckForCdnUpdatesAction(connection);
             action.Completed += CheckForCdnUpdatesAction_Completed;
-            action.RunAsync();
+
+            if (isPlanAction)
+                action.RunSync(action.Session);
+            else
+                action.RunAsync();
         }
 
         private static void CheckForCdnUpdatesAction_Completed(ActionBase sender)
