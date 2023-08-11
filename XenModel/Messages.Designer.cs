@@ -38390,6 +38390,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refreshing the updates list for {0}... .
+        /// </summary>
+        public static string UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleting update installation file {0} from {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_REMOVING_UPDATE {

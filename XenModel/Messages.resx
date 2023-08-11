@@ -13255,6 +13255,9 @@ Please check your settings and try again.</value>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
     <value>Rebooting {0}...</value>
   </data>
+  <data name="UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST" xml:space="preserve">
+    <value>Refreshing the updates list for {0}... </value>
+  </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>Deleting update installation file {0} from {1}... </value>
   </data>
