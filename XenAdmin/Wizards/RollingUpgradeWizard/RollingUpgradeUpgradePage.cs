@@ -171,7 +171,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     if (!MinimalPatches.ContainsKey(bgw))
                     {
                         log.InfoFormat("Calculating minimal patches for {0}", host.Name());
-                        Updates.CheckForServerUpdates(userRequested: true, async: false);
+                        Updates.CheckForServerUpdates(userRequested: true, asynchronous: false);
                         var mp = Updates.GetMinimalPatches(host);
                         log.InfoFormat("Minimal patches for {0}: {1}", host.Name(),
                             mp == null ? "None" : string.Join(",", mp.Select(p => p.Name)));

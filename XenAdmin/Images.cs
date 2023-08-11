@@ -70,6 +70,8 @@ namespace XenAdmin
             ImageList16.Images.Add("000_HostUnpatched_h32bit_16.png", XenAdmin.Properties.Resources._000_HostUnpatched_h32bit_16);
             ImageList16.Images.Add("server_up_16.png", XenAdmin.Properties.Resources.server_up_16);
             ImageList16.Images.Add("000_ServerErrorFile_h32bit_16.png", XenAdmin.Properties.Resources._000_ServerErrorFile_h32bit_16);
+            ImageList16.Images.Add("000_Server_h32bit_16-w-alert.png", Properties.Resources._000_Server_h32bit_16_w_alert);
+
             ImageList16.Images.Add("000_StartVM_h32bit_16.png", XenAdmin.Properties.Resources._000_StartVM_h32bit_16);
             ImageList16.Images.Add("000_VMDisabled_h32bit_16.png", XenAdmin.Properties.Resources._000_VMDisabled_h32bit_16);
             ImageList16.Images.Add("000_StoppedVM_h32bit_16.png", XenAdmin.Properties.Resources._000_StoppedVM_h32bit_16);
@@ -86,11 +88,11 @@ namespace XenAdmin
             ImageList16.Images.Add("000_VMSnapshotDiskMemory_h32bit_16.png", XenAdmin.Properties.Resources._000_VMSnapshotDiskMemory_h32bit_16);
             ImageList16.Images.Add("_000_ScheduledVMsnapshotDiskOnly_h32bit_16.png", XenAdmin.Properties.Resources._000_ScheduledVMsnapshotDiskOnly_h32bit_16);
             ImageList16.Images.Add("_000_ScheduledVMsnapshotDiskMemory_h32bit_16.png", XenAdmin.Properties.Resources._000_ScheduledVMsnapshotDiskMemory_h32bit_16);
+
             ImageList16.Images.Add("000_PoolConnected_h32bit_16.png", XenAdmin.Properties.Resources._000_PoolConnected_h32bit_16);
             ImageList16.Images.Add("pool_up_16.png", XenAdmin.Properties.Resources.pool_up_16);
-
+            ImageList16.Images.Add("pool_unpatched.png", Properties.Resources.pool_unpatched);
             ImageList16.Images.Add("000_Pool_h32bit_16-w-alert.png", Properties.Resources._000_Pool_h32bit_16_w_alert);
-            ImageList16.Images.Add("000_Server_h32bit_16-w-alert.png", Properties.Resources._000_Server_h32bit_16_w_alert);
 
             ImageList16.Images.Add("000_Storage_h32bit_16.png", XenAdmin.Properties.Resources._000_Storage_h32bit_16);
             ImageList16.Images.Add("000_StorageBroken_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageBroken_h32bit_16);
@@ -459,55 +461,86 @@ namespace XenAdmin
 
         public static Icons GetIconFor(Host host)
         {
+            Host_metrics metrics = host.Connection.Resolve(host.metrics);
 
-            Host_metrics metrics = host.Connection.Resolve<Host_metrics>(host.metrics);
-            bool host_is_live = metrics != null && metrics.live;
-
-            if (host_is_live)
+            if (metrics != null && metrics.live)
             {
                 if (host.IsFreeLicenseOrExpired())
-                {
                     return Icons.ServerUnlicensed;
-                }
+
                 if (host.HasCrashDumps())
-                {
                     return Icons.HostHasCrashDumps;
-                }
-                if (host.current_operations.ContainsValue(host_allowed_operations.evacuate)
-                    || !host.enabled)
-                {
+
+                if (host.current_operations.ContainsValue(host_allowed_operations.evacuate) || !host.enabled)
                     return Icons.HostEvacuate;
-                }
-                else if (Helpers.IsOlderThanCoordinator(host))
-                {
+
+                if (Helpers.IsOlderThanCoordinator(host))
                     return Icons.HostOlderThanCoordinator;
+
+                if (Helpers.CloudOrGreater(host))
+                {
+                    if (host.Connection.Cache.Hosts.Select(h => h.latest_synced_updates_applied).Distinct().Count() > 1 &&
+                        host.latest_synced_updates_applied != latest_synced_updates_applied_state.yes)
+                        return Icons.HostUnpatched;
                 }
                 else
                 {
-                    return Icons.HostConnected;
+                    var cache = host.Connection.Cache;
+                    var allHostCount = host.Connection.Cache.HostCount;
+
+                    foreach (var u in cache.Pool_updates)
+                    {
+                        var appliedHosts = u.AppliedOnHosts();
+
+                        if (appliedHosts.Count > 0 && appliedHosts.Count != allHostCount &&
+                            u.EnforceHomogeneity() && !appliedHosts.Contains(host))
+                            return Icons.HostUnpatched;
+                    }
                 }
+
+                return Icons.HostConnected;
             }
-            else
-            {
-                // XenAdmin.XenSearch.Group puts a fake host in the treeview for disconnected
-                // XenConnections. So here we give the yellow 'connection in progress' icon which formerly
-                // applied only to XenConnections.
-                if (host.Connection.InProgress && !host.Connection.IsConnected)
-                    return Icons.HostConnecting;
-                else
-                    return Icons.HostDisconnected;
-            }
+
+            // XenAdmin.XenSearch.Group puts a fake host in the treeview for disconnected
+            // XenConnections. So here we give the yellow 'connection in progress' icon which formerly
+            // applied only to XenConnections.
+            if (host.Connection.InProgress && !host.Connection.IsConnected)
+                return Icons.HostConnecting;
+            
+            return Icons.HostDisconnected;
         }
 
         public static Icons GetIconFor(Pool pool)
         {
             if (!pool.Connection.IsConnected)
                 return Icons.HostDisconnected;
+
             if (pool.Connection.Cache.Hosts.Any(h => h.IsFreeLicenseOrExpired()))
                 return Icons.PoolUnlicensed;
-            if (pool.IsPoolFullyUpgraded())
-                return Icons.PoolConnected;
-            return Icons.PoolNotFullyUpgraded;
+
+            if (!pool.IsPoolFullyUpgraded())
+                return Icons.PoolNotFullyUpgraded;
+
+            if (Helpers.CloudOrGreater(pool.Connection))
+            {
+                if (pool.Connection.Cache.Hosts.Select(h => h.latest_synced_updates_applied).Distinct().Count() > 1)
+                    return Icons.PoolUnPatched;
+            }
+            else
+            {
+                var cache = pool.Connection.Cache;
+                var allHostCount = pool.Connection.Cache.HostCount;
+
+                foreach (var u in cache.Pool_updates)
+                {
+                    var appliedHosts = u.AppliedOnHosts();
+
+                    if (appliedHosts.Count > 0 && appliedHosts.Count != allHostCount && u.EnforceHomogeneity())
+                        return Icons.PoolUnPatched;
+                }
+            }
+
+            return Icons.PoolConnected;
         }
 
         public static Icons GetIconFor(XenAPI.Network network)
@@ -823,6 +856,7 @@ namespace XenAdmin
             public static Bitmap licensekey_32 = Properties.Resources.licensekey_32;
             public static Bitmap lifecycle_hot = Properties.Resources.lifecycle_hot;
             public static Bitmap lifecycle_pressed = Properties.Resources.lifecycle_pressed;
+            public static Bitmap livepatch_16 = Properties.Resources.livepatch_16;
             public static Bitmap log_destination_16 = Properties.Resources.log_destination_16;
             public static Bitmap Logo = Properties.Resources.Logo;
             public static Bitmap memory_dynmax_slider = Properties.Resources.memory_dynmax_slider;
@@ -861,6 +895,7 @@ namespace XenAdmin
             public static Bitmap PDChevronRight = Properties.Resources.PDChevronRight;
             public static Bitmap PDChevronUp = Properties.Resources.PDChevronUp;
             public static Bitmap PDChevronUpOver = Properties.Resources.PDChevronUpOver;
+            public static Bitmap pool_unpatched = Properties.Resources.pool_unpatched;
             public static Bitmap pool_up_16 = Properties.Resources.pool_up_16;
             public static Bitmap redhat_16x = Properties.Resources.redhat_16x;
             public static Bitmap Refresh16 = Properties.Resources.Refresh16;
@@ -935,6 +970,7 @@ namespace XenAdmin
             public static Bitmap turbo_16x = Properties.Resources.turbo_16x;
             public static Bitmap usb_16 = Properties.Resources.usb_16;
             public static Bitmap yinhekylin_16x = Properties.Resources.yinhekylin_16x;
+            public static Bitmap rightArrowLong_Blue_16 = Properties.Resources.rightArrowLong_Blue_16;
         }
     }
 }

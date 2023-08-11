@@ -128,10 +128,16 @@
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
     <Compile Include="Actions\SR\SrTrimAction.cs" />
+    <Compile Include="Actions\Updates\ApplyUpdatesFromCdnAction.cs" />
+    <Compile Include="Actions\Updates\ConfigCdnSyncAction.cs" />
     <Compile Include="Actions\Updates\DownloadUnzipUpdateAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUpdateClientAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
     <Compile Include="Actions\Updates\ClientVersion.cs" />
+    <Compile Include="Actions\Updates\CheckForCdnUpdatesAction.cs" />
+    <Compile Include="Actions\Updates\ToggleCdnSyncAction.cs" />
+    <Compile Include="Actions\Updates\SyncWithCdnAction.cs" />
+    <Compile Include="Actions\Updates\RepositoryProxyAction.cs" />
     <Compile Include="Actions\Updates\TokenManager.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
@@ -171,6 +177,7 @@
     <Compile Include="Actions\StatusReport\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="Actions\Updates\Cdn.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -361,6 +368,7 @@
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\JsonRpc.cs" />
     <Compile Include="XenAPI\JsonRpcClient.cs" />
+    <Compile Include="XenAPI\latest_synced_updates_applied_state.cs" />
     <Compile Include="XenAPI\livepatch_status.cs" />
     <Compile Include="XenAPI\LVHD.cs">
       <SubType>Code</SubType>
@@ -397,6 +405,7 @@
     <Compile Include="XenAPI\tunnel_protocol.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\update_guidances.cs" />
+    <Compile Include="XenAPI\update_sync_frequency.cs" />
     <Compile Include="XenAPI\USB_group.cs" />
     <Compile Include="XenAPI\Vdi_nbd_server_info.cs" />
     <Compile Include="XenAPI\VGPU.cs" />

@@ -66,33 +66,43 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string NextText(bool isLastPage)
         {
-            return Messages.UPDATES_WIZARD_APPLY_UPDATE;
+            return WizardMode == WizardMode.AutomatedUpdates ? Messages.UPDATES_WIZARD_APPLY_UPDATES : Messages.UPDATES_WIZARD_APPLY_UPDATE;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
+            removeUpdateFileCheckBox.Visible = !IsNewGeneration;
+
             var anyPoolForbidsAutostart = SelectedServers.Select(s => Helpers.GetPoolOfOne(s.Connection)).Any(p => p.IsAutoUpdateRestartsForbidden());
 
             // this will be true if a patch has restartHost guidance or if livepatching fails
             bool someHostMayRequireRestart;
             bool automaticDisabled;
 
-            switch (SelectedUpdateType)
+            if (IsNewGeneration)
             {
-                case UpdateType.Legacy:
-                    ManualTextInstructions = ModePoolPatch(out someHostMayRequireRestart);
-                    automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
-                    break;
-                case UpdateType.ISO:
-                    ManualTextInstructions = PoolUpdate != null
-                        ? ModePoolUpdate(out someHostMayRequireRestart)
-                        : ModeSuppPack(out someHostMayRequireRestart);
-                    automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
-                    break;
-                default:
-                    ManualTextInstructions = null;
-                    automaticDisabled = true;
-                    break;
+                ManualTextInstructions = ModeCdnUpdates();
+                automaticDisabled = anyPoolForbidsAutostart;
+            }
+            else
+            {
+                switch (SelectedUpdateType)
+                {
+                    case UpdateType.Legacy:
+                        ManualTextInstructions = ModePoolPatch(out someHostMayRequireRestart);
+                        automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
+                        break;
+                    case UpdateType.ISO:
+                        ManualTextInstructions = PoolUpdate != null
+                            ? ModePoolUpdate(out someHostMayRequireRestart)
+                            : ModeSuppPack(out someHostMayRequireRestart);
+                        automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
+                        break;
+                    default:
+                        ManualTextInstructions = null;
+                        automaticDisabled = true;
+                        break;
+                }
             }
 
             if (ManualTextInstructions == null || ManualTextInstructions.Count == 0)
@@ -166,11 +176,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Accessors
 
+        public WizardMode WizardMode { get; set; }
+        public bool IsNewGeneration { get; set; }
+
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { get; private set; }
 
         public bool IsAutomaticMode => AutomaticRadioButton.Checked;
 
-        public bool RemoveUpdateFile => removeUpdateFileCheckBox.Checked;
+        public bool RemoveUpdateFile => removeUpdateFileCheckBox.Visible && removeUpdateFileCheckBox.Checked;
 
         public List<Pool> SelectedPools { private get; set; }
         public List<Host> SelectedServers { private get; set; }
@@ -268,6 +281,48 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var serversPerPool = GroupServersPerPool(SelectedPools, SelectedServers);
             return GetGuidanceList(after_apply_guidance.restartHost, serversPerPool, null, out someHostMayRequireRestart);
+        }
+
+        private Dictionary<Pool, StringBuilder> ModeCdnUpdates()
+        {
+            var poolDict = new Dictionary<Pool, StringBuilder>();
+
+            foreach (var pool in SelectedPools)
+            {
+                if (!Updates.CdnUpdateInfoPerConnection.TryGetValue(pool.Connection, out var poolUpdateInfo))
+                    continue;
+
+                var hostDict = new Dictionary<Host, StringBuilder>();
+
+                foreach (var hostUpdateInfo in poolUpdateInfo.HostsWithUpdates)
+                {
+                    if (hostUpdateInfo.RecommendedGuidance.Length > 0)
+                    {
+                        var host = pool.Connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef));
+                        if (host != null)
+                        {
+                            var hostSb = new StringBuilder();
+
+                            var msg = host.IsCoordinator() ? $"{host.Name()} ({Messages.COORDINATOR})" : host.Name();
+                            hostSb.AppendIndented(msg).AppendLine();
+
+                            foreach (var g in hostUpdateInfo.RecommendedGuidance)
+                                hostSb.AppendIndented(Cdn.FriendlyInstruction(g), 4).AppendLine();
+
+                            if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                                hostSb.AppendIndented(Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS, 4).AppendLine();
+
+                            hostDict[host] = hostSb;
+                        }
+                    }
+                }
+
+                if (hostDict.Count > 0)
+                    poolDict[pool] = new StringBuilder(string.Join(Environment.NewLine,
+                        hostDict.OrderBy(k => k.Key).Select(k => k.Value.ToString())));
+            }
+
+            return poolDict;
         }
 
 

@@ -62,7 +62,13 @@ using XenAdmin.Properties;
     "[Xc updates url]",
     "[Cfu url]",
     "[Guest Tools]",
-    "[XenServer host]")]
+    "[XenServer host]",
+    "[YumRepoBaseBin]",
+    "[YumRepoBaseSource]",
+    "[YumRepoEarlyAccessBin]",
+    "[YumRepoEarlyAccessSource]",
+    "[YumRepoNormalBin]",
+    "[YumRepoNormalSource]")]
 
 namespace XenAdmin.Properties
 {
@@ -78,7 +84,14 @@ namespace XenAdmin.Properties
             string xcUpdatesUrl,
             string cfuUrl,
             string vmTools,
-            string xenHost)
+            string xenHost,
+            string yumRepoBaseBin,
+            string yumRepoBaseSource,
+            string yumRepoEarlyAccessBin,
+            string yumRepoEarlyAccessSource,
+            string yumRepoNormalBin,
+            string yumRepoNormalSource
+        )
         {
             BrandConsole = brandConsole;
             BrandConsoleNoSpace = brandConsoleNoSpace;
@@ -89,6 +102,12 @@ namespace XenAdmin.Properties
             CfuUrl = cfuUrl;
             VmTools = vmTools;
             XenHost = xenHost;
+            YumRepoBaseBin = yumRepoBaseBin;
+            YumRepoBaseSource = yumRepoBaseSource;
+            YumRepoEarlyAccessBin = yumRepoEarlyAccessBin;
+            YumRepoEarlyAccessSource = yumRepoEarlyAccessSource;
+            YumRepoNormalBin = yumRepoNormalBin;
+            YumRepoNormalSource = yumRepoNormalSource;
         }
 
         public string BrandConsole { get; }
@@ -100,5 +119,11 @@ namespace XenAdmin.Properties
         public string XcUpdatesUrl { get; }
         public string CfuUrl { get; }
         public string XenHost { get; }
+        public string YumRepoBaseBin { get; }
+        public string YumRepoBaseSource { get; }
+        public string YumRepoEarlyAccessBin { get; }
+        public string YumRepoEarlyAccessSource { get; }
+        public string YumRepoNormalBin { get; }
+        public string YumRepoNormalSource { get; }
     }
 }

@@ -71,7 +71,7 @@ namespace XenAdmin.Controls
             comboBoxCacheSr.Items.Clear();
 
             // add the "Not configured" item first
-            var notConfiguredItem = new SrComboBoxItem(null, Messages.PVS_CACHE_NOT_CONFIGURED);
+            var notConfiguredItem = new SrComboBoxItem(null, Messages.NOT_CONFIGURED);
             comboBoxCacheSr.Items.Add(notConfiguredItem);
 
             // add Memory SR; if no memory SR  found, add a placeholder (we will create the memory SR in ConfigurePvsCacheAction)

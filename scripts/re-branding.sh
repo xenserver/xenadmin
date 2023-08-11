@@ -50,6 +50,12 @@ rebranding_global()
         -e "s#xencenter\/current-release\/#${BRANDING_HELP_PATH}#g" \
         -e "s#\[Xc updates url\]#${XC_UPDATES_URL}#g" \
         -e "s#\[Cfu url\]#${CFU_URL}#g" \
+        -e "s#\[YumRepoBaseBin\]#${YUM_REPO_BASE_BIN}#g" \
+        -e "s#\[YumRepoBaseSource\]#${YUM_REPO_BASE_SRC}#g" \
+        -e "s#\[YumRepoEarlyAccessBin\]#${YUM_REPO_EARLY_ACCESS_BIN}#g" \
+        -e "s#\[YumRepoEarlyAccessSource\]#${YUM_REPO_EARLY_ACCESS_SRC}#g" \
+        -e "s#\[YumRepoNormalBin\]#${YUM_REPO_NORMAL_BIN}#g" \
+        -e "s#\[YumRepoNormalSource\]#${YUM_REPO_NORMAL_SRC}#g" \
         $1
 }
 

@@ -60,6 +60,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public XenServerPatchAlert AlertFromFileOnDisk { private get; set; }
         public bool FileFromDiskHasUpdateXml { private get; set; }
         public WizardMode WizardMode { private get; set; }
+        public bool IsNewGeneration { get; set; }
 
         public PatchingWizard_SelectServers()
         {
@@ -75,7 +76,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null;
+            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates ||
+                                UpdateAlertFromWeb != null ||
+                                AlertFromFileOnDisk != null;
 
             switch (WizardMode)
             {
@@ -92,7 +95,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     break;
             }
 
-            List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+            var xenConnections = ConnectionsManager.XenConnectionsCopy
+                .Where(c => IsNewGeneration ? Helpers.CloudOrGreater(c) : !Helpers.CloudOrGreater(c)).ToList();
             xenConnections.Sort();
 
             int licensedPoolCount = 0;
@@ -205,35 +209,48 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
 
-            //check updgrade sequences
-            var minimalPatches = WizardMode == WizardMode.NewVersion
-                ? Updates.GetMinimalPatches(host)
-                : Updates.GetMinimalPatches(host.Connection);
-            if (minimalPatches == null) //version not supported or too new to have automated updates available
+            if (Helpers.CloudOrGreater(host))
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
-                return false;
+                if (!Updates.CdnUpdateInfoPerConnection.TryGetValue(host.Connection, out var updateInfo) ||
+                    updateInfo.HostsWithUpdates.FirstOrDefault(u => u.HostOpaqueRef == host.opaque_ref) == null)
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    return false;
+                }
             }
-
-            //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
-            if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+            else
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
-                return false;
-            }
+                //check updgrade sequences
+                var minimalPatches = WizardMode == WizardMode.NewVersion
+                    ? Updates.GetMinimalPatches(host)
+                    : Updates.GetMinimalPatches(host.Connection);
+                
+                if (minimalPatches == null) //version not supported or too new to have automated updates available
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    return false;
+                }
 
-            var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
-            if (us == null)
-            {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
-                return false;
-            }
+                //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
+                if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
+                    return false;
+                }
 
-            //if host is up to date
-            if (us.Count == 0)
-            {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
-                return false;
+                var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
+                if (us == null)
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
+                    return false;
+                }
+
+                //if host is up to date
+                if (us.Count == 0)
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    return false;
+                }
             }
 
             tooltipText = null;
@@ -244,7 +261,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             tooltipText = null;
 
-            if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
+            if (Helpers.FeatureForbidden(host, Host.RestrictHotfixApply) && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
             {
                 tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return false;
@@ -276,8 +293,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 case UpdateType.ISO:
                     //from Ely onwards, iso does not mean supplemental pack
-                    
-                    if (WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null)
+
+                    if (WizardMode == WizardMode.AutomatedUpdates ||
+                        UpdateAlertFromWeb != null ||
+                        AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);
 
                     // here a file from disk was selected, but it was not an update (FileFromDiskAlert == null)
@@ -985,8 +1004,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             private void UpdateDetails()
             {
-                var pool = Tag as Pool;
-                if (pool != null)
+                if (Tag is Pool pool)
                 {
                     Host coordinator = pool.Connection.Resolve(pool.master);
                     if (_poolCheckBoxCell.Value == null)
@@ -994,12 +1012,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     _expansionCell.Value = Images.StaticImages.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
-                    _versionCell.Value = coordinator.ProductVersionTextShort();
+                    _versionCell.Value = $"{coordinator.ProductBrand()} {coordinator.ProductVersionTextShort()}";
                     return;
                 }
 
-                var host = Tag as Host;
-                if (host != null)
+                if (Tag is Host host)
                 {
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
@@ -1012,7 +1029,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         _poolIconHostCheckCell.Value = Images.GetImage16For(host);
                     _nameCell.Value = host;
-                    _versionCell.Value = host.ProductVersionTextShort();
+                    _versionCell.Value = $"{host.ProductBrand()} {host.ProductVersionTextShort()}";
                 }
             }
 

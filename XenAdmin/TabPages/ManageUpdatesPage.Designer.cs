@@ -52,22 +52,21 @@
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
             this.dismissAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dismissSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
             this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.checkForUpdatesNowLink = new System.Windows.Forms.LinkLabel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelProgress = new System.Windows.Forms.Label();
             this.spinner = new XenAdmin.Controls.SpinnerIcon();
-            this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewHosts = new XenAdmin.TabPages.ManageUpdatesPage.UpdatePageByHostDataGridView();
             this.ColumnExpansion = new System.Windows.Forms.DataGridViewImageColumn();
@@ -84,6 +83,8 @@
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.linkLabelConfigure = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -91,10 +92,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinner)).BeginInit();
-            this.tableLayouPanel5.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -140,11 +142,11 @@
             this.toolStripDropDownButtonDateFilter,
             this.toolStripSeparator3,
             this.toolStripButtonRefresh,
+            this.toolStripSplitButtonDismiss,
+            this.toolStripButtonRestoreDismissed,
             this.toolStripButtonUpdate,
             this.toolStripSeparator1,
-            this.toolStripButtonExportAll,
-            this.toolStripSplitButtonDismiss,
-            this.toolStripButtonRestoreDismissed});
+            this.toolStripButtonExportAll});
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.TabStop = true;
             // 
@@ -160,7 +162,7 @@
             // 
             // byUpdateToolStripMenuItem
             // 
-            this.byUpdateToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
+            this.byUpdateToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._015_Download_h32bit_16;
             resources.ApplyResources(this.byUpdateToolStripMenuItem, "byUpdateToolStripMenuItem");
             this.byUpdateToolStripMenuItem.Name = "byUpdateToolStripMenuItem";
             this.byUpdateToolStripMenuItem.Click += new System.EventHandler(this.byUpdateToolStripMenuItem_Click);
@@ -205,26 +207,6 @@
             this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
             this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
             // 
-            // toolStripButtonUpdate
-            // 
-            this.toolStripButtonUpdate.AutoToolTip = false;
-            this.toolStripButtonUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripButtonUpdate, "toolStripButtonUpdate");
-            this.toolStripButtonUpdate.Name = "toolStripButtonUpdate";
-            this.toolStripButtonUpdate.Click += new System.EventHandler(this.toolStripButtonUpdate_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // toolStripButtonExportAll
-            // 
-            this.toolStripButtonExportAll.AutoToolTip = false;
-            resources.ApplyResources(this.toolStripButtonExportAll, "toolStripButtonExportAll");
-            this.toolStripButtonExportAll.Name = "toolStripButtonExportAll";
-            this.toolStripButtonExportAll.Click += new System.EventHandler(this.toolStripButtonExportAll_Click);
-            // 
             // toolStripSplitButtonDismiss
             // 
             this.toolStripSplitButtonDismiss.AutoToolTip = false;
@@ -256,6 +238,26 @@
             this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
             this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
             // 
+            // toolStripButtonUpdate
+            // 
+            this.toolStripButtonUpdate.AutoToolTip = false;
+            this.toolStripButtonUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripButtonUpdate, "toolStripButtonUpdate");
+            this.toolStripButtonUpdate.Name = "toolStripButtonUpdate";
+            this.toolStripButtonUpdate.Click += new System.EventHandler(this.toolStripButtonUpdate_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // toolStripButtonExportAll
+            // 
+            this.toolStripButtonExportAll.AutoToolTip = false;
+            resources.ApplyResources(this.toolStripButtonExportAll, "toolStripButtonExportAll");
+            this.toolStripButtonExportAll.Name = "toolStripButtonExportAll";
+            this.toolStripButtonExportAll.Click += new System.EventHandler(this.toolStripButtonExportAll_Click);
+            // 
             // AutoCheckForUpdatesDisabledLabel
             // 
             resources.ApplyResources(this.AutoCheckForUpdatesDisabledLabel, "AutoCheckForUpdatesDisabledLabel");
@@ -267,13 +269,6 @@
             this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
-            // 
-            // checkForUpdatesNowLink
-            // 
-            resources.ApplyResources(this.checkForUpdatesNowLink, "checkForUpdatesNowLink");
-            this.checkForUpdatesNowLink.Name = "checkForUpdatesNowLink";
-            this.checkForUpdatesNowLink.TabStop = true;
-            this.checkForUpdatesNowLink.Click += new System.EventHandler(this.checkForUpdatesNowLink_Click);
             // 
             // button2
             // 
@@ -307,18 +302,16 @@
             this.spinner.Name = "spinner";
             this.spinner.TabStop = false;
             // 
-            // tableLayouPanel5
+            // tableLayoutPanel5
             // 
-            resources.ApplyResources(this.tableLayouPanel5, "tableLayouPanel5");
-            this.tableLayouPanel5.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayouPanel5.Controls.Add(this.checkForUpdatesNowLink, 2, 0);
-            this.tableLayouPanel5.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
-            this.tableLayouPanel5.Controls.Add(this.panel1, 0, 1);
-            this.tableLayouPanel5.Name = "tableLayouPanel5";
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel1, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // panel1
             // 
-            this.tableLayouPanel5.SetColumnSpan(this.panel1, 3);
             this.panel1.Controls.Add(this.dataGridViewHosts);
             this.panel1.Controls.Add(this.dataGridViewUpdates);
             resources.ApplyResources(this.panel1, "panel1");
@@ -431,7 +424,6 @@
             this.dataGridViewUpdates.ReadOnly = true;
             this.dataGridViewUpdates.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpdates_CellClick);
             this.dataGridViewUpdates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpdates_CellDoubleClick);
-            this.dataGridViewUpdates.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewUpdates_ColumnHeaderMouseClick);
             this.dataGridViewUpdates.SelectionChanged += new System.EventHandler(this.dataGridViewUpdates_SelectionChanged);
             this.dataGridViewUpdates.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewUpdates_SortCompare);
             this.dataGridViewUpdates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewUpdates_KeyDown);
@@ -486,6 +478,21 @@
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // tableLayoutPanel6
+            // 
+            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
+            this.tableLayoutPanel6.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.linkLabelConfigure, 2, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            // 
+            // linkLabelConfigure
+            // 
+            resources.ApplyResources(this.linkLabelConfigure, "linkLabelConfigure");
+            this.linkLabelConfigure.Name = "linkLabelConfigure";
+            this.linkLabelConfigure.TabStop = true;
+            this.linkLabelConfigure.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelConfigure_LinkClicked);
+            // 
             // ManageUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
@@ -493,8 +500,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayouPanel5);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayoutPanel5);
             this.Name = "ManageUpdatesPage";
             this.Resize += new System.EventHandler(this.ManageUpdatesPage_Resize);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -507,11 +513,13 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinner)).EndInit();
-            this.tableLayouPanel5.ResumeLayout(false);
-            this.tableLayouPanel5.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).EndInit();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -531,23 +539,12 @@
         private Controls.FilterLocationToolStripDropDownButton toolStripDropDownButtonServerFilter;
         private Controls.FilterDatesToolStripDropDownButton toolStripDropDownButtonDateFilter;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
-        private System.Windows.Forms.ToolStripMenuItem dismissAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dismissSelectedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
         private System.Windows.Forms.Label AutoCheckForUpdatesDisabledLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel checkForUpdatesNowLink;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
-        private System.Windows.Forms.TableLayoutPanel tableLayouPanel5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonView;
         private System.Windows.Forms.ToolStripMenuItem byUpdateToolStripMenuItem;
@@ -564,5 +561,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstalledUpdate;
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
         private Controls.SpinnerIcon spinner;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
+        private System.Windows.Forms.ToolStripMenuItem dismissAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dismissSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
+        private System.Windows.Forms.LinkLabel linkLabelConfigure;
     }
 }

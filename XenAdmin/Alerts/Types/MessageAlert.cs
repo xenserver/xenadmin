@@ -504,6 +504,12 @@ namespace XenAdmin.Alerts
                 case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_30:
                     return new CertificateAlert(msg);
 
+                case Message.MessageType.UPDATES_FEATURE_EXPIRED:
+                case Message.MessageType.UPDATES_FEATURE_EXPIRING_CRITICAL:
+                case Message.MessageType.UPDATES_FEATURE_EXPIRING_MAJOR:
+                case Message.MessageType.UPDATES_FEATURE_EXPIRING_WARNING:
+                    return new CssExpiryAlert(msg);
+
                 case Message.MessageType.FAILED_LOGIN_ATTEMPTS:
                     return new FailedLoginAttemptAlert(msg);
                 case Message.MessageType.LEAF_COALESCE_START_MESSAGE:

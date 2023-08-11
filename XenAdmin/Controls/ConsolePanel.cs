@@ -127,8 +127,8 @@ namespace XenAdmin.Controls
 
                 string msg = allowedRoles.Count == 1 ? Messages.RBAC_CONSOLE_WARNING_ONE : Messages.RBAC_CONSOLE_WARNING_MANY;
                 lableRbacWarning.Text = string.Format(msg,
-                    Role.FriendlyCSVRoleList(source.Connection.Session.Roles),
-                    Role.FriendlyCSVRoleList(allowedRoles));
+                    Role.FriendlyCsvRoleList(source.Connection.Session.Roles),
+                    Role.FriendlyCsvRoleList(allowedRoles));
 
                 tableLayoutPanelRbac.Visible = true;
                 return;

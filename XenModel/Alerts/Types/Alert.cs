@@ -192,7 +192,7 @@ namespace XenAdmin.Alerts
         public string uuid;
         protected int _priority;
 
-        public Alert()
+        protected Alert()
         {
             uuid = Guid.NewGuid().ToString();
         }

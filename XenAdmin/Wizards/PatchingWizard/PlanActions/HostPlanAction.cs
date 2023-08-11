@@ -40,20 +40,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Host _currentHost;
         protected readonly XenRef<Host> HostXenRef;
 
         protected HostPlanAction(Host host)
             : base(host.Connection)
         {
-            _currentHost = host;
+            CurrentHost = host;
             HostXenRef = new XenRef<Host>(host);
         }
 
-        protected internal Host CurrentHost
-        {
-            get { return _currentHost; }
-        }
+        protected Host CurrentHost { get; }
 
         public Host GetResolvedHost()
         {

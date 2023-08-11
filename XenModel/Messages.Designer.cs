@@ -124,6 +124,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installing updates on {0}....
+        /// </summary>
+        public static string ACTION_APPLY_CDN_UPDATES_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_APPLY_CDN_UPDATES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changing control domain memory settings on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_CHANGE_CONTROL_DOMAIN_MEMORY {
@@ -4985,11 +4994,119 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The last synchronization with the update channel took place on {0}..
+        /// </summary>
+        public static string ALERT_CDN_OUT_OF_SYNC_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_OUT_OF_SYNC_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have not synchronized with the update channel in {0} days..
+        /// </summary>
+        public static string ALERT_CDN_OUT_OF_SYNC_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_OUT_OF_SYNC_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure Updates.
+        /// </summary>
+        public static string ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring an update channel will allow your system to synchronize and retrieve available updates..
+        /// </summary>
+        public static string ALERT_CDN_REPO_NOT_CONFIGURED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_REPO_NOT_CONFIGURED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have not configured an update channel on &apos;{0}&apos;.
+        /// </summary>
+        public static string ALERT_CDN_REPO_NOT_CONFIGURED_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_REPO_NOT_CONFIGURED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When CPU usage exceeds {0}% for {1} min(s).
         /// </summary>
         public static string ALERT_CPUS_SUB_TEXT {
             get {
                 return ResourceManager.GetString("ALERT_CPUS_SUB_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Customer Success Services (CSS) agreement expired on {0}..
+        /// </summary>
+        public static string ALERT_CSS_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renew CSS Agreement.
+        /// </summary>
+        public static string ALERT_CSS_EXPIRED_LINK_TEXT {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRED_LINK_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement has expired.
+        /// </summary>
+        public static string ALERT_CSS_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Customer Success Services (CSS) agreement will expire on {0}..
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement is expiring in {0} day(s).
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement is expiring in {0} hour(s).
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement is expiring in {0} minute(s).
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_TITLE_MINUTES", resourceCulture);
             }
         }
         
@@ -5396,11 +5513,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for {1} updates and new versions of the application?.
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of the application?.
         /// </summary>
         public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
             get {
                 return ResourceManager.GetString("ALLOWED_UPDATES_DIALOG_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can configure {0} to periodically check the internet for updates and new versions for servers running {1} or earlier. Would you like to do so?.
+        /// </summary>
+        public static string ALLOWED_UPDATES_DIALOG_MESSAGE_CFU {
+            get {
+                return ResourceManager.GetString("ALLOWED_UPDATES_DIALOG_MESSAGE_CFU", resourceCulture);
             }
         }
         
@@ -7164,6 +7290,89 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrate VMs off this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_EVACUATE_HOST {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_EVACUATE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reboot this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_REBOOT_HOST {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_REBOOT_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live patch failed. Reboot this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reboot VMs running on this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_RESTART_DEVICE_MODEL {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_RESTART_DEVICE_MODEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart Toolstack.
+        /// </summary>
+        public static string CDN_GUIDANCE_RESTART_TOOLSTACK {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_RESTART_TOOLSTACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This update live patches the following components: {0}.
+        /// </summary>
+        public static string CDN_LIVEPATCHES_IN_UPDATE {
+            get {
+                return ResourceManager.GetString("CDN_LIVEPATCHES_IN_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following tasks will need to be performed manually for the installed updates to take effect:
+        ///{0}.
+        /// </summary>
+        public static string CDN_PENDING_GUIDANCES_FAILURE {
+            get {
+                return ResourceManager.GetString("CDN_PENDING_GUIDANCES_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending tasks on {0}.
+        /// </summary>
+        public static string CDN_PENDING_GUIDANCES_KEY {
+            get {
+                return ResourceManager.GetString("CDN_PENDING_GUIDANCES_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following tasks need to be performed for the latest installed updates to take effect:
+        ///{0}.
+        /// </summary>
+        public static string CDN_PENDING_GUIDANCES_VALUE {
+            get {
+                return ResourceManager.GetString("CDN_PENDING_GUIDANCES_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; expired on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
@@ -7773,6 +7982,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has synchronized within the past week.
+        /// </summary>
+        public static string CHECKING_LAST_CDN_SYNC_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CHECKING_LAST_CDN_SYNC_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking date of last synchronization with update channel.
+        /// </summary>
+        public static string CHECKING_LAST_CDN_SYNC_TILE {
+            get {
+                return ResourceManager.GetString("CHECKING_LAST_CDN_SYNC_TILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Power On mode check.
         /// </summary>
         public static string CHECKING_POWER_ON_MODE {
@@ -8167,6 +8394,33 @@ namespace XenAdmin {
         public static string COMPRESSING_FILES {
             get {
                 return ResourceManager.GetString("COMPRESSING_FILES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1}.
+        /// </summary>
+        public static string CONFIG_CDN_UPDATES_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIG_CDN_UPDATES_TAB_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} or earlier.
+        /// </summary>
+        public static string CONFIG_LCM_UPDATES_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIG_LCM_UPDATES_TAB_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Configure Updates....
+        /// </summary>
+        public static string CONFIG_UPDATES_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("CONFIG_UPDATES_MENU_ITEM", resourceCulture);
             }
         }
         
@@ -20259,6 +20513,142 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post-update tasks to be performed:
+        ///{0}.
+        /// </summary>
+        public static string HOTFIX_POST_UPDATE_ACTIONS {
+            get {
+                return ResourceManager.GetString("HOTFIX_POST_UPDATE_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server will be live patched. If live patch fails, a server reboot will be required..
+        /// </summary>
+        public static string HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS {
+            get {
+                return ResourceManager.GetString("HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} packages will be updated.
+        /// </summary>
+        public static string HOTFIX_RPMS_TO_INSTALL {
+            get {
+                return ResourceManager.GetString("HOTFIX_RPMS_TO_INSTALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} bug fixes.
+        /// </summary>
+        public static string HOTFIX_TYPE_BUG_FIX_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_BUG_FIX_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 bug fix.
+        /// </summary>
+        public static string HOTFIX_TYPE_BUG_FIX_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_BUG_FIX_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} foundational changes.
+        /// </summary>
+        public static string HOTFIX_TYPE_FOUNDATIONAL_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_FOUNDATIONAL_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 foundational change.
+        /// </summary>
+        public static string HOTFIX_TYPE_FOUNDATIONAL_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_FOUNDATIONAL_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} improvements.
+        /// </summary>
+        public static string HOTFIX_TYPE_IMPROVEMENT_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_IMPROVEMENT_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 improvement.
+        /// </summary>
+        public static string HOTFIX_TYPE_IMPROVEMENT_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_IMPROVEMENT_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new features.
+        /// </summary>
+        public static string HOTFIX_TYPE_NEW_FEATURE_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_NEW_FEATURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new feature.
+        /// </summary>
+        public static string HOTFIX_TYPE_NEW_FEATURE_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_NEW_FEATURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} feature previews.
+        /// </summary>
+        public static string HOTFIX_TYPE_PREVIEW_FEATURE_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_PREVIEW_FEATURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new feature preview.
+        /// </summary>
+        public static string HOTFIX_TYPE_PREVIEW_FEATURE_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_PREVIEW_FEATURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} security fixes.
+        /// </summary>
+        public static string HOTFIX_TYPE_SECURITY_FIX_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_SECURITY_FIX_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 security fix.
+        /// </summary>
+        public static string HOTFIX_TYPE_SECURITY_FIX_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_SECURITY_FIX_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hourly; at {0} minutes past each hour.
         /// </summary>
         public static string HOURLY_SCHEDULE_FORMAT {
@@ -21410,6 +21800,15 @@ namespace XenAdmin {
         public static string INCORRECT_OLD_PASSWORD {
             get {
                 return ResourceManager.GetString("INCORRECT_OLD_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indeterminable.
+        /// </summary>
+        public static string INDETERMINABLE {
+            get {
+                return ResourceManager.GetString("INDETERMINABLE", resourceCulture);
             }
         }
         
@@ -28293,6 +28692,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not configured.
+        /// </summary>
+        public static string NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to not contained in.
         /// </summary>
         public static string NOT_CONTAINED_IN {
@@ -28626,15 +29034,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alerts: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_ALERTS_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_ALERTS_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Alerts ({0}).
         /// </summary>
         public static string NOTIFICATIONS_SUBMODE_ALERTS_UNREAD {
@@ -28649,42 +29048,6 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_EVENTS_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_READ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Events: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1 error.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} errors.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} in progress.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -28712,15 +29075,6 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
             }
         }
         
@@ -29371,6 +29725,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install Updates.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uploading and installing updates.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE {
@@ -29731,11 +30094,83 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} will download and install all released updates on the current version, usually with only a single reboot at the end..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} will install all released updates on the current version, usually with only a single reboot at the end..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Automated Updates, choose an update to download, or browse your computer for an update or supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Automated Updates, or browse your computer for a supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse your computer for an update or supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an update to download, or browse your computer for an update or supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Update File.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Select an update or supplemental pack from disk.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Select a supplemental pack from disk.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN", resourceCulture);
             }
         }
         
@@ -29758,7 +30193,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose an existing update to install or upload a new one.
+        ///   Looks up a localized string similar to Choose the update you want to install.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_TITLE {
             get {
@@ -31656,15 +32091,6 @@ namespace XenAdmin {
         public static string PVS_CACHE_MEMORY_SR_NAME {
             get {
                 return ResourceManager.GetString("PVS_CACHE_MEMORY_SR_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not configured.
-        /// </summary>
-        public static string PVS_CACHE_NOT_CONFIGURED {
-            get {
-                return ResourceManager.GetString("PVS_CACHE_NOT_CONFIGURED", resourceCulture);
             }
         }
         
@@ -37167,15 +37593,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically check for {0} or {1} updates.
-        /// </summary>
-        public static string UPDATES_DESC {
-            get {
-                return ResourceManager.GetString("UPDATES_DESC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to For the update to take effect after application, the following action is required:
         /// .
         /// </summary>
@@ -37330,6 +37747,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configure Updates....
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_CONFIG {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_CONFIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (full application required).
         /// </summary>
         public static string UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY {
@@ -37339,7 +37765,61 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install Update.
+        ///   Looks up a localized string similar to Last synchronized.
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_LAST_SYNCED {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_LAST_SYNCED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update channel.
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_REPO {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_REPO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize Now.
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_SYNC_NOW {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_SYNC_NOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Updates.
+        /// </summary>
+        public static string UPDATES_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("UPDATES_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically check for {0} updates.
+        /// </summary>
+        public static string UPDATES_OPTIONS_DESC {
+            get {
+                return ResourceManager.GetString("UPDATES_OPTIONS_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Updates.
+        /// </summary>
+        public static string UPDATES_OPTIONS_TITLE {
+            get {
+                return ResourceManager.GetString("UPDATES_OPTIONS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install Updates.
         /// </summary>
         public static string UPDATES_WIZARD {
             get {
@@ -37384,6 +37864,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Install updates.
+        /// </summary>
+        public static string UPDATES_WIZARD_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installing update {0} on {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE {
@@ -37398,6 +37887,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing updates on {0}... .
+        /// </summary>
+        public static string UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN", resourceCulture);
             }
         }
         
@@ -37888,6 +38386,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_REBOOTING {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_REBOOTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refreshing the updates list for {0}... .
+        /// </summary>
+        public static string UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST", resourceCulture);
             }
         }
         
@@ -43099,6 +43606,215 @@ namespace XenAdmin {
         public static string YOU_ARE_HERE {
             get {
                 return ResourceManager.GetString("YOU_ARE_HERE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving list of available updates for {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CHECK_FOR_UPDATES {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CHECK_FOR_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling repository {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling repository {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_ENABLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_DESCRIPTION_ENABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introducing repository {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_INTRODUCE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_DESCRIPTION_INTRODUCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring {0} to retrieve updates from the {1} repo....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring proxy for accessing the update channel.
+        /// </summary>
+        public static string YUM_REPO_ACTION_PROXY_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_PROXY_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling proxy for accessing the update channel.
+        /// </summary>
+        public static string YUM_REPO_ACTION_PROXY_DISABLE_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_PROXY_DISABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring periodic synchronization with the update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNC_SCHEDULE_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNC_SCHEDULE_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling periodic synchronization with the update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNC_SCHEDULE_DISABLE_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNC_SCHEDULE_DISABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling periodic synchronization with the update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNC_SCHEDULE_ENABLE_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNC_SCHEDULE_ENABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronizing {0} with update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNCING_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNCING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Base.
+        /// </summary>
+        public static string YUM_REPO_BASE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_BASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Early Access.
+        /// </summary>
+        public static string YUM_REPO_EARLY_ACCESS {
+            get {
+                return ResourceManager.GetString("YUM_REPO_EARLY_ACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string YUM_REPO_NORMAL {
+            get {
+                return ResourceManager.GetString("YUM_REPO_NORMAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string YUM_REPO_PROXY {
+            get {
+                return ResourceManager.GetString("YUM_REPO_PROXY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} recommends that you synchronize the selected pool(s) or standalone host(s) with the specified update channel as soon as possible to retrieve the latest available updates.
+        ///
+        ///Do you want to synchronize immediately?.
+        /// </summary>
+        public static string YUM_REPO_SYNC_AFTER_CONFIG {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_AFTER_CONFIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to synchronize all connected pools or standalone servers with their respective update channel?.
+        /// </summary>
+        public static string YUM_REPO_SYNC_ALL_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_ALL_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have applied filters to the list of pools or standalone servers. Do you want to synchronize all connected systems with their respective update channel, or only the systems you have chosen to view?.
+        /// </summary>
+        public static string YUM_REPO_SYNC_FILTER_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_FILTER_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronization with the update channel is in progress. Please try again later..
+        /// </summary>
+        public static string YUM_REPO_SYNC_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Synchronize with update channel.
+        /// </summary>
+        public static string YUM_REPO_SYNC_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize &amp;all.
+        /// </summary>
+        public static string YUM_REPO_SYNC_YES_ALL_BUTTON {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_YES_ALL_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Synchronize.
+        /// </summary>
+        public static string YUM_REPO_SYNC_YES_BUTTON {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_YES_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only synchronize &amp;visible.
+        /// </summary>
+        public static string YUM_REPO_SYNC_YES_VISIBLE_BUTTON {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_YES_VISIBLE_BUTTON", resourceCulture);
             }
         }
     }

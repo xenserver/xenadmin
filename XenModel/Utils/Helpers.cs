@@ -409,13 +409,12 @@ namespace XenAdmin.Core
 
         public static bool IsOlderThanCoordinator(Host host)
         {
-            Host coordinator = Helpers.GetCoordinator(host.Connection);
+            Host coordinator = GetCoordinator(host.Connection);
+
             if (coordinator == null || coordinator.opaque_ref == host.opaque_ref)
                 return false;
-            else if (Helpers.ProductVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(coordinator)) >= 0)
-                return false;
-            else
-                return true;
+
+            return ProductVersionCompare(HostProductVersion(host), HostProductVersion(coordinator)) < 0;
         }
 
 

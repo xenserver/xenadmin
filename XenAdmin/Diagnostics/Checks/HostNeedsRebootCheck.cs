@@ -66,9 +66,19 @@ namespace XenAdmin.Diagnostics.Checks
             this.restartHostPatches = restartHostPatches;
         }
 
+        public HostNeedsRebootCheck(Host host)
+            : base(host)
+        {
+        }
+
 
         protected override Problem RunHostCheck()
         {
+            if (Helpers.CloudOrGreater(Host))
+            {
+                return new HostNeedsReboot(this, Host);
+            }
+
             var updateSequenceIsLivePatchable = restartHostPatches != null && restartHostPatches.Count > 0 && restartHostPatches.All(p => p.ContainsLivepatch);
 
             // when livepatching is available, no restart is expected
@@ -97,14 +107,8 @@ namespace XenAdmin.Diagnostics.Checks
             return null;
         }
         
-        public override string Description
-        {
-            get { return Messages.HOST_NEEDS_REBOOT_CHECK_DESCRIPTION; }
-        }
+        public override string Description => Messages.HOST_NEEDS_REBOOT_CHECK_DESCRIPTION;
 
-        public override string SuccessfulCheckDescription
-        {
-            get { return successfulCheckDescription; }
-        }
+        public override string SuccessfulCheckDescription => successfulCheckDescription;
     }
 }
