@@ -168,12 +168,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return AutomaticRadioButton.Checked || ManualRadioButton.Checked;
         }
 
-        private void UpdateEnablement()
-        {
-            textBoxLog.Enabled = ManualRadioButton.Checked;
-            OnPageUpdated();
-        }
-
         #region Accessors
 
         public WizardMode WizardMode { get; set; }
@@ -196,12 +190,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AutomaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
+            if (AutomaticRadioButton.Checked)
+                OnPageUpdated();
         }
 
         private void ManualRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
+            if (ManualRadioButton.Checked)
+                OnPageUpdated();
         }
 
         private void button1_Click(object sender, EventArgs e)
