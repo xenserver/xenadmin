@@ -190,69 +190,90 @@ namespace XenAdmin.Wizards.PatchingWizard
                 : CanEnableRowNonAutomated(host, out tooltipText);
         }
 
-        private bool CanEnableRowAutomatedUpdates(Host host, out string tooltipText)
+        private bool CanEnableRowAutomatedUpdates(Host host, out string cannotEnableReason)
         {
             var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
 
             // This check is first because it generally can't be fixed, it's a property of the host
             if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden()) // Forbids update auto restarts
             {
-                tooltipText = Messages.POOL_FORBIDS_AUTOMATED_UPDATES;
+                cannotEnableReason = Messages.POOL_FORBIDS_AUTOMATED_UPDATES;
                 return false;
             }
 
             var pool = Helpers.GetPool(host.Connection);
             if (WizardMode != WizardMode.NewVersion && pool != null && !pool.IsPoolFullyUpgraded()) //partially upgraded pool is not supported
             {
-                tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED, BrandManager.ProductBrand);
+                cannotEnableReason = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED, BrandManager.ProductBrand);
                 return false;
             }
 
             if (Helpers.CloudOrGreater(host))
             {
+                if (poolOfOne?.repositories.Count == 0)
+                {
+                    cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CDN_REPOS_NOT_CONFIGURED;
+                    return false;
+                }
+
+                if (Helpers.XapiEqualOrGreater_23_18_0(host.Connection))
+                {
+                    if (poolOfOne?.last_update_sync == Util.GetUnixMinDateTime())
+                    {
+                        cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CDN_NOT_SYNCHRONIZED;
+                        return false;
+                    }
+
+                    if (host.latest_synced_updates_applied == latest_synced_updates_applied_state.yes)
+                    {
+                        cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CDN_UPDATES_APPLIED;
+                        return false;
+                    }
+                }
+
                 if (!Updates.CdnUpdateInfoPerConnection.TryGetValue(host.Connection, out var updateInfo) ||
                     updateInfo.HostsWithUpdates.FirstOrDefault(u => u.HostOpaqueRef == host.opaque_ref) == null)
                 {
-                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CDN_UPDATES_APPLIED;
                     return false;
                 }
             }
             else
             {
-                //check updgrade sequences
+                //check upgrade sequences
                 var minimalPatches = WizardMode == WizardMode.NewVersion
                     ? Updates.GetMinimalPatches(host)
                     : Updates.GetMinimalPatches(host.Connection);
                 
                 if (minimalPatches == null) //version not supported or too new to have automated updates available
                 {
-                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
                     return false;
                 }
 
                 //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
                 if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
                 {
-                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
+                    cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
                     return false;
                 }
 
                 var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
                 if (us == null)
                 {
-                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
+                    cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
                     return false;
                 }
 
                 //if host is up to date
                 if (us.Count == 0)
                 {
-                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    cannotEnableReason = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
                     return false;
                 }
             }
 
-            tooltipText = null;
+            cannotEnableReason = null;
             return true;
         }
 

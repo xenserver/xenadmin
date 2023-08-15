@@ -10486,6 +10486,15 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0" xml:space="preserve">
     <value>Cannot install updates on this host because the coordinator is running a version higher than {0}</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CDN_NOT_SYNCHRONIZED" xml:space="preserve">
+    <value>You have never synchronized with the update channel.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CDN_REPOS_NOT_CONFIGURED" xml:space="preserve">
+    <value>You have not configured an update channel.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CDN_UPDATES_APPLIED" xml:space="preserve">
+    <value>All updates available at the last synchronization have been applied.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
