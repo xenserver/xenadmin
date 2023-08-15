@@ -2909,6 +2909,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rpm_package {
+            get {
+                object obj = ResourceManager.GetObject("rpm_package", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RunningDC_16 {
             get {
                 object obj = ResourceManager.GetObject("RunningDC_16", resourceCulture);
