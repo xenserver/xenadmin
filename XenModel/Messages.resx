@@ -1834,6 +1834,9 @@ This alarm is set to be triggered when the total throughput exceeds {4}.</value>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(Showing first {0} entries)</value>
   </data>
+  <data name="ALERT_CDN_NEVER_SYNC_TITLE" xml:space="preserve">
+    <value>You have never synchronized with the update channel.</value>
+  </data>
   <data name="ALERT_CDN_OUT_OF_SYNC_DESCRIPTION" xml:space="preserve">
     <value>The last synchronization with the update channel took place on {0}.</value>
   </data>

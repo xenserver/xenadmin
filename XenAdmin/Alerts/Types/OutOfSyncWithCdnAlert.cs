@@ -40,7 +40,7 @@ namespace XenAdmin.Alerts
 {
     public class OutOfSyncWithCdnAlert : Alert
     {
-        private readonly TimeSpan _outOfSyncSpan;
+        private readonly TimeSpan _outOfSyncSpan = TimeSpan.Zero;
         private readonly Pool _pool;
 
         private OutOfSyncWithCdnAlert(Pool pool, DateTime timestamp)
@@ -49,12 +49,19 @@ namespace XenAdmin.Alerts
             _pool = pool;
             Connection = _pool.Connection;
 
-            _outOfSyncSpan = _timestamp - _pool.last_update_sync;
+            if (pool.last_update_sync > Util.GetUnixMinDateTime())
+            {
+                _outOfSyncSpan = _timestamp - _pool.last_update_sync;
 
-            if (_outOfSyncSpan >= TimeSpan.FromDays(180))
-                Priority = AlertPriority.Priority1;
-            else if (_outOfSyncSpan >= TimeSpan.FromDays(90))
-                Priority = AlertPriority.Priority2;
+                if (_outOfSyncSpan >= TimeSpan.FromDays(180))
+                    Priority = AlertPriority.Priority1;
+                else if (_outOfSyncSpan >= TimeSpan.FromDays(90))
+                    Priority = AlertPriority.Priority2;
+            }
+            else
+            {
+                Priority = AlertPriority.Priority3;
+            }
         }
 
         public static bool TryCreate(IXenConnection connection, out Alert alert)
@@ -79,8 +86,9 @@ namespace XenAdmin.Alerts
 
         public override string AppliesTo => Helpers.GetName(_pool);
 
-        public override string Description => string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_DESCRIPTION,
-            AlertExtensions.GetGuiDate(_pool.last_update_sync));
+        public override string Description => _outOfSyncSpan == TimeSpan.Zero
+            ? Messages.ALERT_CDN_NEVER_SYNC_TITLE
+            : string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_DESCRIPTION, AlertExtensions.GetGuiDate(_pool.last_update_sync));
 
         public override Action FixLinkAction
         {
@@ -99,7 +107,9 @@ namespace XenAdmin.Alerts
 
         public override string HelpID => "TODO";
 
-        public override string Title => string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _outOfSyncSpan.Days);
+        public override string Title => _outOfSyncSpan == TimeSpan.Zero
+            ? Messages.ALERT_CDN_NEVER_SYNC_TITLE
+            : string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _outOfSyncSpan.Days);
     }
 
  
