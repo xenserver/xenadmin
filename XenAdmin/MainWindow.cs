@@ -2893,10 +2893,9 @@ namespace XenAdmin
         {
             foreColor = VerticalGradientPanel.TextColor;
 
-            var pool = xenObject as Pool;
-            if (pool != null && pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)
+            if (xenObject is Pool pool && pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)
             {
-                if (pool.IsFreeLicenseOrExpired())
+                if (pool.IsFreeLicenseOrExpired() && !Helpers.NileOrGreater(xenObject.Connection))
                 {
                     foreColor = Color.Red;
                     return Messages.MAINWINDOW_HEADER_UNLICENSED;
@@ -2905,10 +2904,9 @@ namespace XenAdmin
                 return string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(pool));
             }
 
-            var host = xenObject as Host;
-            if (host != null && host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
+            if (xenObject is Host host && host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
             {
-                if (host.IsFreeLicenseOrExpired())
+                if (host.IsFreeLicenseOrExpired() && !Helpers.NileOrGreater(xenObject.Connection))
                 {
                     foreColor = Color.Red;
                     return Messages.MAINWINDOW_HEADER_UNLICENSED;
