@@ -47,8 +47,8 @@ namespace XenAdmin.TabPages
         {
             get
             {
-                if (Status != null && Status.LicensedHost != null && Status.LicenseExpiresIn != null
-                    && !LicenseStatus.IsInfinite(Status.LicenseExpiresIn))
+                if (Status?.LicensedHost != null && Status.LicenseExpiresIn != new TimeSpan() 
+                                                 && !LicenseStatus.IsInfinite(Status.LicenseExpiresIn))
                 {
                     return HelpersGUI.DateTimeToString(Status.LicensedHost.LicenseExpiryUTC().ToLocalTime(),
                         Messages.DATEFORMAT_DMY_LONG, true);
@@ -74,20 +74,20 @@ namespace XenAdmin.TabPages
                         return Messages.LICENSE_UNLICENSED;
 
                     if (Status.CurrentState == LicenseStatus.HostState.Free)
-                        return Messages.LICENSE_UNLICENSED;
+                        return Helpers.NileOrGreater(Status.LicensedHost) ? Messages.GENERAL_UNKNOWN : Messages.LICENSE_UNLICENSED;
 
                     TimeSpan s = Status.LicenseExpiresExactlyIn;
                     if (s.TotalMinutes < 2)
                         return Messages.LICENSE_EXPIRES_ONE_MIN;
 
                     if (s.TotalHours < 2)
-                        return String.Format(Messages.LICENSE_EXPIRES_MINUTES, Math.Floor(s.TotalMinutes));
+                        return string.Format(Messages.LICENSE_EXPIRES_MINUTES, Math.Floor(s.TotalMinutes));
 
                     if (s.TotalDays < 2)
-                        return String.Format(Messages.LICENSE_EXPIRES_HOURS, Math.Floor(s.TotalHours));
+                        return string.Format(Messages.LICENSE_EXPIRES_HOURS, Math.Floor(s.TotalHours));
 
                     if (s.TotalDays < 30)
-                        return String.Format(Messages.LICENSE_EXPIRES_DAYS, s.Days);
+                        return string.Format(Messages.LICENSE_EXPIRES_DAYS, s.Days);
 
                     return Messages.LICENSE_LICENSED;
                 }

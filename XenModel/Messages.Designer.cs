@@ -22849,6 +22849,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expiry status.
+        /// </summary>
+        public static string LICENSE_EXPIRY_STATUS {
+            get {
+                return ResourceManager.GetString("LICENSE_EXPIRY_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field is disabled due to license restrictions on the server..
         /// </summary>
         public static string LICENSE_FIELD_DISABLED {
@@ -23133,15 +23142,6 @@ namespace XenAdmin {
         public static string LICENSE_STANDARD_FEATURES_ENABLED {
             get {
                 return ResourceManager.GetString("LICENSE_STANDARD_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status.
-        /// </summary>
-        public static string LICENSE_STATUS {
-            get {
-                return ResourceManager.GetString("LICENSE_STATUS", resourceCulture);
             }
         }
         
