@@ -7882,6 +7882,9 @@ SR UUID: {1}</value>
   <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
     <value>表示...</value>
   </data>
+  <data name="LICENSE_STATUS" xml:space="preserve">
+    <value>状態</value>
+  </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
 {0} Virtual Apps and Desktops {0} Cloud 機能が有効です</value>

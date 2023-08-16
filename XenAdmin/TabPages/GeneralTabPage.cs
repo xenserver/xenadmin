@@ -112,7 +112,7 @@ namespace XenAdmin.TabPages
                 pdSectionLicense.UpdateEntryValueWithKey(FriendlyName("host.license_params-expiry"),
                     ss.ExpiryDate, ss.ShowExpiryDate);
 
-                pdSectionLicense.UpdateEntryValueWithKey(Messages.LICENSE_EXPIRY_STATUS, ss.ExpiryStatus, true);
+                pdSectionLicense.UpdateEntryValueWithKey(Messages.LICENSE_STATUS, ss.ExpiryStatus, true);
 
                 if (xenObject is Pool p)
                 {
@@ -1101,7 +1101,7 @@ namespace XenAdmin.TabPages
                 if (licenseStatus != null)
                 {
                     var ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-                    s.AddEntry(Messages.LICENSE_EXPIRY_STATUS,
+                    s.AddEntry(Messages.LICENSE_STATUS,
                         licenseStatus.Updated ? ss.ExpiryStatus : Messages.GENERAL_LICENSE_QUERYING, editItem);
 
                     if (ss.ShowExpiryDate)

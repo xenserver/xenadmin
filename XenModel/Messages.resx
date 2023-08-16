@@ -7942,9 +7942,6 @@ SR UUID: {1}</value>
   <data name="LICENSE_EXPIRES_ONE_MIN" xml:space="preserve">
     <value>Expires in 1 minute</value>
   </data>
-  <data name="LICENSE_EXPIRY_STATUS" xml:space="preserve">
-    <value>Expiry status</value>
-  </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">
     <value>This field is disabled due to license restrictions on the server.</value>
   </data>
@@ -8040,6 +8037,9 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_STANDARD_FEATURES_ENABLED" xml:space="preserve">
     <value>Standard features only</value>
+  </data>
+  <data name="LICENSE_STATUS" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="LICENSE_TRIAL" xml:space="preserve">
     <value>Trial</value>
