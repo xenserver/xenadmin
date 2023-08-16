@@ -555,10 +555,9 @@ namespace XenAdmin.TabPages
             var allHostCount = xenObject.Connection.Cache.HostCount;
 
             if (Helpers.CloudOrGreater(pool.Connection))
-            {
                 GenerateCdnUpdatesBox(pool);
-            }
-            else if (Helpers.ElyOrGreater(xenObject.Connection))
+
+            if (Helpers.ElyOrGreater(xenObject.Connection))
             {
                 foreach (var u in cache.Pool_updates)
                 {
