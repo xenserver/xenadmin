@@ -169,15 +169,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US.
-        /// </summary>
-        public static string PRIVACY {
-            get {
-                return ResourceManager.GetString("PRIVACY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xenserver/8/system-requirements/guest-os-support.html.
         /// </summary>
         public static string PV_GUESTS_CHECK_URL {

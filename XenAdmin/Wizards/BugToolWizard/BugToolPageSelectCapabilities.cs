@@ -61,8 +61,6 @@ namespace XenAdmin.Wizards.BugToolWizard
         public BugToolPageSelectCapabilities()
         {
             InitializeComponent();
-            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.Cis);
-            linkLabel1.Visible = !HiddenFeatures.LinkLabelHidden;
         }
 
         public override string Text => Messages.BUGTOOL_PAGE_CAPABILITIES_TEXT;
@@ -419,19 +417,6 @@ namespace XenAdmin.Wizards.BugToolWizard
             row.Capability.Checked = !row.Capability.Checked;
             row.Update();
             OnCheckedCapabilitiesChanged();
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                System.Diagnostics.Process.Start(InvisibleMessages.PRIVACY);
-            }
-            catch
-            {
-                using (var dlg = new ErrorDialog(Messages.HOMEPAGE_ERROR_MESSAGE))
-                    dlg.ShowDialog(this);
-            }
         }
 
         private void SelectButton_Click(object sender, EventArgs e)
