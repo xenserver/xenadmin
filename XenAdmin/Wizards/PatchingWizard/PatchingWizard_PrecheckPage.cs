@@ -414,16 +414,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (host == null)
                                 continue;
 
-                            if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
-                            {
+                            var guidance = hostUpdateInfo.RecommendedGuidance;
+
+                            if (guidance.Contains(CdnGuidance.RebootHost))
                                 rebootChecks.Add(new HostNeedsRebootCheck(host));
+                            if (guidance.Contains(CdnGuidance.RebootHost) || guidance.Contains(CdnGuidance.EvacuateHost))
                                 evacuateChecks.Add(new AssertCanEvacuateCheck(host));
-                            }
-                            else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost) ||
-                                     hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack))
-                            {
-                                evacuateChecks.Add(new AssertCanEvacuateCheck(host));
-                            }
                         }
                     }
                     else

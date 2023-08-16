@@ -74,17 +74,15 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunHostCheck()
         {
-            if (Helpers.CloudOrGreater(Host))
-            {
+            if (Helpers.CloudOrGreater(Host) && livePatchCodesByHost == null)
                 return new HostNeedsReboot(this, Host);
-            }
 
-            var updateSequenceIsLivePatchable = restartHostPatches != null && restartHostPatches.Count > 0 && restartHostPatches.All(p => p.ContainsLivepatch);
+            var updateSequenceIsLivePatchable = restartHostPatches != null && restartHostPatches.Count > 0 &&
+                                                restartHostPatches.All(p => p.ContainsLivepatch);
+            var hostHasBeenLivePatched = livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) &&
+                                         livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete;
 
-            // when livepatching is available, no restart is expected
-            if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) &&
-                livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete
-                || updateSequenceIsLivePatchable)
+            if (hostHasBeenLivePatched || updateSequenceIsLivePatchable)
             {
                 var livePatchingRestricted = Helpers.FeatureForbidden(Host.Connection, Host.RestrictLivePatching);
                 var livePatchingRDisabled = Helpers.GetPoolOfOne(Host.Connection)?.live_patching_disabled == true;
@@ -96,11 +94,11 @@ namespace XenAdmin.Diagnostics.Checks
                 return null;
             }
 
-            if ((updateGuidance != null && updateGuidance.Contains(update_after_apply_guidance.restartHost))
-                || (patchGuidance != null && patchGuidance.Contains(after_apply_guidance.restartHost))
-                || (restartHostPatches != null && restartHostPatches.Count > 0))
+            if (updateGuidance != null && updateGuidance.Contains(update_after_apply_guidance.restartHost) ||
+                patchGuidance != null && patchGuidance.Contains(after_apply_guidance.restartHost) ||
+                restartHostPatches != null && restartHostPatches.Count > 0)
             {
-                 return new HostNeedsReboot(this, Host);
+                return new HostNeedsReboot(this, Host);
             }
 
             successfulCheckDescription = string.Format(Messages.UPDATES_WIZARD_NO_REBOOT_NEEDED, Host);
