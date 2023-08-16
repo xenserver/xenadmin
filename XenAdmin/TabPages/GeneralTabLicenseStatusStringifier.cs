@@ -74,7 +74,7 @@ namespace XenAdmin.TabPages
                         return Messages.LICENSE_UNLICENSED;
 
                     if (Status.CurrentState == LicenseStatus.HostState.Free)
-                        return Helpers.NileOrGreater(Status.LicensedHost) ? Messages.GENERAL_UNKNOWN : Messages.LICENSE_UNLICENSED;
+                        return Helpers.NileOrGreater(Status.LicensedHost) ? Messages.LICENSE_MANAGER_TRIAL_LICENSE : Messages.LICENSE_UNLICENSED;
 
                     TimeSpan s = Status.LicenseExpiresExactlyIn;
                     if (s.TotalMinutes < 2)
