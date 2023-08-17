@@ -7195,10 +7195,10 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>1 new feature</value>
   </data>
   <data name="HOTFIX_TYPE_PREVIEW_FEATURE_MANY" xml:space="preserve">
-    <value>{0} feature previews</value>
+    <value>{0} preview features</value>
   </data>
   <data name="HOTFIX_TYPE_PREVIEW_FEATURE_ONE" xml:space="preserve">
-    <value>1 feature preview</value>
+    <value>1 preview feature</value>
   </data>
   <data name="HOTFIX_TYPE_SECURITY_FIX_MANY" xml:space="preserve">
     <value>{0} security fixes</value>

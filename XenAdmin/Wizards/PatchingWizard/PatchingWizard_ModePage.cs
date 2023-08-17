@@ -79,30 +79,31 @@ namespace XenAdmin.Wizards.PatchingWizard
             bool someHostMayRequireRestart;
             bool automaticDisabled;
 
-            if (IsNewGeneration)
+            switch (SelectedUpdateType)
             {
-                ManualTextInstructions = ModeCdnUpdates();
-                automaticDisabled = anyPoolForbidsAutostart;
-            }
-            else
-            {
-                switch (SelectedUpdateType)
-                {
-                    case UpdateType.Legacy:
+                case UpdateType.Legacy:
+                    if (IsNewGeneration)
+                    {
+                        ManualTextInstructions = ModeCdnUpdates();
+                        automaticDisabled = anyPoolForbidsAutostart;
+                    }
+                    else
+                    {
                         ManualTextInstructions = ModePoolPatch(out someHostMayRequireRestart);
                         automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
-                        break;
-                    case UpdateType.ISO:
-                        ManualTextInstructions = PoolUpdate != null
-                            ? ModePoolUpdate(out someHostMayRequireRestart)
-                            : ModeSuppPack(out someHostMayRequireRestart);
-                        automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
-                        break;
-                    default:
-                        ManualTextInstructions = null;
-                        automaticDisabled = true;
-                        break;
-                }
+                    }
+
+                    break;
+                case UpdateType.ISO:
+                    ManualTextInstructions = PoolUpdate != null
+                        ? ModePoolUpdate(out someHostMayRequireRestart)
+                        : ModeSuppPack(out someHostMayRequireRestart);
+                    automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
+                    break;
+                default:
+                    ManualTextInstructions = null;
+                    automaticDisabled = true;
+                    break;
             }
 
             if (ManualTextInstructions == null || ManualTextInstructions.Count == 0)
