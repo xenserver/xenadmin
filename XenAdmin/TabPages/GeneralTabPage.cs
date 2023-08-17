@@ -116,7 +116,7 @@ namespace XenAdmin.TabPages
 
                 if (xenObject is Pool p)
                 {
-                    var additionalString = PoolAdditionalLicenseString();
+                    var additionalString = PoolAdditionalLicenseString(p);
                     pdSectionGeneral.UpdateEntryValueWithKey(
                         Messages.POOL_LICENSE,
                         additionalString != string.Empty
@@ -1498,7 +1498,7 @@ namespace XenAdmin.TabPages
 
             if (xenObject is Pool p)
             {
-                var additionalString = PoolAdditionalLicenseString();
+                var additionalString = PoolAdditionalLicenseString(p);
                 s.AddEntry(Messages.POOL_LICENSE,
                     additionalString != string.Empty
                         ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
@@ -1580,7 +1580,7 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("host.uuid"), xenObject.Get("uuid") as string);
         }
 
-        private string PoolAdditionalLicenseString()
+        private string PoolAdditionalLicenseString(IXenObject pool)
         {
             if (licenseStatus == null)
                 return string.Empty;
@@ -1590,7 +1590,8 @@ namespace XenAdmin.TabPages
                 case LicenseStatus.HostState.Expired:
                     return Messages.LICENSE_EXPIRED;
                 case LicenseStatus.HostState.Free:
-                    return Messages.LICENSE_UNLICENSED;
+                    // We don't show "Unlicensed" when the pool is in Trial edition
+                    return Helpers.NileOrGreater(pool?.Connection) ? string.Empty : Messages.LICENSE_UNLICENSED;
                 default:
                     return string.Empty;
             }
