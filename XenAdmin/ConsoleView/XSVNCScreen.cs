@@ -614,10 +614,8 @@ namespace XenAdmin.ConsoleView
         {
             if (_vncClient != null)
                 ThreadPool.QueueUserWorkItem(Connect, new KeyValuePair<VNCGraphicsClient, Exception>(_vncClient, null));
-            else
-            {
-                _rdpClient?.Connect(RdpIp);
-            }
+            else if (_rdpClient != null)
+                _rdpClient.Connect(RdpIp);
         }
 
         private void ConnectionSuccess(object sender, EventArgs e)
