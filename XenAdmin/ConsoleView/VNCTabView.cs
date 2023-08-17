@@ -1227,7 +1227,7 @@ namespace XenAdmin.ConsoleView
         private void TryToConnectRDP(object x)
         {
             bool hasToReconnect = vncScreen.RdpIp == null;
-            vncScreen.RdpIp = vncScreen.PollPort(XSVNCScreen.RDP_PORT, true);
+            vncScreen.RdpIp = vncScreen.PollPort(XSVNCScreen.RDPPort, true);
             Program.Invoke(this, (MethodInvoker)(() =>
             {
                 if (hasToReconnect)
@@ -1324,7 +1324,7 @@ namespace XenAdmin.ConsoleView
             if (!RDPControlEnabled)
                 toggleConsoleButton.Enabled = false;
 
-            vncScreen.imediatelyPollForConsole();
+            vncScreen.ImmediatelyPollForConsole();
         }
 
         internal void SwitchIfRequired()

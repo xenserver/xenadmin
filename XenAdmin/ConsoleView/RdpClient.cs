@@ -97,6 +97,11 @@ namespace XenAdmin.ConsoleView
             rdpControl.Resize += resizeHandler;
         }
 
+        private bool _connecting;
+        private bool _authWarningVisible;
+
+        public bool IsAttemptingConnection => _connecting || _authWarningVisible; 
+
         private void RDPConfigure(Size currentConsoleSize)
         {
             rdpControl.BeginInit();
@@ -104,7 +109,7 @@ namespace XenAdmin.ConsoleView
             rdpControl.Dock = DockStyle.None;
             rdpControl.Anchor = AnchorStyles.None;
             rdpControl.Size = currentConsoleSize;
-            RDPAddOnDisconnected();
+            AddRDPEventHandlers();
             rdpControl.Enter += RdpEnter;
             rdpControl.Leave += rdpClient_Leave;
             rdpControl.GotFocus += rdpClient_GotFocus;
@@ -123,15 +128,28 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private void RDPAddOnDisconnected()
+        private void AddRDPEventHandlers()
         {
             if (rdpControl == null)
                 return;
 
-            if (rdpClient9 == null)
-                rdpClient6.OnDisconnected += rdpClient_OnDisconnected;
-            else
-                rdpClient9.OnDisconnected += rdpClient_OnDisconnected;
+            var rdpClient = (IRdpClient)rdpClient9 ?? rdpClient6;
+            if (rdpClient == null)
+            {
+                return;
+            }
+
+            rdpClient.OnDisconnected += (_, e) =>
+            {
+                Program.AssertOnEventThread();
+                OnDisconnected?.Invoke(this, EventArgs.Empty);
+            };
+            rdpClient.OnConnected += (_, e) => _connecting = false;
+            rdpClient.OnConnecting += (_, e) => _connecting = true;
+            rdpClient.OnDisconnected += (_, e) => _connecting = _authWarningVisible = false;
+            rdpClient.OnAuthenticationWarningDisplayed += (_, e) => _authWarningVisible = true;
+            rdpClient.OnAuthenticationWarningDismissed += (_, e) => _authWarningVisible = false;
+
         }
 
         private void RDPSetSettings()
@@ -161,26 +179,43 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public void RDPConnect(string rdpIP, int w, int h)
+        public void RDPConnect(string rdpIP, int width, int height)
         {
             if (rdpControl == null)
                 return;
 
-            if (rdpClient9 == null)
+            var rdpClientName = rdpClient9 == null ? "RDPClient6" : "RDPClient9";
+            var rdpClient = (IRdpClient) rdpClient9 ?? rdpClient6;
+
+            Log.Debug($"Connecting {rdpClientName} using server '{rdpIP}', width '{width}' and height '{height}'");
+
+            if (rdpClient == null)
             {
-                Log.Debug($"Connecting RDPClient6 using server '{rdpIP}', width '{w}' and height '{h}'");
-                rdpClient6.Server = rdpIP;
-                rdpClient6.DesktopWidth = w;
-                rdpClient6.DesktopHeight = h;
-                rdpClient6.Connect();
+                Log.Warn("RDPConnect called with an uninitialized RDP client. Aborting connection attempt.");
+                return;
             }
-            else
+
+            rdpClient.Server = rdpIP;
+            rdpClient.DesktopWidth = width;
+            rdpClient.DesktopHeight = height;
+            try
             {
-                Log.Debug($"Connecting RDPClient9 using server '{rdpIP}', width '{w}' and height '{h}'");
-                rdpClient9.Server = rdpIP;
-                rdpClient9.DesktopWidth = w;
-                rdpClient9.DesktopHeight = h;
-                rdpClient9.Connect();
+                rdpClient.Connect();
+            }
+            catch (COMException comException)
+            {
+                // The Connect method returns E_FAIL if it is called while the control is already connected or in the connecting state.
+                // see https://learn.microsoft.com/en-us/windows/win32/termserv/imstscax-connect#remarks for more information.
+                // The HRESULT value is taken from https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/705fb797-2175-4a90-b5a3-3918024b10b8
+                var eFailHResultValue = Convert.ToInt32("0x80004005", 16);
+                if (comException.ErrorCode == eFailHResultValue)
+                {
+                    Log.Warn("Attempted connection while RDP client was connected or connected already.");
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 
@@ -221,15 +256,6 @@ namespace XenAdmin.ConsoleView
         private int DesktopWidth
         {
             get { return rdpControl == null ? 0 : (rdpClient9 == null ? rdpClient6.DesktopWidth : rdpClient9.DesktopWidth); }
-        }
-
-        void rdpClient_OnDisconnected(object sender, AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent e)
-        {
-            Program.AssertOnEventThread();
-
-            if (OnDisconnected != null)
-                OnDisconnected(this, null);
-
         }
 
         //refresh to draw focus border in correct position after display is updated
