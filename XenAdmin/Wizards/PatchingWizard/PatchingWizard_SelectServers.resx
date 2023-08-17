@@ -198,6 +198,12 @@
   <data name="ColumnName.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
+  <metadata name="ColumnNotes.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnNotes.HeaderText" xml:space="preserve">
+    <value>Notes</value>
+  </data>
   <metadata name="ColumnVersion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -376,6 +382,12 @@
     <value>ColumnName</value>
   </data>
   <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnNotes.Name" xml:space="preserve">
+    <value>ColumnNotes</value>
+  </data>
+  <data name="&gt;&gt;ColumnNotes.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnVersion.Name" xml:space="preserve">

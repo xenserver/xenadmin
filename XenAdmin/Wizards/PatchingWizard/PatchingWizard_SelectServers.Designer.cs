@@ -41,6 +41,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnExpander = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnPoolIconHostCheck = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSelectAll = new System.Windows.Forms.Button();
@@ -77,6 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnExpander,
             this.ColumnPoolIconHostCheck,
             this.ColumnName,
+            this.ColumnNotes,
             this.ColumnVersion});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewHosts, 2);
             this.dataGridViewHosts.Name = "dataGridViewHosts";
@@ -105,10 +107,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // ColumnName
             // 
-            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnName.FillWeight = 110.2538F;
             resources.ApplyResources(this.ColumnName, "ColumnName");
             this.ColumnName.Name = "ColumnName";
+            // 
+            // ColumnNotes
+            // 
+            resources.ApplyResources(this.ColumnNotes, "ColumnNotes");
+            this.ColumnNotes.Name = "ColumnNotes";
+            this.ColumnNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ColumnVersion
             // 
@@ -161,6 +167,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private DataGridViewImageColumn ColumnExpander;
         private DataGridViewImageColumn ColumnPoolIconHostCheck;
         private DataGridViewTextBoxColumn ColumnName;
+        private DataGridViewTextBoxColumn ColumnNotes;
         private DataGridViewTextBoxColumn ColumnVersion;
         private Label label1;
         private CheckBox applyUpdatesCheckBox;

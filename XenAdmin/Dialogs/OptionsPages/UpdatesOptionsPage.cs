@@ -92,7 +92,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #endregion
 
-        private void linkLabelCongifUpdates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelConfigUpdates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             using (var dialog = new ConfigUpdatesDialog())
                 dialog.ShowDialog(this);

@@ -30248,6 +30248,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have never synchronized with the update channel..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CDN_NOT_SYNCHRONIZED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CDN_NOT_SYNCHRONIZED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have not configured an update channel..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CDN_REPOS_NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CDN_REPOS_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All updates available at the last synchronization have been applied..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CDN_UPDATES_APPLIED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CDN_UPDATES_APPLIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subscription Advantage required.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED {
