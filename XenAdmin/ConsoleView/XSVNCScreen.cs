@@ -505,9 +505,6 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private readonly object _rdpConnectionLock = new object();
-
-
         /// <summary>
         /// Creates the actual VNC or RDP client control.
         /// </summary>
@@ -524,28 +521,23 @@ namespace XenAdmin.ConsoleView
             //console size with some offset to accomodate focus rectangle
             var currentConsoleSize = new Size(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET);
 
-            lock (_rdpConnectionLock)
+            if (RemoteConsole != null)
             {
-                // Stop the old client.
-                if (RemoteConsole != null)
+                var preventResetConsole = false;
+                wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;
+                if (RemoteConsole is RdpClient client && client.IsAttemptingConnection)
                 {
-                    var preventResetConsole = false;
-                    wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;
-                    if (RemoteConsole is RdpClient client && client.IsAttemptingConnection)
-                    {
-                        preventResetConsole = true;
-                    }
-
-                    if (!preventResetConsole)
-                    {
-                        RemoteConsole.DisconnectAndDispose();
-                        RemoteConsole = null;
-                    }
-
-                    _vncPassword = null;
+                    preventResetConsole = true;
                 }
-            }
 
+                if (!preventResetConsole)
+                {
+                    RemoteConsole.DisconnectAndDispose();
+                    RemoteConsole = null;
+                }
+
+                _vncPassword = null;
+            }
 
             // Reset
             _haveTriedLoginWithoutPassword = false;
@@ -603,7 +595,7 @@ namespace XenAdmin.ConsoleView
             return (UseVNC || string.IsNullOrEmpty(RdpIp)) &&
                    Source.HasGPUPassthrough() && Source.power_state == vm_power_state.Running;
         }
-
+        
         private void SetKeyboardAndMouseCapture(bool value)
         {
             if (RemoteConsole?.ConsoleControl != null)
