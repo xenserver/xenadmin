@@ -478,8 +478,12 @@ namespace XenAdmin.TabPages
                                 var connection = kvp.Key;
                                 var poolUpdateInfo = kvp.Value;
 
-                                stream.WriteLine(connection.Name);
-                                stream.WriteLine();
+                                // Don't need to print the pool name if it's a standalone host
+                                if (Helpers.GetPool(connection) != null)
+                                {
+                                    stream.WriteLine(connection.Name);
+                                    stream.WriteLine();
+                                }
 
                                 var hosts = poolUpdateInfo.HostsWithUpdates
                                     .Select(hui => connection.Resolve(new XenRef<Host>(hui.HostOpaqueRef)))
@@ -492,7 +496,8 @@ namespace XenAdmin.TabPages
                                         continue;
 
                                     stream.WriteLine(host.Name());
-                                    stream.WriteLine(string.Join("\n", hostUpdateInfo.RecommendedGuidance.Select(Cdn.FriendlyInstruction)));
+                                    stream.WriteLine();
+                                    stream.WriteLine(Messages.HOTFIX_POST_UPDATE_ACTIONS, string.Join(Environment.NewLine, hostUpdateInfo.RecommendedGuidance.Select(Cdn.FriendlyInstruction)));
                                     stream.WriteLine();
 
                                     var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
