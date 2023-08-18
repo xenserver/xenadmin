@@ -4994,6 +4994,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have never synchronized with the update channel..
+        /// </summary>
+        public static string ALERT_CDN_NEVER_SYNC_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_NEVER_SYNC_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The last synchronization with the update channel took place on {0}..
         /// </summary>
         public static string ALERT_CDN_OUT_OF_SYNC_DESCRIPTION {

@@ -249,7 +249,7 @@ namespace XenAdmin.TabPages.CdnUpdates
         public RpmCategoryRow(params string[] rpms)
         {
             SetValues(string.Format(Messages.HOTFIX_RPMS_TO_INSTALL, rpms.Length),
-                Images.StaticImages._000_Patch_h32bit_16);
+                Images.StaticImages.rpm_package);
 
             ChildRows = new List<CdnExpandableRow> { new RpmsRow(rpms) };
         }
