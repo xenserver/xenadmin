@@ -120,34 +120,12 @@ namespace XenAdmin.Core
             CdnUpdateInfoChanged?.Invoke(connection);
         }
 
-        public static void CheckForCdnUpdates(IXenConnection connection, bool isPlanAction = false)
+        public static void CheckForCdnUpdates(IXenConnection connection, bool runSynchronous = false)
         {
-            var pool = Helpers.GetPoolOfOne(connection);
-            if (pool == null)
-                return;
-
-            if (!isPlanAction)
-            {
-                if (Helpers.XapiEqualOrGreater_23_18_0(connection))
-                {
-                    if (pool.last_update_sync == Util.GetUnixMinDateTime() ||
-                        connection.Cache.Hosts.All(h => h.latest_synced_updates_applied == latest_synced_updates_applied_state.yes))
-                        return;
-                }
-                else
-                {
-                    if (pool.repositories.Count == 0)
-                        return;
-                }
-            }
-
-            if (!pool.allowed_operations.Contains(pool_allowed_operations.get_updates))
-                return;
-
             var action = new CheckForCdnUpdatesAction(connection);
             action.Completed += CheckForCdnUpdatesAction_Completed;
 
-            if (isPlanAction)
+            if (runSynchronous)
                 action.RunSync(action.Session);
             else
                 action.RunAsync();
@@ -158,14 +136,12 @@ namespace XenAdmin.Core
             if (!(sender is CheckForCdnUpdatesAction action))
                 return;
 
-            bool succeeded = action.Succeeded;
-
-            if (succeeded)
+            lock (_cdnUpdatesLock)
             {
-                lock (_cdnUpdatesLock)
-                {
+                if (action.Succeeded && action.Updates != null)
                     _cdnUpdateInfoPerConnection[action.Pool.Connection] = action.Updates;
-                }
+                else
+                    _cdnUpdateInfoPerConnection.Remove(action.Pool.Connection);
             }
 
             CdnUpdateInfoChanged?.Invoke(action.Pool.Connection);

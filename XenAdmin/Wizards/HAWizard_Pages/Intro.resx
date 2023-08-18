@@ -140,7 +140,7 @@
 
 Before you begin, ensure that the following requirements are satisfied for all servers and virtual machines in the pool:
 
-•    Shared storage must be available, including at least one iSCSI, NFS or Fibre Channel LUN of 356MB or greater. This LUN will be used for the heartbeat SR.
+•    Shared storage must be available, including at least one iSCSI, NFS or Fibre Channel LUN. This LUN will be used for the heartbeat SR.
 
 •    All the virtual machines you want to protect with HA must be agile.
 

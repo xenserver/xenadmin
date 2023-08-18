@@ -40,6 +40,8 @@ namespace XenAdmin.Actions
 {
     public class CheckForCdnUpdatesAction : AsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public CheckForCdnUpdatesAction(IXenConnection connection)
             : base(connection, string.Empty)
         {
@@ -51,7 +53,16 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            var coordinator = Connection.Resolve(Helpers.GetPoolOfOne(Connection)?.master);
+            var pool = Helpers.GetPoolOfOne(Connection);
+            if (pool == null)
+                return;
+
+            //this waits for 1 minute
+            Connection.WaitFor(() => pool.allowed_operations.Contains(pool_allowed_operations.get_updates), null);
+            if (!pool.allowed_operations.Contains(pool_allowed_operations.get_updates))
+                return;
+
+            var coordinator = Connection.Resolve(pool.master);
             if (coordinator == null)
                 return;
 
@@ -67,15 +78,29 @@ namespace XenAdmin.Actions
                 Query = $"session_id={Uri.EscapeDataString(Session.opaque_ref)}"
             };
 
-            string json;
-
-            using (Stream httpStream = HTTPHelper.GET(builder.Uri, Connection, true))
+            try
             {
-                using (var streamReader = new StreamReader(httpStream))
-                    json = streamReader.ReadToEnd();
-            }
+                string json;
 
-            Updates = JsonConvert.DeserializeObject<CdnPoolUpdateInfo>(json);
+                using (Stream httpStream = HTTPHelper.GET(builder.Uri, Connection, true))
+                {
+                    using (var streamReader = new StreamReader(httpStream))
+                        json = streamReader.ReadToEnd();
+                }
+
+                Updates = JsonConvert.DeserializeObject<CdnPoolUpdateInfo>(json);
+            }
+            catch (HTTP.BadServerResponseException ex)
+            {
+                if (ex.Message.Contains("Received error code HTTP/1.1 404 Not Found\r\n from the server") ||
+                    ex.Message.Contains("Received error code HTTP/1.1 500 Internal Server Error\r\n from the server"))
+                {
+                    log.Warn(ex.Message);
+                    log.Warn("Failed to retrieve available updates. See the server side logs for details.");
+                }
+                else
+                    throw;
+            }
         }
     }
 }

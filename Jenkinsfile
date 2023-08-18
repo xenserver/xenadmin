@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-def XENADMIN_BRANDING_TAG = 'v5.0'
+def XENADMIN_BRANDING_TAG = 'v5.1'
 
 @Library(['PacmanSharedLibrary', "xencenter-pipeline@v4.9"])
 import com.citrix.pipeline.xencenter.*
