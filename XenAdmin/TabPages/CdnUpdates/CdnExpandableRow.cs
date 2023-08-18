@@ -207,13 +207,10 @@ namespace XenAdmin.TabPages.CdnUpdates
 
             if (poolUpdateInfo != null && hostUpdateInfo != null)
             {
-                if (hostUpdateInfo.RecommendedGuidance.Length > 0)
-                {
-                    _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance));
+                _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance));
 
-                    if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
-                        _childRows.Add(new LivePatchActionRow());
-                }
+                if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                    _childRows.Add(new LivePatchActionRow());
 
                 var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
 
@@ -286,7 +283,11 @@ namespace XenAdmin.TabPages.CdnUpdates
     {
         public PostUpdateActionRow(CdnGuidance[] guidance)
         {
-            var text = string.Format(Messages.HOTFIX_POST_UPDATE_ACTIONS, string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction)));
+            var guidanceString = guidance.Length > 0
+                ? string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction))
+                : Messages.NONE_UPPER;
+
+            var text = string.Format(Messages.HOTFIX_POST_UPDATE_ACTIONS, guidanceString);
             SetValues(text, Images.StaticImages.rightArrowLong_Blue_16);
         }
     }

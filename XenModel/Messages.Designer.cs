@@ -18518,15 +18518,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string GPU_NONE {
-            get {
-                return ResourceManager.GetString("GPU_NONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to On {0}:.
         /// </summary>
         public static string GPU_ON_HOST_LABEL {
@@ -28629,6 +28620,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string NONE_UPPER {
+            get {
+                return ResourceManager.GetString("NONE_UPPER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM is not using a shared network. Restart cannot be guaranteed..
         /// </summary>
         public static string NOT_AGILE_NETWORK_NOT_SHARED {
@@ -30772,15 +30772,6 @@ namespace XenAdmin {
         public static string PIF_NIC {
             get {
                 return ResourceManager.GetString("PIF_NIC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string PIF_NONE {
-            get {
-                return ResourceManager.GetString("PIF_NONE", resourceCulture);
             }
         }
         
@@ -42320,15 +42311,6 @@ namespace XenAdmin {
         public static string WLB_OPT_REASON_NETWORKWRITE {
             get {
                 return ResourceManager.GetString("WLB_OPT_REASON_NETWORKWRITE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string WLB_OPT_REASON_NONE {
-            get {
-                return ResourceManager.GetString("WLB_OPT_REASON_NONE", resourceCulture);
             }
         }
         

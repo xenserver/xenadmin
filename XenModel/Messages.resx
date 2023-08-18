@@ -6466,9 +6466,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE" xml:space="preserve">
     <value>{0} (1 GPU)</value>
   </data>
-  <data name="GPU_NONE" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="GPU_ON_HOST_LABEL" xml:space="preserve">
     <value>On {0}:</value>
   </data>
@@ -9942,6 +9939,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NONE_PARENS" xml:space="preserve">
     <value>(None)</value>
   </data>
+  <data name="NONE_UPPER" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="NOT_AGILE_NETWORK_NOT_SHARED" xml:space="preserve">
     <value>The VM is not using a shared network. Restart cannot be guaranteed.</value>
   </data>
@@ -10665,9 +10665,6 @@ This will cancel the upload process.</value>
   </data>
   <data name="PIF_NIC" xml:space="preserve">
     <value>NIC {0}</value>
-  </data>
-  <data name="PIF_NONE" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="PIF_STATIC" xml:space="preserve">
     <value>Static</value>
@@ -14584,9 +14581,6 @@ A {1} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_OPT_REASON_NETWORKWRITE" xml:space="preserve">
     <value>Network Writes</value>
-  </data>
-  <data name="WLB_OPT_REASON_NONE" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="WLB_OPT_REASON_POWEROFF" xml:space="preserve">
     <value>Release Resource</value>
