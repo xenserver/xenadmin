@@ -2563,7 +2563,7 @@ namespace XenAdmin
             foreach (var page in _notificationPages)
             {
                 if (page.Visible)
-                    return alertPage.HelpID;
+                    return page.HelpID;
             }
 
             if (TheTabControl.SelectedTab.Controls.Count > 0 && TheTabControl.SelectedTab.Controls[0] is IControlWithHelp ctrl)

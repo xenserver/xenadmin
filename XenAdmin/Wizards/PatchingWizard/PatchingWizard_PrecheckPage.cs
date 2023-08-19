@@ -104,8 +104,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string Text => Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT;
 
-        public override string HelpID => "UpdatePrechecks";
-
         private void Connection_ConnectionStateChanged(IXenConnection conn)
         {
             Program.Invoke(this, RefreshRechecks);

@@ -57,8 +57,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string PageTitle => Messages.PATCHINGWIZARD_MODEPAGE_TITLE;
 
-        public override string HelpID => "UpdateMode";
-
         public override bool EnablePrevious()
         {
             return true;

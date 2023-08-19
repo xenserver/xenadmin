@@ -113,6 +113,8 @@ namespace XenAdmin.Dialogs.ServerUpdates
                 tabControl1.SelectTab(_configLcmTab);
         }
 
+        internal override string HelpName => "ConfigureUpdatesDialog";
+
 
         private sealed class OptionsTabPage : TabPage
         {

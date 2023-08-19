@@ -103,7 +103,7 @@ namespace XenAdmin.Controls
         /// Gets the value by which the help files section for this page is identified
         /// Most derived classes override it to return a fixed string
         /// </summary>
-        public virtual string HelpID => "";
+        public virtual string HelpID => string.Empty;
 
         public virtual string NextText(bool isLastPage)
         {

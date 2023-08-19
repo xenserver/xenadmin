@@ -61,8 +61,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string PageTitle => Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE;
 
-        public override string HelpID => string.Empty;
-
         #endregion
 
         #region AutomatedUpdatesBesePage overrides

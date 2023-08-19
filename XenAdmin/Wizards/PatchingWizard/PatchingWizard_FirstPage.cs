@@ -64,8 +64,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string  PageTitle => Messages.BEFORE_YOU_START;
 
-        public override string HelpID => "Beforeyoustart";
-
         public bool IsNewGeneration
         {
             get => radioButtonCdn.Checked;
