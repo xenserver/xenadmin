@@ -18890,15 +18890,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA and WLB check.
-        /// </summary>
-        public static string HA_CHECK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("HA_CHECK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Choose a heartbeat SR.
         /// </summary>
         public static string HA_CHOOSESR_PAGE_PAGETITLE {
@@ -19421,6 +19412,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HA is not currently enabled for pool &apos;{0}&apos;.
+        ///
+        ///Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure..
+        /// </summary>
+        public static string HA_PANEL_BLURB {
+            get {
+                return ResourceManager.GetString("HA_PANEL_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HA restart priority.
         /// </summary>
         public static string HA_RESTART_PRIORITY {
@@ -19551,13 +19553,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA is not currently enabled for pool &apos;{0}&apos;.
-        ///
-        ///Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure..
+        ///   Looks up a localized string similar to HA and WLB check.
         /// </summary>
-        public static string HAPANEL_BLURB {
+        public static string HA_WLB_CHECK_DESCRIPTION {
             get {
-                return ResourceManager.GetString("HAPANEL_BLURB", resourceCulture);
+                return ResourceManager.GetString("HA_WLB_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         

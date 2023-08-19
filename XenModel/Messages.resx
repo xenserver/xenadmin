@@ -6598,9 +6598,6 @@ not currently live:
   <data name="HA_CANNOT_EVACUATE_COORDINATOR" xml:space="preserve">
     <value>Server '{0}' cannot be placed in Maintenance Mode because it is the coordinator of an HA-enabled pool.</value>
   </data>
-  <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>HA and WLB check</value>
-  </data>
   <data name="HA_CHOOSESR_PAGE_PAGETITLE" xml:space="preserve">
     <value>Choose a heartbeat SR</value>
   </data>
@@ -6787,6 +6784,11 @@ Reduce protection levels, or bring more servers online to increase the maximum s
   <data name="HA_PAGE_ENABLING" xml:space="preserve">
     <value>HA is currently being enabled for '{0}'.</value>
   </data>
+  <data name="HA_PANEL_BLURB" xml:space="preserve">
+    <value>HA is not currently enabled for pool '{0}'.
+
+Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure.</value>
+  </data>
   <data name="HA_RESTART_PRIORITY" xml:space="preserve">
     <value>HA restart priority</value>
   </data>
@@ -6833,10 +6835,8 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review configuration and activate HA</value>
   </data>
-  <data name="HAPANEL_BLURB" xml:space="preserve">
-    <value>HA is not currently enabled for pool '{0}'.
-
-Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure.</value>
+  <data name="HA_WLB_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>HA and WLB check</value>
   </data>
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>Has any custom field</value>

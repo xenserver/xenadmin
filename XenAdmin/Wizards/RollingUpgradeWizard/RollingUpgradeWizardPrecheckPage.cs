@@ -260,9 +260,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
             //HA checks - for each pool
-            var haChecks = (from Host server in SelectedCoordinators
-                select new HAOffCheck(server) as Check).ToList();
-
+            var haChecks = (from Pool pool in SelectedPools
+                select new HaWlbOffCheck(pool) as Check).ToList();
 
             if (haChecks.Count > 0) 
                 groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));

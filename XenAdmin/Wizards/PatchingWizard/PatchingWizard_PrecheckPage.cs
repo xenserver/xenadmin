@@ -362,11 +362,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             //HA checks
 
             var haChecks = new List<Check>();
-            foreach (Host host in SelectedServers)
-            {
-                if (Helpers.HostIsCoordinator(host))
-                    haChecks.Add(new HAOffCheck(host));
-            }
+            foreach (Pool pool in SelectedPools)
+                haChecks.Add(new HaWlbOffCheck(pool));
+
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //PBDsPluggedCheck

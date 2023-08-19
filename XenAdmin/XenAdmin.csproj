@@ -711,7 +711,7 @@
     <Compile Include="Core\History.cs" />
     <Compile Include="Core\Registry.cs" />
     <Compile Include="Core\Updates.cs" />
-    <Compile Include="Diagnostics\Checks\HAOffCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HaWlbOffCheck.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\CannotMigrateVM.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HAEnabledProblem.cs" />
     <Compile Include="Dialogs\BondProperties.cs">

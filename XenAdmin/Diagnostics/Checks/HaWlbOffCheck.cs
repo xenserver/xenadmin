@@ -28,44 +28,34 @@
  * SUCH DAMAGE.
  */
 
-using XenAPI;
-using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAPI;
 
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class HAOffCheck : HostPostLivenessCheck
+    class HaWlbOffCheck : PoolCheck
     {
-        public HAOffCheck(Host host)
-            : base(host)
+        public HaWlbOffCheck(Pool pool)
+            : base(pool)
         {
         }
 
-        protected override Problem RunHostCheck()
+        protected override Problem RunCheck()
         {
-            Pool pool = Helpers.GetPoolOfOne(Host.Connection);
-            if (pool == null)
-                return null;
+            if (Pool.ha_enabled)
+                return new HAEnabledProblem(this, Pool);
 
-            if (pool.ha_enabled)
-                return new HAEnabledProblem(this, pool);
-            if (Helpers.WlbEnabled(pool.Connection))
-                return new WLBEnabledProblem(this, pool);
+            if (Helpers.WlbEnabled(Pool.Connection))
+                return new WLBEnabledProblem(this, Pool);
+
             return null;
         }
 
-        public override string Description => Messages.HA_CHECK_DESCRIPTION;
+        public override string Description => Messages.HA_WLB_CHECK_DESCRIPTION;
 
-        public override string SuccessfulCheckDescription
-        {
-            get
-            {
-                var pool = Helpers.GetPool(Host.Connection);
-                return string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK,
-                    pool != null ? pool.Name() : Host.Name(), Description);
-            }
-        }
+        public override string SuccessfulCheckDescription => string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK, Pool.Name(), Description);
     }
 }
