@@ -108,7 +108,7 @@ namespace XenAPI
             if (table.ContainsKey("last_updated"))
                 last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(VIF_metrics other)
@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._io_read_kbs, other._io_read_kbs) &&
-                Helper.AreEqual2(this._io_write_kbs, other._io_write_kbs) &&
-                Helper.AreEqual2(this._last_updated, other._last_updated) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_io_read_kbs, other._io_read_kbs) &&
+                Helper.AreEqual2(_io_write_kbs, other._io_write_kbs) &&
+                Helper.AreEqual2(_last_updated, other._last_updated) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VIF_metrics server)

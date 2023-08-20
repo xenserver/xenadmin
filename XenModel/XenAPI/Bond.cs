@@ -118,13 +118,13 @@ namespace XenAPI
             if (table.ContainsKey("slaves"))
                 slaves = Marshalling.ParseSetRef<PIF>(table, "slaves");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("primary_slave"))
                 primary_slave = Marshalling.ParseRef<PIF>(table, "primary_slave");
             if (table.ContainsKey("mode"))
                 mode = (bond_mode)Helper.EnumParseDefault(typeof(bond_mode), Marshalling.ParseString(table, "mode"));
             if (table.ContainsKey("properties"))
-                properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
+                properties = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "properties"));
             if (table.ContainsKey("links_up"))
                 links_up = Marshalling.ParseLong(table, "links_up");
             if (table.ContainsKey("auto_update_mac"))
@@ -138,15 +138,15 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._master, other._master) &&
-                Helper.AreEqual2(this._slaves, other._slaves) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._primary_slave, other._primary_slave) &&
-                Helper.AreEqual2(this._mode, other._mode) &&
-                Helper.AreEqual2(this._properties, other._properties) &&
-                Helper.AreEqual2(this._links_up, other._links_up) &&
-                Helper.AreEqual2(this._auto_update_mac, other._auto_update_mac);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_master, other._master) &&
+                Helper.AreEqual2(_slaves, other._slaves) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_primary_slave, other._primary_slave) &&
+                Helper.AreEqual2(_mode, other._mode) &&
+                Helper.AreEqual2(_properties, other._properties) &&
+                Helper.AreEqual2(_links_up, other._links_up) &&
+                Helper.AreEqual2(_auto_update_mac, other._auto_update_mac);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Bond server)

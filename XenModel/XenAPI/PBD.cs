@@ -109,11 +109,11 @@ namespace XenAPI
             if (table.ContainsKey("SR"))
                 SR = Marshalling.ParseRef<SR>(table, "SR");
             if (table.ContainsKey("device_config"))
-                device_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "device_config"));
+                device_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "device_config"));
             if (table.ContainsKey("currently_attached"))
                 currently_attached = Marshalling.ParseBool(table, "currently_attached");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(PBD other)
@@ -123,12 +123,12 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._SR, other._SR) &&
-                Helper.AreEqual2(this._device_config, other._device_config) &&
-                Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_SR, other._SR) &&
+                Helper.AreEqual2(_device_config, other._device_config) &&
+                Helper.AreEqual2(_currently_attached, other._currently_attached) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PBD server)

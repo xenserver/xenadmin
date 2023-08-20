@@ -144,7 +144,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<task_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_task_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_task_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("created"))
                 created = Marshalling.ParseDateTime(table, "created");
             if (table.ContainsKey("finished"))
@@ -162,7 +162,7 @@ namespace XenAPI
             if (table.ContainsKey("error_info"))
                 error_info = Marshalling.ParseStringArray(table, "error_info");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("subtask_of"))
                 subtask_of = Marshalling.ParseRef<Task>(table, "subtask_of");
             if (table.ContainsKey("subtasks"))
@@ -178,25 +178,25 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._created, other._created) &&
-                Helper.AreEqual2(this._finished, other._finished) &&
-                Helper.AreEqual2(this._status, other._status) &&
-                Helper.AreEqual2(this._resident_on, other._resident_on) &&
-                Helper.AreEqual2(this._progress, other._progress) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._result, other._result) &&
-                Helper.AreEqual2(this._error_info, other._error_info) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._subtask_of, other._subtask_of) &&
-                Helper.AreEqual2(this._subtasks, other._subtasks) &&
-                Helper.AreEqual2(this._backtrace, other._backtrace);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_created, other._created) &&
+                Helper.AreEqual2(_finished, other._finished) &&
+                Helper.AreEqual2(_status, other._status) &&
+                Helper.AreEqual2(_resident_on, other._resident_on) &&
+                Helper.AreEqual2(_progress, other._progress) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_result, other._result) &&
+                Helper.AreEqual2(_error_info, other._error_info) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_subtask_of, other._subtask_of) &&
+                Helper.AreEqual2(_subtasks, other._subtasks) &&
+                Helper.AreEqual2(_backtrace, other._backtrace);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Task server)

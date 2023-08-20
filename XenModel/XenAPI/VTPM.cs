@@ -113,7 +113,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<vtpm_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vtpm_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_vtpm_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VM"))
                 VM = Marshalling.ParseRef<VM>(table, "VM");
             if (table.ContainsKey("backend"))
@@ -133,16 +133,16 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._VM, other._VM) &&
-                Helper.AreEqual2(this._backend, other._backend) &&
-                Helper.AreEqual2(this._persistence_backend, other._persistence_backend) &&
-                Helper.AreEqual2(this._is_unique, other._is_unique) &&
-                Helper.AreEqual2(this._is_protected, other._is_protected);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_VM, other._VM) &&
+                Helper.AreEqual2(_backend, other._backend) &&
+                Helper.AreEqual2(_persistence_backend, other._persistence_backend) &&
+                Helper.AreEqual2(_is_unique, other._is_unique) &&
+                Helper.AreEqual2(_is_protected, other._is_protected);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VTPM server)

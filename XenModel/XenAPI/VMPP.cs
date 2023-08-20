@@ -159,7 +159,7 @@ namespace XenAPI
             if (table.ContainsKey("backup_frequency"))
                 backup_frequency = (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), Marshalling.ParseString(table, "backup_frequency"));
             if (table.ContainsKey("backup_schedule"))
-                backup_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "backup_schedule"));
+                backup_schedule = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "backup_schedule"));
             if (table.ContainsKey("is_backup_running"))
                 is_backup_running = Marshalling.ParseBool(table, "is_backup_running");
             if (table.ContainsKey("backup_last_run_time"))
@@ -167,11 +167,11 @@ namespace XenAPI
             if (table.ContainsKey("archive_target_type"))
                 archive_target_type = (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), Marshalling.ParseString(table, "archive_target_type"));
             if (table.ContainsKey("archive_target_config"))
-                archive_target_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "archive_target_config"));
+                archive_target_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "archive_target_config"));
             if (table.ContainsKey("archive_frequency"))
                 archive_frequency = (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), Marshalling.ParseString(table, "archive_frequency"));
             if (table.ContainsKey("archive_schedule"))
-                archive_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "archive_schedule"));
+                archive_schedule = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "archive_schedule"));
             if (table.ContainsKey("is_archive_running"))
                 is_archive_running = Marshalling.ParseBool(table, "is_archive_running");
             if (table.ContainsKey("archive_last_run_time"))
@@ -181,7 +181,7 @@ namespace XenAPI
             if (table.ContainsKey("is_alarm_enabled"))
                 is_alarm_enabled = Marshalling.ParseBool(table, "is_alarm_enabled");
             if (table.ContainsKey("alarm_config"))
-                alarm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "alarm_config"));
+                alarm_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "alarm_config"));
             if (table.ContainsKey("recent_alerts"))
                 recent_alerts = Marshalling.ParseStringArray(table, "recent_alerts");
         }
@@ -193,26 +193,26 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._is_policy_enabled, other._is_policy_enabled) &&
-                Helper.AreEqual2(this._backup_type, other._backup_type) &&
-                Helper.AreEqual2(this._backup_retention_value, other._backup_retention_value) &&
-                Helper.AreEqual2(this._backup_frequency, other._backup_frequency) &&
-                Helper.AreEqual2(this._backup_schedule, other._backup_schedule) &&
-                Helper.AreEqual2(this._is_backup_running, other._is_backup_running) &&
-                Helper.AreEqual2(this._backup_last_run_time, other._backup_last_run_time) &&
-                Helper.AreEqual2(this._archive_target_type, other._archive_target_type) &&
-                Helper.AreEqual2(this._archive_target_config, other._archive_target_config) &&
-                Helper.AreEqual2(this._archive_frequency, other._archive_frequency) &&
-                Helper.AreEqual2(this._archive_schedule, other._archive_schedule) &&
-                Helper.AreEqual2(this._is_archive_running, other._is_archive_running) &&
-                Helper.AreEqual2(this._archive_last_run_time, other._archive_last_run_time) &&
-                Helper.AreEqual2(this._VMs, other._VMs) &&
-                Helper.AreEqual2(this._is_alarm_enabled, other._is_alarm_enabled) &&
-                Helper.AreEqual2(this._alarm_config, other._alarm_config) &&
-                Helper.AreEqual2(this._recent_alerts, other._recent_alerts);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_is_policy_enabled, other._is_policy_enabled) &&
+                Helper.AreEqual2(_backup_type, other._backup_type) &&
+                Helper.AreEqual2(_backup_retention_value, other._backup_retention_value) &&
+                Helper.AreEqual2(_backup_frequency, other._backup_frequency) &&
+                Helper.AreEqual2(_backup_schedule, other._backup_schedule) &&
+                Helper.AreEqual2(_is_backup_running, other._is_backup_running) &&
+                Helper.AreEqual2(_backup_last_run_time, other._backup_last_run_time) &&
+                Helper.AreEqual2(_archive_target_type, other._archive_target_type) &&
+                Helper.AreEqual2(_archive_target_config, other._archive_target_config) &&
+                Helper.AreEqual2(_archive_frequency, other._archive_frequency) &&
+                Helper.AreEqual2(_archive_schedule, other._archive_schedule) &&
+                Helper.AreEqual2(_is_archive_running, other._is_archive_running) &&
+                Helper.AreEqual2(_archive_last_run_time, other._archive_last_run_time) &&
+                Helper.AreEqual2(_VMs, other._VMs) &&
+                Helper.AreEqual2(_is_alarm_enabled, other._is_alarm_enabled) &&
+                Helper.AreEqual2(_alarm_config, other._alarm_config) &&
+                Helper.AreEqual2(_recent_alerts, other._recent_alerts);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VMPP server)

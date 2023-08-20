@@ -36,9 +36,8 @@ using System.Collections.Generic;
 {
     internal class Maps
     {
-        internal static Dictionary<string, string> convert_from_proxy_string_string(Object o)
+        internal static Dictionary<string, string> ToDictionary_string_string(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, string> result = new Dictionary<string, string>();
             if (table != null)
             {
@@ -59,32 +58,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_string(Dictionary<string, string> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = table[key] ?? "";
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, long> convert_from_proxy_string_long(Object o)
+        internal static Dictionary<string, long> ToDictionary_string_long(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, long> result = new Dictionary<string, long>();
             if (table != null)
             {
@@ -105,32 +81,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_long(Dictionary<string, long> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = table[key].ToString();
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, cluster_host_operation> convert_from_proxy_string_cluster_host_operation(Object o)
+        internal static Dictionary<string, cluster_host_operation> ToDictionary_string_cluster_host_operation(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, cluster_host_operation> result = new Dictionary<string, cluster_host_operation>();
             if (table != null)
             {
@@ -151,32 +104,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_cluster_host_operation(Dictionary<string, cluster_host_operation> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = cluster_host_operation_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, cluster_operation> convert_from_proxy_string_cluster_operation(Object o)
+        internal static Dictionary<string, cluster_operation> ToDictionary_string_cluster_operation(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, cluster_operation> result = new Dictionary<string, cluster_operation>();
             if (table != null)
             {
@@ -197,32 +127,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_cluster_operation(Dictionary<string, cluster_operation> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = cluster_operation_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, host_allowed_operations> convert_from_proxy_string_host_allowed_operations(Object o)
+        internal static Dictionary<string, host_allowed_operations> ToDictionary_string_host_allowed_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, host_allowed_operations> result = new Dictionary<string, host_allowed_operations>();
             if (table != null)
             {
@@ -243,32 +150,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_host_allowed_operations(Dictionary<string, host_allowed_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = host_allowed_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, network_operations> convert_from_proxy_string_network_operations(Object o)
+        internal static Dictionary<string, network_operations> ToDictionary_string_network_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, network_operations> result = new Dictionary<string, network_operations>();
             if (table != null)
             {
@@ -289,32 +173,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_network_operations(Dictionary<string, network_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = network_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, pool_allowed_operations> convert_from_proxy_string_pool_allowed_operations(Object o)
+        internal static Dictionary<string, pool_allowed_operations> ToDictionary_string_pool_allowed_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, pool_allowed_operations> result = new Dictionary<string, pool_allowed_operations>();
             if (table != null)
             {
@@ -335,32 +196,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_pool_allowed_operations(Dictionary<string, pool_allowed_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = pool_allowed_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, storage_operations> convert_from_proxy_string_storage_operations(Object o)
+        internal static Dictionary<string, storage_operations> ToDictionary_string_storage_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, storage_operations> result = new Dictionary<string, storage_operations>();
             if (table != null)
             {
@@ -381,32 +219,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_storage_operations(Dictionary<string, storage_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = storage_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, task_allowed_operations> convert_from_proxy_string_task_allowed_operations(Object o)
+        internal static Dictionary<string, task_allowed_operations> ToDictionary_string_task_allowed_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, task_allowed_operations> result = new Dictionary<string, task_allowed_operations>();
             if (table != null)
             {
@@ -427,32 +242,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_task_allowed_operations(Dictionary<string, task_allowed_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = task_allowed_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vbd_operations> convert_from_proxy_string_vbd_operations(Object o)
+        internal static Dictionary<string, vbd_operations> ToDictionary_string_vbd_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vbd_operations> result = new Dictionary<string, vbd_operations>();
             if (table != null)
             {
@@ -473,32 +265,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vbd_operations(Dictionary<string, vbd_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vbd_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vdi_operations> convert_from_proxy_string_vdi_operations(Object o)
+        internal static Dictionary<string, vdi_operations> ToDictionary_string_vdi_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vdi_operations> result = new Dictionary<string, vdi_operations>();
             if (table != null)
             {
@@ -519,32 +288,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vdi_operations(Dictionary<string, vdi_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vdi_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vif_operations> convert_from_proxy_string_vif_operations(Object o)
+        internal static Dictionary<string, vif_operations> ToDictionary_string_vif_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vif_operations> result = new Dictionary<string, vif_operations>();
             if (table != null)
             {
@@ -565,32 +311,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vif_operations(Dictionary<string, vif_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vif_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vm_appliance_operation> convert_from_proxy_string_vm_appliance_operation(Object o)
+        internal static Dictionary<string, vm_appliance_operation> ToDictionary_string_vm_appliance_operation(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vm_appliance_operation> result = new Dictionary<string, vm_appliance_operation>();
             if (table != null)
             {
@@ -611,32 +334,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vm_appliance_operation(Dictionary<string, vm_appliance_operation> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vm_appliance_operation_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vm_operations> convert_from_proxy_string_vm_operations(Object o)
+        internal static Dictionary<string, vm_operations> ToDictionary_string_vm_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vm_operations> result = new Dictionary<string, vm_operations>();
             if (table != null)
             {
@@ -657,32 +357,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vm_operations(Dictionary<string, vm_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vm_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vtpm_operations> convert_from_proxy_string_vtpm_operations(Object o)
+        internal static Dictionary<string, vtpm_operations> ToDictionary_string_vtpm_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vtpm_operations> result = new Dictionary<string, vtpm_operations>();
             if (table != null)
             {
@@ -703,32 +380,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vtpm_operations(Dictionary<string, vtpm_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vtpm_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, vusb_operations> convert_from_proxy_string_vusb_operations(Object o)
+        internal static Dictionary<string, vusb_operations> ToDictionary_string_vusb_operations(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, vusb_operations> result = new Dictionary<string, vusb_operations>();
             if (table != null)
             {
@@ -749,32 +403,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_vusb_operations(Dictionary<string, vusb_operations> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = vusb_operations_helper.ToString(table[key]);
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<string, XenRef<Blob>> convert_from_proxy_string_XenRefBlob(Object o)
+        internal static Dictionary<string, XenRef<Blob>> ToDictionary_string_XenRefBlob(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<string, XenRef<Blob>> result = new Dictionary<string, XenRef<Blob>>();
             if (table != null)
             {
@@ -795,32 +426,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_string_XenRefBlob(Dictionary<string, XenRef<Blob>> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (string key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = table[key] ?? "";
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<long, long> convert_from_proxy_long_long(Object o)
+        internal static Dictionary<long, long> ToDictionary_long_long(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<long, long> result = new Dictionary<long, long>();
             if (table != null)
             {
@@ -841,32 +449,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_long_long(Dictionary<long, long> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (long key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key.ToString();
-                        string v = table[key].ToString();
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<long, double> convert_from_proxy_long_double(Object o)
+        internal static Dictionary<long, double> ToDictionary_long_double(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<long, double> result = new Dictionary<long, double>();
             if (table != null)
             {
@@ -887,32 +472,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_long_double(Dictionary<long, double> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (long key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key.ToString();
-                        double v = table[key];
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<long, string[]> convert_from_proxy_long_string_array(Object o)
+        internal static Dictionary<long, string[]> ToDictionary_long_string_array(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<long, string[]> result = new Dictionary<long, string[]>();
             if (table != null)
             {
@@ -933,32 +495,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_long_string_array(Dictionary<long, string[]> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (long key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key.ToString();
-                        string[] v = table[key];
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<vm_operations, string> convert_from_proxy_vm_operations_string(Object o)
+        internal static Dictionary<vm_operations, string> ToDictionary_vm_operations_string(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<vm_operations, string> result = new Dictionary<vm_operations, string>();
             if (table != null)
             {
@@ -979,32 +518,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_vm_operations_string(Dictionary<vm_operations, string> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (vm_operations key in table.Keys)
-                {
-                    try
-                    {
-                        string k = vm_operations_helper.ToString(key);
-                        string v = table[key] ?? "";
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<XenRef<VGPU_type>, long> convert_from_proxy_XenRefVGPU_type_long(Object o)
+        internal static Dictionary<XenRef<VGPU_type>, long> ToDictionary_XenRefVGPU_type_long(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<XenRef<VGPU_type>, long> result = new Dictionary<XenRef<VGPU_type>, long>();
             if (table != null)
             {
@@ -1025,32 +541,9 @@ using System.Collections.Generic;
             return result;
         }
 
-        internal static Hashtable convert_to_proxy_XenRefVGPU_type_long(Dictionary<XenRef<VGPU_type>, long> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (XenRef<VGPU_type> key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = table[key].ToString();
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
-                    }
-                }
-            }
-            return result;
-        }
 
-
-        internal static Dictionary<XenRef<VIF>, string> convert_from_proxy_XenRefVIF_string(Object o)
+        internal static Dictionary<XenRef<VIF>, string> ToDictionary_XenRefVIF_string(Hashtable table)
         {
-            Hashtable table = (Hashtable)o;
             Dictionary<XenRef<VIF>, string> result = new Dictionary<XenRef<VIF>, string>();
             if (table != null)
             {
@@ -1065,28 +558,6 @@ using System.Collections.Generic;
                     catch
                     {
                        // continue
-                    }
-                }
-            }
-            return result;
-        }
-
-        internal static Hashtable convert_to_proxy_XenRefVIF_string(Dictionary<XenRef<VIF>, string> table)
-        {
-            var result = new Hashtable();
-            if (table != null)
-            {
-                foreach (XenRef<VIF> key in table.Keys)
-                {
-                    try
-                    {
-                        string k = key ?? "";
-                        string v = table[key] ?? "";
-                        result[k] = v;
-                    }
-                    catch
-                    {
-                        // continue
                     }
                 }
             }

@@ -133,7 +133,7 @@ namespace XenAPI
             if (table.ContainsKey("pool_patch"))
                 pool_patch = Marshalling.ParseRef<Pool_patch>(table, "pool_patch");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Host_patch other)
@@ -143,16 +143,16 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._applied, other._applied) &&
-                Helper.AreEqual2(this._timestamp_applied, other._timestamp_applied) &&
-                Helper.AreEqual2(this._size, other._size) &&
-                Helper.AreEqual2(this._pool_patch, other._pool_patch) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_version, other._version) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_applied, other._applied) &&
+                Helper.AreEqual2(_timestamp_applied, other._timestamp_applied) &&
+                Helper.AreEqual2(_size, other._size) &&
+                Helper.AreEqual2(_pool_patch, other._pool_patch) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host_patch server)

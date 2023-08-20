@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._subroles, other._subroles) &&
-                Helper.AreEqual2(this._is_internal, other._is_internal);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_subroles, other._subroles) &&
+                Helper.AreEqual2(_is_internal, other._is_internal);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Role server)

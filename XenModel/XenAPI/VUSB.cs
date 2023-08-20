@@ -110,13 +110,13 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<vusb_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vusb_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_vusb_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VM"))
                 VM = Marshalling.ParseRef<VM>(table, "VM");
             if (table.ContainsKey("USB_group"))
                 USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("currently_attached"))
                 currently_attached = Marshalling.ParseBool(table, "currently_attached");
         }
@@ -128,15 +128,15 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._VM, other._VM) &&
-                Helper.AreEqual2(this._USB_group, other._USB_group) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._currently_attached, other._currently_attached);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_VM, other._VM) &&
+                Helper.AreEqual2(_USB_group, other._USB_group) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_currently_attached, other._currently_attached);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VUSB server)

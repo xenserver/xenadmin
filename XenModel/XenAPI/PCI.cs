@@ -132,7 +132,7 @@ namespace XenAPI
             if (table.ContainsKey("dependencies"))
                 dependencies = Marshalling.ParseSetRef<PCI>(table, "dependencies");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("subsystem_vendor_name"))
                 subsystem_vendor_name = Marshalling.ParseString(table, "subsystem_vendor_name");
             if (table.ContainsKey("subsystem_device_name"))
@@ -148,17 +148,17 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._class_name, other._class_name) &&
-                Helper.AreEqual2(this._vendor_name, other._vendor_name) &&
-                Helper.AreEqual2(this._device_name, other._device_name) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._pci_id, other._pci_id) &&
-                Helper.AreEqual2(this._dependencies, other._dependencies) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._subsystem_vendor_name, other._subsystem_vendor_name) &&
-                Helper.AreEqual2(this._subsystem_device_name, other._subsystem_device_name) &&
-                Helper.AreEqual2(this._driver_name, other._driver_name);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_class_name, other._class_name) &&
+                Helper.AreEqual2(_vendor_name, other._vendor_name) &&
+                Helper.AreEqual2(_device_name, other._device_name) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_pci_id, other._pci_id) &&
+                Helper.AreEqual2(_dependencies, other._dependencies) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_subsystem_vendor_name, other._subsystem_vendor_name) &&
+                Helper.AreEqual2(_subsystem_device_name, other._subsystem_device_name) &&
+                Helper.AreEqual2(_driver_name, other._driver_name);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PCI server)

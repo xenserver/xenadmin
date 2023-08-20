@@ -141,7 +141,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<network_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_network_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_network_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VIFs"))
                 VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
             if (table.ContainsKey("PIFs"))
@@ -149,19 +149,19 @@ namespace XenAPI
             if (table.ContainsKey("MTU"))
                 MTU = Marshalling.ParseLong(table, "MTU");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("bridge"))
                 bridge = Marshalling.ParseString(table, "bridge");
             if (table.ContainsKey("managed"))
                 managed = Marshalling.ParseBool(table, "managed");
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
+                blobs = Maps.ToDictionary_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("tags"))
                 tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("default_locking_mode"))
                 default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), Marshalling.ParseString(table, "default_locking_mode"));
             if (table.ContainsKey("assigned_ips"))
-                assigned_ips = Maps.convert_from_proxy_XenRefVIF_string(Marshalling.ParseHashTable(table, "assigned_ips"));
+                assigned_ips = Maps.ToDictionary_XenRefVIF_string(Marshalling.ParseHashTable(table, "assigned_ips"));
             if (table.ContainsKey("purpose"))
                 purpose = Helper.StringArrayToEnumList<network_purpose>(Marshalling.ParseStringArray(table, "purpose"));
         }
@@ -173,24 +173,24 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._VIFs, other._VIFs) &&
-                Helper.AreEqual2(this._PIFs, other._PIFs) &&
-                Helper.AreEqual2(this._MTU, other._MTU) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._bridge, other._bridge) &&
-                Helper.AreEqual2(this._managed, other._managed) &&
-                Helper.AreEqual2(this._blobs, other._blobs) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._default_locking_mode, other._default_locking_mode) &&
-                Helper.AreEqual2(this._assigned_ips, other._assigned_ips) &&
-                Helper.AreEqual2(this._purpose, other._purpose);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_VIFs, other._VIFs) &&
+                Helper.AreEqual2(_PIFs, other._PIFs) &&
+                Helper.AreEqual2(_MTU, other._MTU) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_bridge, other._bridge) &&
+                Helper.AreEqual2(_managed, other._managed) &&
+                Helper.AreEqual2(_blobs, other._blobs) &&
+                Helper.AreEqual2(_tags, other._tags) &&
+                Helper.AreEqual2(_default_locking_mode, other._default_locking_mode) &&
+                Helper.AreEqual2(_assigned_ips, other._assigned_ips) &&
+                Helper.AreEqual2(_purpose, other._purpose);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Network server)

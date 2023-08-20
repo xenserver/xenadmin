@@ -103,7 +103,7 @@ namespace XenAPI
             if (table.ContainsKey("fullname"))
                 fullname = Marshalling.ParseString(table, "fullname");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(User other)
@@ -113,10 +113,10 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._short_name, other._short_name) &&
-                Helper.AreEqual2(this._fullname, other._fullname) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_short_name, other._short_name) &&
+                Helper.AreEqual2(_fullname, other._fullname) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, User server)

@@ -34,11 +34,15 @@ namespace XenAPI
     {
         public enum MessageType
         {
-            PERIODIC_UPDATE_SYNC_FAILED,
             UPDATES_FEATURE_EXPIRED,
             UPDATES_FEATURE_EXPIRING_WARNING,
             UPDATES_FEATURE_EXPIRING_MAJOR,
             UPDATES_FEATURE_EXPIRING_CRITICAL,
+            LEAF_COALESCE_START_MESSAGE,
+            LEAF_COALESCE_COMPLETED,
+            LEAF_COALESCE_FAILED,
+            POST_ATTACH_SCAN_FAILED,
+            PERIODIC_UPDATE_SYNC_FAILED,
             TLS_VERIFICATION_EMERGENCY_DISABLED,
             FAILED_LOGIN_ATTEMPTS,
             HOST_INTERNAL_CERTIFICATE_EXPIRING_07,
@@ -136,9 +140,6 @@ namespace XenAPI
             HA_STATEFILE_APPROACHING_TIMEOUT,
             HA_HEARTBEAT_APPROACHING_TIMEOUT,
             HA_STATEFILE_LOST,
-            LEAF_COALESCE_START_MESSAGE,
-            LEAF_COALESCE_COMPLETED,
-            LEAF_COALESCE_FAILED,
             unknown
         }
 
@@ -148,8 +149,6 @@ namespace XenAPI
             {
                 switch (this.name)
                 {
-                    case "PERIODIC_UPDATE_SYNC_FAILED":
-                        return MessageType.PERIODIC_UPDATE_SYNC_FAILED;
                     case "UPDATES_FEATURE_EXPIRED":
                         return MessageType.UPDATES_FEATURE_EXPIRED;
                     case "UPDATES_FEATURE_EXPIRING_WARNING":
@@ -158,6 +157,16 @@ namespace XenAPI
                         return MessageType.UPDATES_FEATURE_EXPIRING_MAJOR;
                     case "UPDATES_FEATURE_EXPIRING_CRITICAL":
                         return MessageType.UPDATES_FEATURE_EXPIRING_CRITICAL;
+                    case "LEAF_COALESCE_START_MESSAGE":
+                        return MessageType.LEAF_COALESCE_START_MESSAGE;
+                    case "LEAF_COALESCE_COMPLETED":
+                        return MessageType.LEAF_COALESCE_COMPLETED;
+                    case "LEAF_COALESCE_FAILED":
+                        return MessageType.LEAF_COALESCE_FAILED;
+                    case "POST_ATTACH_SCAN_FAILED":
+                        return MessageType.POST_ATTACH_SCAN_FAILED;
+                    case "PERIODIC_UPDATE_SYNC_FAILED":
+                        return MessageType.PERIODIC_UPDATE_SYNC_FAILED;
                     case "TLS_VERIFICATION_EMERGENCY_DISABLED":
                         return MessageType.TLS_VERIFICATION_EMERGENCY_DISABLED;
                     case "FAILED_LOGIN_ATTEMPTS":
@@ -352,12 +361,6 @@ namespace XenAPI
                         return MessageType.HA_HEARTBEAT_APPROACHING_TIMEOUT;
                     case "HA_STATEFILE_LOST":
                         return MessageType.HA_STATEFILE_LOST;
-                    case "LEAF_COALESCE_START_MESSAGE":
-                        return MessageType.LEAF_COALESCE_START_MESSAGE;
-                    case "LEAF_COALESCE_COMPLETED":
-                        return MessageType.LEAF_COALESCE_COMPLETED;
-                    case "LEAF_COALESCE_FAILED":
-                        return MessageType.LEAF_COALESCE_FAILED;
                     default:
                         return MessageType.unknown;
                 }

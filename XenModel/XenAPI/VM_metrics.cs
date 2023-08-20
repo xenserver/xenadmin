@@ -139,13 +139,13 @@ namespace XenAPI
             if (table.ContainsKey("VCPUs_number"))
                 VCPUs_number = Marshalling.ParseLong(table, "VCPUs_number");
             if (table.ContainsKey("VCPUs_utilisation"))
-                VCPUs_utilisation = Maps.convert_from_proxy_long_double(Marshalling.ParseHashTable(table, "VCPUs_utilisation"));
+                VCPUs_utilisation = Maps.ToDictionary_long_double(Marshalling.ParseHashTable(table, "VCPUs_utilisation"));
             if (table.ContainsKey("VCPUs_CPU"))
-                VCPUs_CPU = Maps.convert_from_proxy_long_long(Marshalling.ParseHashTable(table, "VCPUs_CPU"));
+                VCPUs_CPU = Maps.ToDictionary_long_long(Marshalling.ParseHashTable(table, "VCPUs_CPU"));
             if (table.ContainsKey("VCPUs_params"))
-                VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
+                VCPUs_params = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
             if (table.ContainsKey("VCPUs_flags"))
-                VCPUs_flags = Maps.convert_from_proxy_long_string_array(Marshalling.ParseHashTable(table, "VCPUs_flags"));
+                VCPUs_flags = Maps.ToDictionary_long_string_array(Marshalling.ParseHashTable(table, "VCPUs_flags"));
             if (table.ContainsKey("state"))
                 state = Marshalling.ParseStringArray(table, "state");
             if (table.ContainsKey("start_time"))
@@ -155,7 +155,7 @@ namespace XenAPI
             if (table.ContainsKey("last_updated"))
                 last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("hvm"))
                 hvm = Marshalling.ParseBool(table, "hvm");
             if (table.ContainsKey("nested_virt"))
@@ -173,22 +173,22 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._memory_actual, other._memory_actual) &&
-                Helper.AreEqual2(this._VCPUs_number, other._VCPUs_number) &&
-                Helper.AreEqual2(this._VCPUs_utilisation, other._VCPUs_utilisation) &&
-                Helper.AreEqual2(this._VCPUs_CPU, other._VCPUs_CPU) &&
-                Helper.AreEqual2(this._VCPUs_params, other._VCPUs_params) &&
-                Helper.AreEqual2(this._VCPUs_flags, other._VCPUs_flags) &&
-                Helper.AreEqual2(this._state, other._state) &&
-                Helper.AreEqual2(this._start_time, other._start_time) &&
-                Helper.AreEqual2(this._install_time, other._install_time) &&
-                Helper.AreEqual2(this._last_updated, other._last_updated) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._hvm, other._hvm) &&
-                Helper.AreEqual2(this._nested_virt, other._nested_virt) &&
-                Helper.AreEqual2(this._nomigrate, other._nomigrate) &&
-                Helper.AreEqual2(this._current_domain_type, other._current_domain_type);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_memory_actual, other._memory_actual) &&
+                Helper.AreEqual2(_VCPUs_number, other._VCPUs_number) &&
+                Helper.AreEqual2(_VCPUs_utilisation, other._VCPUs_utilisation) &&
+                Helper.AreEqual2(_VCPUs_CPU, other._VCPUs_CPU) &&
+                Helper.AreEqual2(_VCPUs_params, other._VCPUs_params) &&
+                Helper.AreEqual2(_VCPUs_flags, other._VCPUs_flags) &&
+                Helper.AreEqual2(_state, other._state) &&
+                Helper.AreEqual2(_start_time, other._start_time) &&
+                Helper.AreEqual2(_install_time, other._install_time) &&
+                Helper.AreEqual2(_last_updated, other._last_updated) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_hvm, other._hvm) &&
+                Helper.AreEqual2(_nested_virt, other._nested_virt) &&
+                Helper.AreEqual2(_nomigrate, other._nomigrate) &&
+                Helper.AreEqual2(_current_domain_type, other._current_domain_type);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM_metrics server)

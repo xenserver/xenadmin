@@ -97,13 +97,13 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("configuration"))
-                configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "configuration"));
+                configuration = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "configuration"));
             if (table.ContainsKey("complete"))
                 complete = Marshalling.ParseBool(table, "complete");
             if (table.ContainsKey("sr"))
                 sr = (Sr_stat)Marshalling.convertStruct(typeof(Sr_stat), Marshalling.ParseHashTable(table, "sr"));;
             if (table.ContainsKey("extra_info"))
-                extra_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "extra_info"));
+                extra_info = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "extra_info"));
         }
 
         public bool DeepEquals(Probe_result other)
@@ -113,10 +113,10 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._configuration, other._configuration) &&
-                Helper.AreEqual2(this._complete, other._complete) &&
-                Helper.AreEqual2(this._sr, other._sr) &&
-                Helper.AreEqual2(this._extra_info, other._extra_info);
+            return Helper.AreEqual2(_configuration, other._configuration) &&
+                Helper.AreEqual2(_complete, other._complete) &&
+                Helper.AreEqual2(_sr, other._sr) &&
+                Helper.AreEqual2(_extra_info, other._extra_info);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Probe_result server)

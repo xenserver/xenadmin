@@ -123,12 +123,12 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._SR, other._SR) &&
-                Helper.AreEqual2(this._site, other._site) &&
-                Helper.AreEqual2(this._size, other._size) &&
-                Helper.AreEqual2(this._VDI, other._VDI);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_SR, other._SR) &&
+                Helper.AreEqual2(_site, other._site) &&
+                Helper.AreEqual2(_size, other._size) &&
+                Helper.AreEqual2(_VDI, other._VDI);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PVS_cache_storage server)

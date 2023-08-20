@@ -155,7 +155,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<vbd_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vbd_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_vbd_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VM"))
                 VM = Marshalling.ParseRef<VM>(table, "VM");
             if (table.ContainsKey("VDI"))
@@ -177,7 +177,7 @@ namespace XenAPI
             if (table.ContainsKey("empty"))
                 empty = Marshalling.ParseBool(table, "empty");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("currently_attached"))
                 currently_attached = Marshalling.ParseBool(table, "currently_attached");
             if (table.ContainsKey("status_code"))
@@ -185,11 +185,11 @@ namespace XenAPI
             if (table.ContainsKey("status_detail"))
                 status_detail = Marshalling.ParseString(table, "status_detail");
             if (table.ContainsKey("runtime_properties"))
-                runtime_properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "runtime_properties"));
+                runtime_properties = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "runtime_properties"));
             if (table.ContainsKey("qos_algorithm_type"))
                 qos_algorithm_type = Marshalling.ParseString(table, "qos_algorithm_type");
             if (table.ContainsKey("qos_algorithm_params"))
-                qos_algorithm_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "qos_algorithm_params"));
+                qos_algorithm_params = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "qos_algorithm_params"));
             if (table.ContainsKey("qos_supported_algorithms"))
                 qos_supported_algorithms = Marshalling.ParseStringArray(table, "qos_supported_algorithms");
             if (table.ContainsKey("metrics"))
@@ -203,30 +203,30 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._VM, other._VM) &&
-                Helper.AreEqual2(this._VDI, other._VDI) &&
-                Helper.AreEqual2(this._device, other._device) &&
-                Helper.AreEqual2(this._userdevice, other._userdevice) &&
-                Helper.AreEqual2(this._bootable, other._bootable) &&
-                Helper.AreEqual2(this._mode, other._mode) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._unpluggable, other._unpluggable) &&
-                Helper.AreEqual2(this._storage_lock, other._storage_lock) &&
-                Helper.AreEqual2(this._empty, other._empty) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
-                Helper.AreEqual2(this._status_code, other._status_code) &&
-                Helper.AreEqual2(this._status_detail, other._status_detail) &&
-                Helper.AreEqual2(this._runtime_properties, other._runtime_properties) &&
-                Helper.AreEqual2(this._qos_algorithm_type, other._qos_algorithm_type) &&
-                Helper.AreEqual2(this._qos_algorithm_params, other._qos_algorithm_params) &&
-                Helper.AreEqual2(this._qos_supported_algorithms, other._qos_supported_algorithms) &&
-                Helper.AreEqual2(this._metrics, other._metrics);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_VM, other._VM) &&
+                Helper.AreEqual2(_VDI, other._VDI) &&
+                Helper.AreEqual2(_device, other._device) &&
+                Helper.AreEqual2(_userdevice, other._userdevice) &&
+                Helper.AreEqual2(_bootable, other._bootable) &&
+                Helper.AreEqual2(_mode, other._mode) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_unpluggable, other._unpluggable) &&
+                Helper.AreEqual2(_storage_lock, other._storage_lock) &&
+                Helper.AreEqual2(_empty, other._empty) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_currently_attached, other._currently_attached) &&
+                Helper.AreEqual2(_status_code, other._status_code) &&
+                Helper.AreEqual2(_status_detail, other._status_detail) &&
+                Helper.AreEqual2(_runtime_properties, other._runtime_properties) &&
+                Helper.AreEqual2(_qos_algorithm_type, other._qos_algorithm_type) &&
+                Helper.AreEqual2(_qos_algorithm_params, other._qos_algorithm_params) &&
+                Helper.AreEqual2(_qos_supported_algorithms, other._qos_supported_algorithms) &&
+                Helper.AreEqual2(_metrics, other._metrics);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VBD server)

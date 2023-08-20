@@ -230,7 +230,7 @@ namespace XenAPI
             if (table.ContainsKey("management"))
                 management = Marshalling.ParseBool(table, "management");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("disallow_unplug"))
                 disallow_unplug = Marshalling.ParseBool(table, "disallow_unplug");
             if (table.ContainsKey("tunnel_access_PIF_of"))
@@ -248,7 +248,7 @@ namespace XenAPI
             if (table.ContainsKey("managed"))
                 managed = Marshalling.ParseBool(table, "managed");
             if (table.ContainsKey("properties"))
-                properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
+                properties = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "properties"));
             if (table.ContainsKey("capabilities"))
                 capabilities = Marshalling.ParseStringArray(table, "capabilities");
             if (table.ContainsKey("igmp_snooping_status"))
@@ -268,41 +268,41 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._device, other._device) &&
-                Helper.AreEqual2(this._network, other._network) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._MAC, other._MAC) &&
-                Helper.AreEqual2(this._MTU, other._MTU) &&
-                Helper.AreEqual2(this._VLAN, other._VLAN) &&
-                Helper.AreEqual2(this._metrics, other._metrics) &&
-                Helper.AreEqual2(this._physical, other._physical) &&
-                Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
-                Helper.AreEqual2(this._ip_configuration_mode, other._ip_configuration_mode) &&
-                Helper.AreEqual2(this._IP, other._IP) &&
-                Helper.AreEqual2(this._netmask, other._netmask) &&
-                Helper.AreEqual2(this._gateway, other._gateway) &&
-                Helper.AreEqual2(this._DNS, other._DNS) &&
-                Helper.AreEqual2(this._bond_slave_of, other._bond_slave_of) &&
-                Helper.AreEqual2(this._bond_master_of, other._bond_master_of) &&
-                Helper.AreEqual2(this._VLAN_master_of, other._VLAN_master_of) &&
-                Helper.AreEqual2(this._VLAN_slave_of, other._VLAN_slave_of) &&
-                Helper.AreEqual2(this._management, other._management) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._disallow_unplug, other._disallow_unplug) &&
-                Helper.AreEqual2(this._tunnel_access_PIF_of, other._tunnel_access_PIF_of) &&
-                Helper.AreEqual2(this._tunnel_transport_PIF_of, other._tunnel_transport_PIF_of) &&
-                Helper.AreEqual2(this._ipv6_configuration_mode, other._ipv6_configuration_mode) &&
-                Helper.AreEqual2(this._IPv6, other._IPv6) &&
-                Helper.AreEqual2(this._ipv6_gateway, other._ipv6_gateway) &&
-                Helper.AreEqual2(this._primary_address_type, other._primary_address_type) &&
-                Helper.AreEqual2(this._managed, other._managed) &&
-                Helper.AreEqual2(this._properties, other._properties) &&
-                Helper.AreEqual2(this._capabilities, other._capabilities) &&
-                Helper.AreEqual2(this._igmp_snooping_status, other._igmp_snooping_status) &&
-                Helper.AreEqual2(this._sriov_physical_PIF_of, other._sriov_physical_PIF_of) &&
-                Helper.AreEqual2(this._sriov_logical_PIF_of, other._sriov_logical_PIF_of) &&
-                Helper.AreEqual2(this._PCI, other._PCI);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_device, other._device) &&
+                Helper.AreEqual2(_network, other._network) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_MAC, other._MAC) &&
+                Helper.AreEqual2(_MTU, other._MTU) &&
+                Helper.AreEqual2(_VLAN, other._VLAN) &&
+                Helper.AreEqual2(_metrics, other._metrics) &&
+                Helper.AreEqual2(_physical, other._physical) &&
+                Helper.AreEqual2(_currently_attached, other._currently_attached) &&
+                Helper.AreEqual2(_ip_configuration_mode, other._ip_configuration_mode) &&
+                Helper.AreEqual2(_IP, other._IP) &&
+                Helper.AreEqual2(_netmask, other._netmask) &&
+                Helper.AreEqual2(_gateway, other._gateway) &&
+                Helper.AreEqual2(_DNS, other._DNS) &&
+                Helper.AreEqual2(_bond_slave_of, other._bond_slave_of) &&
+                Helper.AreEqual2(_bond_master_of, other._bond_master_of) &&
+                Helper.AreEqual2(_VLAN_master_of, other._VLAN_master_of) &&
+                Helper.AreEqual2(_VLAN_slave_of, other._VLAN_slave_of) &&
+                Helper.AreEqual2(_management, other._management) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_disallow_unplug, other._disallow_unplug) &&
+                Helper.AreEqual2(_tunnel_access_PIF_of, other._tunnel_access_PIF_of) &&
+                Helper.AreEqual2(_tunnel_transport_PIF_of, other._tunnel_transport_PIF_of) &&
+                Helper.AreEqual2(_ipv6_configuration_mode, other._ipv6_configuration_mode) &&
+                Helper.AreEqual2(_IPv6, other._IPv6) &&
+                Helper.AreEqual2(_ipv6_gateway, other._ipv6_gateway) &&
+                Helper.AreEqual2(_primary_address_type, other._primary_address_type) &&
+                Helper.AreEqual2(_managed, other._managed) &&
+                Helper.AreEqual2(_properties, other._properties) &&
+                Helper.AreEqual2(_capabilities, other._capabilities) &&
+                Helper.AreEqual2(_igmp_snooping_status, other._igmp_snooping_status) &&
+                Helper.AreEqual2(_sriov_physical_PIF_of, other._sriov_physical_PIF_of) &&
+                Helper.AreEqual2(_sriov_logical_PIF_of, other._sriov_logical_PIF_of) &&
+                Helper.AreEqual2(_PCI, other._PCI);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PIF server)

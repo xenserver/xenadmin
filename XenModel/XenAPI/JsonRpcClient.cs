@@ -3377,13 +3377,6 @@ namespace XenAPI
             return Rpc<List<update_guidances>>("VM.get_pending_guidances", new JArray(session, _vm ?? ""), serializer);
         }
 
-        public List<update_guidances> vm_get_recommended_guidances(string session, string _vm)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            return Rpc<List<update_guidances>>("VM.get_recommended_guidances", new JArray(session, _vm ?? ""), serializer);
-        }
-
         public void vm_set_name_label(string session, string _vm, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -6394,25 +6387,11 @@ namespace XenAPI
             return Rpc<bool>("host.get_https_only", new JArray(session, _host ?? ""), serializer);
         }
 
-        public List<update_guidances> host_get_recommended_guidances(string session, string _host)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            return Rpc<List<update_guidances>>("host.get_recommended_guidances", new JArray(session, _host ?? ""), serializer);
-        }
-
         public latest_synced_updates_applied_state host_get_latest_synced_updates_applied(string session, string _host)
         {
             var converters = new List<JsonConverter> {new latest_synced_updates_applied_stateConverter()};
             var serializer = CreateSerializer(converters);
             return Rpc<latest_synced_updates_applied_state>("host.get_latest_synced_updates_applied", new JArray(session, _host ?? ""), serializer);
-        }
-
-        public bool host_get_toolstack_restart_required_after_update(string session, string _host)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            return Rpc<bool>("host.get_toolstack_restart_required_after_update", new JArray(session, _host ?? ""), serializer);
         }
 
         public void host_set_name_label(string session, string _host, string _label)
