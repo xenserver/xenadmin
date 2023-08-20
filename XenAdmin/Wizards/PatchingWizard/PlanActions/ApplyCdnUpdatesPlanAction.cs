@@ -57,6 +57,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 log.DebugFormat("Disabling host {0}", host.Name());
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, host.Name()));
                 Host.disable(session, HostXenRef.opaque_ref);
+                Connection.WaitFor(() => !host.enabled, null);
             }
 
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN, host.Name()));

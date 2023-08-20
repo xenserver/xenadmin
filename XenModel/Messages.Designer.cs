@@ -20532,6 +20532,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server will be evacuated prior to installing updates.
+        /// </summary>
+        public static string HOTFIX_PRE_UPDATE_ACTIONS {
+            get {
+                return ResourceManager.GetString("HOTFIX_PRE_UPDATE_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} packages will be updated.
         /// </summary>
         public static string HOTFIX_RPMS_TO_INSTALL {

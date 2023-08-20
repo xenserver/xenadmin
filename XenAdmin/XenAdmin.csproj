@@ -4246,7 +4246,6 @@
       <DependentUpon>PatchingWizard_FirstPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyPatchPlanAction.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\BringBabiesBackAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PatchingWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4283,7 +4282,6 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_SelectServers.Designer.cs">
       <DependentUpon>PatchingWizard_SelectServers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\PlanActions\EvacuateHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PlanActionWithSession.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RebootPlanAction.cs" />

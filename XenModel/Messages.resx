@@ -7167,6 +7167,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS" xml:space="preserve">
     <value>This server will be live patched. If live patch fails, a server reboot will be required.</value>
   </data>
+  <data name="HOTFIX_PRE_UPDATE_ACTIONS" xml:space="preserve">
+    <value>This server will be evacuated prior to installing updates</value>
+  </data>
   <data name="HOTFIX_RPMS_TO_INSTALL" xml:space="preserve">
     <value>{0} packages will be updated</value>
   </data>

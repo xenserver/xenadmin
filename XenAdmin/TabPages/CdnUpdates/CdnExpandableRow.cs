@@ -205,9 +205,15 @@ namespace XenAdmin.TabPages.CdnUpdates
             SetValues(Host.Name(), Images.GetImage16For(Images.GetIconFor(Host)), channel: channel,
                 lastSync: lastSyncTime, lastUpdate: lastUpdateTime);
 
-            if (poolUpdateInfo != null && hostUpdateInfo != null)
+            if (poolUpdateInfo != null && hostUpdateInfo != null && hostUpdateInfo.UpdateIDs.Length > 0)
             {
-                _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance));
+                if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost) ||
+                    hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                {
+                    _childRows.Add(new PreUpdateActionRow());
+                }
+
+                _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance.Where(g => g != CdnGuidance.EvacuateHost).ToArray()));
 
                 if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
                     _childRows.Add(new LivePatchActionRow());
@@ -276,6 +282,14 @@ namespace XenAdmin.TabPages.CdnUpdates
         public UpdateDetailRow(string detail)
         {
             SetValues(detail, null);
+        }
+    }
+
+    internal class PreUpdateActionRow : CdnExpandableRow
+    {
+        public PreUpdateActionRow()
+        {
+            SetValues(Messages.HOTFIX_PRE_UPDATE_ACTIONS, Images.StaticImages.rightArrowLong_Blue_16);
         }
     }
 
