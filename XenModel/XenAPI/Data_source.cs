@@ -133,14 +133,14 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._enabled, other._enabled) &&
-                Helper.AreEqual2(this._standard, other._standard) &&
-                Helper.AreEqual2(this._units, other._units) &&
-                Helper.AreEqual2(this._min, other._min) &&
-                Helper.AreEqual2(this._max, other._max) &&
-                Helper.AreEqual2(this._value, other._value);
+            return Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_enabled, other._enabled) &&
+                Helper.AreEqual2(_standard, other._standard) &&
+                Helper.AreEqual2(_units, other._units) &&
+                Helper.AreEqual2(_min, other._min) &&
+                Helper.AreEqual2(_max, other._max) &&
+                Helper.AreEqual2(_value, other._value);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Data_source server)

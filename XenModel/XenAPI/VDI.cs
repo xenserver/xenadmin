@@ -189,7 +189,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<vdi_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vdi_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_vdi_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("SR"))
                 SR = Marshalling.ParseRef<SR>(table, "SR");
             if (table.ContainsKey("VBDs"))
@@ -207,7 +207,7 @@ namespace XenAPI
             if (table.ContainsKey("read_only"))
                 read_only = Marshalling.ParseBool(table, "read_only");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("storage_lock"))
                 storage_lock = Marshalling.ParseBool(table, "storage_lock");
             if (table.ContainsKey("location"))
@@ -219,9 +219,9 @@ namespace XenAPI
             if (table.ContainsKey("parent"))
                 parent = Marshalling.ParseRef<VDI>(table, "parent");
             if (table.ContainsKey("xenstore_data"))
-                xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
+                xenstore_data = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
             if (table.ContainsKey("sm_config"))
-                sm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "sm_config"));
+                sm_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "sm_config"));
             if (table.ContainsKey("is_a_snapshot"))
                 is_a_snapshot = Marshalling.ParseBool(table, "is_a_snapshot");
             if (table.ContainsKey("snapshot_of"))
@@ -253,40 +253,40 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._SR, other._SR) &&
-                Helper.AreEqual2(this._VBDs, other._VBDs) &&
-                Helper.AreEqual2(this._crash_dumps, other._crash_dumps) &&
-                Helper.AreEqual2(this._virtual_size, other._virtual_size) &&
-                Helper.AreEqual2(this._physical_utilisation, other._physical_utilisation) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._sharable, other._sharable) &&
-                Helper.AreEqual2(this._read_only, other._read_only) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._storage_lock, other._storage_lock) &&
-                Helper.AreEqual2(this._location, other._location) &&
-                Helper.AreEqual2(this._managed, other._managed) &&
-                Helper.AreEqual2(this._missing, other._missing) &&
-                Helper.AreEqual2(this._parent, other._parent) &&
-                Helper.AreEqual2(this._xenstore_data, other._xenstore_data) &&
-                Helper.AreEqual2(this._sm_config, other._sm_config) &&
-                Helper.AreEqual2(this._is_a_snapshot, other._is_a_snapshot) &&
-                Helper.AreEqual2(this._snapshot_of, other._snapshot_of) &&
-                Helper.AreEqual2(this._snapshots, other._snapshots) &&
-                Helper.AreEqual2(this._snapshot_time, other._snapshot_time) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._allow_caching, other._allow_caching) &&
-                Helper.AreEqual2(this._on_boot, other._on_boot) &&
-                Helper.AreEqual2(this._metadata_of_pool, other._metadata_of_pool) &&
-                Helper.AreEqual2(this._metadata_latest, other._metadata_latest) &&
-                Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso) &&
-                Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_SR, other._SR) &&
+                Helper.AreEqual2(_VBDs, other._VBDs) &&
+                Helper.AreEqual2(_crash_dumps, other._crash_dumps) &&
+                Helper.AreEqual2(_virtual_size, other._virtual_size) &&
+                Helper.AreEqual2(_physical_utilisation, other._physical_utilisation) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_sharable, other._sharable) &&
+                Helper.AreEqual2(_read_only, other._read_only) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_storage_lock, other._storage_lock) &&
+                Helper.AreEqual2(_location, other._location) &&
+                Helper.AreEqual2(_managed, other._managed) &&
+                Helper.AreEqual2(_missing, other._missing) &&
+                Helper.AreEqual2(_parent, other._parent) &&
+                Helper.AreEqual2(_xenstore_data, other._xenstore_data) &&
+                Helper.AreEqual2(_sm_config, other._sm_config) &&
+                Helper.AreEqual2(_is_a_snapshot, other._is_a_snapshot) &&
+                Helper.AreEqual2(_snapshot_of, other._snapshot_of) &&
+                Helper.AreEqual2(_snapshots, other._snapshots) &&
+                Helper.AreEqual2(_snapshot_time, other._snapshot_time) &&
+                Helper.AreEqual2(_tags, other._tags) &&
+                Helper.AreEqual2(_allow_caching, other._allow_caching) &&
+                Helper.AreEqual2(_on_boot, other._on_boot) &&
+                Helper.AreEqual2(_metadata_of_pool, other._metadata_of_pool) &&
+                Helper.AreEqual2(_metadata_latest, other._metadata_latest) &&
+                Helper.AreEqual2(_is_tools_iso, other._is_tools_iso) &&
+                Helper.AreEqual2(_cbt_enabled, other._cbt_enabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VDI server)

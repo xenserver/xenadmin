@@ -3144,15 +3144,6 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pool is syncing with the enabled remote YUM repository..
-        /// </summary>
-        public static string REPOSYNC_IN_PROGRESS {
-            get {
-                return ResourceManager.GetString("REPOSYNC_IN_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The operation you requested cannot be performed because the specified PIF is currently unplugged..
         /// </summary>
         public static string REQUIRED_PIF_IS_UNPLUGGED {

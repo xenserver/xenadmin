@@ -148,7 +148,7 @@ namespace XenAPI
             if (table.ContainsKey("last_updated"))
                 last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(PIF_metrics other)
@@ -158,19 +158,19 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._io_read_kbs, other._io_read_kbs) &&
-                Helper.AreEqual2(this._io_write_kbs, other._io_write_kbs) &&
-                Helper.AreEqual2(this._carrier, other._carrier) &&
-                Helper.AreEqual2(this._vendor_id, other._vendor_id) &&
-                Helper.AreEqual2(this._vendor_name, other._vendor_name) &&
-                Helper.AreEqual2(this._device_id, other._device_id) &&
-                Helper.AreEqual2(this._device_name, other._device_name) &&
-                Helper.AreEqual2(this._speed, other._speed) &&
-                Helper.AreEqual2(this._duplex, other._duplex) &&
-                Helper.AreEqual2(this._pci_bus_path, other._pci_bus_path) &&
-                Helper.AreEqual2(this._last_updated, other._last_updated) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_io_read_kbs, other._io_read_kbs) &&
+                Helper.AreEqual2(_io_write_kbs, other._io_write_kbs) &&
+                Helper.AreEqual2(_carrier, other._carrier) &&
+                Helper.AreEqual2(_vendor_id, other._vendor_id) &&
+                Helper.AreEqual2(_vendor_name, other._vendor_name) &&
+                Helper.AreEqual2(_device_id, other._device_id) &&
+                Helper.AreEqual2(_device_name, other._device_name) &&
+                Helper.AreEqual2(_speed, other._speed) &&
+                Helper.AreEqual2(_duplex, other._duplex) &&
+                Helper.AreEqual2(_pci_bus_path, other._pci_bus_path) &&
+                Helper.AreEqual2(_last_updated, other._last_updated) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PIF_metrics server)

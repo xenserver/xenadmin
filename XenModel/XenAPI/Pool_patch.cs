@@ -133,7 +133,7 @@ namespace XenAPI
             if (table.ContainsKey("pool_update"))
                 pool_update = Marshalling.ParseRef<Pool_update>(table, "pool_update");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Pool_patch other)
@@ -143,16 +143,16 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._size, other._size) &&
-                Helper.AreEqual2(this._pool_applied, other._pool_applied) &&
-                Helper.AreEqual2(this._host_patches, other._host_patches) &&
-                Helper.AreEqual2(this._after_apply_guidance, other._after_apply_guidance) &&
-                Helper.AreEqual2(this._pool_update, other._pool_update) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_version, other._version) &&
+                Helper.AreEqual2(_size, other._size) &&
+                Helper.AreEqual2(_pool_applied, other._pool_applied) &&
+                Helper.AreEqual2(_host_patches, other._host_patches) &&
+                Helper.AreEqual2(_after_apply_guidance, other._after_apply_guidance) &&
+                Helper.AreEqual2(_pool_update, other._pool_update) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool_patch server)

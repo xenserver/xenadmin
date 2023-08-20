@@ -129,23 +129,23 @@ namespace XenAPI
             if (table.ContainsKey("uuid"))
                 uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("os_version"))
-                os_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "os_version"));
+                os_version = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "os_version"));
             if (table.ContainsKey("PV_drivers_version"))
-                PV_drivers_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "PV_drivers_version"));
+                PV_drivers_version = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "PV_drivers_version"));
             if (table.ContainsKey("PV_drivers_up_to_date"))
                 PV_drivers_up_to_date = Marshalling.ParseBool(table, "PV_drivers_up_to_date");
             if (table.ContainsKey("memory"))
-                memory = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "memory"));
+                memory = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "memory"));
             if (table.ContainsKey("disks"))
-                disks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "disks"));
+                disks = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "disks"));
             if (table.ContainsKey("networks"))
-                networks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "networks"));
+                networks = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "networks"));
             if (table.ContainsKey("other"))
-                other = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other"));
+                other = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other"));
             if (table.ContainsKey("last_updated"))
                 last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("live"))
                 live = Marshalling.ParseBool(table, "live");
             if (table.ContainsKey("can_use_hotplug_vbd"))
@@ -163,20 +163,20 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._os_version, other._os_version) &&
-                Helper.AreEqual2(this._PV_drivers_version, other._PV_drivers_version) &&
-                Helper.AreEqual2(this._PV_drivers_up_to_date, other._PV_drivers_up_to_date) &&
-                Helper.AreEqual2(this._memory, other._memory) &&
-                Helper.AreEqual2(this._disks, other._disks) &&
-                Helper.AreEqual2(this._networks, other._networks) &&
-                Helper.AreEqual2(this._other, other._other) &&
-                Helper.AreEqual2(this._last_updated, other._last_updated) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._live, other._live) &&
-                Helper.AreEqual2(this._can_use_hotplug_vbd, other._can_use_hotplug_vbd) &&
-                Helper.AreEqual2(this._can_use_hotplug_vif, other._can_use_hotplug_vif) &&
-                Helper.AreEqual2(this._PV_drivers_detected, other._PV_drivers_detected);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_os_version, other._os_version) &&
+                Helper.AreEqual2(_PV_drivers_version, other._PV_drivers_version) &&
+                Helper.AreEqual2(_PV_drivers_up_to_date, other._PV_drivers_up_to_date) &&
+                Helper.AreEqual2(_memory, other._memory) &&
+                Helper.AreEqual2(_disks, other._disks) &&
+                Helper.AreEqual2(_networks, other._networks) &&
+                Helper.AreEqual2(_other, other._other) &&
+                Helper.AreEqual2(_last_updated, other._last_updated) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_live, other._live) &&
+                Helper.AreEqual2(_can_use_hotplug_vbd, other._can_use_hotplug_vbd) &&
+                Helper.AreEqual2(_can_use_hotplug_vif, other._can_use_hotplug_vif) &&
+                Helper.AreEqual2(_PV_drivers_detected, other._PV_drivers_detected);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM_guest_metrics server)

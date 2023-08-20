@@ -108,7 +108,7 @@ namespace XenAPI
             if (table.ContainsKey("tag"))
                 tag = Marshalling.ParseLong(table, "tag");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(VLAN other)
@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._tagged_PIF, other._tagged_PIF) &&
-                Helper.AreEqual2(this._untagged_PIF, other._untagged_PIF) &&
-                Helper.AreEqual2(this._tag, other._tag) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_tagged_PIF, other._tagged_PIF) &&
+                Helper.AreEqual2(_untagged_PIF, other._untagged_PIF) &&
+                Helper.AreEqual2(_tag, other._tag) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VLAN server)

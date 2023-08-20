@@ -261,11 +261,11 @@ namespace XenAPI
             if (table.ContainsKey("crash_dump_SR"))
                 crash_dump_SR = Marshalling.ParseRef<SR>(table, "crash_dump_SR");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("ha_enabled"))
                 ha_enabled = Marshalling.ParseBool(table, "ha_enabled");
             if (table.ContainsKey("ha_configuration"))
-                ha_configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "ha_configuration"));
+                ha_configuration = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "ha_configuration"));
             if (table.ContainsKey("ha_statefiles"))
                 ha_statefiles = Marshalling.ParseStringArray(table, "ha_statefiles");
             if (table.ContainsKey("ha_host_failures_to_tolerate"))
@@ -277,13 +277,13 @@ namespace XenAPI
             if (table.ContainsKey("ha_overcommitted"))
                 ha_overcommitted = Marshalling.ParseBool(table, "ha_overcommitted");
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
+                blobs = Maps.ToDictionary_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("tags"))
                 tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("gui_config"))
-                gui_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "gui_config"));
+                gui_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "gui_config"));
             if (table.ContainsKey("health_check_config"))
-                health_check_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "health_check_config"));
+                health_check_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "health_check_config"));
             if (table.ContainsKey("wlb_url"))
                 wlb_url = Marshalling.ParseString(table, "wlb_url");
             if (table.ContainsKey("wlb_username"))
@@ -299,7 +299,7 @@ namespace XenAPI
             if (table.ContainsKey("vswitch_controller"))
                 vswitch_controller = Marshalling.ParseString(table, "vswitch_controller");
             if (table.ContainsKey("restrictions"))
-                restrictions = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "restrictions"));
+                restrictions = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "restrictions"));
             if (table.ContainsKey("metadata_VDIs"))
                 metadata_VDIs = Marshalling.ParseSetRef<VDI>(table, "metadata_VDIs");
             if (table.ContainsKey("ha_cluster_stack"))
@@ -307,11 +307,11 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<pool_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("guest_agent_config"))
-                guest_agent_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_agent_config"));
+                guest_agent_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "guest_agent_config"));
             if (table.ContainsKey("cpu_info"))
-                cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
+                cpu_info = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
             if (table.ContainsKey("policy_no_vendor_device"))
                 policy_no_vendor_device = Marshalling.ParseBool(table, "policy_no_vendor_device");
             if (table.ContainsKey("live_patching_disabled"))
@@ -363,62 +363,62 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._master, other._master) &&
-                Helper.AreEqual2(this._default_SR, other._default_SR) &&
-                Helper.AreEqual2(this._suspend_image_SR, other._suspend_image_SR) &&
-                Helper.AreEqual2(this._crash_dump_SR, other._crash_dump_SR) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._ha_enabled, other._ha_enabled) &&
-                Helper.AreEqual2(this._ha_configuration, other._ha_configuration) &&
-                Helper.AreEqual2(this._ha_statefiles, other._ha_statefiles) &&
-                Helper.AreEqual2(this._ha_host_failures_to_tolerate, other._ha_host_failures_to_tolerate) &&
-                Helper.AreEqual2(this._ha_plan_exists_for, other._ha_plan_exists_for) &&
-                Helper.AreEqual2(this._ha_allow_overcommit, other._ha_allow_overcommit) &&
-                Helper.AreEqual2(this._ha_overcommitted, other._ha_overcommitted) &&
-                Helper.AreEqual2(this._blobs, other._blobs) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._gui_config, other._gui_config) &&
-                Helper.AreEqual2(this._health_check_config, other._health_check_config) &&
-                Helper.AreEqual2(this._wlb_url, other._wlb_url) &&
-                Helper.AreEqual2(this._wlb_username, other._wlb_username) &&
-                Helper.AreEqual2(this._wlb_enabled, other._wlb_enabled) &&
-                Helper.AreEqual2(this._wlb_verify_cert, other._wlb_verify_cert) &&
-                Helper.AreEqual2(this._redo_log_enabled, other._redo_log_enabled) &&
-                Helper.AreEqual2(this._redo_log_vdi, other._redo_log_vdi) &&
-                Helper.AreEqual2(this._vswitch_controller, other._vswitch_controller) &&
-                Helper.AreEqual2(this._restrictions, other._restrictions) &&
-                Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs) &&
-                Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._guest_agent_config, other._guest_agent_config) &&
-                Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
-                Helper.AreEqual2(this._policy_no_vendor_device, other._policy_no_vendor_device) &&
-                Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled) &&
-                Helper.AreEqual2(this._igmp_snooping_enabled, other._igmp_snooping_enabled) &&
-                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
-                Helper.AreEqual2(this._is_psr_pending, other._is_psr_pending) &&
-                Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
-                Helper.AreEqual2(this._repositories, other._repositories) &&
-                Helper.AreEqual2(this._client_certificate_auth_enabled, other._client_certificate_auth_enabled) &&
-                Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name) &&
-                Helper.AreEqual2(this._repository_proxy_url, other._repository_proxy_url) &&
-                Helper.AreEqual2(this._repository_proxy_username, other._repository_proxy_username) &&
-                Helper.AreEqual2(this._repository_proxy_password, other._repository_proxy_password) &&
-                Helper.AreEqual2(this._migration_compression, other._migration_compression) &&
-                Helper.AreEqual2(this._coordinator_bias, other._coordinator_bias) &&
-                Helper.AreEqual2(this._telemetry_uuid, other._telemetry_uuid) &&
-                Helper.AreEqual2(this._telemetry_frequency, other._telemetry_frequency) &&
-                Helper.AreEqual2(this._telemetry_next_collection, other._telemetry_next_collection) &&
-                Helper.AreEqual2(this._last_update_sync, other._last_update_sync) &&
-                Helper.AreEqual2(this._update_sync_frequency, other._update_sync_frequency) &&
-                Helper.AreEqual2(this._update_sync_day, other._update_sync_day) &&
-                Helper.AreEqual2(this._update_sync_enabled, other._update_sync_enabled);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_master, other._master) &&
+                Helper.AreEqual2(_default_SR, other._default_SR) &&
+                Helper.AreEqual2(_suspend_image_SR, other._suspend_image_SR) &&
+                Helper.AreEqual2(_crash_dump_SR, other._crash_dump_SR) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_ha_enabled, other._ha_enabled) &&
+                Helper.AreEqual2(_ha_configuration, other._ha_configuration) &&
+                Helper.AreEqual2(_ha_statefiles, other._ha_statefiles) &&
+                Helper.AreEqual2(_ha_host_failures_to_tolerate, other._ha_host_failures_to_tolerate) &&
+                Helper.AreEqual2(_ha_plan_exists_for, other._ha_plan_exists_for) &&
+                Helper.AreEqual2(_ha_allow_overcommit, other._ha_allow_overcommit) &&
+                Helper.AreEqual2(_ha_overcommitted, other._ha_overcommitted) &&
+                Helper.AreEqual2(_blobs, other._blobs) &&
+                Helper.AreEqual2(_tags, other._tags) &&
+                Helper.AreEqual2(_gui_config, other._gui_config) &&
+                Helper.AreEqual2(_health_check_config, other._health_check_config) &&
+                Helper.AreEqual2(_wlb_url, other._wlb_url) &&
+                Helper.AreEqual2(_wlb_username, other._wlb_username) &&
+                Helper.AreEqual2(_wlb_enabled, other._wlb_enabled) &&
+                Helper.AreEqual2(_wlb_verify_cert, other._wlb_verify_cert) &&
+                Helper.AreEqual2(_redo_log_enabled, other._redo_log_enabled) &&
+                Helper.AreEqual2(_redo_log_vdi, other._redo_log_vdi) &&
+                Helper.AreEqual2(_vswitch_controller, other._vswitch_controller) &&
+                Helper.AreEqual2(_restrictions, other._restrictions) &&
+                Helper.AreEqual2(_metadata_VDIs, other._metadata_VDIs) &&
+                Helper.AreEqual2(_ha_cluster_stack, other._ha_cluster_stack) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_guest_agent_config, other._guest_agent_config) &&
+                Helper.AreEqual2(_cpu_info, other._cpu_info) &&
+                Helper.AreEqual2(_policy_no_vendor_device, other._policy_no_vendor_device) &&
+                Helper.AreEqual2(_live_patching_disabled, other._live_patching_disabled) &&
+                Helper.AreEqual2(_igmp_snooping_enabled, other._igmp_snooping_enabled) &&
+                Helper.AreEqual2(_uefi_certificates, other._uefi_certificates) &&
+                Helper.AreEqual2(_is_psr_pending, other._is_psr_pending) &&
+                Helper.AreEqual2(_tls_verification_enabled, other._tls_verification_enabled) &&
+                Helper.AreEqual2(_repositories, other._repositories) &&
+                Helper.AreEqual2(_client_certificate_auth_enabled, other._client_certificate_auth_enabled) &&
+                Helper.AreEqual2(_client_certificate_auth_name, other._client_certificate_auth_name) &&
+                Helper.AreEqual2(_repository_proxy_url, other._repository_proxy_url) &&
+                Helper.AreEqual2(_repository_proxy_username, other._repository_proxy_username) &&
+                Helper.AreEqual2(_repository_proxy_password, other._repository_proxy_password) &&
+                Helper.AreEqual2(_migration_compression, other._migration_compression) &&
+                Helper.AreEqual2(_coordinator_bias, other._coordinator_bias) &&
+                Helper.AreEqual2(_telemetry_uuid, other._telemetry_uuid) &&
+                Helper.AreEqual2(_telemetry_frequency, other._telemetry_frequency) &&
+                Helper.AreEqual2(_telemetry_next_collection, other._telemetry_next_collection) &&
+                Helper.AreEqual2(_last_update_sync, other._last_update_sync) &&
+                Helper.AreEqual2(_update_sync_frequency, other._update_sync_frequency) &&
+                Helper.AreEqual2(_update_sync_day, other._update_sync_day) &&
+                Helper.AreEqual2(_update_sync_enabled, other._update_sync_enabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)

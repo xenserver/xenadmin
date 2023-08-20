@@ -138,15 +138,15 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._binary_url, other._binary_url) &&
-                Helper.AreEqual2(this._source_url, other._source_url) &&
-                Helper.AreEqual2(this._update, other._update) &&
-                Helper.AreEqual2(this._hash, other._hash) &&
-                Helper.AreEqual2(this._up_to_date, other._up_to_date) &&
-                Helper.AreEqual2(this._gpgkey_path, other._gpgkey_path);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_binary_url, other._binary_url) &&
+                Helper.AreEqual2(_source_url, other._source_url) &&
+                Helper.AreEqual2(_update, other._update) &&
+                Helper.AreEqual2(_hash, other._hash) &&
+                Helper.AreEqual2(_up_to_date, other._up_to_date) &&
+                Helper.AreEqual2(_gpgkey_path, other._gpgkey_path);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Repository server)
@@ -288,11 +288,11 @@ namespace XenAPI
         /// <summary>
         /// Get the up_to_date field of the given Repository.
         /// First published in 1.301.0.
-        /// Deprecated since 23.12.0-next.
+        /// Deprecated since 23.18.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
-        [Deprecated("23.12.0-next")]
+        [Deprecated("23.18.0")]
         public static bool get_up_to_date(Session session, string _repository)
         {
             return session.JsonRpcClient.repository_get_up_to_date(session.opaque_ref, _repository);

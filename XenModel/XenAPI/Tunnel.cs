@@ -109,9 +109,9 @@ namespace XenAPI
             if (table.ContainsKey("transport_PIF"))
                 transport_PIF = Marshalling.ParseRef<PIF>(table, "transport_PIF");
             if (table.ContainsKey("status"))
-                status = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "status"));
+                status = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "status"));
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("protocol"))
                 protocol = (tunnel_protocol)Helper.EnumParseDefault(typeof(tunnel_protocol), Marshalling.ParseString(table, "protocol"));
         }
@@ -123,12 +123,12 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._access_PIF, other._access_PIF) &&
-                Helper.AreEqual2(this._transport_PIF, other._transport_PIF) &&
-                Helper.AreEqual2(this._status, other._status) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._protocol, other._protocol);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_access_PIF, other._access_PIF) &&
+                Helper.AreEqual2(_transport_PIF, other._transport_PIF) &&
+                Helper.AreEqual2(_status, other._status) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_protocol, other._protocol);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Tunnel server)

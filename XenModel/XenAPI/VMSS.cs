@@ -129,7 +129,7 @@ namespace XenAPI
             if (table.ContainsKey("frequency"))
                 frequency = (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), Marshalling.ParseString(table, "frequency"));
             if (table.ContainsKey("schedule"))
-                schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "schedule"));
+                schedule = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "schedule"));
             if (table.ContainsKey("last_run_time"))
                 last_run_time = Marshalling.ParseDateTime(table, "last_run_time");
             if (table.ContainsKey("VMs"))
@@ -143,16 +143,16 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._enabled, other._enabled) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._retained_snapshots, other._retained_snapshots) &&
-                Helper.AreEqual2(this._frequency, other._frequency) &&
-                Helper.AreEqual2(this._schedule, other._schedule) &&
-                Helper.AreEqual2(this._last_run_time, other._last_run_time) &&
-                Helper.AreEqual2(this._VMs, other._VMs);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_enabled, other._enabled) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_retained_snapshots, other._retained_snapshots) &&
+                Helper.AreEqual2(_frequency, other._frequency) &&
+                Helper.AreEqual2(_schedule, other._schedule) &&
+                Helper.AreEqual2(_last_run_time, other._last_run_time) &&
+                Helper.AreEqual2(_VMs, other._VMs);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VMSS server)

@@ -133,7 +133,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<cluster_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_cluster_operation(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_cluster_operation(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("pool_auto_join"))
                 pool_auto_join = Marshalling.ParseBool(table, "pool_auto_join");
             if (table.ContainsKey("token_timeout"))
@@ -141,9 +141,9 @@ namespace XenAPI
             if (table.ContainsKey("token_timeout_coefficient"))
                 token_timeout_coefficient = Marshalling.ParseDouble(table, "token_timeout_coefficient");
             if (table.ContainsKey("cluster_config"))
-                cluster_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cluster_config"));
+                cluster_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "cluster_config"));
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Cluster other, bool ignoreCurrentOperations)
@@ -153,20 +153,20 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._cluster_hosts, other._cluster_hosts) &&
-                Helper.AreEqual2(this._pending_forget, other._pending_forget) &&
-                Helper.AreEqual2(this._cluster_token, other._cluster_token) &&
-                Helper.AreEqual2(this._cluster_stack, other._cluster_stack) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._pool_auto_join, other._pool_auto_join) &&
-                Helper.AreEqual2(this._token_timeout, other._token_timeout) &&
-                Helper.AreEqual2(this._token_timeout_coefficient, other._token_timeout_coefficient) &&
-                Helper.AreEqual2(this._cluster_config, other._cluster_config) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_cluster_hosts, other._cluster_hosts) &&
+                Helper.AreEqual2(_pending_forget, other._pending_forget) &&
+                Helper.AreEqual2(_cluster_token, other._cluster_token) &&
+                Helper.AreEqual2(_cluster_stack, other._cluster_stack) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_pool_auto_join, other._pool_auto_join) &&
+                Helper.AreEqual2(_token_timeout, other._token_timeout) &&
+                Helper.AreEqual2(_token_timeout_coefficient, other._token_timeout_coefficient) &&
+                Helper.AreEqual2(_cluster_config, other._cluster_config) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Cluster server)

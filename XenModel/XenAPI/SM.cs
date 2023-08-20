@@ -143,13 +143,13 @@ namespace XenAPI
             if (table.ContainsKey("required_api_version"))
                 required_api_version = Marshalling.ParseString(table, "required_api_version");
             if (table.ContainsKey("configuration"))
-                configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "configuration"));
+                configuration = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "configuration"));
             if (table.ContainsKey("capabilities"))
                 capabilities = Marshalling.ParseStringArray(table, "capabilities");
             if (table.ContainsKey("features"))
-                features = Maps.convert_from_proxy_string_long(Marshalling.ParseHashTable(table, "features"));
+                features = Maps.ToDictionary_string_long(Marshalling.ParseHashTable(table, "features"));
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("driver_filename"))
                 driver_filename = Marshalling.ParseString(table, "driver_filename");
             if (table.ContainsKey("required_cluster_stack"))
@@ -163,20 +163,20 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._vendor, other._vendor) &&
-                Helper.AreEqual2(this._copyright, other._copyright) &&
-                Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._required_api_version, other._required_api_version) &&
-                Helper.AreEqual2(this._configuration, other._configuration) &&
-                Helper.AreEqual2(this._capabilities, other._capabilities) &&
-                Helper.AreEqual2(this._features, other._features) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._driver_filename, other._driver_filename) &&
-                Helper.AreEqual2(this._required_cluster_stack, other._required_cluster_stack);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_vendor, other._vendor) &&
+                Helper.AreEqual2(_copyright, other._copyright) &&
+                Helper.AreEqual2(_version, other._version) &&
+                Helper.AreEqual2(_required_api_version, other._required_api_version) &&
+                Helper.AreEqual2(_configuration, other._configuration) &&
+                Helper.AreEqual2(_capabilities, other._capabilities) &&
+                Helper.AreEqual2(_features, other._features) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_driver_filename, other._driver_filename) &&
+                Helper.AreEqual2(_required_cluster_stack, other._required_cluster_stack);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SM server)

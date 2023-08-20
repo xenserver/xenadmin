@@ -131,7 +131,7 @@ namespace XenAPI
             if (table.ContainsKey("currently_attached"))
                 currently_attached = Marshalling.ParseBool(table, "currently_attached");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("type"))
                 type = Marshalling.ParseRef<VGPU_type>(table, "type");
             if (table.ContainsKey("resident_on"))
@@ -139,7 +139,7 @@ namespace XenAPI
             if (table.ContainsKey("scheduled_to_be_resident_on"))
                 scheduled_to_be_resident_on = Marshalling.ParseRef<PGPU>(table, "scheduled_to_be_resident_on");
             if (table.ContainsKey("compatibility_metadata"))
-                compatibility_metadata = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
+                compatibility_metadata = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
             if (table.ContainsKey("extra_args"))
                 extra_args = Marshalling.ParseString(table, "extra_args");
             if (table.ContainsKey("PCI"))
@@ -153,18 +153,18 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._VM, other._VM) &&
-                Helper.AreEqual2(this._GPU_group, other._GPU_group) &&
-                Helper.AreEqual2(this._device, other._device) &&
-                Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._resident_on, other._resident_on) &&
-                Helper.AreEqual2(this._scheduled_to_be_resident_on, other._scheduled_to_be_resident_on) &&
-                Helper.AreEqual2(this._compatibility_metadata, other._compatibility_metadata) &&
-                Helper.AreEqual2(this._extra_args, other._extra_args) &&
-                Helper.AreEqual2(this._PCI, other._PCI);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_VM, other._VM) &&
+                Helper.AreEqual2(_GPU_group, other._GPU_group) &&
+                Helper.AreEqual2(_device, other._device) &&
+                Helper.AreEqual2(_currently_attached, other._currently_attached) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_resident_on, other._resident_on) &&
+                Helper.AreEqual2(_scheduled_to_be_resident_on, other._scheduled_to_be_resident_on) &&
+                Helper.AreEqual2(_compatibility_metadata, other._compatibility_metadata) &&
+                Helper.AreEqual2(_extra_args, other._extra_args) &&
+                Helper.AreEqual2(_PCI, other._PCI);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU server)

@@ -1148,9 +1148,6 @@ Authorized Roles: {1}</value>
   <data name="REPOSYNC_FAILED" xml:space="preserve">
     <value>Syncing with remote YUM repository failed.</value>
   </data>
-  <data name="REPOSYNC_IN_PROGRESS" xml:space="preserve">
-    <value>The pool is syncing with the enabled remote YUM repository.</value>
-  </data>
   <data name="REQUIRED_PIF_IS_UNPLUGGED" xml:space="preserve">
     <value>The operation you requested cannot be performed because the specified PIF is currently unplugged.</value>
   </data>

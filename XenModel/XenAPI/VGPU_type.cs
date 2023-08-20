@@ -173,22 +173,22 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._vendor_name, other._vendor_name) &&
-                Helper.AreEqual2(this._model_name, other._model_name) &&
-                Helper.AreEqual2(this._framebuffer_size, other._framebuffer_size) &&
-                Helper.AreEqual2(this._max_heads, other._max_heads) &&
-                Helper.AreEqual2(this._max_resolution_x, other._max_resolution_x) &&
-                Helper.AreEqual2(this._max_resolution_y, other._max_resolution_y) &&
-                Helper.AreEqual2(this._supported_on_PGPUs, other._supported_on_PGPUs) &&
-                Helper.AreEqual2(this._enabled_on_PGPUs, other._enabled_on_PGPUs) &&
-                Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
-                Helper.AreEqual2(this._supported_on_GPU_groups, other._supported_on_GPU_groups) &&
-                Helper.AreEqual2(this._enabled_on_GPU_groups, other._enabled_on_GPU_groups) &&
-                Helper.AreEqual2(this._implementation, other._implementation) &&
-                Helper.AreEqual2(this._identifier, other._identifier) &&
-                Helper.AreEqual2(this._experimental, other._experimental) &&
-                Helper.AreEqual2(this._compatible_types_in_vm, other._compatible_types_in_vm);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_vendor_name, other._vendor_name) &&
+                Helper.AreEqual2(_model_name, other._model_name) &&
+                Helper.AreEqual2(_framebuffer_size, other._framebuffer_size) &&
+                Helper.AreEqual2(_max_heads, other._max_heads) &&
+                Helper.AreEqual2(_max_resolution_x, other._max_resolution_x) &&
+                Helper.AreEqual2(_max_resolution_y, other._max_resolution_y) &&
+                Helper.AreEqual2(_supported_on_PGPUs, other._supported_on_PGPUs) &&
+                Helper.AreEqual2(_enabled_on_PGPUs, other._enabled_on_PGPUs) &&
+                Helper.AreEqual2(_VGPUs, other._VGPUs) &&
+                Helper.AreEqual2(_supported_on_GPU_groups, other._supported_on_GPU_groups) &&
+                Helper.AreEqual2(_enabled_on_GPU_groups, other._enabled_on_GPU_groups) &&
+                Helper.AreEqual2(_implementation, other._implementation) &&
+                Helper.AreEqual2(_identifier, other._identifier) &&
+                Helper.AreEqual2(_experimental, other._experimental) &&
+                Helper.AreEqual2(_compatible_types_in_vm, other._compatible_types_in_vm);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU_type server)

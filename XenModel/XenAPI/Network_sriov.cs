@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._physical_PIF, other._physical_PIF) &&
-                Helper.AreEqual2(this._logical_PIF, other._logical_PIF) &&
-                Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
-                Helper.AreEqual2(this._configuration_mode, other._configuration_mode);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_physical_PIF, other._physical_PIF) &&
+                Helper.AreEqual2(_logical_PIF, other._logical_PIF) &&
+                Helper.AreEqual2(_requires_reboot, other._requires_reboot) &&
+                Helper.AreEqual2(_configuration_mode, other._configuration_mode);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Network_sriov server)

@@ -136,7 +136,7 @@ namespace XenAPI
             if (table.ContainsKey("hosts"))
                 hosts = Marshalling.ParseSetRef<Host>(table, "hosts");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("enforce_homogeneity"))
                 enforce_homogeneity = Marshalling.ParseBool(table, "enforce_homogeneity");
         }
@@ -148,17 +148,17 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._installation_size, other._installation_size) &&
-                Helper.AreEqual2(this._key, other._key) &&
-                Helper.AreEqual2(this._after_apply_guidance, other._after_apply_guidance) &&
-                Helper.AreEqual2(this._vdi, other._vdi) &&
-                Helper.AreEqual2(this._hosts, other._hosts) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._enforce_homogeneity, other._enforce_homogeneity);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_version, other._version) &&
+                Helper.AreEqual2(_installation_size, other._installation_size) &&
+                Helper.AreEqual2(_key, other._key) &&
+                Helper.AreEqual2(_after_apply_guidance, other._after_apply_guidance) &&
+                Helper.AreEqual2(_vdi, other._vdi) &&
+                Helper.AreEqual2(_hosts, other._hosts) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_enforce_homogeneity, other._enforce_homogeneity);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool_update server)

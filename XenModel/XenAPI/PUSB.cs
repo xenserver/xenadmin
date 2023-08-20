@@ -151,7 +151,7 @@ namespace XenAPI
             if (table.ContainsKey("passthrough_enabled"))
                 passthrough_enabled = Marshalling.ParseBool(table, "passthrough_enabled");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("speed"))
                 speed = Marshalling.ParseDouble(table, "speed");
         }
@@ -163,20 +163,20 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._USB_group, other._USB_group) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._path, other._path) &&
-                Helper.AreEqual2(this._vendor_id, other._vendor_id) &&
-                Helper.AreEqual2(this._vendor_desc, other._vendor_desc) &&
-                Helper.AreEqual2(this._product_id, other._product_id) &&
-                Helper.AreEqual2(this._product_desc, other._product_desc) &&
-                Helper.AreEqual2(this._serial, other._serial) &&
-                Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._description, other._description) &&
-                Helper.AreEqual2(this._passthrough_enabled, other._passthrough_enabled) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._speed, other._speed);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_USB_group, other._USB_group) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_path, other._path) &&
+                Helper.AreEqual2(_vendor_id, other._vendor_id) &&
+                Helper.AreEqual2(_vendor_desc, other._vendor_desc) &&
+                Helper.AreEqual2(_product_id, other._product_id) &&
+                Helper.AreEqual2(_product_desc, other._product_desc) &&
+                Helper.AreEqual2(_serial, other._serial) &&
+                Helper.AreEqual2(_version, other._version) &&
+                Helper.AreEqual2(_description, other._description) &&
+                Helper.AreEqual2(_passthrough_enabled, other._passthrough_enabled) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_speed, other._speed);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PUSB server)
