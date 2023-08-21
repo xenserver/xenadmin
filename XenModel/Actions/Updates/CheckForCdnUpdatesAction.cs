@@ -92,8 +92,7 @@ namespace XenAdmin.Actions
             }
             catch (HTTP.BadServerResponseException ex)
             {
-                if (ex.Message.Contains("Received error code HTTP/1.1 404 Not Found\r\n from the server") ||
-                    ex.Message.Contains("Received error code HTTP/1.1 500 Internal Server Error\r\n from the server"))
+                if (ex.Message.Contains("404 Not Found") || ex.Message.Contains("500 Internal Server Error"))
                 {
                     log.Warn(ex.Message);
                     log.Warn("Failed to retrieve available updates. See the server side logs for details.");
