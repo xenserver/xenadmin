@@ -92,7 +92,8 @@ namespace XenAdmin.Actions
             }
             catch (HTTP.BadServerResponseException ex)
             {
-                if (ex.Message.Contains("404 Not Found") || ex.Message.Contains("500 Internal Server Error"))
+                if (ex.Message.Contains("404 Not Found") || ex.Message.Contains("500 Internal Server Error") ||
+                    ex.Message.Contains("500 Internal Error")) //seems xapi shows this too
                 {
                     log.Warn(ex.Message);
                     log.Warn("Failed to retrieve available updates. See the server side logs for details.");
