@@ -205,15 +205,18 @@ namespace XenAdmin.TabPages.CdnUpdates
             SetValues(Host.Name(), Images.GetImage16For(Images.GetIconFor(Host)), channel: channel,
                 lastSync: lastSyncTime, lastUpdate: lastUpdateTime);
 
-            if (poolUpdateInfo != null && hostUpdateInfo != null)
+            if (poolUpdateInfo != null && hostUpdateInfo != null && hostUpdateInfo.UpdateIDs.Length > 0)
             {
-                if (hostUpdateInfo.RecommendedGuidance.Length > 0)
+                if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost) ||
+                    hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
                 {
-                    _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance));
-
-                    if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
-                        _childRows.Add(new LivePatchActionRow());
+                    _childRows.Add(new PreUpdateActionRow());
                 }
+
+                _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance.Where(g => g != CdnGuidance.EvacuateHost).ToArray()));
+
+                if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                    _childRows.Add(new LivePatchActionRow());
 
                 var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
 
@@ -282,11 +285,23 @@ namespace XenAdmin.TabPages.CdnUpdates
         }
     }
 
+    internal class PreUpdateActionRow : CdnExpandableRow
+    {
+        public PreUpdateActionRow()
+        {
+            SetValues(Messages.HOTFIX_PRE_UPDATE_ACTIONS, Images.StaticImages.rightArrowLong_Blue_16);
+        }
+    }
+
     internal class PostUpdateActionRow : CdnExpandableRow
     {
         public PostUpdateActionRow(CdnGuidance[] guidance)
         {
-            var text = string.Format(Messages.HOTFIX_POST_UPDATE_ACTIONS, string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction)));
+            var guidanceString = guidance.Length > 0
+                ? string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction))
+                : Messages.NONE_UPPER;
+
+            var text = string.Format(Messages.HOTFIX_POST_UPDATE_ACTIONS, guidanceString);
             SetValues(text, Images.StaticImages.rightArrowLong_Blue_16);
         }
     }

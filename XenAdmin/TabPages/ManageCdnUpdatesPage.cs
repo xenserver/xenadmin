@@ -94,7 +94,7 @@ namespace XenAdmin.TabPages
             Updates.CdnUpdateInfoChanged -= Cdn_UpdateInfoChanged;
         }
 
-        public override string HelpID => "ManageUpdatesDialog";
+        public override string HelpID => "ManageCdnUpdatesTabPage";
 
         public override NotificationsSubMode NotificationsSubMode => NotificationsSubMode.UpdatesFromCdn;
 

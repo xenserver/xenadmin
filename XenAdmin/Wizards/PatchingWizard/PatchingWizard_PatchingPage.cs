@@ -83,11 +83,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public override string HelpID
-        {
-            get { return "InstallUpdate"; }
-        }
-
         #endregion
 
         #region AutomatedUpdatesBesePage overrides

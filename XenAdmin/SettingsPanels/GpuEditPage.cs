@@ -119,7 +119,7 @@ namespace XenAdmin.SettingsPanels
                 if (Helpers.GpusAvailable(Connection))
                 {
                     var vGpus = VGpus;
-                    txt = vGpus.Count > 0 ? string.Join(",", vGpus.Select(v => v.VGpuTypeDescription())) : Messages.GPU_NONE;
+                    txt = vGpus.Count > 0 ? string.Join(",", vGpus.Select(v => v.VGpuTypeDescription())) : Messages.NONE_UPPER;
                 }
 
                 return txt;

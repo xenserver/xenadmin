@@ -57,8 +57,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string PageTitle => Messages.PATCHINGWIZARD_MODEPAGE_TITLE;
 
-        public override string HelpID => "UpdateMode";
-
         public override bool EnablePrevious()
         {
             return true;
@@ -293,24 +291,37 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var hostUpdateInfo in poolUpdateInfo.HostsWithUpdates)
                 {
-                    if (hostUpdateInfo.RecommendedGuidance.Length > 0)
+                    var host = pool.Connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef));
+                    if (host != null)
                     {
-                        var host = pool.Connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef));
-                        if (host != null)
+                        var hostSb = new StringBuilder();
+
+                        var msg = host.IsCoordinator() ? $"{host.Name()} ({Messages.COORDINATOR})" : host.Name();
+                        hostSb.AppendIndented(msg).AppendLine();
+
+                        //evacuate host is a pre-update task and will be done regardless the mode selected
+
+                        if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack) ||
+                            host.pending_guidances.Contains(update_guidances.restart_toolstack))
                         {
-                            var hostSb = new StringBuilder();
-
-                            var msg = host.IsCoordinator() ? $"{host.Name()} ({Messages.COORDINATOR})" : host.Name();
-                            hostSb.AppendIndented(msg).AppendLine();
-
-                            foreach (var g in hostUpdateInfo.RecommendedGuidance)
-                                hostSb.AppendIndented(Cdn.FriendlyInstruction(g), 4).AppendLine();
-
-                            if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
-                                hostSb.AppendIndented(Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS, 4).AppendLine();
-
-                            hostDict[host] = hostSb;
+                            hostSb.AppendIndented(Cdn.FriendlyInstruction(CdnGuidance.RestartToolstack), 4).AppendLine();
                         }
+
+                        if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost) ||
+                            host.pending_guidances.Contains(update_guidances.reboot_host) ||
+                            host.pending_guidances.Contains(update_guidances.reboot_host_on_livepatch_failure))
+                        {
+                            hostSb.AppendIndented(Cdn.FriendlyInstruction(CdnGuidance.RebootHost), 4).AppendLine();
+                        }
+
+                        if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartDeviceModel) ||
+                            host.pending_guidances.Contains(update_guidances.restart_device_model))
+                            hostSb.AppendIndented(Cdn.FriendlyInstruction(CdnGuidance.RestartDeviceModel), 4).AppendLine();
+
+                        if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                            hostSb.AppendIndented(Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS, 4).AppendLine();
+
+                        hostDict[host] = hostSb;
                     }
                 }
 

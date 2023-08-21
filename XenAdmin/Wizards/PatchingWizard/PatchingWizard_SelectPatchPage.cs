@@ -216,8 +216,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string PageTitle => Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TITLE;
 
-        public override string HelpID => "SelectUpdate";
-
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             RegisterEvents();

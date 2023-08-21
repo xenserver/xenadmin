@@ -120,14 +120,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region XenTabPage overrides
 
-        public override string Text { get { return Messages.PATCHINGWIZARD_UPLOADPAGE_TEXT; } }
+        public override string Text => Messages.PATCHINGWIZARD_UPLOADPAGE_TEXT;
 
-        public override string PageTitle
-        {
-            get { return Messages.PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD; }
-        }
-
-        public override string HelpID { get { return "UploadPatch"; } }
+        public override string PageTitle => Messages.PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD;
 
         public override bool EnableNext()
         {

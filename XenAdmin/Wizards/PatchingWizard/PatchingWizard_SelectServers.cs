@@ -72,8 +72,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string PageTitle => Messages.PATCHINGWIZARD_SELECTSERVERPAGE_TITLE;
 
-        public override string HelpID => "SelectServers";
-
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates ||

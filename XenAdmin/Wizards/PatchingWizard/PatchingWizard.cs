@@ -293,6 +293,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.FinishWizard();
         }
 
+        protected override string WizardPaneHelpID()
+        {
+            return PatchingWizard_FirstPage.IsNewGeneration ? "PatchingWizard_xs" : "PatchingWizard_ch";
+        }
+
         private void CleanUploadedPatches(bool forceCleanSelectedPatch = false)
         {
             var list = new List<AsyncAction>();

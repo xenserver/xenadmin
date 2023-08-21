@@ -105,7 +105,7 @@ namespace XenAdmin.Alerts
 
         public override string FixLinkText => Messages.UPDATES_GENERAL_TAB_SYNC_NOW;
 
-        public override string HelpID => "TODO";
+        public override string HelpID => "OutOfSyncWithCdnAlert";
 
         public override string Title => _outOfSyncSpan == TimeSpan.Zero
             ? Messages.ALERT_CDN_NEVER_SYNC_TITLE
@@ -159,7 +159,7 @@ namespace XenAdmin.Alerts
 
         public override string FixLinkText => Messages.ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK;
 
-        public override string HelpID => "TODO";
+        public override string HelpID => "YumRepoNotConfiguredAlert";
 
         public override string Title => string.Format(Messages.ALERT_CDN_REPO_NOT_CONFIGURED_TITLE, Connection.Name);
     }

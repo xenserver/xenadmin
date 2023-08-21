@@ -203,7 +203,7 @@ sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip > ${OUTPUT
 echo "INFO: Generating XCUpdates.xml"
 
 # UPDATE_URL points at the updates XML, we need to point to the MSI
-msi_url="${UPDATES_URL/XCUpdates.xml/$BRANDING_BRAND_CONSOLE_NO_SPACE.msi}"
+msi_url="${XC_UPDATES_URL/XCUpdates.xml/$BRANDING_BRAND_CONSOLE_NO_SPACE.msi}"
 
 output_xml="<?xml version=\"1.0\" ?>
 <patchdata>

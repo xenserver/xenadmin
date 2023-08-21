@@ -18518,15 +18518,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string GPU_NONE {
-            get {
-                return ResourceManager.GetString("GPU_NONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to On {0}:.
         /// </summary>
         public static string GPU_ON_HOST_LABEL {
@@ -18895,15 +18886,6 @@ namespace XenAdmin {
         public static string HA_CANNOT_EVACUATE_COORDINATOR {
             get {
                 return ResourceManager.GetString("HA_CANNOT_EVACUATE_COORDINATOR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HA and WLB check.
-        /// </summary>
-        public static string HA_CHECK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("HA_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -19430,6 +19412,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HA is not currently enabled for pool &apos;{0}&apos;.
+        ///
+        ///Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure..
+        /// </summary>
+        public static string HA_PANEL_BLURB {
+            get {
+                return ResourceManager.GetString("HA_PANEL_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HA restart priority.
         /// </summary>
         public static string HA_RESTART_PRIORITY {
@@ -19560,13 +19553,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA is not currently enabled for pool &apos;{0}&apos;.
-        ///
-        ///Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure..
+        ///   Looks up a localized string similar to HA and WLB check.
         /// </summary>
-        public static string HAPANEL_BLURB {
+        public static string HA_WLB_CHECK_DESCRIPTION {
             get {
-                return ResourceManager.GetString("HAPANEL_BLURB", resourceCulture);
+                return ResourceManager.GetString("HA_WLB_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -20537,6 +20528,15 @@ namespace XenAdmin {
         public static string HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS {
             get {
                 return ResourceManager.GetString("HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server will be evacuated prior to installing updates.
+        /// </summary>
+        public static string HOTFIX_PRE_UPDATE_ACTIONS {
+            get {
+                return ResourceManager.GetString("HOTFIX_PRE_UPDATE_ACTIONS", resourceCulture);
             }
         }
         
@@ -28629,6 +28629,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string NONE_UPPER {
+            get {
+                return ResourceManager.GetString("NONE_UPPER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM is not using a shared network. Restart cannot be guaranteed..
         /// </summary>
         public static string NOT_AGILE_NETWORK_NOT_SHARED {
@@ -30772,15 +30781,6 @@ namespace XenAdmin {
         public static string PIF_NIC {
             get {
                 return ResourceManager.GetString("PIF_NIC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string PIF_NONE {
-            get {
-                return ResourceManager.GetString("PIF_NONE", resourceCulture);
             }
         }
         
@@ -42320,15 +42320,6 @@ namespace XenAdmin {
         public static string WLB_OPT_REASON_NETWORKWRITE {
             get {
                 return ResourceManager.GetString("WLB_OPT_REASON_NETWORKWRITE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string WLB_OPT_REASON_NONE {
-            get {
-                return ResourceManager.GetString("WLB_OPT_REASON_NONE", resourceCulture);
             }
         }
         

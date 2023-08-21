@@ -120,7 +120,7 @@ namespace XenAdmin.TabPages
             Updates.CheckForServerUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
         }
 
-        public override string HelpID => "ManageUpdatesDialog";
+        public override string HelpID => "ManageUpdatesTabPage";
 
         public override NotificationsSubMode NotificationsSubMode => NotificationsSubMode.Updates;
 

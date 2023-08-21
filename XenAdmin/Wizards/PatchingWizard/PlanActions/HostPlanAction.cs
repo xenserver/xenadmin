@@ -67,6 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, hostObj.Name()));
                 log.DebugFormat("Disabling host {0}", hostObj.Name());
                 Host.disable(session, HostXenRef.opaque_ref);
+                Connection.WaitFor(() => !hostObj.enabled, null);
             }
 
             if (vms.Count > 0)
@@ -223,6 +224,53 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     log.Debug(string.Format("Cannot enable host {0}. Retrying in 5 sec.", hostObj), e);
                 }
             }
+        }
+    }
+
+
+    public class BringBabiesBackAction : HostPlanAction
+    {
+        private readonly List<XenRef<VM>> _vms;
+        private readonly bool _enableOnly;
+
+        public BringBabiesBackAction(List<XenRef<VM>> vms, Host host, bool enableOnly)
+            : base(host)
+        {
+            _vms = vms;
+            _enableOnly = enableOnly;
+        }
+
+        protected override void RunWithSession(ref Session session)
+        {
+            BringBabiesBack(ref session, _vms, _enableOnly);
+        }
+    }
+
+
+    public class EvacuateHostPlanAction : HostPlanAction
+    {
+        public EvacuateHostPlanAction(Host host)
+            : base(host)
+        {
+        }
+
+        protected override void RunWithSession(ref Session session)
+        {
+            EvacuateHost(ref session);
+        }
+    }
+
+
+    public class EnableHostPlanAction : HostPlanAction
+    {
+        public EnableHostPlanAction(Host host)
+            : base(host)
+        {
+        }
+
+        protected override void RunWithSession(ref Session session)
+        {
+            WaitForHostToBecomeEnabled(session, true);
         }
     }
 }
