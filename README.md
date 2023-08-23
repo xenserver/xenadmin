@@ -34,7 +34,7 @@ How to build XenCenter
 To build XenCenter, you need
 
 * the source from xenadmin repository
-* Visual Studio 2019
+* Visual Studio 2022
 * .NET Framework 4.8
 
 and also some libraries which we do not store in the source tree:

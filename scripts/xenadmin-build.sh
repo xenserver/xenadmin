@@ -46,17 +46,17 @@ SCRATCH_DIR=${REPO}/_scratch
 OUTPUT_DIR=${REPO}/_output
 
 #build
-MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe"
-SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.8 /p:VisualStudioVersion=16.0"
+MSBUILD="/cygdrive/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
+SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.8 /p:VisualStudioVersion=17.0"
 
 if [ ! -f "${MSBUILD}" ] ; then
   echo "DEBUG: Did not find VS Community edition. Trying Professional"
-  MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe"
+  MSBUILD="/cygdrive/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/MSBuild.exe"
 fi
 
 if [ ! -f "${MSBUILD}" ] ; then
   echo "DEBUG: Did not find VS Professional edition. Trying Enterprise"
-  MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe"
+  MSBUILD="/cygdrive/c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/MSBuild.exe"
 fi
 
 mkdir_clean ${SCRATCH_DIR}
