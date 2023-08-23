@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- Copyright (c) Cloud Software Group, Inc. 
+ Copyright (c) Cloud Software Group, Inc.
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -59,7 +59,6 @@
                             <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe" KeyPath="yes" />
                             <!-- other EXEs -->
                             <File Id="XeEXE" Source="$(env.RepoRoot)\xe\bin\Release\xe.exe" />
-                            <File Id="xva_verifyEXE" Source="$(env.RepoRoot)\xva_verify\bin\Release\xva_verify.exe" />
                             <!-- config -->
                             <File Id="XenCenterCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe.config" />
                             <!-- DLLs -->
@@ -170,7 +169,7 @@
                 </RegistryKey>
             </Component>
         </DirectoryRef>
-        
+
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="$(var.AppShortcutGuid)">
                 <Shortcut Id="StartmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
@@ -239,9 +238,9 @@
             <ExecuteAction Sequence="1102" />
         </InstallUISequence>
         <UI>
-            <Publish Dialog="ExitDialog" 
-                Control="Finish" 
-                Event="DoAction" 
+            <Publish Dialog="ExitDialog"
+                Control="Finish"
+                Event="DoAction"
                 Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"
             </Publish>
         </UI>

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) Cloud Software Group, Inc. 
+# Copyright (c) Cloud Software Group, Inc.
 #
 #Redistribution and use in source and binary forms, with or without modification,
 #are permitted provided that the following conditions are met:
@@ -63,7 +63,7 @@ version_csharp "${REPO}/CommonAssemblyInfo.cs"
 rebranding_global "${REPO}/CommonAssemblyInfo.cs"
 
 #AssemblyInfo rebranding
-for projectDir in CFUValidator CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi xva_verify
+for projectDir in CFUValidator CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi
 do
   assemblyInfo="${REPO}/${projectDir}/Properties/AssemblyInfo.cs"
   version_csharp ${assemblyInfo}
