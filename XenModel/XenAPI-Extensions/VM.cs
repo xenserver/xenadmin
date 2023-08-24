@@ -115,7 +115,7 @@ namespace XenAPI
             if (is_a_snapshot)  // Snapshots have the same "home" as their VM. This is necessary to make a pool-server-VM-snapshot tree (CA-76273).
             {
                 var from = Connection.Resolve(snapshot_of);
-                return (from == null ? null : from.Home()); // "from" can be null if VM has been deleted
+                return from?.Home(); // "from" can be null if VM has been deleted
             }
 
             if (is_a_template)  // Templates (apart from snapshots) don't have a "home", even if their affinity is set CA-36286
