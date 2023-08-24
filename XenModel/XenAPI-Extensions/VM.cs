@@ -468,7 +468,7 @@ namespace XenAPI
 
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
-        // able to recognise it, and turn it off during Rolling Pool Upgrade.
+        // able to recognize it, and turn it off during Rolling Pool Upgrade.
         public bool GetAutoPowerOn()
         {
             return BoolKey(other_config, "auto_poweron");
@@ -483,13 +483,13 @@ namespace XenAPI
         {
             foreach (var vbdRef in VBDs)
             {
-                var vbd = Connection.Resolve<VBD>(vbdRef);
+                var vbd = Connection.Resolve(vbdRef);
                 if (vbd != null)
                 {
-                    var vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    var vdi = Connection.Resolve(vbd.VDI);
                     if (vdi != null)
                     {
-                        var sr = Connection.Resolve<SR>(vdi.SR);
+                        var sr = Connection.Resolve(vdi.SR);
                         if (sr != null && !sr.shared)
                         {
                             if (sr.content_type == SR.Content_Type_ISO)
@@ -515,7 +515,7 @@ namespace XenAPI
             {
                 if (!vbd.IsCDROM())
                 {
-                    var VDI = Connection.Resolve<VDI>(vbd.VDI);
+                    var VDI = Connection.Resolve(vbd.VDI);
                     if (VDI != null && VDI.Show(showHiddenVMs))
                     {
                         var TheSR = Connection.Resolve(VDI.SR);
@@ -780,7 +780,7 @@ namespace XenAPI
         {
             if (Connection == null)
                 return false;
-            foreach (var vbd in Connection.ResolveAll<VBD>(VBDs))
+            foreach (var vbd in Connection.ResolveAll(VBDs))
             {
                 if (vbd.type == vbd_type.Disk)
                 {
@@ -788,10 +788,10 @@ namespace XenAPI
                 }
                 else
                 {
-                    var vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    var vdi = Connection.Resolve(vbd.VDI);
                     if (vdi == null)
                         continue;
-                    var sr = Connection.Resolve<SR>(vdi.SR);
+                    var sr = Connection.Resolve(vdi.SR);
                     if (sr == null || sr.shared)
                         continue;
                     return false; // we have a shared cd
@@ -1400,7 +1400,7 @@ namespace XenAPI
 
         public bool HasCD()
         {
-            foreach (var vbd in Connection.ResolveAll<VBD>(VBDs))
+            foreach (var vbd in Connection.ResolveAll(VBDs))
             {
                 if (vbd.IsCDROM())
                 {
