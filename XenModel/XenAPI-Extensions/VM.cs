@@ -216,14 +216,14 @@ namespace XenAPI
             if (xdRecommendations != null)
                 return xdRecommendations;
 
-            if (string.IsNullOrEmpty(this.recommendations))
+            if (string.IsNullOrEmpty(recommendations))
                 return null;
 
             xdRecommendations = new XmlDocument();
 
             try
             {
-                xdRecommendations.LoadXml(this.recommendations);
+                xdRecommendations.LoadXml(recommendations);
             }
             catch
             {
@@ -263,8 +263,8 @@ namespace XenAPI
         /// </remarks>
         public string GetBootOrder()
         {
-            if (this.HVM_boot_params.ContainsKey("order"))
-                return this.HVM_boot_params["order"].ToUpper();
+            if (HVM_boot_params.ContainsKey("order"))
+                return HVM_boot_params["order"].ToUpper();
 
             return "CD";
         }
@@ -330,7 +330,7 @@ namespace XenAPI
 
         public bool HasRDP()
         {
-            var metrics = Connection.Resolve(this.guest_metrics);
+            var metrics = Connection.Resolve(guest_metrics);
             if (metrics == null)
                 return false;
             // feature-ts is the feature flag indicating the toolstack
@@ -340,7 +340,7 @@ namespace XenAPI
 
         public bool RDPEnabled()
         {
-            var vmMetrics = Connection.Resolve(this.guest_metrics);
+            var vmMetrics = Connection.Resolve(guest_metrics);
             if (vmMetrics == null)
                 return false;
             // data/ts indicates the VM has RDP enabled
@@ -349,7 +349,7 @@ namespace XenAPI
 
         public bool RDPControlEnabled()
         {
-            var metrics = Connection.Resolve(this.guest_metrics);
+            var metrics = Connection.Resolve(guest_metrics);
             if (metrics == null)
                 return false;
             // feature-ts2 is the feature flag indicating that data/ts is valid
@@ -616,11 +616,11 @@ namespace XenAPI
             var status = GetVirtualisationStatus(out _);
 
             if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
-                || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+                || status.HasFlag(VirtualisationStatus.UNKNOWN))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
 
-            if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
             {
                     var guestMetrics = Connection.Resolve(guest_metrics);
                     if (guestMetrics != null
@@ -1078,26 +1078,26 @@ namespace XenAPI
         /// </summary>
         public HA_Restart_Priority HARestartPriority()
         {
-            return StringToPriority(this.ha_restart_priority);
+            return StringToPriority(ha_restart_priority);
         }
 
          public override string NameWithLocation()
         {
-            if (this.Connection != null)
+            if (Connection != null)
             {
-                if (this.IsRealVm())
+                if (IsRealVm())
                 {
                     return base.NameWithLocation();
                 }
-                else if (this.is_a_snapshot)
+                else if (is_a_snapshot)
                 {
-                    var snapshotOf = this.Connection.Resolve(this.snapshot_of);
+                    var snapshotOf = Connection.Resolve(snapshot_of);
                     if (snapshotOf == null)
                         return base.NameWithLocation();
 
                     return string.Format(Messages.SNAPSHOT_OF_TITLE, Name(), snapshotOf.Name(), LocationString());
                 }
-                else if (this.is_a_template)
+                else if (is_a_template)
                 {
                     if (Helpers.IsPool(Connection))
                         return string.Format(Messages.OBJECT_IN_POOL, Name(), Connection.Name);
@@ -1111,11 +1111,11 @@ namespace XenAPI
 
         internal override string LocationString()
         {
-            var server = this.Home();
+            var server = Home();
             if (server != null)
                 return string.Format(Messages.ON_SERVER, server);
 
-            var pool = Helpers.GetPool(this.Connection);
+            var pool = Helpers.GetPool(Connection);
             if (pool != null)
                 return string.Format(Messages.IN_POOL, pool);
 
@@ -1225,7 +1225,7 @@ namespace XenAPI
         /// <param name="priority"></param>
         public static void SetHaRestartPriority(Session session, VM vm, HA_Restart_Priority priority)
         {
-            VM.set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
+            set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
         }
 
         public bool AnyDiskFastClonable()
@@ -1400,7 +1400,7 @@ namespace XenAPI
 
         public bool HasCD()
         {
-            foreach (var vbd in this.Connection.ResolveAll<VBD>(this.VBDs))
+            foreach (var vbd in Connection.ResolveAll<VBD>(VBDs))
             {
                 if (vbd.IsCDROM())
                 {
@@ -1471,7 +1471,7 @@ namespace XenAPI
                 return homeServer.CoresPerSocket();
 
             var maxCoresPerSocket = 0;
-            foreach (var host in this.Connection.Cache.Hosts)
+            foreach (var host in Connection.Cache.Hosts)
             {
                 var coresPerSocket = host.CoresPerSocket();
                 if (coresPerSocket > maxCoresPerSocket)
@@ -1691,7 +1691,7 @@ namespace XenAPI
 
         public bool WindowsUpdateCapable()
         {
-            return this.has_vendor_device && this.IsWindows();
+            return has_vendor_device && IsWindows();
         }
 
         /// <summary>
@@ -1701,9 +1701,9 @@ namespace XenAPI
         {
             var ipAddresses = new List<string>();
 
-            if (!this.is_control_domain) //vm
+            if (!is_control_domain) //vm
             {
-                var vifs = this.Connection.ResolveAll(this.VIFs);
+                var vifs = Connection.ResolveAll(VIFs);
                 vifs.Sort();
 
                 foreach (var vif in vifs)
@@ -1720,12 +1720,12 @@ namespace XenAPI
             }
             else //control domain
             {
-                var pifList = new List<PIF>(this.Connection.Cache.PIFs);
+                var pifList = new List<PIF>(Connection.Cache.PIFs);
                 pifList.Sort(); // This sort ensures that the primary PIF comes before other management PIFs
 
                 foreach (var pif in pifList)
                 {
-                    if (pif.host.opaque_ref != this.resident_on.opaque_ref || !pif.currently_attached)
+                    if (pif.host.opaque_ref != resident_on.opaque_ref || !pif.currently_attached)
                         continue;
 
                     if (pif.IsManagementInterface(false))
