@@ -62,7 +62,7 @@ namespace XenAPI
         // CP-41825: > 32 vCPUs is only supported for trusted VMs
         public const long MAX_VCPUS_FOR_NON_TRUSTED_VMS = 32; 
 
-        private XmlDocument xdRecommendations = null;
+        private XmlDocument xdRecommendations;
         public const int MAX_ALLOWED_VTPMS = 1;
 
         public int MaxVCPUsAllowed()
@@ -599,7 +599,7 @@ namespace XenAPI
             NotifyPropertyChanged("virtualisation_status");
         }
 
-        private Timer VirtualizationTimer = null;
+        private Timer VirtualizationTimer;
 
         [Flags]
         public enum VirtualisationStatus
