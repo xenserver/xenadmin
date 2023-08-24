@@ -51,7 +51,7 @@ namespace XenAdmin.SettingsPanels
 
         private VM vm;
         private bool vmIsAgile;
-        private VM.HA_Restart_Priority origRestartPriority;
+        private VM.HaRestartPriority origRestartPriority;
         private long origNtol;
         private long origOrder;
         private long origStartDelay;
@@ -263,7 +263,7 @@ namespace XenAdmin.SettingsPanels
             m_comboBoxProtectionLevel.Items.Clear();
             ToggleScanningVmAgile(false);
 
-            List<VM.HA_Restart_Priority> restartPriorities = VM.GetAvailableRestartPriorities(vm.Connection);
+            List<VM.HaRestartPriority> restartPriorities = VM.GetAvailableRestartPriorities(vm.Connection);
             foreach (var restartPriority in restartPriorities)
             {
                 // add "restart" priorities only is vm is agile
@@ -392,7 +392,7 @@ namespace XenAdmin.SettingsPanels
             return nudOrder.Value != origOrder || nudStartDelay.Value != origStartDelay;
         }
 
-        public VM.HA_Restart_Priority SelectedPriority { get; private set; }
+        public VM.HaRestartPriority SelectedPriority { get; private set; }
 
         public List<VGPU> VGpus { private get; set; }
 
@@ -586,9 +586,9 @@ namespace XenAdmin.SettingsPanels
 
         private class PriorityWrapper
         {
-            public readonly VM.HA_Restart_Priority Priority;
+            public readonly VM.HaRestartPriority Priority;
 
-            public PriorityWrapper(VM.HA_Restart_Priority priority)
+            public PriorityWrapper(VM.HaRestartPriority priority)
             {
                 this.Priority = priority;
             }

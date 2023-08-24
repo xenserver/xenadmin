@@ -46,7 +46,7 @@ namespace XenAPI
 {
     public partial class VM : IComparable<VM>
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // The following variables are only used when the corresponding variable is missing from
         // the recommendations field of the VM (which is inherited from the recommendations field
         // of the template it was created from). This should not normally happen, so we just use
@@ -62,7 +62,7 @@ namespace XenAPI
         // CP-41825: > 32 vCPUs is only supported for trusted VMs
         public const long MAX_VCPUS_FOR_NON_TRUSTED_VMS = 32; 
 
-        private XmlDocument xdRecommendations;
+        private XmlDocument _xdRecommendations;
         public const int MAX_ALLOWED_VTPMS = 1;
 
         public int MaxVCPUsAllowed()
@@ -124,9 +124,9 @@ namespace XenAPI
             if (power_state == vm_power_state.Running)
                 return Connection.Resolve(resident_on);
 
-            var storage_host = GetStorageHost(false);
-            if (storage_host != null)
-                return storage_host;
+            var storageHost = GetStorageHost(false);
+            if (storageHost != null)
+                return storageHost;
 
             var affinityHost = Connection.Resolve(affinity);
             if (affinityHost != null && affinityHost.IsLive())
@@ -167,10 +167,10 @@ namespace XenAPI
 
         public override string Name()
         {
-            const string CONTROL_DOMAIN = "Control domain on host: ";
-            if (name_label != null && name_label.StartsWith(CONTROL_DOMAIN))
+            const string controlDomain = "Control domain on host: ";
+            if (name_label != null && name_label.StartsWith(controlDomain))
             {
-                var hostName = name_label.Substring(CONTROL_DOMAIN.Length);
+                var hostName = name_label.Substring(controlDomain.Length);
                 return string.Format(Messages.CONTROL_DOM_ON_HOST, hostName);
             }
             return name_label;
@@ -211,42 +211,41 @@ namespace XenAPI
 
         private XmlDocument GetRecommendations()
         {
-            if (xdRecommendations != null)
-                return xdRecommendations;
+            if (_xdRecommendations != null)
+                return _xdRecommendations;
 
             if (string.IsNullOrEmpty(recommendations))
                 return null;
 
-            xdRecommendations = new XmlDocument();
+            _xdRecommendations = new XmlDocument();
 
             try
             {
-                xdRecommendations.LoadXml(recommendations);
+                _xdRecommendations.LoadXml(recommendations);
             }
             catch
             {
-                xdRecommendations = null;
+                _xdRecommendations = null;
             }
 
-            return xdRecommendations;
+            return _xdRecommendations;
         }
 
         public Host GetStorageHost(bool ignoreCDs)
         {
-
-            foreach (var TheVBD in Connection.ResolveAll(VBDs))
+            foreach (var theVBD in Connection.ResolveAll(VBDs))
             {
 
-                if (ignoreCDs && TheVBD.type == vbd_type.CD)
+                if (ignoreCDs && theVBD.type == vbd_type.CD)
                     continue;
-                var TheVDI = Connection.Resolve(TheVBD.VDI);
+                var theVDI = Connection.Resolve(theVBD.VDI);
 
-                if (TheVDI == null || !TheVDI.Show(true))
+                if (theVDI == null || !theVDI.Show(true))
                     continue;
-                var TheSR = Connection.Resolve(TheVDI.SR);
-                if (TheSR == null)
+                var theSr = Connection.Resolve(theVDI.SR);
+                if (theSr == null)
                     continue;
-                var host = TheSR.GetStorageHost();
+                var host = theSr.GetStorageHost();
                 if (host != null)
                 {
                     return host;
@@ -406,7 +405,7 @@ namespace XenAPI
             if (bool.TryParse(xn?.Attributes?["value"]?.Value, out var result))
                 return result;
 
-            log.Error("Error parsing has-vendor-device on the template.");
+            Log.Error("Error parsing has-vendor-device on the template.");
             return false;
         }
 
@@ -510,13 +509,13 @@ namespace XenAPI
             {
                 if (!vbd.IsCDROM())
                 {
-                    var VDI = Connection.Resolve(vbd.VDI);
-                    if (VDI != null && VDI.Show(showHiddenVMs))
+                    var vdi = Connection.Resolve(vbd.VDI);
+                    if (vdi != null && vdi.Show(showHiddenVMs))
                     {
-                        var TheSR = Connection.Resolve(VDI.SR);
-                        if (TheSR != null && !TheSR.IsToolsSR())
+                        var theSr = Connection.Resolve(vdi.SR);
+                        if (theSr != null && !theSr.IsToolsSR())
                         {
-                            totalSpace += VDI.virtual_size;
+                            totalSpace += vdi.virtual_size;
                         }
                     }
                 }
@@ -568,24 +567,24 @@ namespace XenAPI
             return op != vm_operations.changing_dynamic_range && op != vm_operations.changing_static_range && op != vm_operations.changing_memory_limits;
         }
 
-        private DateTime startuptime;
+        private DateTime _startupTime;
 
         public DateTime GetBodgeStartupTime()
         {
-            return startuptime;
+            return _startupTime;
         }
 
         public void SetBodgeStartupTime(DateTime value)
         {
-            startuptime = value;
+            _startupTime = value;
             // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
             NotifyPropertyChanged("virtualisation_status");
-            if (VirtualizationTimer != null)
-                VirtualizationTimer.Stop();
+            if (_virtualizationTimer != null)
+                _virtualizationTimer.Stop();
             // 2 minutes before we give up plus some breathing space
-            VirtualizationTimer = new Timer(182000) {AutoReset = false};
-            VirtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
-            VirtualizationTimer.Start();
+            _virtualizationTimer = new Timer(182000) {AutoReset = false};
+            _virtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
+            _virtualizationTimer.Start();
         }
 
         void VirtualizationTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -593,28 +592,28 @@ namespace XenAPI
             NotifyPropertyChanged("virtualisation_status");
         }
 
-        private Timer VirtualizationTimer;
+        private Timer _virtualizationTimer;
 
         [Flags]
-        public enum VirtualisationStatus
+        public enum VirtualizationStatus
         {
-            NOT_INSTALLED               = 0,
-            UNKNOWN                     = 1,
-            PV_DRIVERS_OUT_OF_DATE      = 2,
-            IO_DRIVERS_INSTALLED        = 4,
-            MANAGEMENT_INSTALLED        = 8,
+            NotInstalled               = 0,
+            Unknown                     = 1,
+            PvDriversOutOfDate      = 2,
+            IoDriversInstalled        = 4,
+            ManagementInstalled        = 8,
         };
 
-        public string GetVirtualisationWarningMessages()
+        public string GetVirtualizationWarningMessages()
         {
-            var status = GetVirtualisationStatus(out _);
+            var status = GetVirtualizationStatus(out _);
 
-            if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
-                || status.HasFlag(VirtualisationStatus.UNKNOWN))
+            if (status.HasFlag(VirtualizationStatus.IoDriversInstalled) && status.HasFlag(VirtualizationStatus.ManagementInstalled)
+                || status.HasFlag(VirtualizationStatus.Unknown))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
 
-            if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            if (status.HasFlag(VirtualizationStatus.PvDriversOutOfDate))
             {
                     var guestMetrics = Connection.Resolve(guest_metrics);
                     if (guestMetrics != null
@@ -628,7 +627,7 @@ namespace XenAPI
                     return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION, BrandManager.VmTools);
             }
 
-            return HasNewVirtualisationStates()
+            return HasNewVirtualizationStates()
                 ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED
                 : string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
         }
@@ -652,32 +651,32 @@ namespace XenAPI
         ///    4 = I/O Optimized
         ///   12 = I/O and Management installed
         /// </remarks>
-        public VirtualisationStatus GetVirtualisationStatus(out string friendlyStatus)
+        public VirtualizationStatus GetVirtualizationStatus(out string friendlyStatus)
         {
             friendlyStatus = Messages.VIRTUALIZATION_UNKNOWN;
 
             if (Connection == null || power_state != vm_power_state.Running || Connection.Resolve(metrics) == null)
-                return VirtualisationStatus.UNKNOWN;
+                return VirtualizationStatus.Unknown;
 
             var vmGuestMetrics = Connection.Resolve(guest_metrics);
             var lessThanTwoMin = (DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2;
 
-            if (HasNewVirtualisationStates())
+            if (HasNewVirtualizationStates())
             {
-                var flags = VirtualisationStatus.NOT_INSTALLED;
+                var flags = VirtualizationStatus.NotInstalled;
 
                 if (vmGuestMetrics != null && vmGuestMetrics.PV_drivers_detected)
-                    flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
+                    flags |= VirtualizationStatus.IoDriversInstalled;
 
                 if (vmGuestMetrics != null && IntKey(vmGuestMetrics.other, "feature-static-ip-setting", 0) != 0)
-                    flags |= VirtualisationStatus.MANAGEMENT_INSTALLED;
+                    flags |= VirtualizationStatus.ManagementInstalled;
 
-                if (flags.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
+                if (flags.HasFlag(VirtualizationStatus.IoDriversInstalled | VirtualizationStatus.ManagementInstalled))
                     friendlyStatus = Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
-                else if (flags.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                else if (flags.HasFlag(VirtualizationStatus.IoDriversInstalled))
                     friendlyStatus = Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
                 else if (lessThanTwoMin)
-                    flags = VirtualisationStatus.UNKNOWN;
+                    flags = VirtualizationStatus.Unknown;
                 else
                     friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
 
@@ -686,11 +685,11 @@ namespace XenAPI
 
             if (vmGuestMetrics == null || !vmGuestMetrics.PV_drivers_installed())
                 if (lessThanTwoMin)
-                    return VirtualisationStatus.UNKNOWN;
+                    return VirtualizationStatus.Unknown;
                 else
                 {
                     friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
-                    return VirtualisationStatus.NOT_INSTALLED;
+                    return VirtualizationStatus.NotInstalled;
                 }
 
             if (!vmGuestMetrics.PV_drivers_version.TryGetValue("major", out var major))
@@ -701,11 +700,11 @@ namespace XenAPI
             if (!vmGuestMetrics.PV_drivers_up_to_date)
             {
                 friendlyStatus = string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, $"{major}.{minor}");
-                return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+                return VirtualizationStatus.PvDriversOutOfDate;
             }
 
             friendlyStatus = string.Format(Messages.VIRTUALIZATION_OPTIMIZED, $"{major}.{minor}");
-            return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
+            return VirtualizationStatus.IoDriversInstalled | VirtualizationStatus.ManagementInstalled;
         }
 
         /// <summary>
@@ -713,7 +712,7 @@ namespace XenAPI
         /// We need to know this, because for those VMs virtualization status is defined differently.
         /// This does not mean new(ly created) VM
         /// </summary>
-        public bool HasNewVirtualisationStates()
+        public bool HasNewVirtualizationStates()
         {
             return IsWindows();
         }
@@ -804,7 +803,7 @@ namespace XenAPI
         /// List of distros that we treat as Linux/Non-Windows (written in the VM.guest_metrics
         /// by the Linux Guest Agent after evaluating xe-linux-distribution)
         /// </summary>
-        private static string[] linuxDistros =
+        private static string[] _linuxDistros =
         {
             "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
             "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom", "rocky"
@@ -994,28 +993,28 @@ namespace XenAPI
             if (!guestMetrics.os_version.ContainsKey("name"))
                 return Messages.UNKNOWN;
 
-            var os_name = guestMetrics.os_version["name"];
+            var osName = guestMetrics.os_version["name"];
 
             // This hack is to make the windows names look nicer
-            var index = os_name.IndexOf("|");
+            var index = osName.IndexOf("|");
             if (index >= 1)
-                os_name = os_name.Substring(0, index);
+                osName = osName.Substring(0, index);
 
             // CA-9631: conform to MS trademark guidelines
-            if (os_name.StartsWith("Microsoft®"))
+            if (osName.StartsWith("Microsoft®"))
             {
-                if (os_name != "Microsoft®")
-                    os_name = os_name.Substring(10).Trim();
+                if (osName != "Microsoft®")
+                    osName = osName.Substring(10).Trim();
             }
-            else if (os_name.StartsWith("Microsoft"))
+            else if (osName.StartsWith("Microsoft"))
             {
-                if (os_name != "Microsoft")
-                    os_name = os_name.Substring(9).Trim();
+                if (osName != "Microsoft")
+                    osName = osName.Substring(9).Trim();
             }
 
-            if (os_name == "")
+            if (osName == "")
                 return Messages.UNKNOWN;
-            return os_name;
+            return osName;
         }
 
         /// <summary>
@@ -1061,13 +1060,13 @@ namespace XenAPI
         /// <remarks>
         /// AlwaysRestartHighPriority and AlwaysRestart are replaced by Restart in Boston; we still keep them for backward compatibility
         /// </remarks>
-        public enum HA_Restart_Priority { AlwaysRestartHighPriority, AlwaysRestart, Restart, BestEffort, DoNotRestart };
+        public enum HaRestartPriority { AlwaysRestartHighPriority, AlwaysRestart, Restart, BestEffort, DoNotRestart };
 
         /// <summary>
         /// An enum-ified version of ha_restart_priority: use this one instead.
         /// NB setting this property does not change ha-always-run.
         /// </summary>
-        public HA_Restart_Priority HARestartPriority()
+        public HaRestartPriority HARestartPriority()
         {
             return StringToPriority(ha_restart_priority);
         }
@@ -1114,12 +1113,12 @@ namespace XenAPI
             return string.Empty;
         }
 
-        public static List<HA_Restart_Priority> GetAvailableRestartPriorities(IXenConnection connection)
+        public static List<HaRestartPriority> GetAvailableRestartPriorities(IXenConnection connection)
         {
-            var restartPriorities = new List<HA_Restart_Priority>();
-            restartPriorities.Add(HA_Restart_Priority.Restart);
-            restartPriorities.Add(HA_Restart_Priority.BestEffort);
-            restartPriorities.Add(HA_Restart_Priority.DoNotRestart);
+            var restartPriorities = new List<HaRestartPriority>();
+            restartPriorities.Add(HaRestartPriority.Restart);
+            restartPriorities.Add(HaRestartPriority.BestEffort);
+            restartPriorities.Add(HaRestartPriority.DoNotRestart);
             return restartPriorities;
         }
 
@@ -1131,14 +1130,14 @@ namespace XenAPI
             return HaPriorityIsRestart(Connection, HARestartPriority());
         }
 
-        public static bool HaPriorityIsRestart(IXenConnection connection, HA_Restart_Priority haRestartPriority)
+        public static bool HaPriorityIsRestart(IXenConnection connection, HaRestartPriority haRestartPriority)
         {
-            return haRestartPriority == HA_Restart_Priority.Restart;
+            return haRestartPriority == HaRestartPriority.Restart;
         }
 
-        public static HA_Restart_Priority HaHighestProtectionAvailable(IXenConnection connection)
+        public static HaRestartPriority HaHighestProtectionAvailable(IXenConnection connection)
         {
-            return HA_Restart_Priority.Restart;
+            return HaRestartPriority.Restart;
         }
 
         public const string RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY = "0"; //only used for Pre-Boston pools
@@ -1155,37 +1154,37 @@ namespace XenAPI
         /// </summary>
         /// <param name="priority"></param>
         /// <returns></returns>
-        internal static string PriorityToString(HA_Restart_Priority priority)
+        internal static string PriorityToString(HaRestartPriority priority)
         {
             switch (priority)
             {
-                case HA_Restart_Priority.AlwaysRestartHighPriority:
+                case HaRestartPriority.AlwaysRestartHighPriority:
                     return RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY;
-                case HA_Restart_Priority.AlwaysRestart:
+                case HaRestartPriority.AlwaysRestart:
                     return RESTART_PRIORITY_ALWAYS_RESTART;
-                case HA_Restart_Priority.Restart:
+                case HaRestartPriority.Restart:
                     return RESTART_PRIORITY_RESTART;
-                case HA_Restart_Priority.BestEffort:
+                case HaRestartPriority.BestEffort:
                     return RESTART_PRIORITY_BEST_EFFORT;
                 default:
                     return RESTART_PRIORITY_DO_NOT_RESTART;
             }
         }
 
-        internal static HA_Restart_Priority StringToPriority(string priority)
+        internal static HaRestartPriority StringToPriority(string priority)
         {
             switch (priority)
             {
                 case RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY:
-                    return HA_Restart_Priority.AlwaysRestartHighPriority;
+                    return HaRestartPriority.AlwaysRestartHighPriority;
                 case RESTART_PRIORITY_RESTART:
-                    return HA_Restart_Priority.Restart;
+                    return HaRestartPriority.Restart;
                 case RESTART_PRIORITY_DO_NOT_RESTART:
-                    return HA_Restart_Priority.DoNotRestart;
+                    return HaRestartPriority.DoNotRestart;
                 case RESTART_PRIORITY_BEST_EFFORT:
-                    return HA_Restart_Priority.BestEffort;
+                    return HaRestartPriority.BestEffort;
                 default:
-                    return HA_Restart_Priority.AlwaysRestart;
+                    return HaRestartPriority.AlwaysRestart;
             }
         }
 
@@ -1208,14 +1207,14 @@ namespace XenAPI
             var myPool = Helpers.GetPoolOfOne(Connection);
             if (myPool == null)
                 return false;
-            return myPool.ha_enabled && HARestartPriority() != HA_Restart_Priority.DoNotRestart;
+            return myPool.ha_enabled && HARestartPriority() != HaRestartPriority.DoNotRestart;
         }
 
         /// <summary>
         /// Calls set_ha_restart_priority
         /// </summary>
         /// <param name="priority"></param>
-        public static void SetHaRestartPriority(Session session, VM vm, HA_Restart_Priority priority)
+        public static void SetHaRestartPriority(Session session, VM vm, HaRestartPriority priority)
         {
             set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
         }
@@ -1566,8 +1565,8 @@ namespace XenAPI
             foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
             {
                 var vdi = Connection.Resolve(vbd.VDI);
-                var resident_host = Connection.Resolve(resident_on);
-                if (vdi != null && resident_host != null && vdi.ReadCachingEnabled(resident_host))
+                var residentHost = Connection.Resolve(resident_on);
+                if (vdi != null && residentHost != null && vdi.ReadCachingEnabled(residentHost))
                     readCachingVdis.Add(vdi);
             }
             return readCachingVdis;
@@ -1584,10 +1583,10 @@ namespace XenAPI
             foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
             {
                 var vdi = Connection.Resolve(vbd.VDI);
-                var resident_host = Connection.Resolve(resident_on);
-                if (vdi != null && resident_host != null && !vdi.ReadCachingEnabled(resident_host))
+                var residentHost = Connection.Resolve(resident_on);
+                if (vdi != null && residentHost != null && !vdi.ReadCachingEnabled(residentHost))
                 {
-                    var reason = vdi.ReadCachingDisabledReason(resident_host);
+                    var reason = vdi.ReadCachingDisabledReason(residentHost);
                     if (reason > ans)
                         ans = reason;
                 }
@@ -1653,7 +1652,7 @@ namespace XenAPI
                 return false;
 
             if (guestMetrics.os_version.TryGetValue("distro", out var distro) &&
-                !string.IsNullOrEmpty(distro) && linuxDistros.Contains(distro.ToLowerInvariant()))
+                !string.IsNullOrEmpty(distro) && _linuxDistros.Contains(distro.ToLowerInvariant()))
                 return true;
 
             if (guestMetrics.os_version.TryGetValue("uname", out var uname) &&
@@ -1814,7 +1813,7 @@ namespace XenAPI
     public struct VMStartupOptions
     {
         public long Order, StartDelay;
-        public VM.HA_Restart_Priority? HaRestartPriority;
+        public VM.HaRestartPriority? HaRestartPriority;
 
         public VMStartupOptions(long order, long startDelay)
         {
@@ -1823,7 +1822,7 @@ namespace XenAPI
             HaRestartPriority = null;
         }
 
-        public VMStartupOptions(long order, long startDelay, VM.HA_Restart_Priority haRestartPriority)
+        public VMStartupOptions(long order, long startDelay, VM.HaRestartPriority haRestartPriority)
         {
             Order = order;
             StartDelay = startDelay;

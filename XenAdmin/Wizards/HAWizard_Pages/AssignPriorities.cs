@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         private void UpdateMenuItems()
         {
-            List<VM.HA_Restart_Priority> restartPriorities = VM.GetAvailableRestartPriorities(connection);
+            List<VM.HaRestartPriority> restartPriorities = VM.GetAvailableRestartPriorities(connection);
 
             //When this line: m_dropDownButtonRestartPriority.ContextMenuStrip = this.contextMenuStrip
             //was called in the designer a "dummy" item was added to the contextMenuStrip by the m_dropDownButtonRestartPriority,
@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// <summary>
         /// The current (uncommitted) VM restart priorities.
         /// </summary>
-        public Dictionary<VM, VM.HA_Restart_Priority> CurrentSettings
+        public Dictionary<VM, VM.HaRestartPriority> CurrentSettings
         {
             get { return haNtolIndicator.Settings; }
         }
@@ -246,7 +246,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                     // The first case is for the HA wizard when priorities are being configured for the first time,
                     // the second is for the edit dialog, when HA is already enabled.
                     
-                    VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority();
+                    VM.HaRestartPriority? priority = firstTime ? (VM.HaRestartPriority?)null : vm.HARestartPriority();
                     var row = new VmWithSettingsRow(vm, priority);
                     newRows.Add(row);
                 }
@@ -335,16 +335,16 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 {
                     Debug.Assert(ProtectVmsByDefault);
 
-                    var priority = isNowAgile ? VM.HaHighestProtectionAvailable(connection) : VM.HA_Restart_Priority.BestEffort;
+                    var priority = isNowAgile ? VM.HaHighestProtectionAvailable(connection) : VM.HaRestartPriority.BestEffort;
 
                     row.UpdateRestartPriority(priority);
                     haNtolIndicator.Settings = getCurrentSettings();
                 }
                 else if (!isNowAgile
-                        && row.RestartPriority != VM.HA_Restart_Priority.BestEffort
-                        && row.RestartPriority != VM.HA_Restart_Priority.DoNotRestart)
+                        && row.RestartPriority != VM.HaRestartPriority.BestEffort
+                        && row.RestartPriority != VM.HaRestartPriority.DoNotRestart)
                 {
-                    row.UpdateRestartPriority(VM.HA_Restart_Priority.BestEffort);
+                    row.UpdateRestartPriority(VM.HaRestartPriority.BestEffort);
                     haNtolIndicator.Settings = getCurrentSettings();
                 }
 
@@ -377,7 +377,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             var vms = connection.Cache.VMs.Where(v => v.HaCanProtect(Properties.Settings.Default.ShowHiddenVMs));
             bool firstTime = IsHaActivatedFirstTime(vms);
 
-            VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority();
+            VM.HaRestartPriority? priority = firstTime ? (VM.HaRestartPriority?)null : vm.HARestartPriority();
             var row = new VmWithSettingsRow(vm, priority);
             dataGridViewVms.Rows.Add(row);
             UpdateVMsAgility(new List<VM> {vm});
@@ -485,7 +485,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         private void priority_Click(object sender, EventArgs e)
         {
             var menuitem = (ToolStripMenuItem)sender;
-            VM.HA_Restart_Priority pri = (VM.HA_Restart_Priority)menuitem.Tag;
+            VM.HaRestartPriority pri = (VM.HaRestartPriority)menuitem.Tag;
 
             bool changesMade = false;
             foreach (var row in dataGridViewVms.SelectedRows.Cast<VmWithSettingsRow>())
@@ -509,16 +509,16 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// <summary>
         /// Gets the current (uncommitted) VM restart priorities. Must be called on the GUI thread.
         /// </summary>
-        private Dictionary<VM, VM.HA_Restart_Priority> getCurrentSettings()
+        private Dictionary<VM, VM.HaRestartPriority> getCurrentSettings()
         {
             Program.AssertOnEventThread();
-            Dictionary<VM, VM.HA_Restart_Priority> result = new Dictionary<VM, VM.HA_Restart_Priority>();
+            Dictionary<VM, VM.HaRestartPriority> result = new Dictionary<VM, VM.HaRestartPriority>();
 
             foreach (var row in dataGridViewVms.Rows.Cast<VmWithSettingsRow>())
             {
                 // If the restart priority is null, it means we don't know if the VM is agile yet, and we have
                 // protectVmsByDefault == true.
-                result[row.Vm] = row.RestartPriority ?? VM.HA_Restart_Priority.BestEffort;
+                result[row.Vm] = row.RestartPriority ?? VM.HaRestartPriority.BestEffort;
             }
             return result;
         }
@@ -534,7 +534,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             foreach (ToolStripMenuItem item in contextMenuStrip.Items)
             {
-                var itemRestartPriority = ((VM.HA_Restart_Priority)item.Tag);
+                var itemRestartPriority = ((VM.HaRestartPriority)item.Tag);
                 item.Checked = selectedRows.Count > 0 && selectedRows.All(s => s.RestartPriority == itemRestartPriority);
             }
         }
@@ -573,7 +573,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             foreach (ToolStripMenuItem item in contextMenuStrip.Items)
             {
-                VM.HA_Restart_Priority itemRestartPriority = (VM.HA_Restart_Priority)item.Tag;
+                VM.HaRestartPriority itemRestartPriority = (VM.HaRestartPriority)item.Tag;
 
                 if (selectedRows.All(r => r.RestartPriority == itemRestartPriority))
                 {
@@ -603,7 +603,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             // Now set the buttons and tooltips)
             foreach (ToolStripMenuItem menuItem in contextMenuStrip.Items)
             {
-                var priority = (VM.HA_Restart_Priority)menuItem.Tag;
+                var priority = (VM.HaRestartPriority)menuItem.Tag;
 
                 if (VM.HaPriorityIsRestart(connection, priority))
                 {
@@ -675,7 +675,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 if (curRow.HasChanged())
                     result[curRow.Vm] = new VMStartupOptions(curRow.StartOrder,
                                                              curRow.StartDelay,
-                                                             curRow.RestartPriority ?? VM.HA_Restart_Priority.BestEffort);
+                                                             curRow.RestartPriority ?? VM.HaRestartPriority.BestEffort);
             }
             return result;
         }
@@ -737,7 +737,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             public VM Vm { get; private set; }
             public long StartDelay { get; private set; }
             public long StartOrder { get; private set; }
-            public VM.HA_Restart_Priority? RestartPriority { get; private set; }
+            public VM.HaRestartPriority? RestartPriority { get; private set; }
             public bool IsAgile { get; private set; }
 
             /// <summary>
@@ -781,7 +781,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 }
             }
 
-            public VmWithSettingsRow(VM vm, VM.HA_Restart_Priority? priority)
+            public VmWithSettingsRow(VM vm, VM.HaRestartPriority? priority)
             {
                 cellImage = new DataGridViewImageCell {ValueType = typeof(Image)};
                 cellVm = new DataGridViewTextBoxCell();
@@ -817,7 +817,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 cellStartOrder.Value = startOrder.ToString();
             }
 
-            public void UpdateRestartPriority(VM.HA_Restart_Priority? restartPriority)
+            public void UpdateRestartPriority(VM.HaRestartPriority? restartPriority)
             {
                 RestartPriority = restartPriority;
                 cellRestartPriority.Value = Helpers.RestartPriorityI18n(restartPriority);

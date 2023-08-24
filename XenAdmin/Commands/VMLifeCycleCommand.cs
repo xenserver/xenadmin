@@ -162,19 +162,19 @@ namespace XenAdmin.Commands
             if (vm == null)
                 return null;
 
-            var status = vm.GetVirtualisationStatus(out _);
+            var status = vm.GetVirtualizationStatus(out _);
             //trying to guess the reason
-            if (vm.HasNewVirtualisationStates())
+            if (vm.HasNewVirtualizationStates())
             {
-                if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)) //note: this will also be true when the enum is in Unknown state
+                if (!status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled)) //note: this will also be true when the enum is in Unknown state
                     return Messages.VM_MISSING_IO_DRIVERS;
             }
             else
             {
-                if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+                if (status == VM.VirtualizationStatus.NotInstalled || status.HasFlag(VM.VirtualizationStatus.Unknown))
                     return FriendlyErrorNames.VM_MISSING_PV_DRIVERS;
 
-                if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                if (status.HasFlag(VM.VirtualizationStatus.PvDriversOutOfDate))
                     return FriendlyErrorNames.VM_OLD_PV_DRIVERS;
             }
 

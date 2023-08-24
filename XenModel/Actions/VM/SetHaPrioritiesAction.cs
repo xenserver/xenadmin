@@ -71,12 +71,12 @@ namespace XenAdmin.Actions
             int i = 0;
             foreach (VM vm in settings.Keys)
             {
-                if (VM.HaPriorityIsRestart(vm.Connection, (VM.HA_Restart_Priority)settings[vm].HaRestartPriority))
+                if (VM.HaPriorityIsRestart(vm.Connection, (VM.HaRestartPriority)settings[vm].HaRestartPriority))
                     continue;
 
                 Description = string.Format(Messages.HA_SETTING_PRIORITY_ON_X, Helpers.GetName(vm));
 
-                VM.SetHaRestartPriority(Session, vm, (VM.HA_Restart_Priority)settings[vm].HaRestartPriority);
+                VM.SetHaRestartPriority(Session, vm, (VM.HaRestartPriority)settings[vm].HaRestartPriority);
                 VM.set_order(Session, vm.opaque_ref, settings[vm].Order);
                 VM.set_start_delay(Session, vm.opaque_ref, settings[vm].StartDelay);
 
@@ -90,12 +90,12 @@ namespace XenAdmin.Actions
             // Then move any VMs from unprotected -> protected
             foreach (VM vm in settings.Keys)
             {
-                if (!VM.HaPriorityIsRestart(vm.Connection, (VM.HA_Restart_Priority)settings[vm].HaRestartPriority))
+                if (!VM.HaPriorityIsRestart(vm.Connection, (VM.HaRestartPriority)settings[vm].HaRestartPriority))
                     continue;
 
                 Description = string.Format(Messages.HA_SETTING_PRIORITY_ON_X, Helpers.GetName(vm));
 
-                VM.SetHaRestartPriority(Session, vm, (VM.HA_Restart_Priority)settings[vm].HaRestartPriority);
+                VM.SetHaRestartPriority(Session, vm, (VM.HaRestartPriority)settings[vm].HaRestartPriority);
                 VM.set_order(Session, vm.opaque_ref, settings[vm].Order);
                 VM.set_start_delay(Session, vm.opaque_ref, settings[vm].StartDelay);
 

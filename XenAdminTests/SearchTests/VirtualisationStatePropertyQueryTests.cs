@@ -222,12 +222,12 @@ namespace XenAdminTests.SearchTests
         [TestCase("Fully optimized", new[] {"vm1", "vm5"})]
         public void TestVirtStatusIs(string filter, string[] expectedVmNames)
         {
-            var dict = PropertyAccessors.Geti18nFor(PropertyNames.virtualisation_status) as Dictionary<string, VM.VirtualisationStatus>;
+            var dict = PropertyAccessors.Geti18nFor(PropertyNames.virtualisation_status) as Dictionary<string, VM.VirtualizationStatus>;
 
             Assert.NotNull(dict, "Did not find i18n for VM.VirtualisationStatus");
             Assert.IsTrue(dict.TryGetValue(filter, out var status), $"Did not find i18n for {filter}");
 
-            var query = new EnumPropertyQuery<VM.VirtualisationStatus>(PropertyNames.virtualisation_status, status, true);
+            var query = new EnumPropertyQuery<VM.VirtualizationStatus>(PropertyNames.virtualisation_status, status, true);
             CheckMatch(query, expectedVmNames);
         }
 
@@ -240,21 +240,21 @@ namespace XenAdminTests.SearchTests
         [TestCase("Fully optimized", new[] {"vm0", "vm2", "vm3", "vm4", "vm6"})]
         public void TestVirtStatusIsNot(string filter, string[] expectedVmNames)
         {
-            var dict = PropertyAccessors.Geti18nFor(PropertyNames.virtualisation_status) as Dictionary<string, VM.VirtualisationStatus>;
+            var dict = PropertyAccessors.Geti18nFor(PropertyNames.virtualisation_status) as Dictionary<string, VM.VirtualizationStatus>;
 
             Assert.NotNull(dict, "Did not find i18n for VM.VirtualisationStatus");
             Assert.IsTrue(dict.TryGetValue(filter, out var status), $"Did not find i18n for {filter}");
 
-            var query = new EnumPropertyQuery<VM.VirtualisationStatus>(PropertyNames.virtualisation_status, status, false);
+            var query = new EnumPropertyQuery<VM.VirtualizationStatus>(PropertyNames.virtualisation_status, status, false);
             CheckMatch(query, expectedVmNames);
         }
 
-        private void CheckMatch(EnumPropertyQuery<VM.VirtualisationStatus> query, string[] expectedVmNames)
+        private void CheckMatch(EnumPropertyQuery<VM.VirtualizationStatus> query, string[] expectedVmNames)
         {
             foreach (var moqVm in _allVms)
             {
                 var vm = moqVm.Object;
-                bool? match = query.MatchProperty(vm.GetVirtualisationStatus(out _));
+                bool? match = query.MatchProperty(vm.GetVirtualizationStatus(out _));
                 Assert.True(match.HasValue);
 
                 var name = vm.Name();

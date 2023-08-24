@@ -69,7 +69,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public VM.HA_Restart_Priority SelectedPriority { private get; set; }
+        public VM.HaRestartPriority SelectedPriority { private get; set; }
 
         #region IEditPage Members
 
