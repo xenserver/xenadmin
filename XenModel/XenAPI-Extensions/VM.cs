@@ -151,15 +151,8 @@ namespace XenAPI
         public SR FindVMCDROMSR()
         {
             var vbd = FindVMCDROM();
-            if (vbd != null)
-            {
-                var vdi = vbd.Connection.Resolve(vbd.VDI);
-                if (vdi != null)
-                {
-                    return vdi.Connection.Resolve(vdi.SR);
-                }
-            }
-            return null;
+            var vdi = vbd?.Connection.Resolve(vbd.VDI);
+            return vdi?.Connection.Resolve(vdi.SR);
         }
 
         public override string Name()
@@ -240,9 +233,7 @@ namespace XenAPI
                 if (theVDI == null || !theVDI.Show(true))
                     continue;
                 var theSr = Connection.Resolve(theVDI.SR);
-                if (theSr == null)
-                    continue;
-                var host = theSr.GetStorageHost();
+                var host = theSr?.GetStorageHost();
                 if (host != null)
                 {
                     return host;
@@ -576,8 +567,7 @@ namespace XenAPI
             _startupTime = value;
             // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
             NotifyPropertyChanged("virtualisation_status");
-            if (_virtualizationTimer != null)
-                _virtualizationTimer.Stop();
+            _virtualizationTimer?.Stop();
             // 2 minutes before we give up plus some breathing space
             _virtualizationTimer = new Timer(182000) {AutoReset = false};
             _virtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
@@ -981,10 +971,8 @@ namespace XenAPI
         public string GetOSName()
         {
             var guestMetrics = Connection.Resolve(guest_metrics);
-            if (guestMetrics == null)
-                return Messages.UNKNOWN;
 
-            if (guestMetrics.os_version == null)
+            if (guestMetrics?.os_version == null)
                 return Messages.UNKNOWN;
 
             if (!guestMetrics.os_version.ContainsKey("name"))
@@ -1418,13 +1406,10 @@ namespace XenAPI
             var vbds = Connection.ResolveAll(VBDs);
             foreach (var vbd in vbds)
             {
-                if (vbd != null)
+                var vdi = vbd?.Connection.Resolve(vbd.VDI);
+                if (vdi != null)
                 {
-                    var vdi = vbd.Connection.Resolve(vbd.VDI);
-                    if (vdi != null)
-                    {
-                        yield return vdi.Connection.Resolve(vdi.SR);
-                    }
+                    yield return vdi.Connection.Resolve(vdi.SR);
                 }
             }
         }
