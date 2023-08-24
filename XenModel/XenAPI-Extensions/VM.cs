@@ -67,9 +67,9 @@ namespace XenAPI
 
         public int MaxVCPUsAllowed()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
             if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
                 return result;
 
@@ -78,9 +78,9 @@ namespace XenAPI
 
         public int MinVCPUs()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
             if (int.TryParse(xn?.Attributes?["min"]?.Value, out var result))
                 return result;
 
@@ -101,7 +101,7 @@ namespace XenAPI
         /// <returns></returns>
         public bool HasSavedRestartPriority()
         {
-            Pool pool = Helpers.GetPoolOfOne(Connection);
+            var pool = Helpers.GetPoolOfOne(Connection);
             return pool != null && pool.ha_enabled && !String.IsNullOrEmpty(ha_restart_priority);
         }
 
@@ -114,7 +114,7 @@ namespace XenAPI
         {
             if (is_a_snapshot)  // Snapshots have the same "home" as their VM. This is necessary to make a pool-server-VM-snapshot tree (CA-76273).
             {
-                VM from = Connection.Resolve(snapshot_of);
+                var from = Connection.Resolve(snapshot_of);
                 return (from == null ? null : from.Home()); // "from" can be null if VM has been deleted
             }
 
@@ -124,11 +124,11 @@ namespace XenAPI
             if (power_state == vm_power_state.Running)
                 return Connection.Resolve(resident_on);
 
-            Host storage_host = GetStorageHost(false);
+            var storage_host = GetStorageHost(false);
             if (storage_host != null)
                 return storage_host;
 
-            Host affinityHost = Connection.Resolve(affinity);
+            var affinityHost = Connection.Resolve(affinity);
             if (affinityHost != null && affinityHost.IsLive())
                 return affinityHost;
 
@@ -140,7 +140,7 @@ namespace XenAPI
             if (Connection == null)
                 return null;
 
-            List<VBD> vbds = Connection.ResolveAll(VBDs).FindAll(vbd => vbd.IsCDROM());
+            var vbds = Connection.ResolveAll(VBDs).FindAll(vbd => vbd.IsCDROM());
 
             if (vbds.Count > 0)
             {
@@ -155,10 +155,10 @@ namespace XenAPI
 
         public SR FindVMCDROMSR()
         {
-            VBD vbd = FindVMCDROM();
+            var vbd = FindVMCDROM();
             if (vbd != null)
             {
-                VDI vdi = vbd.Connection.Resolve(vbd.VDI);
+                var vdi = vbd.Connection.Resolve(vbd.VDI);
                 if (vdi != null)
                 {
                     return vdi.Connection.Resolve(vdi.SR);
@@ -180,9 +180,9 @@ namespace XenAPI
 
         public long MaxMemAllowed()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
             if (long.TryParse(xn?.Attributes?["max"]?.Value, out var result))
                 return result;
 
@@ -191,9 +191,9 @@ namespace XenAPI
 
         public int MaxVIFsAllowed()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
             if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
                 return result;
 
@@ -202,9 +202,9 @@ namespace XenAPI
 
         public int MaxVBDsAllowed()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
             if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
                 return result;
 
@@ -236,19 +236,19 @@ namespace XenAPI
         public Host GetStorageHost(bool ignoreCDs)
         {
 
-            foreach (VBD TheVBD in Connection.ResolveAll(VBDs))
+            foreach (var TheVBD in Connection.ResolveAll(VBDs))
             {
 
                 if (ignoreCDs && TheVBD.type == vbd_type.CD)
                     continue;
-                VDI TheVDI = Connection.Resolve(TheVBD.VDI);
+                var TheVDI = Connection.Resolve(TheVBD.VDI);
 
                 if (TheVDI == null || !TheVDI.Show(true))
                     continue;
-                SR TheSR = Connection.Resolve(TheVDI.SR);
+                var TheSR = Connection.Resolve(TheVDI.SR);
                 if (TheSR == null)
                     continue;
-                Host host = TheSR.GetStorageHost();
+                var host = TheSR.GetStorageHost();
                 if (host != null)
                 {
                     return host;
@@ -381,9 +381,9 @@ namespace XenAPI
             if (!IsHVM())
                 return false;
 
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
             if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
                 return result != 0;
 
@@ -392,9 +392,9 @@ namespace XenAPI
 
         public bool HasSriovRecommendation()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
             if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
                 return result != 0;
 
@@ -403,9 +403,9 @@ namespace XenAPI
 
         public bool HasVendorDeviceRecommendation()
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
             if (bool.TryParse(xn?.Attributes?["value"]?.Value, out var result))
                 return result;
 
@@ -423,9 +423,9 @@ namespace XenAPI
             if (!IsHVM() || !CanHaveGpu())
                 return false;
 
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
             if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
                 return result != 0;
 
@@ -457,9 +457,9 @@ namespace XenAPI
 
         private string GetRecommendationByField(string fieldName)
         {
-            XmlDocument xd = GetRecommendations();
+            var xd = GetRecommendations();
 
-            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
 
             return xn?.Attributes?["value"]?.Value ?? string.Empty;
         }
@@ -481,15 +481,15 @@ namespace XenAPI
 
         public string IsOnSharedStorage()
         {
-            foreach (XenRef<VBD> vbdRef in VBDs)
+            foreach (var vbdRef in VBDs)
             {
-                VBD vbd = Connection.Resolve<VBD>(vbdRef);
+                var vbd = Connection.Resolve<VBD>(vbdRef);
                 if (vbd != null)
                 {
-                    VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    var vdi = Connection.Resolve<VDI>(vbd.VDI);
                     if (vdi != null)
                     {
-                        SR sr = Connection.Resolve<SR>(vdi.SR);
+                        var sr = Connection.Resolve<SR>(vdi.SR);
                         if (sr != null && !sr.shared)
                         {
                             if (sr.content_type == SR.Content_Type_ISO)
@@ -511,14 +511,14 @@ namespace XenAPI
         {
             decimal totalSpace = 0;
 
-            foreach (VBD vbd in Connection.ResolveAll(VBDs))
+            foreach (var vbd in Connection.ResolveAll(VBDs))
             {
                 if (!vbd.IsCDROM())
                 {
-                    VDI VDI = Connection.Resolve<VDI>(vbd.VDI);
+                    var VDI = Connection.Resolve<VDI>(vbd.VDI);
                     if (VDI != null && VDI.Show(showHiddenVMs))
                     {
-                        SR TheSR = Connection.Resolve(VDI.SR);
+                        var TheSR = Connection.Resolve(VDI.SR);
                         if (TheSR != null && !TheSR.IsToolsSR())
                         {
                             totalSpace += VDI.virtual_size;
@@ -613,7 +613,7 @@ namespace XenAPI
 
         public string GetVirtualisationWarningMessages()
         {
-            VirtualisationStatus status = GetVirtualisationStatus(out _);
+            var status = GetVirtualisationStatus(out _);
 
             if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
                 || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
@@ -622,7 +622,7 @@ namespace XenAPI
 
             if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
             {
-                    VM_guest_metrics guestMetrics = Connection.Resolve(guest_metrics);
+                    var guestMetrics = Connection.Resolve(guest_metrics);
                     if (guestMetrics != null
                         && guestMetrics.PV_drivers_version.ContainsKey("major")
                         && guestMetrics.PV_drivers_version.ContainsKey("minor"))
@@ -780,7 +780,7 @@ namespace XenAPI
         {
             if (Connection == null)
                 return false;
-            foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
+            foreach (var vbd in Connection.ResolveAll<VBD>(VBDs))
             {
                 if (vbd.type == vbd_type.Disk)
                 {
@@ -788,10 +788,10 @@ namespace XenAPI
                 }
                 else
                 {
-                    VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    var vdi = Connection.Resolve<VDI>(vbd.VDI);
                     if (vdi == null)
                         continue;
-                    SR sr = Connection.Resolve<SR>(vdi.SR);
+                    var sr = Connection.Resolve<SR>(vdi.SR);
                     if (sr == null || sr.shared)
                         continue;
                     return false; // we have a shared cd
@@ -873,7 +873,7 @@ namespace XenAPI
             if (!DefaultTemplate())
                 return VmTemplateType.Custom;
 
-            string os = name_label.ToLowerInvariant();
+            var os = name_label.ToLowerInvariant();
 
             if (os.Contains("citrix"))
                 return VmTemplateType.Citrix;
@@ -986,13 +986,13 @@ namespace XenAPI
             if (other_config == null || !other_config.ContainsKey(P2V_IMPORT_DATE))
                 return DateTime.MinValue;
 
-            string importDate = other_config[P2V_IMPORT_DATE];
+            var importDate = other_config[P2V_IMPORT_DATE];
             return Util.TryParseIso8601DateTime(importDate, out var result) ? result : DateTime.MinValue;
         }
 
         public String GetOSName()
         {
-            VM_guest_metrics guestMetrics = Connection.Resolve(guest_metrics);
+            var guestMetrics = Connection.Resolve(guest_metrics);
             if (guestMetrics == null)
                 return Messages.UNKNOWN;
 
@@ -1002,10 +1002,10 @@ namespace XenAPI
             if (!guestMetrics.os_version.ContainsKey("name"))
                 return Messages.UNKNOWN;
 
-            String os_name = guestMetrics.os_version["name"];
+            var os_name = guestMetrics.os_version["name"];
 
             // This hack is to make the windows names look nicer
-            int index = os_name.IndexOf("|");
+            var index = os_name.IndexOf("|");
             if (index >= 1)
                 os_name = os_name.Substring(0, index);
 
@@ -1033,7 +1033,7 @@ namespace XenAPI
         /// </summary>
         public DateTime GetStartTime()
         {
-            VM_metrics metrics = Connection.Resolve(this.metrics);
+            var metrics = Connection.Resolve(this.metrics);
             if (metrics == null)
                 return DateTime.MinValue;
 
@@ -1050,7 +1050,7 @@ namespace XenAPI
                 return null;
             }
 
-            DateTime startTime = GetStartTime();
+            var startTime = GetStartTime();
             if (startTime == Epoch || startTime == DateTime.MinValue)
                 return null;
             return new PrettyTimeSpan(DateTime.UtcNow - startTime - Connection.ServerTimeOffset);
@@ -1111,11 +1111,11 @@ namespace XenAPI
 
         internal override string LocationString()
         {
-            Host server = this.Home();
+            var server = this.Home();
             if (server != null)
                 return string.Format(Messages.ON_SERVER, server);
 
-            Pool pool = Helpers.GetPool(this.Connection);
+            var pool = Helpers.GetPool(this.Connection);
             if (pool != null)
                 return string.Format(Messages.IN_POOL, pool);
 
@@ -1213,7 +1213,7 @@ namespace XenAPI
         {
             if (Connection == null)
                 return false;
-            Pool myPool = Helpers.GetPoolOfOne(Connection);
+            var myPool = Helpers.GetPoolOfOne(Connection);
             if (myPool == null)
                 return false;
             return myPool.ha_enabled && HARestartPriority() != HA_Restart_Priority.DoNotRestart;
@@ -1232,20 +1232,20 @@ namespace XenAPI
         {
             if (Connection == null)
                 return false;
-            foreach (VBD vbd in Connection.ResolveAll(VBDs))
+            foreach (var vbd in Connection.ResolveAll(VBDs))
             {
                 if (vbd.type != vbd_type.Disk)
                     continue;
 
-                VDI vdi = Connection.Resolve(vbd.VDI);
+                var vdi = Connection.Resolve(vbd.VDI);
                 if (vdi == null)
                     continue;
 
-                SR sr = Connection.Resolve(vdi.SR);
+                var sr = Connection.Resolve(vdi.SR);
                 if (sr == null)
                     continue;
 
-                SM sm = SM.GetByType(Connection, sr.type);
+                var sm = SM.GetByType(Connection, sr.type);
                 if (sm == null)
                     continue;
 
@@ -1259,7 +1259,7 @@ namespace XenAPI
         {
             if (Connection == null)
                 return false;
-            foreach (VBD vbd in Connection.ResolveAll(VBDs))
+            foreach (var vbd in Connection.ResolveAll(VBDs))
             {
                 if (vbd.type != vbd_type.Disk)
                     continue;
@@ -1300,7 +1300,7 @@ namespace XenAPI
             foreach (var pbd in Connection.Cache.PBDs)
             {
                 if (pbd != null &&
-                    pbd.other_config.TryGetValue("storage_driver_domain", out string vmRef) &&
+                    pbd.other_config.TryGetValue("storage_driver_domain", out var vmRef) &&
                     vmRef == opaque_ref)
                 {
                     sr = Connection.Resolve(pbd.SR);
@@ -1333,11 +1333,11 @@ namespace XenAPI
         {
             try
             {
-                string xml = Get(other_config, "disks");
+                var xml = Get(other_config, "disks");
                 if (string.IsNullOrEmpty(xml))
                     return null;
 
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.LoadXml(xml);
                 return doc.FirstChild;
             }
@@ -1368,7 +1368,7 @@ namespace XenAPI
         /// </summary>
         public string AffinityServerString()
         {
-            Host host = Connection.Resolve(affinity);
+            var host = Connection.Resolve(affinity);
             if (host == null)
                 return Messages.NONE;
 
@@ -1392,8 +1392,8 @@ namespace XenAPI
                 return false;
             }
 
-            bool value = bios_strings.ContainsKey("bios-vendor") && bios_strings["bios-vendor"] == "Xen"
-                         && bios_strings.ContainsKey("system-manufacturer") && bios_strings["system-manufacturer"] == "Xen";
+            var value = bios_strings.ContainsKey("bios-vendor") && bios_strings["bios-vendor"] == "Xen"
+                                                                && bios_strings.ContainsKey("system-manufacturer") && bios_strings["system-manufacturer"] == "Xen";
 
             return !value;
         }
@@ -1427,12 +1427,12 @@ namespace XenAPI
 
         public virtual IEnumerable<SR> SRs()
         {
-            List<VBD> vbds = Connection.ResolveAll(VBDs);
+            var vbds = Connection.ResolveAll(VBDs);
             foreach (var vbd in vbds)
             {
                 if (vbd != null)
                 {
-                    VDI vdi = vbd.Connection.Resolve(vbd.VDI);
+                    var vdi = vbd.Connection.Resolve(vbd.VDI);
                     if (vdi != null)
                     {
                         yield return vdi.Connection.Resolve(vdi.SR);
@@ -1544,19 +1544,19 @@ namespace XenAPI
 
         public VM_Docker_Info DockerInfo()
         {
-            string xml = Get(other_config, "docker_info");
+            var xml = Get(other_config, "docker_info");
             if (string.IsNullOrEmpty(xml))
                 return null;
-            VM_Docker_Info info = new VM_Docker_Info(xml);
+            var info = new VM_Docker_Info(xml);
             return info;
         }
 
         public VM_Docker_Version DockerVersion()
         {
-            string xml = Get(other_config, "docker_version");
+            var xml = Get(other_config, "docker_version");
             if (string.IsNullOrEmpty(xml))
                 return null;
-            VM_Docker_Version info = new VM_Docker_Version(xml);
+            var info = new VM_Docker_Version(xml);
             return info;
         }
 
@@ -1676,12 +1676,12 @@ namespace XenAPI
         {
             if (!string.IsNullOrEmpty(last_booted_record))
             {
-                Regex regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
+                var regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
 
                 var v = regex.Match(last_booted_record);
                 if (v.Success)
                 {
-                    string s = v.Groups[1].ToString();
+                    var s = v.Groups[1].ToString();
                     return Connection.Resolve(new XenRef<VM_guest_metrics>(s));
                 }
             }
@@ -1699,11 +1699,11 @@ namespace XenAPI
         /// </summary>
         public string IPAddressForSSH()
         {
-            List<string> ipAddresses = new List<string>();
+            var ipAddresses = new List<string>();
 
             if (!this.is_control_domain) //vm
             {
-                List<VIF> vifs = this.Connection.ResolveAll(this.VIFs);
+                var vifs = this.Connection.ResolveAll(this.VIFs);
                 vifs.Sort();
 
                 foreach (var vif in vifs)
@@ -1720,10 +1720,10 @@ namespace XenAPI
             }
             else //control domain
             {
-                List<PIF> pifList = new List<PIF>(this.Connection.Cache.PIFs);
+                var pifList = new List<PIF>(this.Connection.Cache.PIFs);
                 pifList.Sort(); // This sort ensures that the primary PIF comes before other management PIFs
 
-                foreach (PIF pif in pifList)
+                foreach (var pif in pifList)
                 {
                     if (pif.host.opaque_ref != this.resident_on.opaque_ref || !pif.currently_attached)
                         continue;
@@ -1737,7 +1737,7 @@ namespace XenAPI
 
             //find first IPv4 address and return it - we would use it if there is one
             IPAddress addr;
-            foreach (string addrString in ipAddresses)
+            foreach (var addrString in ipAddresses)
                 if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                     return addrString;
 
