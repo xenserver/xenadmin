@@ -44,9 +44,9 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    public partial class VM : IComparable<VM>
+    public partial class VM
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         // The following variables are only used when the corresponding variable is missing from
         // the recommendations field of the VM (which is inherited from the recommendations field
         // of the template it was created from). This should not normally happen, so we just use
@@ -96,9 +96,6 @@ namespace XenAPI
         /// Returns true if the VM's pool has HA enabled and the VM has a saved restart priority other than DoNotRestart.
         /// Does not take account of ha-always-run.
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="vm"></param>
-        /// <returns></returns>
         public bool HasSavedRestartPriority()
         {
             var pool = Helpers.GetPoolOfOne(Connection);
@@ -587,7 +584,7 @@ namespace XenAPI
             _virtualizationTimer.Start();
         }
 
-        void VirtualizationTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void VirtualizationTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             NotifyPropertyChanged("virtualisation_status");
         }
