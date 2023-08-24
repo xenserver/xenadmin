@@ -147,10 +147,8 @@ namespace XenAPI
                 vbds.Sort();
                 return vbds[0];
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public SR FindVMCDROMSR()
@@ -286,11 +284,10 @@ namespace XenAPI
                 int weight;
                 if (int.TryParse(VCPUs_params["weight"], out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
                     return weight > 0 ? weight : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
-                else
-                    return 65536; // could not parse number, assume max
+                return 65536; // could not parse number, assume max
             }
-            else
-                return 256;
+
+            return 256;
         }
 
         public void SetVcpuWeight(int value)
@@ -496,10 +493,8 @@ namespace XenAPI
                             {
                                 return Messages.EJECT_YOUR_CD;
                             }
-                            else
-                            {
-                                return Messages.VM_USES_LOCAL_STORAGE;
-                            }
+
+                            return Messages.VM_USES_LOCAL_STORAGE;
                         }
                     }
                 }
@@ -560,9 +555,8 @@ namespace XenAPI
                 otherClass = 2;
 
             if (myClass != otherClass)
-                return (myClass - otherClass);
-            else
-                return base.CompareTo(other);
+                return myClass - otherClass;
+            return base.CompareTo(other);
         }
 
         /// <summary>
@@ -786,16 +780,14 @@ namespace XenAPI
                 {
                     return false; // we have a disk :(
                 }
-                else
-                {
-                    var vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi == null)
-                        continue;
-                    var sr = Connection.Resolve(vdi.SR);
-                    if (sr == null || sr.shared)
-                        continue;
-                    return false; // we have a shared cd
-                }
+
+                var vdi = Connection.Resolve(vbd.VDI);
+                if (vdi == null)
+                    continue;
+                var sr = Connection.Resolve(vdi.SR);
+                if (sr == null || sr.shared)
+                    continue;
+                return false; // we have a shared cd
             }
             return true; // we have no disks hooray!!
         }
@@ -1023,8 +1015,7 @@ namespace XenAPI
 
             if (os_name == "")
                 return Messages.UNKNOWN;
-            else
-                return os_name;
+            return os_name;
         }
 
         /// <summary>
@@ -1089,7 +1080,8 @@ namespace XenAPI
                 {
                     return base.NameWithLocation();
                 }
-                else if (is_a_snapshot)
+
+                if (is_a_snapshot)
                 {
                     var snapshotOf = Connection.Resolve(snapshot_of);
                     if (snapshotOf == null)
@@ -1097,7 +1089,7 @@ namespace XenAPI
 
                     return string.Format(Messages.SNAPSHOT_OF_TITLE, Name(), snapshotOf.Name(), LocationString());
                 }
-                else if (is_a_template)
+                if (is_a_template)
                 {
                     if (Helpers.IsPool(Connection))
                         return string.Format(Messages.OBJECT_IN_POOL, Name(), Connection.Name);
@@ -1606,8 +1598,7 @@ namespace XenAPI
                 case VDI.ReadCachingDisabledReasonCode.LICENSE_RESTRICTION:
                     if (Helpers.FeatureForbidden(Connection, Host.RestrictReadCaching))
                         return Messages.VM_READ_CACHING_DISABLED_REASON_LICENSE;
-                    else
-                        return Messages.VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE;
+                    return Messages.VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE;
                 case VDI.ReadCachingDisabledReasonCode.SR_NOT_SUPPORTED:
                     return Messages.VM_READ_CACHING_DISABLED_REASON_SR_TYPE;
                 case VDI.ReadCachingDisabledReasonCode.NO_RO_IMAGE:
@@ -1766,7 +1757,7 @@ namespace XenAPI
 
         public bool UsingUpstreamQemu()
         {
-            return (platform != null) &&
+            return platform != null &&
                 platform.ContainsKey("device-model") &&
                 platform["device-model"] == "qemu-upstream-compat";
         }
