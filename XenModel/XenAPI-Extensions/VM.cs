@@ -102,7 +102,7 @@ namespace XenAPI
         public bool HasSavedRestartPriority()
         {
             var pool = Helpers.GetPoolOfOne(Connection);
-            return pool != null && pool.ha_enabled && !String.IsNullOrEmpty(ha_restart_priority);
+            return pool != null && pool.ha_enabled && !string.IsNullOrEmpty(ha_restart_priority);
         }
 
         /// <summary>
@@ -990,7 +990,7 @@ namespace XenAPI
             return Util.TryParseIso8601DateTime(importDate, out var result) ? result : DateTime.MinValue;
         }
 
-        public String GetOSName()
+        public string GetOSName()
         {
             var guestMetrics = Connection.Resolve(guest_metrics);
             if (guestMetrics == null)
