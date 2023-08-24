@@ -60,7 +60,7 @@ namespace XenAPI
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
         // CP-41825: > 32 vCPUs is only supported for trusted VMs
-        public const long MAX_VCPUS_FOR_NON_TRUSTED_VMS = 32; 
+        public const long MAX_VCPUS_FOR_NON_TRUSTED_VMS = 32;
 
         private XmlDocument _xdRecommendations;
         public const int MAX_ALLOWED_VTPMS = 1;
@@ -294,7 +294,7 @@ namespace XenAPI
 
         public string InstallRepository()
         {
-           return Get(other_config, "install-repository");
+            return Get(other_config, "install-repository");
         }
 
         public string InstallDistro()
@@ -569,7 +569,7 @@ namespace XenAPI
             NotifyPropertyChanged("virtualisation_status");
             _virtualizationTimer?.Stop();
             // 2 minutes before we give up plus some breathing space
-            _virtualizationTimer = new Timer(182000) {AutoReset = false};
+            _virtualizationTimer = new Timer(182000) { AutoReset = false };
             _virtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
             _virtualizationTimer.Start();
         }
@@ -584,11 +584,11 @@ namespace XenAPI
         [Flags]
         public enum VirtualizationStatus
         {
-            NotInstalled               = 0,
-            Unknown                     = 1,
-            PvDriversOutOfDate      = 2,
-            IoDriversInstalled        = 4,
-            ManagementInstalled        = 8,
+            NotInstalled = 0,
+            Unknown = 1,
+            PvDriversOutOfDate = 2,
+            IoDriversInstalled = 4,
+            ManagementInstalled = 8,
         };
 
         public string GetVirtualizationWarningMessages()
@@ -597,21 +597,21 @@ namespace XenAPI
 
             if (status.HasFlag(VirtualizationStatus.IoDriversInstalled) && status.HasFlag(VirtualizationStatus.ManagementInstalled)
                 || status.HasFlag(VirtualizationStatus.Unknown))
-                    // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
-                    return "";
+                // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
+                return "";
 
             if (status.HasFlag(VirtualizationStatus.PvDriversOutOfDate))
             {
-                    var guestMetrics = Connection.Resolve(guest_metrics);
-                    if (guestMetrics != null
-                        && guestMetrics.PV_drivers_version.ContainsKey("major")
-                        && guestMetrics.PV_drivers_version.ContainsKey("minor"))
-                    {
-                        return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE, BrandManager.VmTools,
-                            guestMetrics.PV_drivers_version["major"], guestMetrics.PV_drivers_version["minor"]);
-                    }
-                    
-                    return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION, BrandManager.VmTools);
+                var guestMetrics = Connection.Resolve(guest_metrics);
+                if (guestMetrics != null
+                    && guestMetrics.PV_drivers_version.ContainsKey("major")
+                    && guestMetrics.PV_drivers_version.ContainsKey("minor"))
+                {
+                    return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE, BrandManager.VmTools,
+                        guestMetrics.PV_drivers_version["major"], guestMetrics.PV_drivers_version["minor"]);
+                }
+
+                return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION, BrandManager.VmTools);
             }
 
             return HasNewVirtualizationStates()
@@ -814,7 +814,7 @@ namespace XenAPI
             Windows = 2,
             WindowsServer = 3,
             LegacyWindows = 4,
-            Asianux  = 5,
+            Asianux = 5,
             Centos = 6,
             CoreOS = 7,
             Debian = 8,
@@ -1056,7 +1056,7 @@ namespace XenAPI
             return StringToPriority(ha_restart_priority);
         }
 
-         public override string NameWithLocation()
+        public override string NameWithLocation()
         {
             if (Connection != null)
             {
@@ -1473,7 +1473,7 @@ namespace XenAPI
         public string Topology()
         {
             var cores = GetCoresPerSocket();
-            var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max/cores : 0;
+            var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max / cores : 0;
             return GetTopology(sockets, cores);
         }
 
@@ -1768,7 +1768,7 @@ namespace XenAPI
                 cannotReason = string.Format(Messages.VTPM_MAX_REACHED, MAX_ALLOWED_VTPMS);
                 return false;
             }
-            
+
             if (power_state != vm_power_state.Halted)
             {
                 cannotReason = Messages.VTPM_POWER_STATE_WRONG_ATTACH;
