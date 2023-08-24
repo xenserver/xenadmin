@@ -32,21 +32,95 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Timers;
 using System.Xml;
+using log4net;
+using Newtonsoft.Json;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using System.Net;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-
 
 namespace XenAPI
 {
     public partial class VM
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
+
+        /// <remarks>
+        ///     AlwaysRestartHighPriority and AlwaysRestart are replaced by Restart in Boston; we still keep them for backward
+        ///     compatibility
+        /// </remarks>
+        public enum HaRestartPriority
+        {
+            AlwaysRestartHighPriority,
+            AlwaysRestart,
+            Restart,
+            BestEffort,
+            DoNotRestart
+        }
+
+        [Flags]
+        public enum VirtualizationStatus
+        {
+            NotInstalled = 0,
+            Unknown = 1,
+            PvDriversOutOfDate = 2,
+            IoDriversInstalled = 4,
+            ManagementInstalled = 8
+        }
+
+        public enum VmDescriptionType
+        {
+            None,
+            ReadOnly,
+            ReadWrite
+        }
+
+        /// <summary>
+        ///     Sort in the following order:
+        ///     1) User Templates
+        ///     2) Windows VMs
+        ///     3) Other VMs (e.g. Linux . Names in alphabetical order)
+        ///     4) Citrix VMs (e.g. XenApp templates)
+        ///     5) Misc VMs
+        ///     6) Regular snapshots
+        ///     7) Snapshots from VMPP (CA-46206)
+        ///     Last: Hidden VMs (only visible if "Show Hidden Objects" is on: see CA-39036).
+        /// </summary>
+        public enum VmTemplateType
+        {
+            NoTemplate = 0, //it's not a template
+            Custom = 1,
+            Windows = 2,
+            WindowsServer = 3,
+            LegacyWindows = 4,
+            Asianux = 5,
+            Centos = 6,
+            CoreOS = 7,
+            Debian = 8,
+            Gooroom = 9,
+            Linx = 10,
+            NeoKylin = 11,
+            Oracle = 12,
+            RedHat = 13,
+            Rocky = 14,
+            SciLinux = 15,
+            Suse = 16,
+            Turbo = 17,
+            Ubuntu = 18,
+            YinheKylin = 19,
+            Citrix = 20,
+            Solaris = 21,
+            Misc = 22,
+            Snapshot = 23,
+            SnapshotFromVmpp = 24,
+            Count = 25 //bump this if values are added
+        }
+
         // The following variables are only used when the corresponding variable is missing from
         // the recommendations field of the VM (which is inherited from the recommendations field
         // of the template it was created from). This should not normally happen, so we just use
@@ -58,12 +132,58 @@ namespace XenAPI
         public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
         public const long DEFAULT_MEM_MIN_IMG_IMPORT = 256 * Util.BINARY_MEGA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
-        public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
+
+        public const long MAX_SOCKETS = 16; // current hard limit in Xen: CA-198276
+
         // CP-41825: > 32 vCPUs is only supported for trusted VMs
         public const long MAX_VCPUS_FOR_NON_TRUSTED_VMS = 32;
+        public const int MAX_ALLOWED_VTPMS = 1;
+
+        private const string P2V_SOURCE_MACHINE = "p2v_source_machine";
+        private const string P2V_IMPORT_DATE = "p2v_import_date";
+
+        public const string RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY = "0"; //only used for Pre-Boston pools
+        public const string RESTART_PRIORITY_ALWAYS_RESTART = "1"; //only used for Pre-Boston pools
+
+        /// <summary>
+        ///     This is the new "Restart" priority in Boston, and will replace RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY and
+        ///     RESTART_PRIORITY_ALWAYS_RESTART
+        /// </summary>
+        public const string RESTART_PRIORITY_RESTART = "restart";
+
+        public const string RESTART_PRIORITY_BEST_EFFORT = "best-effort";
+        public const string RESTART_PRIORITY_DO_NOT_RESTART = "";
+
+        /// <summary>
+        ///     List of distros that we treat as Linux/Non-Windows (written in the VM.guest_metrics
+        ///     by the Linux Guest Agent after evaluating xe-linux-distribution)
+        /// </summary>
+        private static readonly string[] _linuxDistros =
+        {
+            "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
+            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom", "rocky"
+        };
+
+        private static readonly DateTime Epoch = new DateTime(1970, 1, 1);
+
+        private bool _isBeingCreated;
+
+        private DateTime _startupTime;
+
+        private Timer _virtualizationTimer;
 
         private XmlDocument _xdRecommendations;
-        public const int MAX_ALLOWED_VTPMS = 1;
+
+        [JsonIgnore]
+        public bool IsBeingCreated
+        {
+            get => _isBeingCreated;
+            set
+            {
+                _isBeingCreated = value;
+                NotifyPropertyChanged("IsBeingCreated");
+            }
+        }
 
         public int MaxVCPUsAllowed()
         {
@@ -93,8 +213,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns true if the VM's pool has HA enabled and the VM has a saved restart priority other than DoNotRestart.
-        /// Does not take account of ha-always-run.
+        ///     Returns true if the VM's pool has HA enabled and the VM has a saved restart priority other than DoNotRestart.
+        ///     Does not take account of ha-always-run.
         /// </summary>
         public bool HasSavedRestartPriority()
         {
@@ -103,19 +223,20 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the given VM's home, i.e. the host under which we are going to display it.  May return null, if this VM should live
-        /// at the pool level. For a normal VM, we look at (1) where it's running; (2) where its storage forces it to run;
-        /// (3) what its affinity is (its requested but not guaranteed host).
+        ///     Get the given VM's home, i.e. the host under which we are going to display it.  May return null, if this VM should
+        ///     live
+        ///     at the pool level. For a normal VM, we look at (1) where it's running; (2) where its storage forces it to run;
+        ///     (3) what its affinity is (its requested but not guaranteed host).
         /// </summary>
         public virtual Host Home()
         {
-            if (is_a_snapshot)  // Snapshots have the same "home" as their VM. This is necessary to make a pool-server-VM-snapshot tree (CA-76273).
+            if (is_a_snapshot) // Snapshots have the same "home" as their VM. This is necessary to make a pool-server-VM-snapshot tree (CA-76273).
             {
                 var from = Connection.Resolve(snapshot_of);
                 return from?.Home(); // "from" can be null if VM has been deleted
             }
 
-            if (is_a_template)  // Templates (apart from snapshots) don't have a "home", even if their affinity is set CA-36286
+            if (is_a_template) // Templates (apart from snapshots) don't have a "home", even if their affinity is set CA-36286
                 return null;
 
             if (power_state == vm_power_state.Running)
@@ -163,6 +284,7 @@ namespace XenAPI
                 var hostName = name_label.Substring(controlDomain.Length);
                 return string.Format(Messages.CONTROL_DOM_ON_HOST, hostName);
             }
+
             return name_label;
         }
 
@@ -225,7 +347,6 @@ namespace XenAPI
         {
             foreach (var theVBD in Connection.ResolveAll(VBDs))
             {
-
                 if (ignoreCDs && theVBD.type == vbd_type.CD)
                     continue;
                 var theVDI = Connection.Resolve(theVBD.VDI);
@@ -234,17 +355,14 @@ namespace XenAPI
                     continue;
                 var theSr = Connection.Resolve(theVDI.SR);
                 var host = theSr?.GetStorageHost();
-                if (host != null)
-                {
-                    return host;
-                }
+                if (host != null) return host;
             }
 
             return null;
         }
 
         /// <remarks>
-        /// Default on server is CD - disk then optical
+        ///     Default on server is CD - disk then optical
         /// </remarks>
         public string GetBootOrder()
         {
@@ -269,8 +387,12 @@ namespace XenAPI
             if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
             {
                 int weight;
-                if (int.TryParse(VCPUs_params["weight"], out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
-                    return weight > 0 ? weight : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
+                if (int.TryParse(VCPUs_params["weight"],
+                        out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
+                    return
+                        weight > 0
+                            ? weight
+                            : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
                 return 65536; // could not parse number, assume max
             }
 
@@ -355,11 +477,12 @@ namespace XenAPI
                    guestMetrics.networks.Count > 0;
         }
 
-        /// <summary>Returns true if
-        /// 1) the guest is HVM and
-        ///   2a) the allow-gpu-passthrough restriction is absent or
-        ///   2b) the allow-gpu-passthrough restriction is non-zero
-        ///</summary>
+        /// <summary>
+        ///     Returns true if
+        ///     1) the guest is HVM and
+        ///     2a) the allow-gpu-passthrough restriction is absent or
+        ///     2b) the allow-gpu-passthrough restriction is non-zero
+        /// </summary>
         public bool CanHaveGpu()
         {
             if (!IsHVM())
@@ -397,11 +520,12 @@ namespace XenAPI
             return false;
         }
 
-        /// <summary>Returns true if
-        /// 1) the guest is HVM and
-        ///   2a) the allow-vgpu restriction is absent or
-        ///   2b) the allow-vgpu restriction is non-zero
-        ///</summary>
+        /// <summary>
+        ///     Returns true if
+        ///     1) the guest is HVM and
+        ///     2a) the allow-vgpu restriction is absent or
+        ///     2b) the allow-vgpu restriction is non-zero
+        /// </summary>
         public bool CanHaveVGpu()
         {
             if (!IsHVM() || !CanHaveGpu())
@@ -415,40 +539,6 @@ namespace XenAPI
 
             return true;
         }
-
-        #region Boot Mode
-
-        public bool IsDefaultBootModeUefi()
-        {
-            var firmware = Get(HVM_boot_params, "firmware")?.Trim().ToLower();
-            return firmware == "uefi";
-        }
-
-        public string GetSecureBootMode()
-        {
-            return Get(platform, "secureboot")?.Trim().ToLower();
-        }
-
-        public bool SupportsUefiBoot()
-        {
-            return GetRecommendationByField("supports-uefi") == "yes";
-        }
-
-        public bool SupportsSecureUefiBoot()
-        {
-            return GetRecommendationByField("supports-secure-boot") == "yes";
-        }
-
-        private string GetRecommendationByField(string fieldName)
-        {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
-
-            return xn?.Attributes?["value"]?.Value ?? string.Empty;
-        }
-
-        #endregion
 
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
@@ -476,16 +566,14 @@ namespace XenAPI
                         var sr = Connection.Resolve(vdi.SR);
                         if (sr != null && !sr.shared)
                         {
-                            if (sr.content_type == SR.Content_Type_ISO)
-                            {
-                                return Messages.EJECT_YOUR_CD;
-                            }
+                            if (sr.content_type == SR.Content_Type_ISO) return Messages.EJECT_YOUR_CD;
 
                             return Messages.VM_USES_LOCAL_STORAGE;
                         }
                     }
                 }
             }
+
             return "";
         }
 
@@ -494,20 +582,16 @@ namespace XenAPI
             decimal totalSpace = 0;
 
             foreach (var vbd in Connection.ResolveAll(VBDs))
-            {
                 if (!vbd.IsCDROM())
                 {
                     var vdi = Connection.Resolve(vbd.VDI);
                     if (vdi != null && vdi.Show(showHiddenVMs))
                     {
                         var theSr = Connection.Resolve(vdi.SR);
-                        if (theSr != null && !theSr.IsToolsSR())
-                        {
-                            totalSpace += vdi.virtual_size;
-                        }
+                        if (theSr != null && !theSr.IsToolsSR()) totalSpace += vdi.virtual_size;
                     }
                 }
-            }
+
             return totalSpace;
         }
 
@@ -547,15 +631,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// These are the operations that make us show the orange icon for the VM in the tree
-        /// and on the Memory tab. It's shorter to add the ones that cause problems.
+        ///     These are the operations that make us show the orange icon for the VM in the tree
+        ///     and on the Memory tab. It's shorter to add the ones that cause problems.
         /// </summary>
         public static bool is_lifecycle_operation(vm_operations op)
         {
-            return op != vm_operations.changing_dynamic_range && op != vm_operations.changing_static_range && op != vm_operations.changing_memory_limits;
+            return op != vm_operations.changing_dynamic_range && op != vm_operations.changing_static_range &&
+                   op != vm_operations.changing_memory_limits;
         }
-
-        private DateTime _startupTime;
 
         public DateTime GetBodgeStartupTime()
         {
@@ -579,23 +662,12 @@ namespace XenAPI
             NotifyPropertyChanged("virtualisation_status");
         }
 
-        private Timer _virtualizationTimer;
-
-        [Flags]
-        public enum VirtualizationStatus
-        {
-            NotInstalled = 0,
-            Unknown = 1,
-            PvDriversOutOfDate = 2,
-            IoDriversInstalled = 4,
-            ManagementInstalled = 8,
-        };
-
         public string GetVirtualizationWarningMessages()
         {
             var status = GetVirtualizationStatus(out _);
 
-            if (status.HasFlag(VirtualizationStatus.IoDriversInstalled) && status.HasFlag(VirtualizationStatus.ManagementInstalled)
+            if ((status.HasFlag(VirtualizationStatus.IoDriversInstalled) &&
+                 status.HasFlag(VirtualizationStatus.ManagementInstalled))
                 || status.HasFlag(VirtualizationStatus.Unknown))
                 // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                 return "";
@@ -606,10 +678,8 @@ namespace XenAPI
                 if (guestMetrics != null
                     && guestMetrics.PV_drivers_version.ContainsKey("major")
                     && guestMetrics.PV_drivers_version.ContainsKey("minor"))
-                {
                     return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE, BrandManager.VmTools,
                         guestMetrics.PV_drivers_version["major"], guestMetrics.PV_drivers_version["minor"]);
-                }
 
                 return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION, BrandManager.VmTools);
             }
@@ -620,23 +690,20 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Virtualization Status of the VM
+        ///     Virtualization Status of the VM
         /// </summary>
-        /// 
         /// <remarks>
-        /// Following states are expected:
-        /// 
-        /// For Non-Windows VMs and for Windows VMs pre-Dundee:
-        ///   0 = Not installed
-        ///   1 = Unknown
-        ///   2 = Out of date
-        ///  12 = Tools installed (Optimized)
-        ///  
-        /// For Windows VMs on Dundee or higher:
-        ///    0 = Not installed
-        ///    1 = Unknown
-        ///    4 = I/O Optimized
-        ///   12 = I/O and Management installed
+        ///     Following states are expected:
+        ///     For Non-Windows VMs and for Windows VMs pre-Dundee:
+        ///     0 = Not installed
+        ///     1 = Unknown
+        ///     2 = Out of date
+        ///     12 = Tools installed (Optimized)
+        ///     For Windows VMs on Dundee or higher:
+        ///     0 = Not installed
+        ///     1 = Unknown
+        ///     4 = I/O Optimized
+        ///     12 = I/O and Management installed
         /// </remarks>
         public VirtualizationStatus GetVirtualizationStatus(out string friendlyStatus)
         {
@@ -672,7 +739,9 @@ namespace XenAPI
 
             if (vmGuestMetrics == null || !vmGuestMetrics.PV_drivers_installed())
                 if (lessThanTwoMin)
+                {
                     return VirtualizationStatus.Unknown;
+                }
                 else
                 {
                     friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
@@ -695,9 +764,9 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Is this a Windows VM on Dundee or higher host?
-        /// We need to know this, because for those VMs virtualization status is defined differently.
-        /// This does not mean new(ly created) VM
+        ///     Is this a Windows VM on Dundee or higher host?
+        ///     We need to know this, because for those VMs virtualization status is defined differently.
+        ///     This does not mean new(ly created) VM
         /// </summary>
         public bool HasNewVirtualizationStates()
         {
@@ -705,10 +774,10 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns whether this VM support ballooning.
-        /// Real VMs support ballooning if tools are installed on a balloonable OS.
-        /// For templates we cannot tell whether tools are installed, so ballooning is
-        /// supported if and only if dynamic min != static_max (CA-34258/CA-34260).
+        ///     Returns whether this VM support ballooning.
+        ///     Real VMs support ballooning if tools are installed on a balloonable OS.
+        ///     For templates we cannot tell whether tools are installed, so ballooning is
+        ///     supported if and only if dynamic min != static_max (CA-34258/CA-34260).
         /// </summary>
         public bool SupportsBallooning()
         {
@@ -723,7 +792,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether the VM uses ballooning (has different setting of dynamic_max and static_max)
+        ///     Whether the VM uses ballooning (has different setting of dynamic_max and static_max)
         /// </summary>
         public bool UsesBallooning()
         {
@@ -731,7 +800,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether the VM should be shown to the user in the GUI.
+        ///     Whether the VM should be shown to the user in the GUI.
         /// </summary>
         public override bool Show(bool showHiddenVMs)
         {
@@ -745,11 +814,10 @@ namespace XenAPI
                 return true;
 
             return !IsHidden();
-
         }
 
         /// <summary>
-        /// Returns whether the other_config.HideFromXenCenter flag is set to true.
+        ///     Returns whether the other_config.HideFromXenCenter flag is set to true.
         /// </summary>
         public override bool IsHidden()
         {
@@ -762,10 +830,7 @@ namespace XenAPI
                 return false;
             foreach (var vbd in Connection.ResolveAll(VBDs))
             {
-                if (vbd.type == vbd_type.Disk)
-                {
-                    return false; // we have a disk :(
-                }
+                if (vbd.type == vbd_type.Disk) return false; // we have a disk :(
 
                 var vdi = Connection.Resolve(vbd.VDI);
                 if (vdi == null)
@@ -775,66 +840,14 @@ namespace XenAPI
                     continue;
                 return false; // we have a shared cd
             }
+
             return true; // we have no disks hooray!!
         }
 
-        private const string P2V_SOURCE_MACHINE = "p2v_source_machine";
-        private const string P2V_IMPORT_DATE = "p2v_import_date";
-
         public bool IsP2V()
         {
-            return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) && other_config.ContainsKey(P2V_IMPORT_DATE);
-        }
-
-        /// <summary>
-        /// List of distros that we treat as Linux/Non-Windows (written in the VM.guest_metrics
-        /// by the Linux Guest Agent after evaluating xe-linux-distribution)
-        /// </summary>
-        private static string[] _linuxDistros =
-        {
-            "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
-            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom", "rocky"
-        };
-
-        /// <summary>
-        /// Sort in the following order:
-        /// 1) User Templates
-        /// 2) Windows VMs
-        /// 3) Other VMs (e.g. Linux . Names in alphabetical order)
-        /// 4) Citrix VMs (e.g. XenApp templates)
-        /// 5) Misc VMs
-        /// 6) Regular snapshots
-        /// 7) Snapshots from VMPP (CA-46206)
-        /// Last: Hidden VMs (only visible if "Show Hidden Objects" is on: see CA-39036).
-        /// </summary>
-        public enum VmTemplateType
-        {
-            NoTemplate = 0,//it's not a template
-            Custom = 1,
-            Windows = 2,
-            WindowsServer = 3,
-            LegacyWindows = 4,
-            Asianux = 5,
-            Centos = 6,
-            CoreOS = 7,
-            Debian = 8,
-            Gooroom = 9,
-            Linx = 10,
-            NeoKylin = 11,
-            Oracle = 12,
-            RedHat = 13,
-            Rocky = 14,
-            SciLinux = 15,
-            Suse = 16,
-            Turbo = 17,
-            Ubuntu = 18,
-            YinheKylin = 19,
-            Citrix = 20,
-            Solaris = 21,
-            Misc = 22,
-            Snapshot = 23,
-            SnapshotFromVmpp = 24,
-            Count = 25  //bump this if values are added
+            return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) &&
+                   other_config.ContainsKey(P2V_IMPORT_DATE);
         }
 
         public VmTemplateType TemplateType()
@@ -936,8 +949,6 @@ namespace XenAPI
             }
         }
 
-        public enum VmDescriptionType { None, ReadOnly, ReadWrite }
-
         public override string Description()
         {
             // Don't i18n this
@@ -956,7 +967,9 @@ namespace XenAPI
 
         public string P2V_SourceMachine()
         {
-            return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) ? other_config[P2V_SOURCE_MACHINE] : "";
+            return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE)
+                ? other_config[P2V_SOURCE_MACHINE]
+                : "";
         }
 
         public DateTime P2V_ImportDate()
@@ -1003,8 +1016,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Gets the time this VM started, in server time, UTC.  Returns DateTime.MinValue if there are no VM_metrics
-        /// to read.
+        ///     Gets the time this VM started, in server time, UTC.  Returns DateTime.MinValue if there are no VM_metrics
+        ///     to read.
         /// </summary>
         public DateTime GetStartTime()
         {
@@ -1014,16 +1027,13 @@ namespace XenAPI
 
             return metrics.start_time;
         }
-        private static readonly DateTime Epoch = new DateTime(1970, 1, 1);
 
         public PrettyTimeSpan RunningTime()
         {
             if (power_state != vm_power_state.Running &&
                 power_state != vm_power_state.Paused &&
                 power_state != vm_power_state.Suspended)
-            {
                 return null;
-            }
 
             var startTime = GetStartTime();
             if (startTime == Epoch || startTime == DateTime.MinValue)
@@ -1032,7 +1042,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns DateTime.MinValue if the date is not present in other_config.
+        ///     Returns DateTime.MinValue if the date is not present in other_config.
         /// </summary>
         public DateTime LastShutdownTime()
         {
@@ -1042,14 +1052,9 @@ namespace XenAPI
                 : DateTime.MinValue;
         }
 
-        /// <remarks>
-        /// AlwaysRestartHighPriority and AlwaysRestart are replaced by Restart in Boston; we still keep them for backward compatibility
-        /// </remarks>
-        public enum HaRestartPriority { AlwaysRestartHighPriority, AlwaysRestart, Restart, BestEffort, DoNotRestart };
-
         /// <summary>
-        /// An enum-ified version of ha_restart_priority: use this one instead.
-        /// NB setting this property does not change ha-always-run.
+        ///     An enum-ified version of ha_restart_priority: use this one instead.
+        ///     NB setting this property does not change ha-always-run.
         /// </summary>
         public HaRestartPriority HARestartPriority()
         {
@@ -1060,10 +1065,7 @@ namespace XenAPI
         {
             if (Connection != null)
             {
-                if (IsRealVm())
-                {
-                    return base.NameWithLocation();
-                }
+                if (IsRealVm()) return base.NameWithLocation();
 
                 if (is_a_snapshot)
                 {
@@ -1073,6 +1075,7 @@ namespace XenAPI
 
                     return string.Format(Messages.SNAPSHOT_OF_TITLE, Name(), snapshotOf.Name(), LocationString());
                 }
+
                 if (is_a_template)
                 {
                     if (Helpers.IsPool(Connection))
@@ -1108,7 +1111,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns true if VM's restart priority is AlwaysRestart or AlwaysRestartHighPriority.
+        ///     Returns true if VM's restart priority is AlwaysRestart or AlwaysRestartHighPriority.
         /// </summary>
         public bool HaPriorityIsRestart()
         {
@@ -1125,17 +1128,8 @@ namespace XenAPI
             return HaRestartPriority.Restart;
         }
 
-        public const string RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY = "0"; //only used for Pre-Boston pools
-        public const string RESTART_PRIORITY_ALWAYS_RESTART = "1"; //only used for Pre-Boston pools
         /// <summary>
-        /// This is the new "Restart" priority in Boston, and will replace RESTART_PRIORITY_ALWAYS_RESTART_HIGH_PRIORITY and RESTART_PRIORITY_ALWAYS_RESTART
-        /// </summary>
-        public const string RESTART_PRIORITY_RESTART = "restart";
-        public const string RESTART_PRIORITY_BEST_EFFORT = "best-effort";
-        public const string RESTART_PRIORITY_DO_NOT_RESTART = "";
-
-        /// <summary>
-        /// Parses a HA_Restart_Priority into a string the server understands.
+        ///     Parses a HA_Restart_Priority into a string the server understands.
         /// </summary>
         /// <param name="priority"></param>
         /// <returns></returns>
@@ -1174,16 +1168,15 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether HA is capable of restarting this VM (i.e. the VM is not a template or control domain).
+        ///     Whether HA is capable of restarting this VM (i.e. the VM is not a template or control domain).
         /// </summary>
         public bool HaCanProtect(bool showHiddenVMs)
         {
             return IsRealVm() && Show(showHiddenVMs);
-
         }
 
         /// <summary>
-        /// True if this VM's ha_restart_priority is not "Do not restart" and its pool has ha_enabled true.
+        ///     True if this VM's ha_restart_priority is not "Do not restart" and its pool has ha_enabled true.
         /// </summary>
         public bool HAIsProtected()
         {
@@ -1196,7 +1189,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Calls set_ha_restart_priority
+        ///     Calls set_ha_restart_priority
         /// </summary>
         /// <param name="priority"></param>
         public static void SetHaRestartPriority(Session session, VM vm, HaRestartPriority priority)
@@ -1228,6 +1221,7 @@ namespace XenAPI
                 if (Array.IndexOf(sm.capabilities, "VDI_CLONE") != -1)
                     return true;
             }
+
             return false;
         }
 
@@ -1242,11 +1236,12 @@ namespace XenAPI
 
                 return true;
             }
+
             return false;
         }
 
         /// <summary>
-        /// Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
+        ///     Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
         /// </summary>
         public bool IsControlDomainZero(out Host host)
         {
@@ -1274,7 +1269,6 @@ namespace XenAPI
                 return false;
 
             foreach (var pbd in Connection.Cache.PBDs)
-            {
                 if (pbd != null &&
                     pbd.other_config.TryGetValue("storage_driver_domain", out var vmRef) &&
                     vmRef == opaque_ref)
@@ -1283,7 +1277,6 @@ namespace XenAPI
                     if (sr != null)
                         return true;
                 }
-            }
 
             return false;
         }
@@ -1291,18 +1284,6 @@ namespace XenAPI
         public bool IsRealVm()
         {
             return !is_a_snapshot && !is_a_template && !is_control_domain;
-        }
-
-        private bool _isBeingCreated;
-        [JsonIgnore]
-        public bool IsBeingCreated
-        {
-            get { return _isBeingCreated; }
-            set
-            {
-                _isBeingCreated = value;
-                NotifyPropertyChanged("IsBeingCreated");
-            }
         }
 
         public XmlNode ProvisionXml()
@@ -1339,8 +1320,8 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// The name label of the VM's affinity server, or None if it is not set
-        /// (This is what the UI calls the "home server", but is not the same as VM.Home).
+        ///     The name label of the VM's affinity server, or None if it is not set
+        ///     (This is what the UI calls the "home server", but is not the same as VM.Home).
         /// </summary>
         public string AffinityServerString()
         {
@@ -1358,18 +1339,13 @@ namespace XenAPI
 
         public bool BiosStringsCopied()
         {
-            if (DefaultTemplate())
-            {
-                return false;
-            }
+            if (DefaultTemplate()) return false;
 
-            if (bios_strings.Count == 0)
-            {
-                return false;
-            }
+            if (bios_strings.Count == 0) return false;
 
             var value = bios_strings.ContainsKey("bios-vendor") && bios_strings["bios-vendor"] == "Xen"
-                                                                && bios_strings.ContainsKey("system-manufacturer") && bios_strings["system-manufacturer"] == "Xen";
+                                                                && bios_strings.ContainsKey("system-manufacturer") &&
+                                                                bios_strings["system-manufacturer"] == "Xen";
 
             return !value;
         }
@@ -1377,12 +1353,8 @@ namespace XenAPI
         public bool HasCD()
         {
             foreach (var vbd in Connection.ResolveAll(VBDs))
-            {
                 if (vbd.IsCDROM())
-                {
                     return true;
-                }
-            }
             return false;
         }
 
@@ -1398,6 +1370,7 @@ namespace XenAPI
                 var vGPUs = Connection.ResolveAll(VGPUs);
                 return vGPUs.Any(vGPU => vGPU != null && vGPU.IsPassthrough());
             }
+
             return false;
         }
 
@@ -1407,10 +1380,7 @@ namespace XenAPI
             foreach (var vbd in vbds)
             {
                 var vdi = vbd?.Connection.Resolve(vbd.VDI);
-                if (vdi != null)
-                {
-                    yield return vdi.Connection.Resolve(vdi.SR);
-                }
+                if (vdi != null) yield return vdi.Connection.Resolve(vdi.SR);
             }
         }
 
@@ -1427,8 +1397,11 @@ namespace XenAPI
             if (platform != null && platform.ContainsKey("cores-per-socket"))
             {
                 long coresPerSocket;
-                return long.TryParse(platform["cores-per-socket"], out coresPerSocket) ? coresPerSocket : DEFAULT_CORES_PER_SOCKET;
+                return long.TryParse(platform["cores-per-socket"], out coresPerSocket)
+                    ? coresPerSocket
+                    : DEFAULT_CORES_PER_SOCKET;
             }
+
             return DEFAULT_CORES_PER_SOCKET;
         }
 
@@ -1450,6 +1423,7 @@ namespace XenAPI
                 if (coresPerSocket > maxCoresPerSocket)
                     maxCoresPerSocket = coresPerSocket;
             }
+
             return maxCoresPerSocket;
         }
 
@@ -1467,6 +1441,7 @@ namespace XenAPI
                 if (noOfVCPUs / coresPerSocket > MAX_SOCKETS)
                     return Messages.CPU_TOPOLOGY_INVALID_REASON_SOCKETS;
             }
+
             return "";
         }
 
@@ -1480,7 +1455,9 @@ namespace XenAPI
         public static string GetTopology(long sockets, long cores)
         {
             if (sockets == 0) // invalid cores value
-                return cores == 1 ? string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE_1) : string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
+                return cores == 1
+                    ? string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE_1)
+                    : string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
             if (sockets == 1 && cores == 1)
                 return Messages.CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE;
             if (sockets == 1)
@@ -1504,7 +1481,8 @@ namespace XenAPI
         public VDI CloudConfigDrive()
         {
             var vbds = Connection.ResolveAll(VBDs);
-            return vbds.Select(vbd => Connection.Resolve(vbd.VDI)).FirstOrDefault(vdi => vdi != null && vdi.IsCloudConfigDrive());
+            return vbds.Select(vbd => Connection.Resolve(vbd.VDI))
+                .FirstOrDefault(vdi => vdi != null && vdi.IsCloudConfigDrive());
         }
 
         public bool CanHaveCloudConfigDrive()
@@ -1539,7 +1517,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Return the list of VDIs that have Read Caching enabled
+        ///     Return the list of VDIs that have Read Caching enabled
         /// </summary>
         public List<VDI> ReadCachingVDIs()
         {
@@ -1551,6 +1529,7 @@ namespace XenAPI
                 if (vdi != null && residentHost != null && vdi.ReadCachingEnabled(residentHost))
                     readCachingVdis.Add(vdi);
             }
+
             return readCachingVdis;
         }
 
@@ -1593,26 +1572,26 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether the VM can be moved inside the pool (vdi copy + destroy) 
+        ///     Whether the VM can be moved inside the pool (vdi copy + destroy)
         /// </summary>
         public bool CanBeMoved()
         {
             if (SRs().Any(sr => sr != null && sr.HBALunPerVDI()))
                 return false;
 
-            if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
-            {
+            if (!is_a_template && !Locked && allowed_operations != null &&
+                allowed_operations.Contains(vm_operations.export) &&
+                power_state != vm_power_state.Suspended)
                 return Connection.ResolveAll(VBDs).Find(v => v.GetIsOwner()) != null;
-            }
             return false;
         }
 
         /// <summary>
-        /// Returns whether this is a Windows VM by checking the distro value in the
-        /// guest_metrics before falling back to the viridian flag. The result may not be
-        /// correct at all times (a Linux distro can be detected if the guest agent is
-        /// running on the VM). It is more reliable if the VM has already booted once, and
-        /// also works for the "Other Install Media" template and unbooted VMs made from it.
+        ///     Returns whether this is a Windows VM by checking the distro value in the
+        ///     guest_metrics before falling back to the viridian flag. The result may not be
+        ///     correct at all times (a Linux distro can be detected if the guest agent is
+        ///     running on the VM). It is more reliable if the VM has already booted once, and
+        ///     also works for the "Other Install Media" template and unbooted VMs made from it.
         /// </summary>
         public bool IsWindows()
         {
@@ -1648,7 +1627,8 @@ namespace XenAPI
         {
             if (!string.IsNullOrEmpty(last_booted_record))
             {
-                var regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
+                var regex = new Regex(
+                    "'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
 
                 var v = regex.Match(last_booted_record);
                 if (v.Success)
@@ -1667,7 +1647,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns the VM IP address for SSH login.
+        ///     Returns the VM IP address for SSH login.
         /// </summary>
         public string IPAddressForSSH()
         {
@@ -1700,17 +1680,14 @@ namespace XenAPI
                     if (pif.host.opaque_ref != resident_on.opaque_ref || !pif.currently_attached)
                         continue;
 
-                    if (pif.IsManagementInterface(false))
-                    {
-                        ipAddresses.Add(pif.IP);
-                    }
+                    if (pif.IsManagementInterface(false)) ipAddresses.Add(pif.IP);
                 }
             }
 
             //find first IPv4 address and return it - we would use it if there is one
             IPAddress addr;
             foreach (var addrString in ipAddresses)
-                if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == AddressFamily.InterNetwork)
                     return addrString;
 
             //return the first address (this will not be IPv4)
@@ -1739,11 +1716,12 @@ namespace XenAPI
         public bool UsingUpstreamQemu()
         {
             return platform != null &&
-                platform.ContainsKey("device-model") &&
-                platform["device-model"] == "qemu-upstream-compat";
+                   platform.ContainsKey("device-model") &&
+                   platform["device-model"] == "qemu-upstream-compat";
         }
+
         /// <summary>
-        /// Whether the VM's boot mode can be changed. A VM's boot mode cannot be changed once the VM has been started.
+        ///     Whether the VM's boot mode can be changed. A VM's boot mode cannot be changed once the VM has been started.
         /// </summary>
         public bool CanChangeBootMode()
         {
@@ -1790,6 +1768,40 @@ namespace XenAPI
 
             return true;
         }
+
+        #region Boot Mode
+
+        public bool IsDefaultBootModeUefi()
+        {
+            var firmware = Get(HVM_boot_params, "firmware")?.Trim().ToLower();
+            return firmware == "uefi";
+        }
+
+        public string GetSecureBootMode()
+        {
+            return Get(platform, "secureboot")?.Trim().ToLower();
+        }
+
+        public bool SupportsUefiBoot()
+        {
+            return GetRecommendationByField("supports-uefi") == "yes";
+        }
+
+        public bool SupportsSecureUefiBoot()
+        {
+            return GetRecommendationByField("supports-secure-boot") == "yes";
+        }
+
+        private string GetRecommendationByField(string fieldName)
+        {
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
+
+            return xn?.Attributes?["value"]?.Value ?? string.Empty;
+        }
+
+        #endregion
     }
 
     public struct VMStartupOptions
@@ -1812,7 +1824,12 @@ namespace XenAPI
         }
     }
 
-    public enum VmBootMode { Bios, Uefi, SecureUefi }
+    public enum VmBootMode
+    {
+        Bios,
+        Uefi,
+        SecureUefi
+    }
 
     public static class BootModeExtensions
     {
