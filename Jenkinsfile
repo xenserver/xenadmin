@@ -1,6 +1,6 @@
 #!groovy
 
-/* Copyright (c) Cloud Software Group, Inc. 
+/* Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms,
  * with or without modification, are permitted provided
@@ -30,10 +30,10 @@
  * SUCH DAMAGE.
  */
 
-def XENADMIN_BRANDING_TAG = 'v5.1'
+def XENADMIN_BRANDING_TAG = 'v5.2'
 
-@Library(['PacmanSharedLibrary', "xencenter-pipeline@v4.9"])
-import com.citrix.pipeline.xencenter.*
+@Library(['PacmanSharedLibrary', "xencenter-pipeline@v4.10"])
+import com.xenserver.pipeline.xencenter.*
 
 properties([
     [
