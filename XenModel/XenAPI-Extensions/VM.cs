@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -187,13 +188,7 @@ namespace XenAPI
 
         public int MaxVCPUsAllowed()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
-            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_NUM_VCPUS_ALLOWED;
+            return GetMaxRestrictionValue(this, "vcpus-max", DEFAULT_NUM_VCPUS_ALLOWED);
         }
 
         public int MinVCPUs()
@@ -286,6 +281,63 @@ namespace XenAPI
             }
 
             return name_label;
+        }
+
+        /// <summary>
+        /// Fetch a restriction value from all template restrictions,
+        /// falling back to a default  if none is found.
+        /// This can be used to fetch limits for resource counts on the VM&apos;s host.
+        /// See CP-44767 for more information.
+        /// <br />
+        /// Try and create wrapper methods for this call such as <see cref="GetMaxRestrictionValue{T}"/> when possible.
+        /// </summary>
+        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="defaultValue">Fallback value</param>
+        /// <param name="attribute">The XML attribute corresponding to the value we need. For instance, it's "max" for vcpus-max</param>
+        /// <param name="valuePickerFunction">A function to process the list of values and return the required one. For instance, its' the IEnumerable.Max for vcpus-max</param>
+        private T GetRestrictionValue<T>(VM vm, string field, T defaultValue, string attribute, Func<IEnumerable<T>, T> valuePickerFunction)
+        {
+            var xd = vm.GetRecommendations();
+            var xn = xd?.SelectSingleNode($@"restrictions/restriction[@field='{field}']");
+            var resultString = xn?.Attributes?[attribute]?.Value;
+            var result = defaultValue;
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                result = (T)converter.ConvertFromString(resultString);
+            }
+            catch (NotSupportedException)
+            {
+                // either the XML value cannot be converted
+                // or there is no converter
+                // we simply fall back to the default value
+            }
+
+            if (vm.is_a_template)
+            {
+                return result;
+            }
+
+            // VM is not a template, we also want to check all
+            // templates before returning a value
+            var values = Connection.Cache.VMs
+                .Where(v => v.is_a_template)
+                .Select(v => GetRestrictionValue(v, field, defaultValue, attribute, valuePickerFunction))
+                .Prepend(defaultValue);
+
+            return valuePickerFunction(values);
+        }
+
+        private T GetMaxRestrictionValue<T>(VM vm, string field, T defaultValue)
+        {
+            return GetRestrictionValue(vm, field, defaultValue, "max",v => v.Max());
+        }
+
+        private T GetMinRestrictionValue<T>(VM vm, string field, T defaultValue)
+        {
+            return GetRestrictionValue<T>(vm, field, defaultValue, "min", v => v.Min());
         }
 
         public long MaxMemAllowed()
