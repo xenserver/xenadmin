@@ -158,7 +158,7 @@ namespace XenAPI
         ///     List of distros that we treat as Linux/Non-Windows (written in the VM.guest_metrics
         ///     by the Linux Guest Agent after evaluating xe-linux-distribution)
         /// </summary>
-        private static readonly string[] _linuxDistros =
+        private static readonly string[] LinuxDistros =
         {
             "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
             "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom", "rocky"
@@ -1613,7 +1613,7 @@ namespace XenAPI
                 return false;
 
             if (guestMetrics.os_version.TryGetValue("distro", out var distro) &&
-                !string.IsNullOrEmpty(distro) && _linuxDistros.Contains(distro.ToLowerInvariant()))
+                !string.IsNullOrEmpty(distro) && LinuxDistros.Contains(distro.ToLowerInvariant()))
                 return true;
 
             if (guestMetrics.os_version.TryGetValue("uname", out var uname) &&
