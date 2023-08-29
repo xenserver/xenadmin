@@ -186,6 +186,104 @@ namespace XenAPI
             }
         }
 
+        #region Restriction Getters
+
+        /// <summary>
+        ///     Returns true if
+        ///     1) the guest is HVM and
+        ///     2a) the allow-gpu-passthrough restriction is absent or
+        ///     2b) the allow-gpu-passthrough restriction is non-zero
+        /// </summary>
+        public bool CanHaveGpu()
+        {
+            if (!IsHVM())
+                return false;
+
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
+            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result != 0;
+
+            return true;
+        }
+
+        public bool HasSriovRecommendation()
+        {
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
+            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result != 0;
+
+            return false;
+        }
+
+        public bool HasVendorDeviceRecommendation()
+        {
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
+            if (bool.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result;
+
+            Log.Error("Error parsing has-vendor-device on the template.");
+            return false;
+        }
+
+        /// <summary>
+        ///     Returns true if
+        ///     1) the guest is HVM and
+        ///     2a) the allow-vgpu restriction is absent or
+        ///     2b) the allow-vgpu restriction is non-zero
+        /// </summary>
+        public bool CanHaveVGpu()
+        {
+            if (!IsHVM() || !CanHaveGpu())
+                return false;
+
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
+            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result != 0;
+
+            return true;
+        }
+
+        public long MaxMemAllowed()
+        {
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
+            if (long.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
+
+            return DEFAULT_MEM_ALLOWED;
+        }
+
+        public int MaxVIFsAllowed()
+        {
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
+            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
+
+            return DEFAULT_NUM_VIFS_ALLOWED;
+        }
+
+        public int MaxVBDsAllowed()
+        {
+            var xd = GetRecommendations();
+
+            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
+            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
+
+            return DEFAULT_NUM_VBDS_ALLOWED;
+        }
+
         public int MaxVCPUsAllowed()
         {
             return GetMaxRestrictionValue(this, "vcpus-max", DEFAULT_NUM_VCPUS_ALLOWED);
@@ -201,6 +299,103 @@ namespace XenAPI
 
             return 1;
         }
+
+        /// <summary>
+        /// Attempt to fetch a restriction value from a VM template with the same <see cref="VM.reference_label"/>
+        /// as the input VM. This ensures that restriction values are not limiting guest capabilities when restrictions change
+        /// across server upgrades. See CP-44766 for more info.
+        /// <br />
+        /// If the a matching template can't be found, we get the value from all template restrictions,
+        /// falling back to a default  if none is found.
+        /// This can be used to fetch limits for resource counts on the VM&apos;s host.
+        /// See CP-44767 for more information.
+        /// <br />
+        /// Try and create wrapper methods for this call such as <see cref="GetMaxRestrictionValue{T}"/> when possible.
+        /// </summary>
+        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="defaultValue">Fallback value</param>
+        /// <param name="attribute">The XML attribute corresponding to the value we need. For instance, it's "max" for vcpus-max</param>
+        /// <param name="valuePickerFunction">A function to process the list of values and return the required one. For instance, its' the IEnumerable.Max for vcpus-max</param>
+        private T GetRestrictionValue<T>(VM vm, string field, T defaultValue, string attribute, Func<IEnumerable<T>, T> valuePickerFunction)
+        {
+            // CP-44766: We try to fetch the value from a matching template by cross referencing the reference_label
+            if (!vm.is_a_template && !string.IsNullOrEmpty(vm.reference_label))
+            {
+                var matchingTemplate = Connection.Cache.VMs
+                    .FirstOrDefault(v => v.is_a_template && v.reference_label == vm.reference_label);
+
+                if (matchingTemplate != null)
+                {
+                    return GetRestrictionValue(matchingTemplate, field, defaultValue, attribute, valuePickerFunction);
+                }
+            }
+
+            var xd = vm.GetRecommendations();
+            var xn = xd?.SelectSingleNode($@"restrictions/restriction[@field='{field}']");
+            var resultString = xn?.Attributes?[attribute]?.Value;
+            var result = defaultValue;
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                result = (T)converter.ConvertFromString(resultString);
+            }
+            catch (NotSupportedException)
+            {
+                // either the XML value cannot be converted
+                // or there is no converter
+                // we simply fall back to the default value
+            }
+
+            if (vm.is_a_template)
+            {
+                return result;
+            }
+
+            // VM is not a template, we also want to check all
+            // templates before returning a value
+            var values = Connection.Cache.VMs
+                .Where(v => v.is_a_template)
+                .Select(v => GetRestrictionValue(v, field, defaultValue, attribute, valuePickerFunction))
+                .Prepend(defaultValue);
+
+            return valuePickerFunction(values);
+        }
+
+        private T GetMaxRestrictionValue<T>(VM vm, string field, T defaultValue)
+        {
+            return GetRestrictionValue(vm, field, defaultValue, "max", v => v.Max());
+        }
+
+        private T GetMinRestrictionValue<T>(VM vm, string field, T defaultValue)
+        {
+            return GetRestrictionValue<T>(vm, field, defaultValue, "min", v => v.Min());
+        }
+        private XmlDocument GetRecommendations()
+        {
+            if (_xdRecommendations != null)
+                return _xdRecommendations;
+
+            if (string.IsNullOrEmpty(recommendations))
+                return null;
+
+            _xdRecommendations = new XmlDocument();
+
+            try
+            {
+                _xdRecommendations.LoadXml(recommendations);
+            }
+            catch
+            {
+                _xdRecommendations = null;
+            }
+
+            return _xdRecommendations;
+        }
+
+        #endregion
+
 
         public bool IsRunning()
         {
@@ -281,134 +476,6 @@ namespace XenAPI
             }
 
             return name_label;
-        }
-
-        /// <summary>
-        /// Attempt to fetch a restriction value from a VM template with the same <see cref="VM.reference_label"/>
-        /// as the input VM. This ensures that restriction values are not limiting guest capabilities when restrictions change
-        /// across server upgrades. See CP-44766 for more info.
-        /// <br />
-        /// If the a matching template can't be found, we get the value from all template restrictions,
-        /// falling back to a default  if none is found.
-        /// This can be used to fetch limits for resource counts on the VM&apos;s host.
-        /// See CP-44767 for more information.
-        /// <br />
-        /// Try and create wrapper methods for this call such as <see cref="GetMaxRestrictionValue{T}"/> when possible.
-        /// </summary>
-        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
-        /// <param name="vm">The VM whose restrictions we're looking for</param>
-        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
-        /// <param name="defaultValue">Fallback value</param>
-        /// <param name="attribute">The XML attribute corresponding to the value we need. For instance, it's "max" for vcpus-max</param>
-        /// <param name="valuePickerFunction">A function to process the list of values and return the required one. For instance, its' the IEnumerable.Max for vcpus-max</param>
-        private T GetRestrictionValue<T>(VM vm, string field, T defaultValue, string attribute, Func<IEnumerable<T>, T> valuePickerFunction)
-        {
-            // CP-44766: We try to fetch the value from a matching template by cross referencing the reference_label
-            if (!vm.is_a_template && !string.IsNullOrEmpty(vm.reference_label))
-            {
-                var matchingTemplate = Connection.Cache.VMs
-                    .FirstOrDefault(v => v.is_a_template && v.reference_label == vm.reference_label);
-
-                if (matchingTemplate != null)
-                {
-                    return GetRestrictionValue(matchingTemplate, field, defaultValue, attribute, valuePickerFunction);
-                }
-            }
-
-            var xd = vm.GetRecommendations();
-            var xn = xd?.SelectSingleNode($@"restrictions/restriction[@field='{field}']");
-            var resultString = xn?.Attributes?[attribute]?.Value;
-            var result = defaultValue;
-            try
-            {
-                var converter = TypeDescriptor.GetConverter(typeof(T));
-                result = (T)converter.ConvertFromString(resultString);
-            }
-            catch (NotSupportedException)
-            {
-                // either the XML value cannot be converted
-                // or there is no converter
-                // we simply fall back to the default value
-            }
-
-            if (vm.is_a_template)
-            {
-                return result;
-            }
-
-            // VM is not a template, we also want to check all
-            // templates before returning a value
-            var values = Connection.Cache.VMs
-                .Where(v => v.is_a_template)
-                .Select(v => GetRestrictionValue(v, field, defaultValue, attribute, valuePickerFunction))
-                .Prepend(defaultValue);
-
-            return valuePickerFunction(values);
-        }
-
-        private T GetMaxRestrictionValue<T>(VM vm, string field, T defaultValue)
-        {
-            return GetRestrictionValue(vm, field, defaultValue, "max",v => v.Max());
-        }
-
-        private T GetMinRestrictionValue<T>(VM vm, string field, T defaultValue)
-        {
-            return GetRestrictionValue<T>(vm, field, defaultValue, "min", v => v.Min());
-        }
-
-        public long MaxMemAllowed()
-        {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
-            if (long.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_MEM_ALLOWED;
-        }
-
-        public int MaxVIFsAllowed()
-        {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
-            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_NUM_VIFS_ALLOWED;
-        }
-
-        public int MaxVBDsAllowed()
-        {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
-            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_NUM_VBDS_ALLOWED;
-        }
-
-        private XmlDocument GetRecommendations()
-        {
-            if (_xdRecommendations != null)
-                return _xdRecommendations;
-
-            if (string.IsNullOrEmpty(recommendations))
-                return null;
-
-            _xdRecommendations = new XmlDocument();
-
-            try
-            {
-                _xdRecommendations.LoadXml(recommendations);
-            }
-            catch
-            {
-                _xdRecommendations = null;
-            }
-
-            return _xdRecommendations;
         }
 
         public Host GetStorageHost(bool ignoreCDs)
@@ -543,69 +610,6 @@ namespace XenAPI
                    // The network object contains the IP info written by the xenvif
                    // driver (which needs a 1st reboot to swap out the emulated network adapter)
                    guestMetrics.networks.Count > 0;
-        }
-
-        /// <summary>
-        ///     Returns true if
-        ///     1) the guest is HVM and
-        ///     2a) the allow-gpu-passthrough restriction is absent or
-        ///     2b) the allow-gpu-passthrough restriction is non-zero
-        /// </summary>
-        public bool CanHaveGpu()
-        {
-            if (!IsHVM())
-                return false;
-
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
-            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result != 0;
-
-            return true;
-        }
-
-        public bool HasSriovRecommendation()
-        {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
-            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result != 0;
-
-            return false;
-        }
-
-        public bool HasVendorDeviceRecommendation()
-        {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
-            if (bool.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result;
-
-            Log.Error("Error parsing has-vendor-device on the template.");
-            return false;
-        }
-
-        /// <summary>
-        ///     Returns true if
-        ///     1) the guest is HVM and
-        ///     2a) the allow-vgpu restriction is absent or
-        ///     2b) the allow-vgpu restriction is non-zero
-        /// </summary>
-        public bool CanHaveVGpu()
-        {
-            if (!IsHVM() || !CanHaveGpu())
-                return false;
-
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
-            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result != 0;
-
-            return true;
         }
 
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
