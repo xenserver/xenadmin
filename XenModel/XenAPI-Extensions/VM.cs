@@ -284,7 +284,11 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Fetch a restriction value from all template restrictions,
+        /// Attempt to fetch a restriction value from a VM template with the same <see cref="VM.reference_label"/>
+        /// as the input VM. This ensures that restriction values are not limiting guest capabilities when restrictions change
+        /// across server upgrades. See CP-44766 for more info.
+        /// <br />
+        /// If the a matching template can't be found, we get the value from all template restrictions,
         /// falling back to a default  if none is found.
         /// This can be used to fetch limits for resource counts on the VM&apos;s host.
         /// See CP-44767 for more information.
@@ -299,6 +303,18 @@ namespace XenAPI
         /// <param name="valuePickerFunction">A function to process the list of values and return the required one. For instance, its' the IEnumerable.Max for vcpus-max</param>
         private T GetRestrictionValue<T>(VM vm, string field, T defaultValue, string attribute, Func<IEnumerable<T>, T> valuePickerFunction)
         {
+            // CP-44766: We try to fetch the value from a matching template by cross referencing the reference_label
+            if (!vm.is_a_template && !string.IsNullOrEmpty(vm.reference_label))
+            {
+                var matchingTemplate = Connection.Cache.VMs
+                    .FirstOrDefault(v => v.is_a_template && v.reference_label == vm.reference_label);
+
+                if (matchingTemplate != null)
+                {
+                    return GetRestrictionValue(matchingTemplate, field, defaultValue, attribute, valuePickerFunction);
+                }
+            }
+
             var xd = vm.GetRecommendations();
             var xn = xd?.SelectSingleNode($@"restrictions/restriction[@field='{field}']");
             var resultString = xn?.Attributes?[attribute]?.Value;
