@@ -35,11 +35,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Timers;
 using System.Xml;
-using log4net;
 using Newtonsoft.Json;
 using XenAdmin;
 using XenAdmin.Core;
@@ -49,8 +47,6 @@ namespace XenAPI
 {
     public partial class VM
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
-
         /// <remarks>
         ///     AlwaysRestartHighPriority and AlwaysRestart are replaced by Restart in Boston; we still keep them for backward
         ///     compatibility
@@ -173,8 +169,6 @@ namespace XenAPI
 
         private Timer _virtualizationTimer;
 
-        private XmlDocument _xdRecommendations;
-
         [JsonIgnore]
         public bool IsBeingCreated
         {
@@ -199,36 +193,17 @@ namespace XenAPI
             if (!IsHVM())
                 return false;
 
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
-            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result != 0;
-
-            return true;
+            return GetIntRestrictionValue(this, "allow-gpu-passthrough", 1) != 0;
         }
 
         public bool HasSriovRecommendation()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
-            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result != 0;
-
-            return false;
+            return GetIntRestrictionValue(this, "allow-network-sriov", 0) != 0;
         }
 
         public bool HasVendorDeviceRecommendation()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
-            if (bool.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result;
-
-            Log.Error("Error parsing has-vendor-device on the template.");
-            return false;
+            return GetBoolRestrictionValue(this, "has-vendor-device", false);
         }
 
         /// <summary>
@@ -242,46 +217,23 @@ namespace XenAPI
             if (!IsHVM() || !CanHaveGpu())
                 return false;
 
-            var xd = GetRecommendations();
 
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
-            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
-                return result != 0;
-
-            return true;
+            return GetIntRestrictionValue(this, "allow-vgpu", 1) != 0;
         }
 
         public long MaxMemAllowed()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
-            if (long.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_MEM_ALLOWED;
+            return GetMaxRestrictionValue(this, "memory-static-max", DEFAULT_MEM_ALLOWED);
         }
 
         public int MaxVIFsAllowed()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
-            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_NUM_VIFS_ALLOWED;
+            return GetMaxRestrictionValue(this, "number-of-vifs", DEFAULT_NUM_VIFS_ALLOWED);
         }
 
         public int MaxVBDsAllowed()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
-            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
-                return result;
-
-            return DEFAULT_NUM_VBDS_ALLOWED;
+            return GetMaxRestrictionValue(this, "number-of-vbds", DEFAULT_NUM_VBDS_ALLOWED);
         }
 
         public int MaxVCPUsAllowed()
@@ -291,55 +243,58 @@ namespace XenAPI
 
         public int MinVCPUs()
         {
-            var xd = GetRecommendations();
-
-            var xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
-            if (int.TryParse(xn?.Attributes?["min"]?.Value, out var result))
-                return result;
-
-            return 1;
+            return GetMinRestrictionValue(this, "vcpus-min", 1);
         }
 
         /// <summary>
-        /// Attempt to fetch a restriction value from a VM template with the same <see cref="VM.reference_label"/>
-        /// as the input VM. This ensures that restriction values are not limiting guest capabilities when restrictions change
-        /// across server upgrades. See CP-44766 for more info.
-        /// <br />
-        /// If the a matching template can't be found, we get the value from all template restrictions,
-        /// falling back to a default  if none is found.
-        /// This can be used to fetch limits for resource counts on the VM&apos;s host.
-        /// See CP-44767 for more information.
-        /// <br />
-        /// Try and create wrapper methods for this call such as <see cref="GetMaxRestrictionValue{T}"/> when possible.
+        /// Attempt to fetch a restriction value from a VM template with the same <see cref="reference_label"/>
+        /// as the input VM.<br />
+        /// This ensures that restriction values are not limiting guest capabilities when restrictions change
+        /// across server upgrades.<br />
+        /// See CP-44766 for more info.
         /// </summary>
-        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <typeparam name="T">The nullable type of the value. For instance <see cref="Nullable{Int32}"/> should be used for vcpus-max</typeparam>
         /// <param name="vm">The VM whose restrictions we're looking for</param>
         /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
-        /// <param name="defaultValue">Fallback value</param>
         /// <param name="attribute">The XML attribute corresponding to the value we need. For instance, it's "max" for vcpus-max</param>
-        /// <param name="valuePickerFunction">A function to process the list of values and return the required one. For instance, its' the IEnumerable.Max for vcpus-max</param>
-        private T GetRestrictionValue<T>(VM vm, string field, T defaultValue, string attribute, Func<IEnumerable<T>, T> valuePickerFunction)
+        /// <returns>The value if found. If not found, null is returned instead</returns>
+        private static T? GetRestrictionValueFromMatchingTemplate<T>(VM vm, string field, string attribute) where T : struct
         {
-            // CP-44766: We try to fetch the value from a matching template by cross referencing the reference_label
             if (!vm.is_a_template && !string.IsNullOrEmpty(vm.reference_label))
             {
-                var matchingTemplate = Connection.Cache.VMs
+                var matchingTemplate = vm.Connection.Cache.VMs
                     .FirstOrDefault(v => v.is_a_template && v.reference_label == vm.reference_label);
 
                 if (matchingTemplate != null)
                 {
-                    return GetRestrictionValue(matchingTemplate, field, defaultValue, attribute, valuePickerFunction);
+                    return GetRestrictionValue<T>(matchingTemplate, field, attribute);
                 }
             }
 
+            return null;
+        }
+
+        /// <summary>
+        /// Get a value from the VM&apos;s restrictions stored in its recommendations parameter.
+        /// </summary>
+        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="attribute">The XML attribute of the restriction element corresponding to the value we need. For instance, it's "max" for vcpus-max</param>
+        /// <returns>The value if found. If not found, null is returned instead</returns>
+        private static T? GetRestrictionValue<T>(VM vm, string field, string attribute) where T : struct
+        {
             var xd = vm.GetRecommendations();
             var xn = xd?.SelectSingleNode($@"restrictions/restriction[@field='{field}']");
             var resultString = xn?.Attributes?[attribute]?.Value;
-            var result = defaultValue;
+            T? result = null;
             try
             {
                 var converter = TypeDescriptor.GetConverter(typeof(T));
-                result = (T)converter.ConvertFromString(resultString);
+                if (converter.ConvertFromString(resultString) is T convertedResult)
+                {
+                    result = convertedResult;
+                }
             }
             catch (NotSupportedException)
             {
@@ -347,31 +302,99 @@ namespace XenAPI
                 // or there is no converter
                 // we simply fall back to the default value
             }
+            return result;
+        }
 
-            if (vm.is_a_template)
-            {
-                return result;
-            }
-
-            // VM is not a template, we also want to check all
-            // templates before returning a value
-            var values = Connection.Cache.VMs
+        /// <summary>
+        /// If the a matching template can't be found, we get the value from all template restrictions,
+        /// falling back to a default  if none is found.
+        /// This can be used to fetch limits for resource counts on the VM&apos;s host.
+        /// See CP-44767 for more information.<br />
+        /// Try and create wrapper methods for this call such as <see cref="GetMaxRestrictionValue{TSource}"/> when possible.
+        /// </summary>
+        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="attribute">The XML attribute corresponding to the value we need. For instance, it's "max" for vcpus-max</param>
+        /// <returns>A list of all the non-null values present in all cached templates. This list may be empty</returns>
+        private static List<T> GetRestrictionValueAcrossTemplates<T>(IXenObject vm, string field, string attribute) where T : struct
+        {
+            return vm.Connection.Cache.VMs
                 .Where(v => v.is_a_template)
-                .Select(v => GetRestrictionValue(v, field, defaultValue, attribute, valuePickerFunction))
-                .Prepend(defaultValue);
-
-            return valuePickerFunction(values);
+                .Select(v => GetRestrictionValue<T>(v, field, attribute))
+                .Where(value => value != null)
+                .Cast<T>()
+                .ToList();
         }
 
-        private T GetMaxRestrictionValue<T>(VM vm, string field, T defaultValue)
+        /// <summary>
+        /// Get the maximum restriction value. Attempts to fetch the value using <see cref="GetRestrictionValueFromMatchingTemplate{TSource}" /> at first. <br />
+        /// If nothing is found, it looks for the maximum value in all templates using <see cref="Enumerable.Max{TSource}(IEnumerable{TSource})"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="defaultValue">Fallback value. Defaults to this value if no valid alternatives are found.</param>
+        /// <returns>The value of the matching template if found. Else the maximum non null value in all VM templates. Else, the given defaultValue</returns>
+        private static T GetMaxRestrictionValue<T>(VM vm, string field, T defaultValue) where T : struct
         {
-            return GetRestrictionValue(vm, field, defaultValue, "max", v => v.Max());
+            var value = GetRestrictionValueFromMatchingTemplate<T>(vm, field, "max");
+            if (value != null) 
+                return (T) value;
+
+            var templateValues = GetRestrictionValueAcrossTemplates<T>(vm, field, "max");
+            return templateValues.Count == 0 ? defaultValue : templateValues.Max();
         }
 
-        private T GetMinRestrictionValue<T>(VM vm, string field, T defaultValue)
+        /// <summary>
+        /// Get the minimum restriction value. Attempts to fetch the value using <see cref="GetRestrictionValueFromMatchingTemplate{TSource}" /> at first. <br />
+        /// If nothing is found, it looks for the minimum value in all templates using <see cref="Enumerable.Max{TSource}(IEnumerable{TSource})"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the value. For instance <see cref="int"/> should be used for vcpus-max</typeparam>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="defaultValue">Fallback value. Defaults to this value if no valid alternatives are found.</param>
+        /// <returns>The value of the matching template if found. Else the maximum non null value in all VM templates. Else, the given defaultValue</returns>
+        private static T GetMinRestrictionValue<T>(VM vm, string field, T defaultValue) where T : struct
         {
-            return GetRestrictionValue<T>(vm, field, defaultValue, "min", v => v.Min());
+            var value = GetRestrictionValueFromMatchingTemplate<T>(vm, field, "min");
+            if (value != null)
+                return (T)value;
+
+            var templateValues = GetRestrictionValueAcrossTemplates<T>(vm, field, "min");
+            return templateValues.Count == 0 ? defaultValue : templateValues.Min();
         }
+
+        /// <summary>
+        /// Get the restriction value. Attempts to fetch the value using <see cref="GetRestrictionValueFromMatchingTemplate{TSource}" />.
+        /// </summary>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="defaultValue">Fallback value. Defaults to this value if no matching templates with a non-null value are found.</param>
+        /// <returns>The value of the matching template if found.Else, the given defaultValue</returns>
+        private static int GetIntRestrictionValue(VM vm, string field, int defaultValue)
+        {
+            return GetRestrictionValueFromMatchingTemplate<int>(vm, field, "value") ?? defaultValue;
+        }
+
+        /// <summary>
+        /// Get the restriction value. Attempts to fetch the value using <see cref="GetRestrictionValueFromMatchingTemplate{TSource}" />.
+        /// </summary>
+        /// <param name="vm">The VM whose restrictions we're looking for</param>
+        /// <param name="field">The name of the field. For the max number of vCPUs it's vcpus-max</param>
+        /// <param name="defaultValue">Fallback value. Defaults to this value if no matching templates with a non-null value are found.</param>
+        /// <returns>The value of the matching template if found.Else, the given defaultValue</returns>
+        private static bool GetBoolRestrictionValue(VM vm, string field, bool defaultValue)
+        {
+            return GetRestrictionValueFromMatchingTemplate<bool>(vm, field, "value") ?? defaultValue;
+        }
+
+        private XmlDocument _xdRecommendations;
+
+        /// <summary>
+        /// Parse and return the content of the recommendations XML
+        /// </summary>
+        /// <returns>Parsed XML if found. null otherwise</returns>
         private XmlDocument GetRecommendations()
         {
             if (_xdRecommendations != null)
