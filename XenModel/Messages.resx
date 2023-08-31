@@ -10915,7 +10915,7 @@ If this value does not correspond to a server within the selected resource pool 
     <value>Could not find the pool update in {0}'s cache.</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>Pool partially upgraded to {0} {1}</value>
+    <value>Pool partially upgraded to {0}</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
     <value>Partially upgraded</value>

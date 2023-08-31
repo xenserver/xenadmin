@@ -651,19 +651,14 @@ namespace XenAPI
             return Get(software_version, "product_version");
         }
 
-        private string MarketingVersion(string field)
-        {
-            string s = Get(software_version, field);
-            return string.IsNullOrEmpty(s) ? ProductVersion() : s;
-        }
-
         /// <summary>
         /// Return this host's marketing version number (e.g. 5.6 Feature Pack 1),
         /// or ProductVersion (which can still be null) if it can't be found, including pre-Cowley hosts.
         /// </summary>
         public string ProductVersionText()
         {
-            return MarketingVersion("product_version_text");
+            string s = Get(software_version, "product_version_text");
+            return string.IsNullOrEmpty(s) ? ProductVersion() : s;
         }
 
         /// <summary>
@@ -672,7 +667,8 @@ namespace XenAPI
         /// </summary>
         public string ProductVersionTextShort()
         {
-            return MarketingVersion("product_version_text_short");
+            string s = Get(software_version, "product_version_text_short");
+            return string.IsNullOrEmpty(s) ? ProductVersion() : s;
         }
 
         /// <summary>
