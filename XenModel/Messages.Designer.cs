@@ -31504,7 +31504,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool partially upgraded to {0} {1}.
+        ///   Looks up a localized string similar to Pool partially upgraded to {0}.
         /// </summary>
         public static string POOL_VERSIONS_LINK_TEXT {
             get {
