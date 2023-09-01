@@ -295,9 +295,12 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             catch (Exception e)
             {
-                Log.Warn(
-                    $"Get updates for {(xenObject is Host ? "Host" : "VM")}: {(xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef)} Failed.",
-                    e);
+                if (xenObject is Host host)
+                    Log.Warn($"Get updates for host {host.Name()} ({host.opaque_ref}) failed.", e);
+                else if (xenObject is VM vm)
+                    Log.Warn($"Get updates for VM {vm.Name()} ({vm.opaque_ref}) failed.", e);
+                else
+                    Log.Warn($"Get updates for Unknown XenObject {xenObject?.Name() ?? "(unknown name)"} ({xenObject?.opaque_ref ?? "(unknown opaque_ref)"}) failed.", e);
             }
         }
 
