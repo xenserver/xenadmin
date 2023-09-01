@@ -32,7 +32,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Core;
@@ -50,14 +49,11 @@ namespace XenAdmin.TabPages
         private bool _disposed;
         private readonly CollectionChangeEventHandler Message_CollectionChangedWithInvoke;
 
-        private ArchiveMaintainer ArchiveMaintainer =>
-            _archiveMaintainers.FirstOrDefault(a => a.XenObject.Equals(XenObject));
+        private ArchiveMaintainer _archiveMaintainer;
 
-        private readonly List<ArchiveMaintainer> _archiveMaintainers;
         public PerformancePage()
         {
             InitializeComponent();
-            _archiveMaintainers = new List<ArchiveMaintainer>();
             Message_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Message_CollectionChanged);
             GraphList.SelectedGraphChanged += GraphList_SelectedGraphChanged;
             GraphList.MouseDown += GraphList_MouseDown;
@@ -82,11 +78,7 @@ namespace XenAdmin.TabPages
             if (_disposed)
                 return;
 
-            _archiveMaintainers.ForEach(a =>
-            {
-                a.Stop();
-                a.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
-            });
+            _archiveMaintainer.Dispose();
 
             if (disposing)
             {
@@ -175,34 +167,32 @@ namespace XenAdmin.TabPages
             }
             set
             {
-                lock (_archiveMaintainers)
+                DataEventList.Clear();
+                DeregEvents();
+                _xenObject = value;
+                RegEvents();
+
+                var newArchiveMaintainer = new ArchiveMaintainer(value);
+                newArchiveMaintainer.ArchivesUpdated += ArchiveMaintainer_ArchivesUpdated;
+                GraphList.ArchiveMaintainer = newArchiveMaintainer;
+                DataPlotNav.ArchiveMaintainer = newArchiveMaintainer;
+                try
                 {
-                    DataEventList.Clear();
-                    DeregEvents();
-                    _xenObject = value;
-                    RegEvents();
+                    _archiveMaintainer?.Dispose();
+                }
+                catch (ObjectDisposedException)
+                {
+                    // we have already called a dispose
+                }
+                
 
-                    _archiveMaintainers.Where(a => !a.XenObject.Equals(value)).ToList().ForEach(a =>
-                    {
-                        a.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
-                        a.Stop();
-                    });
-                    var existingArchive = _archiveMaintainers.FirstOrDefault(a => a.XenObject.Equals(value));
-                    if (existingArchive == null)
-                    {
-                        existingArchive = new ArchiveMaintainer(value);
-                        _archiveMaintainers.Add(existingArchive);
-                    }
-                    existingArchive.ArchivesUpdated += ArchiveMaintainer_ArchivesUpdated;
-                    GraphList.ArchiveMaintainer = existingArchive;
-                    DataPlotNav.ArchiveMaintainer = existingArchive;
+                _archiveMaintainer = newArchiveMaintainer;
 
-                    if (_xenObject != null)
-                    {
-                        GraphList.LoadGraphs(XenObject);
-                        LoadEvents();
-                        existingArchive.Start(); 
-                    }
+                if (_xenObject != null)
+                {
+                    GraphList.LoadGraphs(XenObject);
+                    LoadEvents();
+                    newArchiveMaintainer.Start();
                 }
                 RefreshAll();
             }
@@ -333,12 +323,7 @@ namespace XenAdmin.TabPages
         public override void PageHidden()
         {
             DeregEvents();
-
-            if (ArchiveMaintainer != null)
-            {
-                ArchiveMaintainer.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
-                ArchiveMaintainer.Stop();
-            }
+            _archiveMaintainer?.Dispose();
         }
 
         private void ArchiveMaintainer_ArchivesUpdated()

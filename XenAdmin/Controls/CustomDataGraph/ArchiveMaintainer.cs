@@ -50,7 +50,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         OneDay = 8
     }
 
-    public class ArchiveMaintainer
+    public class ArchiveMaintainer : IDisposable
     {
         private static readonly log4net.ILog Log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
@@ -88,7 +88,47 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private const int SLEEP_TIME = 5000;
 
-        private CancellationTokenSource _cancellationTokenSource;
+        private volatile bool _requestedCancellation;
+        private volatile bool _running;
+
+        private readonly object _runningLock = new object();
+        private bool RequestedCancellation
+        {
+            get
+            {
+                lock (_runningLock)
+                {
+                    return _requestedCancellation;
+                }
+            }
+            set
+            {
+                lock (_runningLock)
+                {
+                    _requestedCancellation = value;
+                }
+            }
+        }
+
+        private bool Running
+        {
+            get
+            {
+                lock (_runningLock)
+                {
+                    return _running;
+                }
+            }
+            set
+            {
+                lock (_runningLock)
+                {
+                    _running = value;
+                }
+            }
+        }
+
+
         private List<DataSet> _setsAdded;
         private List<Data_source> _dataSources = new List<Data_source>();
         private DateTime ServerNow => DateTime.UtcNow.Subtract(ClientServerOffset);
@@ -116,67 +156,65 @@ namespace XenAdmin.Controls.CustomDataGraph
             var serverWas = ServerNow;
             InitialLoad(serverWas);
 
-            while (!_cancellationTokenSource.Token.IsCancellationRequested)
+            while (!RequestedCancellation)
             {
-                if (serverWas - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
+                if (ServerNow - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
                 {
-                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
-                        _cancellationTokenSource.Token);
-                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+                    if (RequestedCancellation)
                     {
                         break;
                     }
 
-                    LastFiveSecondCollection = serverWas;
+                    LastFiveSecondCollection = ServerNow;
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
 
-                if (serverWas - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
+                if (ServerNow - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
                 {
-                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
-                        _cancellationTokenSource.Token);
-                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+                    if (RequestedCancellation)
                     {
                         break;
                     }
 
-                    LastOneMinuteCollection = serverWas;
+                    LastOneMinuteCollection = ServerNow;
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
 
-                if (serverWas - LastOneHourCollection > TimeSpan.FromHours(1))
+                if (ServerNow - LastOneHourCollection > TimeSpan.FromHours(1))
                 {
-                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
-                        _cancellationTokenSource.Token);
-                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+                    if (RequestedCancellation)
                     {
                         break;
                     }
 
-                    LastOneHourCollection = serverWas;
+                    LastOneHourCollection = ServerNow;
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
 
-                if (serverWas - LastOneDayCollection > TimeSpan.FromDays(1))
+                if (ServerNow - LastOneDayCollection > TimeSpan.FromDays(1))
                 {
-                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
-                        _cancellationTokenSource.Token);
-                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+                    if (RequestedCancellation)
                     {
                         break;
                     }
 
-                    LastOneDayCollection = serverWas;
+                    LastOneDayCollection = ServerNow;
                     Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
-
-                if (_cancellationTokenSource.Token.IsCancellationRequested)
+                if (RequestedCancellation)
                 {
                     break;
                 }
-
                 ArchivesUpdated?.Invoke();
                 Thread.Sleep(SLEEP_TIME);
+                if (RequestedCancellation)
+                {
+                    break;
+                }
             }
         }
 
@@ -199,7 +237,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             foreach (var a in Archives.Values)
                 a.ClearSets();
 
-            if (_cancellationTokenSource.Token.IsCancellationRequested)
+            if (RequestedCancellation)
             {
                 return;
             }
@@ -219,13 +257,12 @@ namespace XenAdmin.Controls.CustomDataGraph
                         break;
                 }
 
-                if (_cancellationTokenSource.Token.IsCancellationRequested)
+                if (RequestedCancellation)
                 {
                     return;
                 }
 
-                Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, XenObject,
-                    _cancellationTokenSource.Token);
+                Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, XenObject);
             }
             catch (Exception e)
             {
@@ -233,7 +270,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 Log.Error($"Failed to retrieve data sources for '{XenObject.Name()}'", e);
             }
 
-            if (_cancellationTokenSource.Token.IsCancellationRequested)
+            if (RequestedCancellation)
             {
                 return;
             }
@@ -248,7 +285,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         }
 
         private void Get(ArchiveInterval interval, Func<ArchiveInterval, IXenObject, Uri> uriBuilder,
-            Action<XmlReader, IXenObject> readerMethod, IXenObject xenObject, CancellationToken token)
+            Action<XmlReader, IXenObject> readerMethod, IXenObject xenObject)
         {
             try
             {
@@ -261,7 +298,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     using (var reader = XmlReader.Create(stream))
                     {
                         _setsAdded = new List<DataSet>();
-                        while (reader.Read() && !token.IsCancellationRequested)
+                        while (reader.Read() && !RequestedCancellation)
                         {
                             readerMethod(reader, xenObject);
                         }
@@ -513,13 +550,19 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public void Start()
         {
-            _cancellationTokenSource = new CancellationTokenSource();
-            ThreadPool.QueueUserWorkItem(StartUpdateLoop);
+            Debug.Assert(!Running, "ArchiveMaintainer is not meant to have more than one worker thread. Ensure you are not calling Start multiple times");
+            // someone already tried to dispose this archive maintainer
+            if (RequestedCancellation || Running)
+            {
+                return;
+            }
+
+            Running = ThreadPool.QueueUserWorkItem(StartUpdateLoop);
         }
 
-        public void Stop()
+        public void Dispose()
         {
-            _cancellationTokenSource.Cancel();
+            RequestedCancellation = true;
         }
 
         #endregion
