@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) Cloud Software Group, Inc. 
+# Copyright (c) Cloud Software Group, Inc.
 #
 # Redistribution and use in source and binary forms,
 # with or without modification, are permitted provided
@@ -46,17 +46,17 @@ SCRATCH_DIR=${REPO}/_scratch
 OUTPUT_DIR=${REPO}/_output
 
 #build
-MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe"
-SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.8 /p:VisualStudioVersion=16.0"
+MSBUILD="/cygdrive/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
+SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.8 /p:VisualStudioVersion=17.0"
 
 if [ ! -f "${MSBUILD}" ] ; then
   echo "DEBUG: Did not find VS Community edition. Trying Professional"
-  MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe"
+  MSBUILD="/cygdrive/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/MSBuild.exe"
 fi
 
 if [ ! -f "${MSBUILD}" ] ; then
   echo "DEBUG: Did not find VS Professional edition. Trying Enterprise"
-  MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe"
+  MSBUILD="/cygdrive/c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/MSBuild.exe"
 fi
 
 mkdir_clean ${SCRATCH_DIR}
@@ -87,7 +87,6 @@ if [ -f "${SIGN_BAT}" ] ; then
 
   cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe "${BRANDING_BRAND_CONSOLE}"
   cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${BRANDING_BRAND_CONSOLE}"
-  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${BRANDING_BRAND_CONSOLE}"
 
   for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll Microsoft.ReportViewer.Common.resources.dll Microsoft.ReportViewer.WinForms.resources.dll
   do
@@ -189,7 +188,6 @@ cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,XenModel.pdb,XenOvf.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
-   ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${OUTPUT_DIR}
 
 cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.zip *.pdb
@@ -216,7 +214,7 @@ output_xml="<?xml version=\"1.0\" ?>
             url=\"${msi_url}\"
             checksum=\"${msi_checksum}\"
             value=\"${BRANDING_XC_PRODUCT_VERSION}.${1}\"
-        />	
+        />
     </versions>
 </patchdata>"
 
