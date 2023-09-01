@@ -161,10 +161,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (ServerNow - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
                 {
                     Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+
                     if (RequestedCancellation)
-                    {
                         break;
-                    }
 
                     LastFiveSecondCollection = ServerNow;
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
@@ -173,10 +172,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (ServerNow - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
                 {
                     Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+
                     if (RequestedCancellation)
-                    {
                         break;
-                    }
 
                     LastOneMinuteCollection = ServerNow;
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
@@ -185,10 +183,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (ServerNow - LastOneHourCollection > TimeSpan.FromHours(1))
                 {
                     Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+
                     if (RequestedCancellation)
-                    {
                         break;
-                    }
 
                     LastOneHourCollection = ServerNow;
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
@@ -197,24 +194,21 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (ServerNow - LastOneDayCollection > TimeSpan.FromDays(1))
                 {
                     Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
+
                     if (RequestedCancellation)
-                    {
                         break;
-                    }
 
                     LastOneDayCollection = ServerNow;
                     Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
                 if (RequestedCancellation)
-                {
                     break;
-                }
+
                 ArchivesUpdated?.Invoke();
                 Thread.Sleep(SLEEP_TIME);
+
                 if (RequestedCancellation)
-                {
                     break;
-                }
             }
         }
 
@@ -238,9 +232,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 a.ClearSets();
 
             if (RequestedCancellation)
-            {
                 return;
-            }
 
             LoadingInitialData = true;
             ArchivesUpdated?.Invoke();
@@ -258,9 +250,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
 
                 if (RequestedCancellation)
-                {
                     return;
-                }
 
                 Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, XenObject);
             }
@@ -271,9 +261,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
 
             if (RequestedCancellation)
-            {
                 return;
-            }
 
             ArchivesUpdated?.Invoke();
             LoadingInitialData = false;
@@ -465,8 +453,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                                 : DAYS_IN_ONE_YEAR; // 366 days in a year
 
                     _currentTime =
-                        new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) *
-                                      TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
+                        new DateTime((_endTime - modInterval - _stepSize * _currentInterval * stepCount) *
+                            TimeSpan.TicksPerSecond + Util.TicksBefore1970).ToLocalTime().Ticks;
                     break;
                 }
                 case "cf":
@@ -500,7 +488,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
             }
 
-            if (reader.NodeType != XmlNodeType.Text) return;
+            if (reader.NodeType != XmlNodeType.Text) 
+                return;
+
             if (_lastNode == "entry")
             {
                 var str = reader.ReadContentAsString();
@@ -531,12 +521,14 @@ namespace XenAdmin.Controls.CustomDataGraph
             else if (_lastNode == "t")
             {
                 var str = reader.ReadContentAsString();
-                _currentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970)
+                _currentTime = new DateTime(Convert.ToInt64(str) * TimeSpan.TicksPerSecond + Util.TicksBefore1970)
                     .ToLocalTime().Ticks;
             }
             else if (_lastNode == "v")
             {
-                if (_setsAdded.Count <= _valueCount) return;
+                if (_setsAdded.Count <= _valueCount) 
+                    return;
+
                 var set = _setsAdded[_valueCount];
                 var str = reader.ReadContentAsString();
                 set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
@@ -553,9 +545,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             Debug.Assert(!Running, "ArchiveMaintainer is not meant to have more than one worker thread. Ensure you are not calling Start multiple times");
             // someone already tried to dispose this archive maintainer
             if (RequestedCancellation || Running)
-            {
                 return;
-            }
 
             Running = ThreadPool.QueueUserWorkItem(StartUpdateLoop);
         }
