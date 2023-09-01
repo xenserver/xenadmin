@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- Copyright (c) Cloud Software Group, Inc. 
+ Copyright (c) Cloud Software Group, Inc.
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -49,7 +49,6 @@
   <?define CompanyNameLegal="@COMPANY_NAME_LEGAL@"?>
   <?define CompanyNameShort="@COMPANY_NAME_SHORT@"?>
   <?define BrandConsole="@BRAND_CONSOLE@"?>
-  <?define BrandConsoleNoSpace="@BRAND_CONSOLE_NO_SPACE@"?>
   <?define BrandConsoleShort="@BRAND_CONSOLE_SHORT@"?>
   <?define BrandProduct="@PRODUCT_BRAND@"?>
   <?define FileExtBackup="xbk"?>

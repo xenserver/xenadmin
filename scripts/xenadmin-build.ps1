@@ -62,8 +62,7 @@ mkdir_clean $SCRATCH_DIR
 mkdir_clean $OUTPUT_DIR
 
 . $REPO\scripts\branding.ps1
-$appName =  $BRANDING_BRAND_CONSOLE_NO_SPACE
-$appMarketingName = $BRANDING_BRAND_CONSOLE
+$appName =  $BRANDING_BRAND_CONSOLE
 
 #package sources BEFORE applying branding
 
@@ -100,7 +99,7 @@ if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
     )
 
     foreach ($file in $filesToSign) {
-        sign_artifact $file $appMarketingName
+        sign_artifact $file $appName
     }
 
     sign_artifact $REPO\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll "XML-RPC.NET"
@@ -125,7 +124,7 @@ Copy-Item -Recurse $REPO\WixInstaller $SCRATCH_DIR -Verbose
 Copy-Item -Recurse $SCRATCH_DIR\wixsrc\src\ext\UIExtension\wixlib $SCRATCH_DIR\WixInstaller -Verbose
 Copy-Item $SCRATCH_DIR\WixInstaller\wixlib\CustomizeDlg.wxs $SCRATCH_DIR\WixInstaller\wixlib\CustomizeStdDlg.wxs -Verbose
 
-if ("XenCenter" -ne $appMarketingName) {
+if ("XenCenter" -ne $appName) {
     Rename-Item -Path $SCRATCH_DIR\WixInstaller\XenCenter.wxs -NewName "$appName.wxs" -Verbose
 }
 
@@ -210,7 +209,7 @@ foreach ($locale in $locales) {
 #copy and sign the combined installer
 
 if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
-    sign_artifact "$SCRATCH_DIR\WixInstaller\$appName.msi" $appMarketingName
+    sign_artifact "$SCRATCH_DIR\WixInstaller\$appName.msi" $appName
 }
 else {
     Write-Host "Sign script does not exist; skip signing installer"
@@ -269,7 +268,7 @@ $xmlFormat=@"
 
 $msi_url = $XC_UPDATES_URL -replace "XCUpdates.xml","$appName.msi"
 $date=(Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-$productFullName =  "$appMarketingName $productVersion"
+$productFullName =  "$appName $productVersion"
 $productVersion =  "$BRANDING_XC_PRODUCT_VERSION.$buildNumber"
 
 Write-Host "INFO: Generating XCUpdates.xml"

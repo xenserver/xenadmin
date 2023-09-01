@@ -52,7 +52,6 @@ function rebranding_global([string]$file) {
         -replace "\[XenServer version\]", $BRANDING_PRODUCT_VERSION_TEXT `
         -replace "\[XenServer host\]", $BRANDING_SERVER `
         -replace "\[XenCenter\]", $BRANDING_BRAND_CONSOLE `
-        -replace "\[XenCenter_No_Space\]", $BRANDING_BRAND_CONSOLE_NO_SPACE `
         -replace "xencenter/current-release/", $BRANDING_HELP_PATH `
         -replace "\[Xc updates url\]", $XC_UPDATES_URL `
         -replace "\[Cfu url\]", $CFU_URL `
@@ -97,7 +96,6 @@ Write-Host "Rebranding file $wxiFile"
     -replace "@COMPANY_NAME_LEGAL@", $BRANDING_COMPANY_NAME_LEGAL `
     -replace "@COMPANY_NAME_SHORT@", $BRANDING_COMPANY_NAME_SHORT `
     -replace "@BRAND_CONSOLE@", $BRANDING_BRAND_CONSOLE `
-    -replace "@BRAND_CONSOLE_NO_SPACE@", $BRANDING_BRAND_CONSOLE_NO_SPACE `
     -replace "@BRAND_CONSOLE_SHORT@", $BRANDING_BRAND_CONSOLE_SHORT `
     -replace "@PRODUCT_BRAND@", $BRANDING_PRODUCT_BRAND |`
     Set-Content -Path $wxiFile -Encoding "utf8"
