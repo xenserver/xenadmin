@@ -4236,24 +4236,6 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREDENTIALS_CHECKING" xml:space="preserve">
     <value>Checking user name and password...</value>
   </data>
-  <data name="CSLG_DELL_DIRECT" xml:space="preserve">
-    <value>Dell EqualLogic</value>
-  </data>
-  <data name="CSLG_DIRECT_CONNECTION" xml:space="preserve">
-    <value>Direct Connection</value>
-  </data>
-  <data name="CSLG_NETAPP_DIRECT" xml:space="preserve">
-    <value>NetApp</value>
-  </data>
-  <data name="CSLG_STORAGEADAPTER" xml:space="preserve">
-    <value>&amp;Storage adapter:</value>
-  </data>
-  <data name="CSLG_STORAGELINK_ADAPTERS" xml:space="preserve">
-    <value>StorageLink adapters</value>
-  </data>
-  <data name="CSLG_STORAGELINK_SERVER" xml:space="preserve">
-    <value>StorageLink Server ({0})</value>
-  </data>
   <data name="CSV_DESCRIPTION" xml:space="preserve">
     <value>Comma Separated Value</value>
   </data>
@@ -14397,6 +14379,9 @@ A {1} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>WLB registry key is missing.</value>
+  </data>
+  <data name="WLB_ERROR_4006" xml:space="preserve">
+    <value>WLB received an argument from the server that is not implemented.</value>
   </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
     <value>WLB received an invalid argument from the server.</value>

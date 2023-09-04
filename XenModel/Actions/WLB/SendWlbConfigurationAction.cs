@@ -38,7 +38,7 @@ using XenAPI;
 namespace XenAdmin.Actions.Wlb
 {
     [Flags]
-    public enum SendWlbConfigurationKind : int
+    public enum SendWlbConfigurationKind
     {
         None = 0,
         SetPoolConfiguration = 1,
@@ -47,26 +47,26 @@ namespace XenAdmin.Actions.Wlb
         SetReportSubscription = 8,
         DeleteReportSubscription = 16,
         SetHostConfiguration = 32
-    };
+    }
 
     public class SendWlbConfigurationAction : AsyncAction
     {
-        private static string SET_HOST_CONFIGURATION = "set_host_configuration";
-        private static string SET_SCHEDULED_TASK = "set_scheduled_task";
-        private static string DELETE_SCHEDULED_TASK = "delete_scheduled_task";
-        private static string SET_REPORT_SUBSCRIPTIONS = "set_report_subscription";
-        private static string DELETE_REPORT_SUBSCRIPTIONS = "delete_report_subscription";
+        private const string SET_HOST_CONFIGURATION = "set_host_configuration";
+        private const string SET_SCHEDULED_TASK = "set_scheduled_task";
+        private const string DELETE_SCHEDULED_TASK = "delete_scheduled_task";
+        private const string SET_REPORT_SUBSCRIPTIONS = "set_report_subscription";
+        private const string DELETE_REPORT_SUBSCRIPTIONS = "delete_report_subscription";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly SendWlbConfigurationKind _kind;
-        private Dictionary<string, string> WlbConfiguration = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _wlbConfiguration;
 
         public SendWlbConfigurationAction(Pool pool, Dictionary<string, string> configuration, SendWlbConfigurationKind kind)
             : base(pool.Connection, string.Format(Messages.SAVING_WLB_CONFIGURATION_FOR, Helpers.GetName(pool).Ellipsise(50)), Messages.SAVING_WLB_CONFIGURATION, false)
         {
-            this.Pool = pool;
-            this.WlbConfiguration = configuration;
-            this._kind = kind;			
+            Pool = pool;
+            _wlbConfiguration = configuration;
+            _kind = kind;			
 			
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add("pool.send_wlb_configuration");
@@ -81,59 +81,59 @@ namespace XenAdmin.Actions.Wlb
 
             ClearKeys();
 
-            if ((_kind & SendWlbConfigurationKind.SetHostConfiguration) == SendWlbConfigurationKind.SetHostConfiguration)
+            if (_kind.HasFlag(SendWlbConfigurationKind.SetHostConfiguration))
             {
-                this.WlbConfiguration.Add(SET_HOST_CONFIGURATION, "true");
+                _wlbConfiguration.Add(SET_HOST_CONFIGURATION, "true");
             }
-            if ((_kind & SendWlbConfigurationKind.SetScheduledTask) == SendWlbConfigurationKind.SetScheduledTask)
+            if (_kind.HasFlag(SendWlbConfigurationKind.SetScheduledTask))
             {
-                this.WlbConfiguration.Add(SET_SCHEDULED_TASK, "true");
+                _wlbConfiguration.Add(SET_SCHEDULED_TASK, "true");
             }
-            if ((_kind & SendWlbConfigurationKind.DeleteScheduledTask) == SendWlbConfigurationKind.DeleteScheduledTask)
+            if (_kind.HasFlag(SendWlbConfigurationKind.DeleteScheduledTask))
             {
-                this.WlbConfiguration.Add(DELETE_SCHEDULED_TASK, "true");
+                _wlbConfiguration.Add(DELETE_SCHEDULED_TASK, "true");
             }
-            if ((_kind & SendWlbConfigurationKind.SetReportSubscription) == SendWlbConfigurationKind.SetReportSubscription)
+            if (_kind.HasFlag(SendWlbConfigurationKind.SetReportSubscription))
             {
-                this.WlbConfiguration.Add(SET_REPORT_SUBSCRIPTIONS, "true");
+                _wlbConfiguration.Add(SET_REPORT_SUBSCRIPTIONS, "true");
             }
-            if ((_kind & SendWlbConfigurationKind.DeleteReportSubscription) == SendWlbConfigurationKind.DeleteReportSubscription)
+            if (_kind.HasFlag(SendWlbConfigurationKind.DeleteReportSubscription))
             {
-                this.WlbConfiguration.Add(DELETE_REPORT_SUBSCRIPTIONS, "true");
+                _wlbConfiguration.Add(DELETE_REPORT_SUBSCRIPTIONS, "true");
             }
 
             try
             {
-                XenAPI.Pool.send_wlb_configuration(this.Session, this.WlbConfiguration);
+                Pool.send_wlb_configuration(Session, _wlbConfiguration);
                 log.Debug("Successfully sent Workload Balancing configuration on pool " + Pool.Name());
-                this.Description = Messages.COMPLETED;
+                Description = Messages.COMPLETED;
             }
             catch (Exception ex)
             {
-                if (ex is Failure)
+                if (ex is Failure f)
                 {
-                    WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
+                    WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, f);
 
-                    if (((Failure)ex).Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
+                    if (f.Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
                     {
-                        Failure f = new Failure(new string[] { Messages.ResourceManager.GetString("WLB_ERROR_" + ((Failure)ex).ErrorDescription[1]) });
-                        throw (f);
-                    }
-                    else
-                    {
-                        throw (ex);
+                        var wlbError = WlbServerState.ConvertWlbError(f.ErrorDescription[1]);
+
+                        if (wlbError != null)
+                            throw new Failure(wlbError);
                     }
                 }
+
+                throw;
             }
         }
 
         private void ClearKeys()
         {
-            this.WlbConfiguration.Remove(SET_HOST_CONFIGURATION);
-            this.WlbConfiguration.Remove(SET_SCHEDULED_TASK);
-            this.WlbConfiguration.Remove(DELETE_SCHEDULED_TASK);
-            this.WlbConfiguration.Remove(SET_REPORT_SUBSCRIPTIONS);
-            this.WlbConfiguration.Remove(DELETE_REPORT_SUBSCRIPTIONS);
+            _wlbConfiguration.Remove(SET_HOST_CONFIGURATION);
+            _wlbConfiguration.Remove(SET_SCHEDULED_TASK);
+            _wlbConfiguration.Remove(DELETE_SCHEDULED_TASK);
+            _wlbConfiguration.Remove(SET_REPORT_SUBSCRIPTIONS);
+            _wlbConfiguration.Remove(DELETE_REPORT_SUBSCRIPTIONS);
         }
     }
 }
