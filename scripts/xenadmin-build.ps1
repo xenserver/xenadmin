@@ -45,6 +45,10 @@ if ($PSBoundParameters.ContainsKey('Verbose')) {
 
 $ErrorActionPreference = "Stop"
 
+####################
+# Helper functions #
+####################
+
 function mkdir_clean([string]$path) {
     if ([System.IO.Directory]::Exists($path)) {
         Remove-Item -Path $path -Force -Recurse -Verbose:$verbose
@@ -65,6 +69,10 @@ function get_locale_id([string]$locale) {
     }
 }
 
+######################
+# clean working area #
+######################
+
 $REPO = Get-Item "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
 $SCRATCH_DIR="$REPO\_scratch"
 $OUTPUT_DIR="$REPO\_output"
@@ -76,7 +84,9 @@ mkdir_clean $OUTPUT_DIR
 . $REPO\scripts\branding.ps1
 $appName =  $BRANDING_BRAND_CONSOLE
 
-#package sources BEFORE applying branding
+############################################
+# package sources BEFORE applying branding #
+############################################
 
 Write-Host "INFO: Packaging source files"
 
@@ -86,7 +96,10 @@ git archive --format=zip -o "$SCRATCH_DIR\xenadmin-sources.zip" $gitCommit
 Compress-Archive -Path "$SCRATCH_DIR\xenadmin-sources.zip","$REPO\packages\dotnet-packages-sources.zip" `
     -DestinationPath "$OUTPUT_DIR\$appName-source.zip" -Verbose:$verbose
 
-#apply branding
+##################
+# apply branding #
+##################
+
 .$REPO\scripts\rebranding.ps1 $buildNumber -Verbose:$verbose
 
 Write-Host "INFO: Expanding External Tools"
@@ -95,7 +108,9 @@ Expand-Archive -Path $REPO\packages\XenCenterOVF.zip -DestinationPath $SCRATCH_D
 Write-Host "INFO: Building solution"
 build $REPO\XenAdmin.sln
 
-#sign files
+##############
+# sign files #
+##############
 
 if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
     . $REPO\scripts\sign.ps1
@@ -130,7 +145,9 @@ else {
     Write-Host "INFO: Sign script does not exist; skip signing binaries"
 }
 
-#prepare wix
+###############
+# prepare Wix #
+###############
 
 Write-Host "INFO: Preparing Wix binaries and UI sources"
 mkdir_clean $SCRATCH_DIR\wixbin
@@ -159,7 +176,9 @@ finally {
 
 New-Item -ItemType File -Path $SCRATCH_DIR\WixInstaller\PrintEula.dll -Verbose:$verbose
 
-#compile_wix
+###############
+# compile Wix #
+###############
 
 $CANDLE="$SCRATCH_DIR\wixbin\candle.exe"
 $LIT="$SCRATCH_DIR\wixbin\lit.exe"
@@ -209,7 +228,10 @@ Write-Host "INFO: Compiling Wix UI"
 Invoke-Expression "$CANDLE -v -out $SCRATCH_DIR\WixInstaller\wixlib\ $candleListString"
 Invoke-Expression "$LIT -v -out $SCRATCH_DIR\WixInstaller\wixlib\WixUiLibrary.wixlib $litListString"
 
-#for each locale create an msi containing all resources
+##########################################################
+# for each locale create an msi containing all resources #
+##########################################################
+
 $locales = @("en-us")
 
 foreach ($locale in $locales) {
@@ -227,7 +249,9 @@ foreach ($locale in $locales) {
     Invoke-Expression "$LIGHT -v -sval -ext WiXNetFxExtension -ext WixUtilExtension -out $SCRATCH_DIR\WixInstaller\$name.msi -loc $SCRATCH_DIR\WixInstaller\wixlib\wixui_$locale.wxl -loc $SCRATCH_DIR\WixInstaller\$locale.wxl $SCRATCH_DIR\WixInstaller\$appName.wixobj $SCRATCH_DIR\WixInstaller\wixlib\WixUiLibrary.wixlib"
 }
 
-#copy and sign the combined installer
+########################################
+# copy and sign the combined installer #
+########################################
 
 if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
     sign_artifact "$SCRATCH_DIR\WixInstaller\$appName.msi" $appName  $thumbPrint $timestampServer
@@ -238,7 +262,10 @@ else {
 
 Copy-Item "$SCRATCH_DIR\WixInstaller\$appName.msi" $OUTPUT_DIR
 
-#build the tests
+###################
+# build the tests #
+###################
+
 Write-Host "INFO: Building the tests"
 build $REPO\XenAdminTests\XenAdminTests.csproj
 Copy-Item $REPO\XenAdmin\ReportViewer\* $REPO\XenAdminTests\bin\Release\ -Verbose:$verbose
@@ -246,16 +273,25 @@ Copy-Item $REPO\XenAdmin\ReportViewer\* $REPO\XenAdminTests\bin\Release\ -Verbos
 Compress-Archive -Path $REPO\XenAdminTests\bin\Release -DestinationPath $OUTPUT_DIR\XenAdminTests.zip -Verbose:$verbose
 Compress-Archive -Path $REPO\XenAdmin\TestResources\* -DestinationPath "$OUTPUT_DIR\$($appName)TestResources.zip" -Verbose:$verbose
 
-#include cfu validator binary in output directory
+####################################################
+# include cfu validator binary in output directory #
+####################################################
+
 Compress-Archive -Path $REPO\CFUValidator\bin\Release\*.dll -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
 Compress-Archive -Path $REPO\CFUValidator\bin\Release\CFUValidator.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
 Compress-Archive -Path $REPO\CFUValidator\bin\Release\$appName.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
 
-#now package the pdbs
+####################
+# package the pdbs #
+####################
+
 Compress-Archive -Path $REPO\packages\*.pdb,$REPO\XenAdmin\bin\Release\*.pdb,$REPO\xe\bin\Release\xe.pdb `
     -DestinationPath "$OUTPUT_DIR\$appName.Symbols.zip" -Verbose:$verbose
 
-#installer and source zip checksums
+################################################
+# calculate installer and source zip checksums #
+################################################
+
 $msi_checksum = (Get-FileHash -Path "$OUTPUT_DIR\$appName.msi" -Algorithm SHA256 |`
     Select-Object -ExpandProperty Hash).ToLower()
 

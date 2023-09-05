@@ -37,6 +37,10 @@ if ($PSBoundParameters.ContainsKey('Verbose')) {
     $verbose = $PsBoundParameters['Verbose']
 }
 
+####################
+# Helper functions #
+####################
+
 function version_csharp([string]$file) {
     Write-Verbose "Versioning file $file" -Verbose:$verbose
 
@@ -69,6 +73,10 @@ function rebranding_global([string]$file) {
          Set-Content -Path $file -Encoding "utf8"
 }
 
+##########################
+# Rebrand solution files #
+##########################
+
 Write-Host "Started product rebranding"
 
 $REPO = Get-Item "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
@@ -78,7 +86,6 @@ $REPO = Get-Item "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
 version_csharp $REPO\CommonAssemblyInfo.cs
 rebranding_global $REPO\CommonAssemblyInfo.cs
 
-#AssemblyInfo rebranding
 $projects = @("CFUValidator", "CommandLib", "xe", "XenAdmin", "XenAdminTests", "XenCenterLib", "XenModel", "XenOvfApi")
 
 foreach ($project in $projects) {
@@ -88,6 +95,13 @@ foreach ($project in $projects) {
 }
 
 rebranding_global $REPO\XenAdmin\XenAdmin.csproj
+
+rebranding_global $REPO\XenAdminTests\TestResources\ContextMenuBuilderTestResults.xml
+rebranding_global $REPO\XenAdminTests\XenAdminTests.csproj
+
+#####################
+# Rebrand installer #
+#####################
 
 $PRODUCT_GUID = [guid]::NewGuid().ToString()
 
@@ -104,9 +118,5 @@ Write-Verbose "Rebranding file $wxiFile" -Verbose:$verbose
     -replace "@BRAND_CONSOLE_SHORT@", $BRANDING_BRAND_CONSOLE_SHORT `
     -replace "@PRODUCT_BRAND@", $BRANDING_PRODUCT_BRAND |`
     Set-Content -Path $wxiFile -Encoding "utf8"
-
-#XenAdminTests
-rebranding_global $REPO\XenAdminTests\TestResources\ContextMenuBuilderTestResults.xml
-rebranding_global $REPO\XenAdminTests\XenAdminTests.csproj
 
 Write-Host "Completed product rebranding"
