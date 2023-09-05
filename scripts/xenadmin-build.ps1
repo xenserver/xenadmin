@@ -29,7 +29,13 @@
 
 Param(
     [Parameter(HelpMessage = " Global build number")]
-    [int]$buildNumber
+    [int]$buildNumber,
+
+    [Parameter(HelpMessage = "Thumbrpint of the certificate to use for signing")]
+    [string]$thumbPrint,
+
+    [Parameter(HelpMessage = "Timestamp server to use for signing")]
+    [string]$timestampServer
 )
 
 $ErrorActionPreference = "Stop"
@@ -99,14 +105,14 @@ if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
     )
 
     foreach ($file in $filesToSign) {
-        sign_artifact $file $appName
+        sign_artifact $file $appName $thumbPrint $timestampServer
     }
 
-    sign_artifact $REPO\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll "XML-RPC.NET"
-    sign_artifact $REPO\XenAdmin\bin\Release\Newtonsoft.Json.CH.dll "JSON.NET"
-    sign_artifact $REPO\XenAdmin\bin\Release\log4net.dll "Log4Net"
-    sign_artifact $REPO\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll "SharpZipLib"
-    sign_artifact $REPO\XenAdmin\bin\Release\DiscUtils.dll "DiscUtils"
+    sign_artifact $REPO\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll "XML-RPC.NET" $thumbPrint $timestampServer
+    sign_artifact $REPO\XenAdmin\bin\Release\Newtonsoft.Json.CH.dll "JSON.NET" $thumbPrint $timestampServer
+    sign_artifact $REPO\XenAdmin\bin\Release\log4net.dll "Log4Net" $thumbPrint $timestampServer
+    sign_artifact $REPO\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll "SharpZipLib" $thumbPrint $timestampServer
+    sign_artifact $REPO\XenAdmin\bin\Release\DiscUtils.dll "DiscUtils" $thumbPrint $timestampServer
 
 }
 else {
@@ -209,7 +215,7 @@ foreach ($locale in $locales) {
 #copy and sign the combined installer
 
 if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
-    sign_artifact "$SCRATCH_DIR\WixInstaller\$appName.msi" $appName
+    sign_artifact "$SCRATCH_DIR\WixInstaller\$appName.msi" $appName  $thumbPrint $timestampServer
 }
 else {
     Write-Host "Sign script does not exist; skip signing installer"
