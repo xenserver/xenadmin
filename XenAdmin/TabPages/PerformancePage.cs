@@ -78,6 +78,7 @@ namespace XenAdmin.TabPages
             if (_disposed)
                 return;
 
+            DeregisterEvents();
             _archiveMaintainer.Dispose();
 
             if (disposing)
@@ -158,7 +159,6 @@ namespace XenAdmin.TabPages
             UpdateAllButtons();
         }
 
-
         public IXenObject XenObject
         {
             private get
@@ -168,9 +168,9 @@ namespace XenAdmin.TabPages
             set
             {
                 DataEventList.Clear();
-                DeregEvents();
+                DeregisterEvents();
                 _xenObject = value;
-                RegEvents();
+                RegisterEvents();
 
                 var newArchiveMaintainer = new ArchiveMaintainer(value);
                 newArchiveMaintainer.ArchivesUpdated += ArchiveMaintainer_ArchivesUpdated;
@@ -184,7 +184,6 @@ namespace XenAdmin.TabPages
                 {
                     // we have already called a dispose
                 }
-                
 
                 _archiveMaintainer = newArchiveMaintainer;
 
@@ -256,7 +255,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void RegEvents()
+        private void RegisterEvents()
         {
             if (XenObject == null)
                 return;
@@ -307,22 +306,27 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void DeregEvents()
+        private void DeregisterEvents()
         {
             if (XenObject == null)
                 return;
 
-            Pool pool = Helpers.GetPoolOfOne(XenObject.Connection);
+            var pool = Helpers.GetPoolOfOne(XenObject.Connection);
 
             if (pool != null)
                 pool.PropertyChanged -= pool_PropertyChanged;
 
+            if (_archiveMaintainer != null)
+            {
+                _archiveMaintainer.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
+            } 
+            
             XenObject.Connection.Cache.DeregisterCollectionChanged<XenAPI.Message>(Message_CollectionChangedWithInvoke);
         }
 
         public override void PageHidden()
         {
-            DeregEvents();
+            DeregisterEvents();
             _archiveMaintainer?.Dispose();
         }
 
