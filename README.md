@@ -54,3 +54,7 @@ To run the [NUnit](http://www.nunit.org/) tests you will need the following libr
 * Moq.dll
 
 which can be obtained from <http://www.nuget.org/>.
+
+Note that the build script assumes that you have added MSBuild's location (usually
+`C:\Program Files\Microsoft Visual Studio\2022\<edition>\MSBuild\Current\Bin`)
+to your `PATH` environment variable.
