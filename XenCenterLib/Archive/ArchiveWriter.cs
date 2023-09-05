@@ -35,7 +35,7 @@ namespace XenCenterLib.Archive
 {
     public abstract class ArchiveWriter : IDisposable
     {
-        public abstract void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate);
+        public abstract void Add(Stream fileToAdd, string fileName, DateTime modificationTime, Action cancellingDelegate);
 
         public virtual void SetBaseStream(Stream outputStream)
         {

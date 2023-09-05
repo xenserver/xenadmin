@@ -44,7 +44,7 @@ namespace XenCenterLib.Archive
         /// <param name="pathToExtractTo">The path to extract the archive to</param>
         /// <param name="cancellingDelegate"></param>
         /// <exception cref="ArgumentNullException">If null path is passed in</exception>
-        /// <exception cref="NullReferenceException">If while combining path and current fFile name a null arises</exception>
+        /// <exception cref="NullReferenceException">If while combining path and current file name a null arises</exception>
         public void ExtractAllContents(string pathToExtractTo, Action cancellingDelegate = null)
         {
             if (String.IsNullOrEmpty(pathToExtractTo))

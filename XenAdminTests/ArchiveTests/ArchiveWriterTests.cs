@@ -77,10 +77,10 @@ namespace XenAdminTests.ArchiveTests
                 }
             }
 
-            public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
+            public override void Add(Stream fileToAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
             {
                 disposed = false;
-                AddedStreamData.Add(filetoAdd);
+                AddedStreamData.Add(fileToAdd);
                 AddedFileNameData.Add(fileName);
                 AddedDates.Add(modificationTime);
             }
