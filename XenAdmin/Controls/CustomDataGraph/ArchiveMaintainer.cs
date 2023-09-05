@@ -158,36 +158,37 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             while (!RequestedCancellation)
             {
-                if (ServerNow - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
+                serverWas = ServerNow;
+                if (serverWas - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
                 {
                     Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
 
                     if (RequestedCancellation)
                         break;
 
-                    LastFiveSecondCollection = ServerNow;
+                    LastFiveSecondCollection = serverWas;
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
 
-                if (ServerNow - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
+                if (serverWas - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
                 {
                     Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
 
                     if (RequestedCancellation)
                         break;
 
-                    LastOneMinuteCollection = ServerNow;
+                    LastOneMinuteCollection = serverWas;
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
 
-                if (ServerNow - LastOneHourCollection > TimeSpan.FromHours(1))
+                if (serverWas - LastOneHourCollection > TimeSpan.FromHours(1))
                 {
                     Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
 
                     if (RequestedCancellation)
                         break;
 
-                    LastOneHourCollection = ServerNow;
+                    LastOneHourCollection = serverWas;
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
 
