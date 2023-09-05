@@ -28,23 +28,28 @@
 # SUCH DAMAGE.
 
 Param(
-    [Parameter(HelpMessage = " Global build number")]
+    [Parameter(HelpMessage = "Global build number", Mandatory = $true)]
     [int]$buildNumber,
 
-    [Parameter(HelpMessage = "Thumbrpint of the certificate to use for signing")]
+    [Parameter(HelpMessage = "Thumbprint of the certificate to use for signing")]
     [string]$thumbPrint,
 
     [Parameter(HelpMessage = "Timestamp server to use for signing")]
     [string]$timestampServer
 )
 
+$verbose = $false
+if ($PSBoundParameters.ContainsKey('Verbose')) {
+    $verbose = $PsBoundParameters['Verbose']
+}
+
 $ErrorActionPreference = "Stop"
 
 function mkdir_clean([string]$path) {
     if ([System.IO.Directory]::Exists($path)) {
-        Remove-Item -Path $path -Force -Recurse
+        Remove-Item -Path $path -Force -Recurse -Verbose:$verbose
     }
-    New-Item -ItemType Directory -Path $path -Verbose
+    New-Item -ItemType Directory -Path $path -Verbose:$verbose
 }
 
 function build([string]$solution) {
@@ -64,6 +69,7 @@ $REPO = Get-Item "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
 $SCRATCH_DIR="$REPO\_scratch"
 $OUTPUT_DIR="$REPO\_output"
 
+Write-Host "INFO: Cleaning scratch and output directories"
 mkdir_clean $SCRATCH_DIR
 mkdir_clean $OUTPUT_DIR
 
@@ -72,16 +78,21 @@ $appName =  $BRANDING_BRAND_CONSOLE
 
 #package sources BEFORE applying branding
 
+Write-Host "INFO: Packaging source files"
+
 $gitCommit = git rev-parse HEAD
 git archive --format=zip -o "$SCRATCH_DIR\xenadmin-sources.zip" $gitCommit
 
 Compress-Archive -Path "$SCRATCH_DIR\xenadmin-sources.zip","$REPO\packages\dotnet-packages-sources.zip" `
-    -DestinationPath "$OUTPUT_DIR\$appName-source.zip" -Verbose
+    -DestinationPath "$OUTPUT_DIR\$appName-source.zip" -Verbose:$verbose
 
 #apply branding
-.$REPO\scripts\rebranding.ps1 $buildNumber
+.$REPO\scripts\rebranding.ps1 $buildNumber -Verbose:$verbose
 
-Expand-Archive -Path $REPO\packages\XenCenterOVF.zip -DestinationPath $SCRATCH_DIR -Verbose
+Write-Host "INFO: Expanding External Tools"
+Expand-Archive -Path $REPO\packages\XenCenterOVF.zip -DestinationPath $SCRATCH_DIR -Verbose:$verbose
+
+Write-Host "INFO: Building solution"
 build $REPO\XenAdmin.sln
 
 #sign files
@@ -116,36 +127,37 @@ if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
 
 }
 else {
-    Write-Host "Sign script does not exist; skip signing binaries"
+    Write-Host "INFO: Sign script does not exist; skip signing binaries"
 }
 
 #prepare wix
 
+Write-Host "INFO: Preparing Wix binaries and UI sources"
 mkdir_clean $SCRATCH_DIR\wixbin
 Expand-Archive -Path $REPO\packages\wix311-binaries.zip -DestinationPath $SCRATCH_DIR\wixbin
 mkdir_clean $SCRATCH_DIR\wixsrc
 Expand-Archive -Path $REPO\packages\wix311-debug.zip -DestinationPath $SCRATCH_DIR\wixsrc
 
-Copy-Item -Recurse $REPO\WixInstaller $SCRATCH_DIR -Verbose
-Copy-Item -Recurse $SCRATCH_DIR\wixsrc\src\ext\UIExtension\wixlib $SCRATCH_DIR\WixInstaller -Verbose
-Copy-Item $SCRATCH_DIR\WixInstaller\wixlib\CustomizeDlg.wxs $SCRATCH_DIR\WixInstaller\wixlib\CustomizeStdDlg.wxs -Verbose
+Copy-Item -Recurse $REPO\WixInstaller $SCRATCH_DIR -Verbose:$verbose
+Copy-Item -Recurse $SCRATCH_DIR\wixsrc\src\ext\UIExtension\wixlib $SCRATCH_DIR\WixInstaller -Verbose:$verbose
+Copy-Item $SCRATCH_DIR\WixInstaller\wixlib\CustomizeDlg.wxs $SCRATCH_DIR\WixInstaller\wixlib\CustomizeStdDlg.wxs -Verbose:$verbose
 
 if ("XenCenter" -ne $appName) {
-    Rename-Item -Path $SCRATCH_DIR\WixInstaller\XenCenter.wxs -NewName "$appName.wxs" -Verbose
+    Rename-Item -Path $SCRATCH_DIR\WixInstaller\XenCenter.wxs -NewName "$appName.wxs" -Verbose:$verbose
 }
 
 $origLocation = Get-Location
-Set-Location $SCRATCH_DIR\WixInstaller\wixlib -Verbose
+Set-Location $SCRATCH_DIR\WixInstaller\wixlib -Verbose:$verbose
 try {
-    Write-Host "Patching Wix UI library"
+    Write-Host "INFO: Patching Wix UI library"
     git apply --verbose $SCRATCH_DIR\WixInstaller\wix_src.patch
-    Write-Host "Patching Wix UI library completed"
+    Write-Host "INFO: Patching Wix UI library completed"
 }
 finally {
-    Set-Location $origLocation -Verbose
+    Set-Location $origLocation -Verbose:$verbose
 }
 
-New-Item -ItemType File -Path $SCRATCH_DIR\WixInstaller\PrintEula.dll -Verbose
+New-Item -ItemType File -Path $SCRATCH_DIR\WixInstaller\PrintEula.dll -Verbose:$verbose
 
 #compile_wix
 
@@ -193,6 +205,7 @@ $litListString = $litList -join " "
 $env:RepoRoot=$REPO
 $env:WixLangId=get_locale_id $locale
 
+Write-Host "INFO: Compiling Wix UI"
 Invoke-Expression "$CANDLE -v -out $SCRATCH_DIR\WixInstaller\wixlib\ $candleListString"
 Invoke-Expression "$LIT -v -out $SCRATCH_DIR\WixInstaller\wixlib\WixUiLibrary.wixlib $litListString"
 
@@ -207,6 +220,8 @@ foreach ($locale in $locales) {
         $name=$appName.$locale
     }
 
+    Write-Host "INFO: Building msi installer"
+
     Invoke-Expression "$CANDLE -v -ext WiXNetFxExtension -ext WixUtilExtension -out $SCRATCH_DIR\WixInstaller\ $SCRATCH_DIR\WixInstaller\$appName.wxs"
 
     Invoke-Expression "$LIGHT -v -sval -ext WiXNetFxExtension -ext WixUtilExtension -out $SCRATCH_DIR\WixInstaller\$name.msi -loc $SCRATCH_DIR\WixInstaller\wixlib\wixui_$locale.wxl -loc $SCRATCH_DIR\WixInstaller\$locale.wxl $SCRATCH_DIR\WixInstaller\$appName.wixobj $SCRATCH_DIR\WixInstaller\wixlib\WixUiLibrary.wixlib"
@@ -218,27 +233,27 @@ if ([System.IO.File]::Exists("$REPO\scripts\sign.ps1")) {
     sign_artifact "$SCRATCH_DIR\WixInstaller\$appName.msi" $appName  $thumbPrint $timestampServer
 }
 else {
-    Write-Host "Sign script does not exist; skip signing installer"
+    Write-Host "INFO: Sign script does not exist; skip signing installer"
 }
 
 Copy-Item "$SCRATCH_DIR\WixInstaller\$appName.msi" $OUTPUT_DIR
 
 #build the tests
-Write-Host "INFO: Build the tests..."
+Write-Host "INFO: Building the tests"
 build $REPO\XenAdminTests\XenAdminTests.csproj
-Copy-Item $REPO\XenAdmin\ReportViewer\* $REPO\XenAdminTests\bin\Release\ -Verbose
+Copy-Item $REPO\XenAdmin\ReportViewer\* $REPO\XenAdminTests\bin\Release\ -Verbose:$verbose
 
-Compress-Archive -Path $REPO\XenAdminTests\bin\Release -DestinationPath $OUTPUT_DIR\XenAdminTests.zip -Verbose
-Compress-Archive -Path $REPO\XenAdmin\TestResources\* -DestinationPath "$OUTPUT_DIR\$($appName)TestResources.zip" -Verbose
+Compress-Archive -Path $REPO\XenAdminTests\bin\Release -DestinationPath $OUTPUT_DIR\XenAdminTests.zip -Verbose:$verbose
+Compress-Archive -Path $REPO\XenAdmin\TestResources\* -DestinationPath "$OUTPUT_DIR\$($appName)TestResources.zip" -Verbose:$verbose
 
 #include cfu validator binary in output directory
-Compress-Archive -Path $REPO\CFUValidator\bin\Release\*.dll -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose
-Compress-Archive -Path $REPO\CFUValidator\bin\Release\CFUValidator.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose
-Compress-Archive -Path $REPO\CFUValidator\bin\Release\$appName.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose
+Compress-Archive -Path $REPO\CFUValidator\bin\Release\*.dll -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
+Compress-Archive -Path $REPO\CFUValidator\bin\Release\CFUValidator.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
+Compress-Archive -Path $REPO\CFUValidator\bin\Release\$appName.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
 
 #now package the pdbs
 Compress-Archive -Path $REPO\packages\*.pdb,$REPO\XenAdmin\bin\Release\*.pdb,$REPO\xe\bin\Release\xe.pdb `
-    -DestinationPath "$OUTPUT_DIR\$appName.Symbols.zip" -Verbose
+    -DestinationPath "$OUTPUT_DIR\$appName.Symbols.zip" -Verbose:$verbose
 
 #installer and source zip checksums
 $msi_checksum = (Get-FileHash -Path "$OUTPUT_DIR\$appName.msi" -Algorithm SHA256 |`
@@ -246,14 +261,14 @@ $msi_checksum = (Get-FileHash -Path "$OUTPUT_DIR\$appName.msi" -Algorithm SHA256
 
 $msi_checksum | Out-File -FilePath "$OUTPUT_DIR\$appName.msi.checksum" -Encoding utf8
 
-Write-Host "Calculated checksum installer checksum: $msi_checksum"
+Write-Host "INFO: Calculated checksum installer checksum: $msi_checksum"
 
 $source_checksum = (Get-FileHash -Path "$OUTPUT_DIR\$appName-source.zip" -Algorithm SHA256 |`
     Select-Object -ExpandProperty Hash).ToLower()
 
 $source_checksum | Out-File -FilePath "$OUTPUT_DIR\$appName-source.zip.checksum" -Encoding utf8
 
-Write-Host "Calculated checksum source checksum: $source_checksum"
+Write-Host "INFO: Calculated checksum source checksum: $source_checksum"
 
 $xmlFormat=@"
 <?xml version=\"1.0\" ?>

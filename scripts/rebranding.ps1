@@ -28,12 +28,17 @@
 # SUCH DAMAGE.
 
 Param(
-    [Parameter(HelpMessage = "Global build number")]
+    [Parameter(HelpMessage = "Global build number", Mandatory = $true)]
     [int]$buildNumber
 )
 
+$verbose = $false
+if ($PSBoundParameters.ContainsKey('Verbose')) {
+    $verbose = $PsBoundParameters['Verbose']
+}
+
 function version_csharp([string]$file) {
-    Write-Host "Versioning file $file"
+    Write-Verbose "Versioning file $file" -Verbose:$verbose
 
     (Get-Content -Path $file -Encoding "utf8") `
         -replace "0.0.0.0", "$BRANDING_XC_PRODUCT_VERSION.$buildNumber" `
@@ -42,7 +47,7 @@ function version_csharp([string]$file) {
 }
 
 function rebranding_global([string]$file) {
-    Write-Host "Rebranding file $file"
+    Write-Verbose "Rebranding file $file"  -Verbose:$verbose
 
     (Get-Content -Path $file -Encoding "utf8") `
         -replace "\[Vendor Legal\]", $BRANDING_COMPANY_NAME_LEGAL `
@@ -88,7 +93,7 @@ $PRODUCT_GUID = [guid]::NewGuid().ToString()
 
 $wxiFile="$REPO\WixInstaller\branding.wxi"
 
-Write-Host "Rebranding file $wxiFile"
+Write-Verbose "Rebranding file $wxiFile" -Verbose:$verbose
 
 (Get-Content -Path $wxiFile -Encoding "utf8") `
     -replace "@AUTOGEN_PRODUCT_GUID@", $PRODUCT_GUID `
