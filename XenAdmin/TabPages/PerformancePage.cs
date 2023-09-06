@@ -77,13 +77,13 @@ namespace XenAdmin.TabPages
         {
             if (_disposed)
                 return;
-
-            DeregisterEvents();
-            _archiveMaintainer.Dispose();
-
+            
             if (disposing)
             {
+                DeregisterEvents();
+                _archiveMaintainer.Dispose();
                 components?.Dispose();
+
                 _disposed = true;
             }
             base.Dispose(disposing);

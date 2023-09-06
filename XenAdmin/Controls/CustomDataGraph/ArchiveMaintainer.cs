@@ -192,14 +192,14 @@ namespace XenAdmin.Controls.CustomDataGraph
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
 
-                if (ServerNow - LastOneDayCollection > TimeSpan.FromDays(1))
+                if (serverWas - LastOneDayCollection > TimeSpan.FromDays(1))
                 {
                     Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject);
 
                     if (RequestedCancellation)
                         break;
 
-                    LastOneDayCollection = ServerNow;
+                    LastOneDayCollection = serverWas;
                     Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
                 if (RequestedCancellation)
