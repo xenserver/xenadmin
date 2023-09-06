@@ -213,17 +213,25 @@ namespace XenAdminTests.ArchiveTests
             Directory.Delete(tempPath, true);
         }
 
-        [Test]
-        public void VerifyADirectoryIsWrittenWhenCallingExtractAllContentsOnLongPath()
+        [TestCase(true, true)]
+        [TestCase(true, true)]
+        [TestCase(false, true)]
+        [TestCase(false, false)]
+        public void VerifyADirectoryIsWrittenWhenCallingExtractAllContentsOnLongPath(bool longDirectoryPath, bool longFilePath)
         {
-            string tempPath = Path.Combine(Path.Combine(Path.GetTempPath(), string.Join(@"\", Enumerable.Repeat("folder", 50))), Path.GetRandomFileName());
-            string longTempPath = StringUtility.ToLongWindowsPath(tempPath);
+            var rootPath = Path.GetTempPath();
+            var (relativeDirectoryPath, fileName) = ArchiveTestsUtils.GetDirectoryAndFilePaths(rootPath, longDirectoryPath, longFilePath);
+
+            var directoryPath = Path.Combine(rootPath, relativeDirectoryPath);
+            var filePath = Path.Combine(directoryPath, fileName);
+
+            var longTempPath = StringUtility.ToLongWindowsPath(filePath); 
             fakeIterator.IsDirectoryReturn = true;
             fakeIterator.CurrentFileNameReturn = "FakePath" + Path.DirectorySeparatorChar;
-            fakeIterator.ExtractAllContents(tempPath);
+            fakeIterator.ExtractAllContents(longTempPath);
 
             //Test file has been created
-            string targetPath = StringUtility.ToLongWindowsPath(Path.Combine(tempPath, fakeIterator.CurrentFileName()));
+            var targetPath = StringUtility.ToLongWindowsPath(Path.Combine(longTempPath, fakeIterator.CurrentFileName()));
             Assert.IsFalse(File.Exists(targetPath), "No files exist");
             Assert.IsTrue(Directory.Exists(targetPath), "Directories exist");
 

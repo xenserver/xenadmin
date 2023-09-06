@@ -252,12 +252,9 @@ namespace XenAdminTests.ArchiveTests
             var zipPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Directory.CreateDirectory(zipPath);
 
-            var directoryPathLength = 248 - zipPath.Length - 1;
-            var relativeDirectoryPath = new string('A', directoryPathLength - (longDirectoryPath ? 0 : 1));
+            var (relativeDirectoryPath, fileName) = ArchiveTestsUtils.GetDirectoryAndFilePaths(zipPath, longDirectoryPath, longFilePath);
+
             var directoryPath = Path.Combine(zipPath, relativeDirectoryPath);
-
-            var fileName = new string('B', longFilePath ? 13 : 11);
-
             var filePath = Path.Combine(directoryPath, fileName);
             var relativeFilePath = Path.Combine(relativeDirectoryPath, fileName);
 
