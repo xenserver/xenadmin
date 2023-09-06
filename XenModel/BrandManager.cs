@@ -115,6 +115,8 @@ namespace XenAdmin.Core
 
         public static readonly string CfuUrl;
 
+        public static readonly string SourceUrl;
+
         public static readonly string VmTools;
 
         public static readonly string XenHost;

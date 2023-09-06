@@ -81,7 +81,7 @@ namespace XenAdmin.Actions.Updates
             _address = uri;
             _canDownloadFile = _address != null;
             _outputPathAndFileName = outputFileName;
-            _authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
+            _authToken = XenAdminConfigManager.Provider.GetClientUpdatesQueryParam();
             _title = title;
             _description = description;
         }
