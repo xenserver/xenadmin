@@ -393,7 +393,7 @@ namespace XenAdmin.Actions
             _checkForUpdatesUrl = xmlLocationUrl;
         }
 
-        protected virtual XmlDocument FetchCheckForUpdatesXml()
+        protected XmlDocument FetchCheckForUpdatesXml()
         {
             var checkForUpdatesXml = new XmlDocument();
             var uriBuilder = new UriBuilder(_checkForUpdatesUrl);
