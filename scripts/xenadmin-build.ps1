@@ -273,14 +273,6 @@ Copy-Item $REPO\XenAdmin\ReportViewer\* $REPO\XenAdminTests\bin\Release\ -Verbos
 Compress-Archive -Path $REPO\XenAdminTests\bin\Release -DestinationPath $OUTPUT_DIR\XenAdminTests.zip -Verbose:$verbose
 Compress-Archive -Path $REPO\XenAdmin\TestResources\* -DestinationPath "$OUTPUT_DIR\$($appName)TestResources.zip" -Verbose:$verbose
 
-####################################################
-# include cfu validator binary in output directory #
-####################################################
-
-Compress-Archive -Path $REPO\CFUValidator\bin\Release\*.dll -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
-Compress-Archive -Path $REPO\CFUValidator\bin\Release\CFUValidator.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
-Compress-Archive -Path $REPO\CFUValidator\bin\Release\$appName.exe -Update -DestinationPath $OUTPUT_DIR\CFUValidator.zip -Verbose:$verbose
-
 ####################
 # package the pdbs #
 ####################

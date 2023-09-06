@@ -86,7 +86,7 @@ $REPO = Get-Item "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
 version_csharp $REPO\CommonAssemblyInfo.cs
 rebranding_global $REPO\CommonAssemblyInfo.cs
 
-$projects = @("CFUValidator", "CommandLib", "xe", "XenAdmin", "XenAdminTests", "XenCenterLib", "XenModel", "XenOvfApi")
+$projects = @("CommandLib", "xe", "XenAdmin", "XenAdminTests", "XenCenterLib", "XenModel", "XenOvfApi")
 
 foreach ($project in $projects) {
     $assemblyInfo = "$REPO\$project\Properties\AssemblyInfo.cs"
