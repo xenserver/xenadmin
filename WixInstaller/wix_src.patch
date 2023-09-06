@@ -95,7 +95,7 @@ diff -ru wixlib/Common.wxs wixlib/Common.wxs
 +<Fragment>
 +    <Binary Id="WixUIWixca" SourceFile="PrintEula.dll" />
 +</Fragment>
-+    
++
  </Wix>
 diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
 --- wixlib/CustomizeDlg.wxs	2019-09-15 07:13:54.000000000 +0100
@@ -158,7 +158,7 @@ diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
 diff -ru wixlib/CustomizeStdDlg.wxs wixlib/CustomizeStdDlg.wxs
 --- wixlib/CustomizeStdDlg.wxs	Tue Feb 21 12:03:46 2012
 +++ wixlib/CustomizeStdDlg.wxs	Tue Jul 20 20:54:33 2015
-@@ -13,7 +13,7 @@
+@@ -5,7 +5,7 @@
  <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
      <Fragment>
          <UI>
@@ -554,7 +554,7 @@ diff -ru wixlib/WixUI_en-us.wxl wixlib/WixUI_en-us.wxl
      <String Id="UITextVolumeCostRequired" Overridable="yes"><!-- _locID_text="UITextVolumeCostRequired" _locComment="UITextVolumeCostRequired" -->Required</String>
      <String Id="UITextVolumeCostSize" Overridable="yes"><!-- _locID_text="UITextVolumeCostSize" _locComment="UITextVolumeCostSize" -->Disk Size</String>
      <String Id="UITextVolumeCostVolume" Overridable="yes"><!-- _locID_text="UITextVolumeCostVolume" _locComment="UITextVolumeCostVolume" -->Volume</String>
-+    
++
 +    <String Id="ErrorNewerProduct">A newer version of this product is already installed.</String>
 +    <String Id="InstallDirDlgUsersLabel">Install for:</String>
 +    <String Id="InstallDirDlgUsersAllRadioButton">&amp;All Users</String>
@@ -600,10 +600,10 @@ diff -ru wixlib/WixUI_FeatureTree.wxs wixlib/WixUI_FeatureTree.wxs
              <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
              <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
              <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
-+			
++
 +			<Publish Dialog="CustomizeStdDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
 +			<Publish Dialog="CustomizeStdDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
-+			
++
          </UI>
  
          <UIRef Id="WixUI_Common" />
@@ -1024,3 +1024,4 @@ diff --git wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
                  </Control>
                  <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
                      <Publish Event="EndDialog" Value="Exit">1</Publish>
+ 

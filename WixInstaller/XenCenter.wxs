@@ -40,7 +40,7 @@
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
                 <Directory Id="XenServer" Name="$(var.BrandProduct)">
-                    <Directory Id="INSTALLDIR" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsoleNoSpace)">
+                    <Directory Id="INSTALLDIR" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)">
                         <Component Id="ReportViewer" Guid="$(var.ReportViewerGuid)">
                             <File Id="MicRepVwrCmnDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
                             <File Id="MicRepVwrPrcObjDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
@@ -56,11 +56,11 @@
                         </Component>
                         <Component Id="MainExecutable" Guid="$(var.MainExeGuid)">
                             <!-- XenCenter EXE -->
-                            <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe" KeyPath="yes" />
+                            <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsole).exe" KeyPath="yes" />
                             <!-- other EXEs -->
                             <File Id="XeEXE" Source="$(env.RepoRoot)\xe\bin\Release\xe.exe" />
                             <!-- config -->
-                            <File Id="XenCenterCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe.config" />
+                            <File Id="XenCenterCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsole).exe.config" />
                             <!-- DLLs -->
                             <File Id="CommandLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CommandLib.dll" />
                             <File Id="CookComputingDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll" />
@@ -149,16 +149,16 @@
                     <Condition>INSTALLSHORTCUT</Condition>
                     <Shortcut Id="DesktopXenCenter"
                               Name="$(var.BrandConsole)"
-                              Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe"
+                              Target="[INSTALLDIR]$(var.BrandConsole).exe"
                               WorkingDirectory="INSTALLDIR"
                 />
-                    <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                    <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsole)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
             <Component Id="RegistryEntries" Guid="$(var.RegEntriesGuid)">
-                <RegistryKey Root="HKMU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)">
+                <RegistryKey Root="HKMU" Key="Software\$(var.BrandProduct)\$(var.BrandConsole)">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
                     <?if "$(var.HiddenFeatures)" != ""?>
                         <RegistryValue Type="string" Name="HiddenFeatures" Value="$(var.HiddenFeatures)" />
@@ -172,9 +172,9 @@
 
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="$(var.AppShortcutGuid)">
-                <Shortcut Id="StartmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="StartmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsole).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="both" />
-                <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsole)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 
@@ -200,7 +200,7 @@
             <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
         </Condition>
         <Property Id="PERMACHINEINSTALL">
-            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="InstallDir" />
+            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.BrandProduct)\$(var.BrandConsole)" Name="InstallDir" />
         </Property>
         <Property Id="REINSTALLMODE" Value="amus" />
         <Property Id="INSTALLSHORTCUT" Value="0"/>

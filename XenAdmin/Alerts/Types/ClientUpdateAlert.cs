@@ -98,7 +98,7 @@ namespace XenAdmin.Alerts
 
         public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
         {
-            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{BrandManager.BrandConsoleNoSpace}.msi");
+            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{BrandManager.BrandConsole}.msi");
 
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), outputPathAndFileName, updateAlert.Checksum);
 
