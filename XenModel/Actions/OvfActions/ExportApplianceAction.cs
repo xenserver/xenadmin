@@ -69,7 +69,7 @@ namespace XenAdmin.Actions.OvfActions
             : base(connection, string.Format(createOVA ? Messages.EXPORT_OVA_PACKAGE : Messages.EXPORT_OVF_PACKAGE,
                 applianceFileName, Helpers.GetName(connection)))
 		{
-			m_applianceDirectory = applianceDirectory;
+			m_applianceDirectory = StringUtility.ToLongWindowsPath(applianceDirectory, true);
 			m_applianceFileName = applianceFileName;
 			m_vmsToExport = vmsToExport;
 			m_eulas = eulas;

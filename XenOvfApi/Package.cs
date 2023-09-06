@@ -331,7 +331,7 @@ namespace XenOvf
         {
             try
             {
-                Directory.Delete(WorkingDir, true);
+                Directory.Delete(StringUtility.ToLongWindowsPath(WorkingDir), true);
             }
             catch
             {
@@ -525,7 +525,13 @@ namespace XenOvf
 
         public string PackageSourceFile { get; }
 
-        public string WorkingDir { get; protected set; }
+        private string _workingDir;
+
+        public string WorkingDir
+        {
+            get => _workingDir;
+            protected set => _workingDir = StringUtility.ToLongWindowsPath(value, true);
+        }
 
         /// <summary>
         /// May be null if no valid OVF file has been found
