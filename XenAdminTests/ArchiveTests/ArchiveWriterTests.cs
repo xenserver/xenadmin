@@ -174,22 +174,72 @@ namespace XenAdminTests.ArchiveTests
             Assert.Throws(typeof(FileNotFoundException), () => fakeWriter.CreateArchive("Yellow brick road - not a path!"));
         }
 
-        [Test]
-        public void CreateArchiveWithLongPath()
+        [TestCase(true, true)]
+        [TestCase(false, true)]
+        [TestCase(true, false)]
+        [TestCase(false, false)]
+        public void CreateArchiveWithLongPath(bool longDirectoryPath, bool longFilePath)
         {
-            var longFilePath = PopulateLongPathArchive(true);
-            Assert.Contains(longFilePath, fakeWriter.AddedFileNameData);
-            // 50 folders and one file
-            Assert.AreEqual(51, fakeWriter.AddedFileNameData.Count);
+            var relativeFilePath = PopulateLongPathArchive(true, longDirectoryPath, longFilePath);
+            Assert.Contains(relativeFilePath, fakeWriter.AddedFileNameData);
+            // 1 folder and one file
+            Assert.AreEqual(2, fakeWriter.AddedFileNameData.Count);
         }
 
-        [Test]
-        public void CreateArchiveWithLongPath_PathTooLong()
+        [TestCase(true, true)]
+        [TestCase(false, true)]
+        [TestCase(true, false)]
+        [TestCase(false, false)]
+        public void CreateArchiveWithLongPath_PathTooLong(bool longDirectoryPath, bool longFilePath)
         {
             //! N.B.: If this test fails it might be because the project has moved to a version of .NET Core
             //! that does not require calls to `StringUtils.ToLongWindowsPath`. Please review its uses
             //! and remove it from the codebase if possible.
-            Assert.Throws(typeof(PathTooLongException), () => PopulateLongPathArchive(false));
+
+            if (!longDirectoryPath)
+            {
+                if(!longFilePath)
+                    Assert.DoesNotThrow(() => PopulateLongPathArchive(false, longDirectoryPath, longFilePath));
+                else
+                    Assert.Throws<DirectoryNotFoundException>(() => PopulateLongPathArchive(false, longDirectoryPath, longFilePath));
+            }
+            else
+            {
+                Assert.Throws<PathTooLongException>(() => PopulateLongPathArchive(false, longDirectoryPath, longFilePath));
+            }
+        }
+
+        [TestCase(true, true, ExpectedResult = true)]
+        [TestCase(true, true, ExpectedResult = true)]
+        [TestCase(false, true, ExpectedResult = true)]
+        [TestCase(false, false, ExpectedResult = false)]
+        public bool PopulateLongPathArchive_ThrowsErrorWhenNecessary(bool longDirectoryPath, bool longFilePath)
+        {
+            // this test ensures PopulateLongPathArchive's correctness
+            // since CreateArchiveWithLongPath depends on it
+
+            var exceptionThrown = false;
+            try
+            {
+                PopulateLongPathArchive(false, longDirectoryPath, longFilePath);
+            }
+            catch (PathTooLongException)
+            {
+                exceptionThrown = true;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                if (!longDirectoryPath && longFilePath)
+                {
+                    exceptionThrown = true;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            
+            return exceptionThrown;
         }
 
         /// <summary>
@@ -197,29 +247,40 @@ namespace XenAdminTests.ArchiveTests
         /// </summary>
         /// <param name="createValidPaths">set to true to ensure folders and files are prepended with \\?\</param>
         /// <returns>the path of the one file that has been added</returns>
-        private string PopulateLongPathArchive(bool createValidPaths)
+        private string PopulateLongPathArchive(bool createValidPaths, bool longDirectoryPath = true, bool longFilePath = true)
         {
             var zipPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Directory.CreateDirectory(zipPath);
 
-            var longFileFolderPath = Path.Combine(zipPath, string.Join(@"\", Enumerable.Repeat("folder", 50)));
-            var longFilePath = longFileFolderPath + @"\file.txt";
+            var directoryPathLength = 248 - zipPath.Length - 1;
+            var relativeDirectoryPath = new string('A', directoryPathLength - (longDirectoryPath ? 0 : 1));
+            var directoryPath = Path.Combine(zipPath, relativeDirectoryPath);
+
+            var fileName = new string('B', longFilePath ? 13 : 11);
+
+            var filePath = Path.Combine(directoryPath, fileName);
+            var relativeFilePath = Path.Combine(relativeDirectoryPath, fileName);
 
             if (createValidPaths)
             {
-                longFileFolderPath = StringUtility.ToLongWindowsPath(longFileFolderPath);
-                longFilePath = StringUtility.ToLongWindowsPath(longFilePath);
+                directoryPath = StringUtility.ToLongWindowsPath(directoryPath);
+                filePath = StringUtility.ToLongWindowsPath(filePath);
             }
 
-            Directory.CreateDirectory(longFileFolderPath);
-            File.WriteAllText(longFilePath, "Hello, World!");
+            Directory.CreateDirectory(directoryPath);
+            File.WriteAllText(filePath, "Hello, World!");
 
             fakeWriter.CreateArchive(zipPath);
 
-            Directory.Delete(longFileFolderPath, true);
+            // we need to ensure we're deleting the folder
+            if (longDirectoryPath || longFilePath)
+            {
+                directoryPath = StringUtility.ToLongWindowsPath(directoryPath, true);
+            }
+            Directory.Delete(directoryPath, true);
 
             // fakeWriter paths have been "cleaned" using ArchiveWriter.CleanRelativePathName
-            return longFilePath.Replace(@"\\?\", string.Empty).Replace(@"\", "/");
+            return relativeFilePath.Replace(@"\\?\", string.Empty).Replace(@"\", "/");
         }
 
         [Test]

@@ -225,10 +225,15 @@ namespace XenCenterLib
         /// See <see href='https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea'>CreateFileA</see> and <see href='https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry'>Maximum Path Length Limitation</see> for more info.
         /// </summary>
         /// <param name="inputPath">The input file path</param>
+        /// <param name="force">Set to true to prepend \\?\ to the path regardless of input length</param>
         /// <returns></returns>
-        public static string ToLongWindowsPath(string inputPath)
+        public static string ToLongWindowsPath(string inputPath, bool force = false)
         {
-            if (string.IsNullOrEmpty(inputPath) || inputPath.Length < 248 || inputPath.StartsWith(@"\\?\"))
+            if (inputPath.StartsWith(@"\\?\"))
+            {
+                return inputPath;
+            }
+            if (!force && (string.IsNullOrEmpty(inputPath) || inputPath.Length < 248))
             {
                 return inputPath;
             }
