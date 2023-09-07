@@ -41,7 +41,7 @@ namespace XenAdmin.Controls.CustomDataGraph
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const int NegativeValue = -1;
+        private const int NEGATIVE_VALUE = -1;
 
         /// <summary>
         /// Things can only be added to the beginning or end of this list; it should
@@ -50,12 +50,12 @@ namespace XenAdmin.Controls.CustomDataGraph
         public List<DataPoint> Points = new List<DataPoint>();
         public bool Selected;
         public List<DataPoint> CurrentlyDisplayed = new List<DataPoint>();
-        public IXenObject XenObject;
+        public readonly IXenObject XenObject;
         public readonly string Id = "";
-        public string DataSourceName;
+        public readonly string DataSourceName;
         public string FriendlyName { get; }
-        private int MultiplyingFactor = 1;
-        public DataRange CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
+        private readonly int _multiplyingFactor = 1;
+        public readonly DataRange CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
         public bool Hide { get; }
 
         public DataSet(IXenObject xo, bool hide, string datasourceName, List<Data_source> datasources)
@@ -87,10 +87,13 @@ namespace XenAdmin.Controls.CustomDataGraph
                 case "tasks":
                 case "file descriptors":
                     break;
+                case "percent":
+                    CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
+                    break;
                 case "(fraction)":
                     //CP-34000: use Auto instead of Fixed scale
                     CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
-                    MultiplyingFactor = 100;
+                    _multiplyingFactor = 100;
                     break;
                 case "MHz":
                     CustomYRange = new DataRange(1, 0, 1, Unit.MegaHertz, RangeScaleMode.Auto);
@@ -108,28 +111,28 @@ namespace XenAdmin.Controls.CustomDataGraph
                     break;
                 case "s":
                     CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                    MultiplyingFactor = (int)Util.DEC_GIGA;
+                    _multiplyingFactor = (int)Util.DEC_GIGA;
                     break;
                 case "ms":
                     CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                    MultiplyingFactor = (int)Util.DEC_MEGA;
+                    _multiplyingFactor = (int)Util.DEC_MEGA;
                     break;
                 case "μs":
                     CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                    MultiplyingFactor = (int)Util.DEC_KILO;
+                    _multiplyingFactor = (int)Util.DEC_KILO;
                     break;
                 case "B":
                     CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
                     break;
                 case "KiB":
                     CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
-                    MultiplyingFactor = (int)Util.BINARY_KILO;
+                    _multiplyingFactor = (int)Util.BINARY_KILO;
                     break;
                 case "B/s":
                     CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
                     break;
                 case "MiB/s":
-                    MultiplyingFactor = (int)Util.BINARY_MEGA;
+                    _multiplyingFactor = (int)Util.BINARY_MEGA;
                     CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
                     break;
                 case "mW":
@@ -346,7 +349,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             double value = Helpers.StringToDouble(str);
             bool isNanOrInfinity = double.IsNaN(value) || double.IsInfinity(value);
-            double yValue = isNanOrInfinity ? NegativeValue : value * MultiplyingFactor;
+            double yValue = isNanOrInfinity ? NEGATIVE_VALUE : value * _multiplyingFactor;
 
             #region cpu
 
@@ -370,7 +373,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
 
                 if (isNanOrInfinity || pt.Y < 0)
-                    pt.Y = NegativeValue;
+                    pt.Y = NEGATIVE_VALUE;
                 else
                 {
                     double cpu_vals_added = 0d;
@@ -395,8 +398,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
-                                 ? NegativeValue
-                                 : (value * MultiplyingFactor) - other.Points[other.Points.Count - 1].Y;
+                                 ? NEGATIVE_VALUE
+                                 : value * _multiplyingFactor - other.Points[other.Points.Count - 1].Y;
                     other.Points[other.Points.Count - 1].Y = yValue;
                 }
             }
@@ -406,8 +409,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
-                                 ? NegativeValue
-                                 : other.Points[other.Points.Count - 1].Y - (value * MultiplyingFactor);
+                                 ? NEGATIVE_VALUE
+                                 : other.Points[other.Points.Count - 1].Y - value * _multiplyingFactor;
                 }
             }
             else if (DataSourceName == "memory")
@@ -416,8 +419,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
-                                 ? NegativeValue
-                                 : (value * MultiplyingFactor) - other.Points[other.Points.Count - 1].Y;
+                                 ? NEGATIVE_VALUE
+                                 : value * _multiplyingFactor - other.Points[other.Points.Count - 1].Y;
                     other.Points[other.Points.Count - 1].Y = yValue;
                 }
             }
@@ -427,8 +430,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
-                                 ? NegativeValue
-                                 : other.Points[other.Points.Count - 1].Y - (value * MultiplyingFactor);
+                                 ? NEGATIVE_VALUE
+                                 : other.Points[other.Points.Count - 1].Y - value * _multiplyingFactor;
                 }
             }
 
