@@ -81,7 +81,7 @@ namespace XenAdmin.TabPages
             if (disposing)
             {
                 DeregisterEvents();
-                _archiveMaintainer.Dispose();
+                _archiveMaintainer?.Dispose();
                 components?.Dispose();
 
                 _disposed = true;
