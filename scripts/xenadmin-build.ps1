@@ -260,7 +260,7 @@ else {
     Write-Host "INFO: Sign script does not exist; skip signing installer"
 }
 
-Copy-Item "$SCRATCH_DIR\WixInstaller\$appName.msi" $OUTPUT_DIR
+Copy-Item -LiteralPath "$SCRATCH_DIR\WixInstaller\$appName.msi" $OUTPUT_DIR -Verbose:$verbose
 
 ###################
 # build the tests #
@@ -292,17 +292,17 @@ Compress-Archive -Path $REPO\packages\*.pdb,$REPO\XenAdmin\bin\Release\*.pdb,$RE
 # calculate installer and source zip checksums #
 ################################################
 
-$msi_checksum = (Get-FileHash -Path "$OUTPUT_DIR\$appName.msi" -Algorithm SHA256 |`
+$msi_checksum = (Get-FileHash -LiteralPath "$OUTPUT_DIR\$appName.msi" -Algorithm SHA256 |`
     Select-Object -ExpandProperty Hash).ToLower()
 
-$msi_checksum | Out-File -FilePath "$OUTPUT_DIR\$appName.msi.checksum" -Encoding utf8
+$msi_checksum | Out-File -LiteralPath "$OUTPUT_DIR\$appName.msi.checksum" -Encoding utf8
 
 Write-Host "INFO: Calculated checksum installer checksum: $msi_checksum"
 
-$source_checksum = (Get-FileHash -Path "$OUTPUT_DIR\$appName-source.zip" -Algorithm SHA256 |`
+$source_checksum = (Get-FileHash -LiteralPath "$OUTPUT_DIR\$appName-source.zip" -Algorithm SHA256 |`
     Select-Object -ExpandProperty Hash).ToLower()
 
-$source_checksum | Out-File -FilePath "$OUTPUT_DIR\$appName-source.zip.checksum" -Encoding utf8
+$source_checksum | Out-File -LiteralPath "$OUTPUT_DIR\$appName-source.zip.checksum" -Encoding utf8
 
 Write-Host "INFO: Calculated checksum source checksum: $source_checksum"
 
@@ -325,8 +325,8 @@ $xmlFormat=@"
 
 $msi_url = $XC_UPDATES_URL -replace "XCUpdates.xml","$appName.msi"
 $date=(Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-$productFullName =  "$appName $productVersion"
 $productVersion =  "$BRANDING_XC_PRODUCT_VERSION.$buildNumber"
+$productFullName =  "$appName $productVersion"
 
 Write-Host "INFO: Generating XCUpdates.xml"
 
