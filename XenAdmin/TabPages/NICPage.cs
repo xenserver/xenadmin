@@ -57,6 +57,8 @@ namespace XenAdmin.TabPages
 
         private readonly CollectionChangeEventHandler PIF_CollectionChangedWithInvoke;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Host Host
         {
             get

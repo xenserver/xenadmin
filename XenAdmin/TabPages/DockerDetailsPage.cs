@@ -37,6 +37,7 @@ using XenAPI;
 using XenAdmin.Model;
 using System.Xml;
 using System.Collections;
+using System.ComponentModel;
 
 namespace XenAdmin.TabPages
 {
@@ -49,6 +50,8 @@ namespace XenAdmin.TabPages
         private Host host;
         private string cachedResult;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DockerContainer DockerContainer
         {
             get

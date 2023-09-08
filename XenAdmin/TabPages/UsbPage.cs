@@ -43,6 +43,8 @@ namespace XenAdmin.TabPages
     public partial class UsbPage : BaseTabPage
     {
         private Host _host;
+        private HostUsbRow selectedRow;
+        private bool InBuildList;
 
         public UsbPage()
         {
@@ -56,6 +58,8 @@ namespace XenAdmin.TabPages
 
         public override string HelpID => "TabPageUSB";
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IXenObject XenObject
         {
             get
@@ -80,7 +84,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-        public bool InBuildList = false;
         private void BuildList()
         {
             Program.AssertOnEventThread();
@@ -121,11 +124,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-        protected override void OnVisibleChanged(EventArgs e)
-        {
-            base.OnVisibleChanged(e);
-        }
-
         public override void PageHidden()
         {
             UnregisterHandlers();
@@ -133,12 +131,12 @@ namespace XenAdmin.TabPages
             base.PageHidden();
         }
 
-        void Host_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Host_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             RefreshAllItems();
         }
 
-        void UsbCollectionChanged(object sender, EventArgs e)
+        private void UsbCollectionChanged(object sender, EventArgs e)
         {
             BuildList();
         }
@@ -153,7 +151,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        internal void UnregisterHandlers()
+        private void UnregisterHandlers()
         {
             if (_host != null)
             {
@@ -169,7 +167,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private HostUsbRow selectedRow = null;
         private void dataGridViewUsbList_SelectionChanged(object sender, EventArgs e)
         {
             selectedRow = null;
