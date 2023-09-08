@@ -34,17 +34,17 @@ using System.Windows.Forms;
 namespace XenAdmin.Controls
 {
     /// <summary>
-    /// A System.Windows.Forms.ToolStrip with the option of click-through
+    /// A System.Windows.Forms.StatusStrip with the option of click-through
     /// (see https://learn.microsoft.com/en-us/archive/blogs/rickbrew/how-to-enable-click-through-for-net-2-0-toolstrip-and-menustrip)
     /// </summary>
-    public class ToolStripEx : ToolStrip
+    public class StatusStripEx : StatusStrip
     {
         /// <summary>
-        /// Gets or sets whether the ToolStripEx honors item clicks when its containing form does
+        /// Gets or sets whether the StatusStripEx honors item clicks when its containing form does
         /// not have input focus.
         /// </summary>
         /// <remarks>
-        /// Default value is false, which is the same behavior provided by the base ToolStrip class.
+        /// Default value is false, which is the same behavior provided by the base StatusStrip class.
         /// </remarks>
         public bool ClickThrough { get; set; }
 

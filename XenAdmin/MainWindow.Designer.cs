@@ -287,13 +287,13 @@ namespace XenAdmin
             this.relNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.StatusStrip = new XenAdmin.Controls.StatusStripEx();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusButtonProgress = new System.Windows.Forms.ToolStripSplitButton();
             this.statusButtonErrors = new System.Windows.Forms.ToolStripSplitButton();
-            this.statusButtonCdnUpdates = new System.Windows.Forms.ToolStripSplitButton();
             this.statusButtonUpdates = new System.Windows.Forms.ToolStripSplitButton();
+            this.statusButtonCdnUpdates = new System.Windows.Forms.ToolStripSplitButton();
             this.statusButtonAlerts = new System.Windows.Forms.ToolStripSplitButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -2002,6 +2002,7 @@ namespace XenAdmin
             // StatusStrip
             // 
             resources.ApplyResources(this.StatusStrip, "StatusStrip");
+            this.StatusStrip.ClickThrough = true;
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusProgressBar,
             this.statusLabel,
@@ -2046,15 +2047,6 @@ namespace XenAdmin
             this.statusButtonErrors.Name = "statusButtonErrors";
             this.statusButtonErrors.Click += new System.EventHandler(this.statusButtonErrors_Click);
             // 
-            // statusButtonCdnUpdates
-            // 
-            this.statusButtonCdnUpdates.DropDownButtonWidth = 0;
-            this.statusButtonCdnUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusButtonCdnUpdates.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
-            resources.ApplyResources(this.statusButtonCdnUpdates, "statusButtonCdnUpdates");
-            this.statusButtonCdnUpdates.Name = "statusButtonCdnUpdates";
-            this.statusButtonCdnUpdates.Click += new System.EventHandler(this.statusButtonCdnUpdates_Click);
-            // 
             // statusButtonUpdates
             // 
             this.statusButtonUpdates.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -2064,6 +2056,15 @@ namespace XenAdmin
             resources.ApplyResources(this.statusButtonUpdates, "statusButtonUpdates");
             this.statusButtonUpdates.Name = "statusButtonUpdates";
             this.statusButtonUpdates.Click += new System.EventHandler(this.statusButtonUpdates_Click);
+            // 
+            // statusButtonCdnUpdates
+            // 
+            this.statusButtonCdnUpdates.DropDownButtonWidth = 0;
+            this.statusButtonCdnUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusButtonCdnUpdates.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
+            resources.ApplyResources(this.statusButtonCdnUpdates, "statusButtonCdnUpdates");
+            this.statusButtonCdnUpdates.Name = "statusButtonCdnUpdates";
+            this.statusButtonCdnUpdates.Click += new System.EventHandler(this.statusButtonCdnUpdates_Click);
             // 
             // statusButtonAlerts
             // 
@@ -2318,7 +2319,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripMenuItem customTemplatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem localStorageToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip StatusStrip;
+        private XenAdmin.Controls.StatusStripEx StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
         private XenAdmin.Commands.CommandToolStripMenuItem reclaimFreedSpacetripMenuItem;

@@ -199,6 +199,9 @@
     <Compile Include="Controls\DiskSpinner.Designer.cs">
       <DependentUpon>DiskSpinner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StatusStripEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TreeViews\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
