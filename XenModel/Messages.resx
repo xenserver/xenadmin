@@ -3659,6 +3659,12 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_DETAIL_TARGET_SR" xml:space="preserve">
     <value>Target SR</value>
   </data>
+  <data name="CONVERSION_DOC_PATH_82" xml:space="preserve">
+    <value>https://docs.xenserver.com/en-us/xencenter/8-2/conversion-manager.html#prepare-your-environment</value>
+  </data>
+  <data name="CONVERSION_DOC_PATH_LATEST" xml:space="preserve">
+    <value>https://docs.xenserver.com/en-us/xencenter/current-release/conversion-manager.html</value>
+  </data>
   <data name="CONVERSION_EXPORT" xml:space="preserve">
     <value>Export conversions to {0}</value>
   </data>
@@ -3720,6 +3726,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_SELECT_VPX_TITLE" xml:space="preserve">
     <value>Select Conversion Manager Virtual Appliance - {0}</value>
+  </data>
+  <data name="CONVERSION_SHOW_ONLY_SUPPORTED_GUEST" xml:space="preserve">
+    <value>Show only guest OS supported in the current version.</value>
   </data>
   <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
     <value>Canceled</value>
@@ -3799,6 +3808,12 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_TRY_AGAIN" xml:space="preserve">
     <value>&amp;Try again</value>
   </data>
+  <data name="CONVERSION_UNSUPPORTED" xml:space="preserve">
+    <value>Unsupported</value>
+  </data>
+  <data name="CONVERSION_UNSUPPORTED_VM_SELECTED_WARNING" xml:space="preserve">
+    <value>You can convert unsupported VMs, but they may not work properly.</value>
+  </data>
   <data name="CONVERSION_VERSION_CHECK" xml:space="preserve">
     <value>Checking compatibility with the Conversion Manager virtual appliance...</value>
   </data>
@@ -3816,6 +3831,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TITLE" xml:space="preserve">
     <value>Select the VMs to convert</value>
+  </data>
+  <data name="CONVERSION_VM_SELECT_WARNING_UNSUPPORTED_VERSION" xml:space="preserve">
+    <value>The guest OS version may not be supported, please check the supported OS list and try again.</value>
   </data>
   <data name="CONVERSION_VPX_OBTAIN_IP" xml:space="preserve">
     <value>Obtaining an IP address for the Conversion Manager virtual appliance...</value>

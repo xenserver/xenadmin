@@ -29,41 +29,47 @@ namespace XenAdmin.Wizards.ConversionWizard
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VmSelectionPage));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanelVmSelection = new System.Windows.Forms.TableLayoutPanel();
+            this.labelDesc = new System.Windows.Forms.Label();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnChecked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.columnVm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnOs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDiskSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.columnRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
             this.buttonSelectAll = new System.Windows.Forms.Button();
             this.buttonClearAll = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.tableLayoutPanelVersion = new System.Windows.Forms.TableLayoutPanel();
+            this.supportedOSLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.showOnlySupportedGuestCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanelError = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxError = new System.Windows.Forms.PictureBox();
             this.labelError = new System.Windows.Forms.Label();
             this._backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanelVmSelection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanelButtons.SuspendLayout();
+            this.tableLayoutPanelVersion.SuspendLayout();
             this.tableLayoutPanelError.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanelVmSelection
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVms, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelError, 0, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            resources.ApplyResources(this.tableLayoutPanelVmSelection, "tableLayoutPanelVmSelection");
+            this.tableLayoutPanelVmSelection.Controls.Add(this.labelDesc, 0, 0);
+            this.tableLayoutPanelVmSelection.Controls.Add(this.dataGridViewVms, 0, 1);
+            this.tableLayoutPanelVmSelection.Controls.Add(this.tableLayoutPanelButtons, 0, 2);
+            this.tableLayoutPanelVmSelection.Controls.Add(this.tableLayoutPanelVersion, 0, 3);
+            this.tableLayoutPanelVmSelection.Controls.Add(this.tableLayoutPanelError, 0, 4);
+            this.tableLayoutPanelVmSelection.Name = "tableLayoutPanelVmSelection";
             // 
-            // label1
+            // labelDesc
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelDesc, "labelDesc");
+            this.labelDesc.Name = "labelDesc";
             // 
             // dataGridViewVms
             // 
@@ -74,7 +80,8 @@ namespace XenAdmin.Wizards.ConversionWizard
             this.columnChecked,
             this.columnVm,
             this.columnOs,
-            this.columnDiskSize});
+            this.columnDiskSize,
+            this.columnRemarks});
             resources.ApplyResources(this.dataGridViewVms, "dataGridViewVms");
             this.dataGridViewVms.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dataGridViewVms.MultiSelect = true;
@@ -90,31 +97,39 @@ namespace XenAdmin.Wizards.ConversionWizard
             // 
             // columnVm
             // 
+            this.columnVm.FillWeight = 70F;
             resources.ApplyResources(this.columnVm, "columnVm");
             this.columnVm.Name = "columnVm";
             this.columnVm.ReadOnly = true;
             // 
             // columnOs
             // 
+            this.columnOs.FillWeight = 80F;
             resources.ApplyResources(this.columnOs, "columnOs");
             this.columnOs.Name = "columnOs";
             this.columnOs.ReadOnly = true;
             // 
             // columnDiskSize
             // 
-            this.columnDiskSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.columnDiskSize.FillWeight = 40F;
+            this.columnDiskSize.FillWeight = 25F;
             resources.ApplyResources(this.columnDiskSize, "columnDiskSize");
             this.columnDiskSize.Name = "columnDiskSize";
             this.columnDiskSize.ReadOnly = true;
             // 
-            // tableLayoutPanel3
+            // columnRemarks
             // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.buttonSelectAll, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.buttonClearAll, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.buttonRefresh, 3, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.columnRemarks.FillWeight = 30F;
+            resources.ApplyResources(this.columnRemarks, "columnRemarks");
+            this.columnRemarks.Name = "columnRemarks";
+            this.columnRemarks.ReadOnly = true;
+            // 
+            // tableLayoutPanelButtons
+            // 
+            resources.ApplyResources(this.tableLayoutPanelButtons, "tableLayoutPanelButtons");
+            this.tableLayoutPanelButtons.Controls.Add(this.buttonSelectAll, 0, 0);
+            this.tableLayoutPanelButtons.Controls.Add(this.buttonClearAll, 1, 0);
+            this.tableLayoutPanelButtons.Controls.Add(this.buttonRefresh, 3, 0);
+            this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             // 
             // buttonSelectAll
             // 
@@ -136,6 +151,29 @@ namespace XenAdmin.Wizards.ConversionWizard
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // tableLayoutPanelVersion
+            // 
+            resources.ApplyResources(this.tableLayoutPanelVersion, "tableLayoutPanelVersion");
+            this.tableLayoutPanelVersion.Controls.Add(this.supportedOSLinkLabel, 1, 0);
+            this.tableLayoutPanelVersion.Controls.Add(this.showOnlySupportedGuestCheckBox, 0, 0);
+            this.tableLayoutPanelVersion.Name = "tableLayoutPanelVersion";
+            // 
+            // supportedOSLinkLabel
+            // 
+            resources.ApplyResources(this.supportedOSLinkLabel, "supportedOSLinkLabel");
+            this.supportedOSLinkLabel.Name = "supportedOSLinkLabel";
+            this.supportedOSLinkLabel.TabStop = true;
+            this.supportedOSLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.supportedOSLinkLabel_LinkClicked);
+            // 
+            // showOnlySupportedGuestCheckBox
+            // 
+            resources.ApplyResources(this.showOnlySupportedGuestCheckBox, "showOnlySupportedGuestCheckBox");
+            this.showOnlySupportedGuestCheckBox.Checked = true;
+            this.showOnlySupportedGuestCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showOnlySupportedGuestCheckBox.Name = "showOnlySupportedGuestCheckBox";
+            this.showOnlySupportedGuestCheckBox.UseVisualStyleBackColor = true;
+            this.showOnlySupportedGuestCheckBox.CheckedChanged += new System.EventHandler(this.showOnlySupportedGuestCheckBox_CheckedChanged);
             // 
             // tableLayoutPanelError
             // 
@@ -166,12 +204,14 @@ namespace XenAdmin.Wizards.ConversionWizard
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayoutPanelVmSelection);
             this.Name = "VmSelectionPage";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanelVmSelection.ResumeLayout(false);
+            this.tableLayoutPanelVmSelection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
-            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanelButtons.ResumeLayout(false);
+            this.tableLayoutPanelVersion.ResumeLayout(false);
+            this.tableLayoutPanelVersion.PerformLayout();
             this.tableLayoutPanelError.ResumeLayout(false);
             this.tableLayoutPanelError.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).EndInit();
@@ -181,20 +221,24 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelError;
-        private System.Windows.Forms.PictureBox pictureBoxError;
-        private System.Windows.Forms.Label labelError;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button buttonSelectAll;
-        private System.Windows.Forms.Button buttonClearAll;
-        private System.Windows.Forms.Button buttonRefresh;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelVmSelection;
+        private System.Windows.Forms.Label labelDesc;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnChecked;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVm;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnOs;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDiskSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnRemarks;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
+        private System.Windows.Forms.Button buttonSelectAll;
+        private System.Windows.Forms.Button buttonClearAll;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelVersion;
+        private System.Windows.Forms.CheckBox showOnlySupportedGuestCheckBox;
+        private System.Windows.Forms.LinkLabel supportedOSLinkLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelError;
+        private System.Windows.Forms.PictureBox pictureBoxError;
+        private System.Windows.Forms.Label labelError;
         private System.ComponentModel.BackgroundWorker _backgroundWorker;
     }
 }

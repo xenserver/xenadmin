@@ -228,6 +228,8 @@ namespace XenAdmin.XCM
         public long CommittedStorage;
         public long UncommittedStorage;
         public bool Template;
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public string[] SupportedXSVersions; // 8.2, or 8.3, or newer version.
     }
 
     public struct ServerInfo
@@ -263,6 +265,12 @@ namespace XenAdmin.XCM
         Failed = 4,
         Cancelled = 5,
         Incomplete = 6,
+    }
+
+    public enum ConvertWarning
+    {
+        None = 0,
+        UnsupportedVersion = 1
     }
 
 

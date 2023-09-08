@@ -10179,6 +10179,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xencenter/8-2/conversion-manager.html#prepare-your-environment.
+        /// </summary>
+        public static string CONVERSION_DOC_PATH_82 {
+            get {
+                return ResourceManager.GetString("CONVERSION_DOC_PATH_82", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xencenter/current-release/conversion-manager.html.
+        /// </summary>
+        public static string CONVERSION_DOC_PATH_LATEST {
+            get {
+                return ResourceManager.GetString("CONVERSION_DOC_PATH_LATEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export conversions to {0}.
         /// </summary>
         public static string CONVERSION_EXPORT {
@@ -10357,6 +10375,15 @@ namespace XenAdmin {
         public static string CONVERSION_SELECT_VPX_TITLE {
             get {
                 return ResourceManager.GetString("CONVERSION_SELECT_VPX_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show only guest OS supported in the current version..
+        /// </summary>
+        public static string CONVERSION_SHOW_ONLY_SUPPORTED_GUEST {
+            get {
+                return ResourceManager.GetString("CONVERSION_SHOW_ONLY_SUPPORTED_GUEST", resourceCulture);
             }
         }
         
@@ -10595,6 +10622,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unsupported.
+        /// </summary>
+        public static string CONVERSION_UNSUPPORTED {
+            get {
+                return ResourceManager.GetString("CONVERSION_UNSUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can convert unsupported VMs, but they may not work properly..
+        /// </summary>
+        public static string CONVERSION_UNSUPPORTED_VM_SELECTED_WARNING {
+            get {
+                return ResourceManager.GetString("CONVERSION_UNSUPPORTED_VM_SELECTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking compatibility with the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_VERSION_CHECK {
@@ -10645,6 +10690,15 @@ namespace XenAdmin {
         public static string CONVERSION_VM_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("CONVERSION_VM_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The guest OS version may not be supported, please check the supported OS list and try again..
+        /// </summary>
+        public static string CONVERSION_VM_SELECT_WARNING_UNSUPPORTED_VERSION {
+            get {
+                return ResourceManager.GetString("CONVERSION_VM_SELECT_WARNING_UNSUPPORTED_VERSION", resourceCulture);
             }
         }
         
