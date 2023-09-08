@@ -153,7 +153,7 @@ namespace XenAdmin.Alerts
             string outputPathAndFileName;
             using (var saveSourceDialog = new SaveFileDialog())
             {
-                saveSourceDialog.FileName = BrandManager.BrandConsoleNoSpace + "-source.zip";
+                saveSourceDialog.FileName = BrandManager.BrandConsole + "-source.zip";
                 saveSourceDialog.DefaultExt = "zip";
                 saveSourceDialog.Filter = "(*.zip)|*.zip|All files (*.*)|*.*";
                 saveSourceDialog.InitialDirectory = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);

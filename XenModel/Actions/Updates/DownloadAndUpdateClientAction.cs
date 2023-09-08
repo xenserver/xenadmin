@@ -37,7 +37,9 @@ using XenCenterLib;
 namespace XenAdmin.Actions.Updates
 {
     public class DownloadAndUpdateClientAction : DownloadFileAction, IByteProgressAction
-    {     
+    {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly string _checksum;
         private FileStream _msiStream;
 
