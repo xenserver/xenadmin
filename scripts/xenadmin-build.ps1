@@ -310,12 +310,14 @@ $xmlFormat=@"
             url="{2}"
             checksum="{3}"
             value="{4}"
+            source="{5}"
         />
     </versions>
 </patchdata>
 "@
 
 $msi_url = $XC_UPDATES_URL -replace "XCUpdates.xml","$appName.msi"
+$source_url = $XC_UPDATES_URL -replace "XCUpdates.xml","$appName-source.zip"
 $date=(Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 $productVersion = "$BRANDING_XC_PRODUCT_VERSION.$buildNumber"
 $productFullName = "$appName $productVersion"
@@ -331,7 +333,11 @@ Write-Host $testXml
 $bomLessEncoding = New-Object System.Text.UTF8Encoding $false
 
 Write-Host "INFO: Generating XCUpdates.xml"
-[System.IO.File]::WriteAllLines("$OUTPUT_DIR\XCUpdates.xml", $prodXml, $bomLessEncoding)
+
+[string]::Format($xmlFormat, $productFullName, $date, $msi_url, $msi_checksum, $productVersion, $source_url) |`
+    Out-File -FilePath $OUTPUT_DIR\XCUpdates.xml -Encoding utf8
 
 Write-Host "INFO: Generating stage-test-XCUpdates.xml. URL is a placeholder value"
-[System.IO.File]::WriteAllLines("$OUTPUT_DIR\stage-test-XCUpdates.xml", $testXml, $bomLessEncoding)
+
+[string]::Format($xmlFormat, $productFullName, $date, "@DEV_MSI_URL_PLACEHOLDER@", $msi_checksum, $productVersion, "@DEV_SOURCE_URL_PLACEHOLDER@") |`
+    Out-File -FilePath $OUTPUT_DIR\stage-test-XCUpdates.xml -Encoding utf8
