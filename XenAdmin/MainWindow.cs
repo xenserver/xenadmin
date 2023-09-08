@@ -1573,9 +1573,8 @@ namespace XenAdmin
             if(!multi && !SearchMode && isRealVMSelected)
                 newTabs.Add(TabPageSnapshots);
 
-            //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
-            if (!wlb_upsell && !multi && !SearchMode && isPoolSelected)
-                newTabs.Add(TabPageWLB);
+            if (!multi && !SearchMode && isPoolSelected)
+                newTabs.Add(wlb_upsell ? TabPageWLBUpsell : TabPageWLB);
 
             if (!multi && !SearchMode && (isPoolSelected || isPoolOrLiveStandaloneHost))
                 newTabs.Add(ad_upsell ? TabPageADUpsell : TabPageAD);
