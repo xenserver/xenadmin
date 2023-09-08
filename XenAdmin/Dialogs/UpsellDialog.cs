@@ -41,7 +41,7 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             upsellPage1.BlurbText = blurb;
-            upsellPage1.enableOkButton();
+            upsellPage1.EnableOkButton();
             CancelButton = upsellPage1.OKButton;
             Height = upsellPage1.Height;
         }
@@ -54,9 +54,7 @@ namespace XenAdmin.Dialogs
 
         public static void ShowUpsellDialog(string message, IWin32Window parent)
         {
-            using (var upsellDialog = new UpsellDialog(HiddenFeatures.LinkLabelHidden
-                    ? message
-                    : message + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand)))
+            using (var upsellDialog = new UpsellDialog(message))
                 upsellDialog.ShowDialog(parent);
         }
     }  
