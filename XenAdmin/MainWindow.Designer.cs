@@ -65,7 +65,6 @@ namespace XenAdmin
             this.TabPageHA = new System.Windows.Forms.TabPage();
             this.TabPageHAUpsell = new System.Windows.Forms.TabPage();
             this.TabPageSnapshots = new System.Windows.Forms.TabPage();
-            this.snapshotPage = new XenAdmin.TabPages.SnapshotsPage();
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
@@ -300,7 +299,6 @@ namespace XenAdmin
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.TheTabControl.SuspendLayout();
-            this.TabPageSnapshots.SuspendLayout();
             this.TitleBackPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
@@ -460,16 +458,9 @@ namespace XenAdmin
             // 
             // TabPageSnapshots
             // 
-            this.TabPageSnapshots.Controls.Add(this.snapshotPage);
             resources.ApplyResources(this.TabPageSnapshots, "TabPageSnapshots");
             this.TabPageSnapshots.Name = "TabPageSnapshots";
             this.TabPageSnapshots.UseVisualStyleBackColor = true;
-            // 
-            // snapshotPage
-            // 
-            resources.ApplyResources(this.snapshotPage, "snapshotPage");
-            this.snapshotPage.Name = "snapshotPage";
-            this.snapshotPage.VM = null;
             // 
             // TabPageWLB
             // 
@@ -2098,7 +2089,6 @@ namespace XenAdmin
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.TheTabControl.ResumeLayout(false);
-            this.TabPageSnapshots.ResumeLayout(false);
             this.TitleBackPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -2244,7 +2234,6 @@ namespace XenAdmin
         private System.Windows.Forms.TabPage TabPageSnapshots;
         private System.Windows.Forms.TabPage TabPageDockerProcess;
         internal System.Windows.Forms.TabPage TabPageDockerDetails;
-        private XenAdmin.TabPages.SnapshotsPage snapshotPage;
         private System.Windows.Forms.ToolStripMenuItem connectDisconnectToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem connectAllToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem DisconnectToolStripMenuItem;
