@@ -266,7 +266,38 @@ namespace XenCenterLib
             public static bool ExistsPipe(string pipePath)
             {
                 log.Debug($"Checking {pipePath} exists");
-                return Directory.GetFiles(@"\\.\pipe\").Contains(pipePath);
+
+                // CA-382850: We iterate manually in order to catch ArgumentExceptions
+                // when listing files. Pipes can be created with invalid characters in 
+                // their names. This throws exception when those files are accessed.
+                // Other processes might create these pipes and inadvertently prevent
+                // XenCenter from starting
+
+                var e = Directory.EnumerateFiles(@"\\.\pipe\");
+                using (var enumerator = e.GetEnumerator())
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            if (!enumerator.MoveNext())
+                            {
+                                break;
+                            }
+
+                            if (enumerator.Current != null && enumerator.Current.Contains(pipePath))
+                            {
+                                return true;
+                            }
+                        }
+                        catch (ArgumentException)
+                        {
+                            // ignore, the pipe's name contains invalid characters
+                        }
+                    }
+                }
+
+                return false;
             }
 
             /// <summary>
