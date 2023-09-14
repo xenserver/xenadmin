@@ -10092,6 +10092,84 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NOW" xml:space="preserve">
     <value>Now</value>
   </data>
+  <data name="NRPE_ACTION_CHANGING" xml:space="preserve">
+    <value>Changing NRPE configuration...</value>
+  </data>
+  <data name="NRPE_ACTIVE" xml:space="preserve">
+    <value>NRPE service is active</value>
+  </data>
+  <data name="NRPE_ALLOW_HOSTS_EMPTY_ERROR" xml:space="preserve">
+    <value>Allow hosts should not be empty.</value>
+  </data>
+  <data name="NRPE_ALLOW_HOSTS_ERROR_TITLE" xml:space="preserve">
+    <value>Allow hosts format is not correct</value>
+  </data>
+  <data name="NRPE_ALLOW_HOSTS_FORMAT_ERROR" xml:space="preserve">
+    <value>Allow hosts should be comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com</value>
+  </data>
+  <data name="NRPE_ALLOW_HOSTS_PLACE_HOLDER" xml:space="preserve">
+    <value>Comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com</value>
+  </data>
+  <data name="NRPE_BATCH_CONFIGURATION" xml:space="preserve">
+    <value>NRPE batch configuration</value>
+  </data>
+  <data name="NRPE_CHECK_CPU" xml:space="preserve">
+    <value>Dom0 CPU Usage (%)</value>
+  </data>
+  <data name="NRPE_CHECK_DISK_LOG" xml:space="preserve">
+    <value>Dom0 Log Partition Free Space (%)</value>
+  </data>
+  <data name="NRPE_CHECK_DISK_ROOT" xml:space="preserve">
+    <value>Dom0 Root Partition Free Space (%)</value>
+  </data>
+  <data name="NRPE_CHECK_HOST_CPU" xml:space="preserve">
+    <value>Host CPU Usage (%)</value>
+  </data>
+  <data name="NRPE_CHECK_HOST_LOAD" xml:space="preserve">
+    <value>Host CPU Load</value>
+  </data>
+  <data name="NRPE_CHECK_HOST_MEMORY" xml:space="preserve">
+    <value>Host Memory Usage (%)</value>
+  </data>
+  <data name="NRPE_CHECK_LOAD" xml:space="preserve">
+    <value>Dom0 CPU Load</value>
+  </data>
+  <data name="NRPE_CHECK_MEMORY" xml:space="preserve">
+    <value>Dom0 Memory Usage (%)</value>
+  </data>
+  <data name="NRPE_CHECK_SWAP" xml:space="preserve">
+    <value>Dom0 Free Swap (%)</value>
+  </data>
+  <data name="NRPE_CHECK_VGPU" xml:space="preserve">
+    <value>Host vGPU Memory Usage (%)</value>
+  </data>
+  <data name="NRPE_CHECK_VGPU_MEMORY" xml:space="preserve">
+    <value>Host vGPU Usage (%)</value>
+  </data>
+  <data name="NRPE_EDIT_PAGE_TEXT" xml:space="preserve">
+    <value>NRPE Configuration</value>
+  </data>
+  <data name="NRPE_INACTIVE" xml:space="preserve">
+    <value>NRPE service is inactive</value>
+  </data>
+  <data name="NRPE_THRESHOLD_RANGE_ERROR" xml:space="preserve">
+    <value>Threshold value should range from {0} to {1}.</value>
+  </data>
+  <data name="NRPE_THRESHOLD_SHOULD_BE_3_NUMBERS" xml:space="preserve">
+    <value>Threshold value should be 3 numbers separated with comma.</value>
+  </data>
+  <data name="NRPE_THRESHOLD_SHOULD_BE_NUMBER" xml:space="preserve">
+    <value>Threshold value should be number.</value>
+  </data>
+  <data name="NRPE_THRESHOLD_SHOULD_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Threshold value should not be empty.</value>
+  </data>
+  <data name="NRPE_THRESHOLD_WARNING_SHOULD_BIGGER_THAN_CRITICAL" xml:space="preserve">
+    <value>Warning threshold should be bigger than critical threshold.</value>
+  </data>
+  <data name="NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL" xml:space="preserve">
+    <value>Warning threshold should be less than critical threshold.</value>
+  </data>
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>Number of snapshots to keep</value>
   </data>
