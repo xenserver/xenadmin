@@ -82,6 +82,7 @@ namespace XenAdmin.Dialogs
         private ClusteringEditPage ClusteringEditPage;
         private SrReadCachingEditPage SrReadCachingEditPage;
         private PoolAdvancedEditPage _poolAdvancedEditPage;
+        private NRPEEditPage NRPEEditPage;
         #endregion
 
         private readonly IXenObject _xenObjectBefore, _xenObjectCopy;
@@ -316,6 +317,11 @@ namespace XenAdmin.Dialogs
                         dialog.ShowCancel = true;
                         dialog.ShowDialog(Program.MainWindow);
                     }
+                }
+                if (isHost || isPool)
+                {
+                    NRPEEditPage = new NRPEEditPage(isHost);
+                    ShowTab(NRPEEditPage);
                 }
             }
             finally
