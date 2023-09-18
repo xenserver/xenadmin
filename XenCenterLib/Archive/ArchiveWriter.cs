@@ -64,7 +64,7 @@ namespace XenCenterLib.Archive
         }
 
         /// <summary>
-        /// Populate the archive by recursively calling the overriden <see cref="Add"/> and <see cref="AddDirectory"/>.
+        /// Populate the archive by recursively calling the overridden <see cref="Add"/> and <see cref="AddDirectory"/>.
         /// </summary>
         /// <param name="pathToArchive">The path to the root of the folder we're archiving</param>
         /// <param name="pathToCurrentDirectory">Keeps track of the current directory we're archiving. In the first recursive call it should be the same as <see cref="pathToArchive"/></param>
