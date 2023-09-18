@@ -130,9 +130,10 @@ namespace XenCenterLib.Archive
 
         private string CleanRelativePathName(string rootPath, string pathName)
         {
+            var cleanedRootPath = rootPath.Replace(@"\\?\", string.Empty);
             return pathName
                 .Replace(@"\\?\", string.Empty)
-                .Replace(rootPath, string.Empty)
+                .Replace(cleanedRootPath, string.Empty)
                 .Replace('\\', '/')
                 .TrimStart('/');
         }
