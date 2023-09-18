@@ -66,6 +66,23 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                                                 }, true);
 
         }
+
+        public override AsyncAction CreateUnwindChangesAction()
+        {
+            var pool = Pool.Connection.Resolve(new XenRef<Pool>(Pool.opaque_ref));
+
+            if (pool == null)
+            {
+                foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy)
+                {
+                    pool = xenConnection.Resolve(new XenRef<Pool>(Pool.opaque_ref));
+                    if (pool != null)
+                        break;
+                }
+            }
+
+            return pool == null ? null : new EnableWLBAction(pool);
+        }
     }
 
     class WLBEnabledWarning : Warning
