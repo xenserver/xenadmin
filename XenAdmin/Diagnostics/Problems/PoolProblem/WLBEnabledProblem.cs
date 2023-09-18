@@ -28,10 +28,8 @@
  * SUCH DAMAGE.
  */
 
-using System.Threading;
 using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
@@ -52,19 +50,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            return new DelegatedAsyncAction(Pool.Connection, Messages.HELP_MESSAGE_DISABLE_WLB, "", "",
-                                            ss =>
-                                                {
-                                                    var action = new DisableWLBAction(Pool, false);
-                                                    action.RunSync(ss);
-                                                    int count = 0;
-                                                    while (Helpers.WlbEnabled(Pool.Connection) && count < 10)
-                                                    {
-                                                        Thread.Sleep(500);
-                                                        count++;
-                                                    }
-                                                }, true);
-
+            return new DisableWLBAction(Pool, false);
         }
 
         public override AsyncAction CreateUnwindChangesAction()
