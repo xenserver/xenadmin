@@ -7948,9 +7948,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Checking HA and WLB status.
         /// </summary>
-        public static string CHECKING_HA_STATUS {
+        public static string CHECKING_HA_AND_WLB_STATUS {
             get {
-                return ResourceManager.GetString("CHECKING_HA_STATUS", resourceCulture);
+                return ResourceManager.GetString("CHECKING_HA_AND_WLB_STATUS", resourceCulture);
             }
         }
         
@@ -18836,6 +18836,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HA check.
+        /// </summary>
+        public static string HA_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("HA_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose a heartbeat SR.
         /// </summary>
         public static string HA_CHOOSESR_PAGE_PAGETITLE {
@@ -19495,15 +19504,6 @@ namespace XenAdmin {
         public static string HA_WIZARD_FINISH_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("HA_WIZARD_FINISH_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HA and WLB check.
-        /// </summary>
-        public static string HA_WLB_CHECK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("HA_WLB_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -38037,6 +38037,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because HA and WLB are enabled on pool {1}..
+        /// </summary>
+        public static string UPDATES_WIZARD_HA_AND_WLB_ON_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_HA_AND_WLB_ON_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool &apos;{0}&apos; cannot have HA enabled..
         /// </summary>
         public static string UPDATES_WIZARD_HA_ON_DESCRIPTION {
@@ -41496,6 +41505,15 @@ namespace XenAdmin {
         public static string WLB_AUTOMATION_SUBTEXT {
             get {
                 return ResourceManager.GetString("WLB_AUTOMATION_SUBTEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WLB check.
+        /// </summary>
+        public static string WLB_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("WLB_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         

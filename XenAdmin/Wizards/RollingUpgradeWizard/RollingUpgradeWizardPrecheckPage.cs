@@ -259,12 +259,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (pvChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
-            //HA checks - for each pool
-            var haChecks = (from Pool pool in SelectedPools
-                select new HaWlbOffCheck(pool) as Check).ToList();
+            //HA and WLB checks - for each pool
+            var haWlbChecks = new List<Check>();
+            foreach (var pool in SelectedPools)
+            {
+                haWlbChecks.Add(new HaOffCheck(pool));
+                haWlbChecks.Add(new WlbOffCheck(pool));
+            }
 
-            if (haChecks.Count > 0) 
-                groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
+            if (haWlbChecks.Count > 0) 
+                groups.Add(new CheckGroup(Messages.CHECKING_HA_AND_WLB_STATUS, haWlbChecks));
 
             //Checking can evacuate host - for hosts that will be upgraded or updated
             var evacuateChecks = (from Host host in hostsToUpgradeOrUpdate

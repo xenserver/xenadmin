@@ -258,16 +258,11 @@ namespace XenAdmin.Diagnostics.Checks
         protected override Problem RunHostCheck()
         {
             Pool pool = Helpers.GetPool(Host.Connection);
-            if (pool != null)
-            {
-                if (pool.ha_enabled)
-                    return new HAEnabledWarning(this, pool, Host);
 
-                if (Helpers.WlbEnabled(pool.Connection))
-                    return new WLBEnabledWarning(this, pool, Host);
-            }
-
-            return null;
+            if (pool == null || (!pool.ha_enabled && !pool.wlb_enabled))
+                return null;
+            
+            return new HaWlbEnabledWarning(this, pool, Host);
         }
 
         public override List<Problem> RunAllChecks()
@@ -279,9 +274,6 @@ namespace XenAdmin.Diagnostics.Checks
                 return CheckHost();
         }
 
-        public override string Description
-        {
-            get { return Messages.ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION; }
-        }
+        public override string Description => Messages.ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION;
     }
 }
