@@ -66,7 +66,6 @@ namespace XenAdmin.Actions.Updates
         private Exception _downloadError;
         private readonly string _authToken;
         private WebClient _client;
-        private string _title;
         private string _description;
 
 
@@ -82,7 +81,6 @@ namespace XenAdmin.Actions.Updates
             _canDownloadFile = _address != null;
             _outputPathAndFileName = outputFileName;
             _authToken = XenAdminConfigManager.Provider.GetClientUpdatesQueryParam();
-            _title = title;
             _description = description;
         }
 
