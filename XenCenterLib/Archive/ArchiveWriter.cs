@@ -35,31 +35,34 @@ namespace XenCenterLib.Archive
 {
     public abstract class ArchiveWriter : IDisposable
     {
+        private int _progressTracker;
+
         public abstract void Add(Stream fileToAdd, string fileName, DateTime modificationTime, Action cancellingDelegate);
+        public abstract void AddDirectory(string directoryName, DateTime modificationTime);
 
         public virtual void SetBaseStream(Stream outputStream)
         {
             throw new NotImplementedException();
         }
 
-        public abstract void AddDirectory(string directoryName, DateTime modificationTime);
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        /// <summary>
-        /// Disposal hook
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing){ }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);   
+        }
 
         public void CreateArchive(string pathToArchive, Action cancellingDelegate = null, Action<int> progressDelegate = null)
         {
-            var longPathToArchive = StringUtility.ToLongWindowsPath(pathToArchive);
-            if (!Directory.Exists(longPathToArchive))
-                throw new FileNotFoundException("The path " + pathToArchive + " does not exist");
-
             // We look recursively and do not use Directory.GetDirectories and Directory.GetFiles with
             // AllDirectories options because in .NET 4.8 they do not enumerate all elements if they
             // have paths longer than 260 characters (248 for directories).
             // If moving to .NET Core, please consider reverting this.
+
+            _progressTracker = 0;
             PopulateArchive(pathToArchive, pathToArchive, cancellingDelegate, progressDelegate);
         }
 
@@ -73,59 +76,49 @@ namespace XenCenterLib.Archive
         /// <param name="totalProgressIncrease">Total progress that needs to be added for archiving this directory. In the first recursive call it should be 100. If the folder we're adding should add 18 percentage points to the total progress, set this value to 18.</param>
         /// <param name="progressOffset">Offset to the progress. This is added to <see cref="totalProgressIncrease"/> when setting the progress for this directory. If this folder should add 18 percentage points to the total progress, but it's for a folder past the 50% mark of the total progress (i.e.: completing this folder should set the total to 68), set this value to 50.</param>
         /// <exception cref="FileNotFoundException">A directory could not be found.</exception>
-        private void PopulateArchive(string pathToArchive, string pathToCurrentDirectory, Action cancellingDelegate = null, Action<int> progressDelegate = null, int totalProgressIncrease = 100, int progressOffset = 0)
+        private void PopulateArchive(string pathToArchive, string pathToCurrentDirectory, Action cancellingDelegate = null, Action<int> progressDelegate = null, float totalProgressIncrease = 100, float progressOffset = 0)
         {
             cancellingDelegate?.Invoke();
 
-            var longPathToArchive = StringUtility.ToLongWindowsPath(pathToArchive);
+            pathToArchive = StringUtility.ToLongWindowsPath(pathToArchive, true);
+            if (!Directory.Exists(pathToArchive))
+                throw new FileNotFoundException($"The path {pathToArchive} does not exist");
 
-            if (!Directory.Exists(longPathToArchive))
-                throw new FileNotFoundException("The path " + pathToArchive + " does not exist");
+            pathToCurrentDirectory = StringUtility.ToLongWindowsPath(pathToCurrentDirectory, true);
 
-            AddFiles(longPathToArchive, pathToCurrentDirectory, cancellingDelegate);
+            //add the current directory except when it's the root directory
+            if (pathToArchive != pathToCurrentDirectory)
+                AddDirectory(CleanRelativePathName(pathToArchive, pathToCurrentDirectory), Directory.GetCreationTime(pathToCurrentDirectory));
 
-            var directories = Directory.GetDirectories(pathToCurrentDirectory);
+            var files = Directory.GetFiles(pathToCurrentDirectory);
 
-            if (directories.Length == 0)
-            {
-                progressDelegate?.Invoke(totalProgressIncrease + progressOffset);
-                return;
-            }
-
-            var progressIncrement = totalProgressIncrease / directories.Length;
-            
-            for (var j = 0; j < directories.Length; j++)
-            {
-                var subdirectoryPath = directories[j];
-                
-                AddDirectory(CleanRelativePathName(pathToArchive, subdirectoryPath), Directory.GetCreationTime(subdirectoryPath));
-
-                // Add the remainder to the offset of the last subdirectory
-                var remainder = j == directories.Length - 1 ? totalProgressIncrease % directories.Length : 0;
-                var newProgressOffset = j * progressIncrement + progressOffset + remainder;
-
-                PopulateArchive(pathToArchive, subdirectoryPath, cancellingDelegate, progressDelegate,progressIncrement, newProgressOffset);
-            }
-        }
-
-        private void AddFiles(string pathToArchive, string currentDirectory, Action cancellingDelegate)
-        {
-            var files = Directory.GetFiles(StringUtility.ToLongWindowsPath(currentDirectory));
-            foreach (var filePath in files)
+            foreach (var file in files)
             {
                 cancellingDelegate?.Invoke();
 
-                using (var fs = File.OpenRead(StringUtility.ToLongWindowsPath(filePath)))
-                {
-                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(StringUtility.ToLongWindowsPath(filePath)), cancellingDelegate);
-                }
-            }
-        }
+                var filePath = StringUtility.ToLongWindowsPath(file, false);
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);   
+                using (var fs = File.OpenRead(filePath))
+                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(filePath), cancellingDelegate);
+            }
+
+            if (_progressTracker != (int)progressOffset)
+            {
+                _progressTracker = (int)progressOffset;
+                progressDelegate?.Invoke(_progressTracker);
+            }
+
+            var directories = Directory.GetDirectories(pathToCurrentDirectory);
+            if (directories.Length == 0)
+                return;
+
+            float increment = totalProgressIncrease / directories.Length;
+
+            for (var i = 0; i < directories.Length; i++)
+            {
+                PopulateArchive(pathToArchive, directories[i], cancellingDelegate, progressDelegate,
+                    increment, i * increment + progressOffset);
+            }
         }
 
         private string CleanRelativePathName(string rootPath, string pathName)

@@ -137,18 +137,8 @@ namespace XenAdminTests.ArchiveTests
                 Assert.AreEqual(1, fakeWriter.AddedDates.Count);
                 Assert.AreEqual(fileName, fakeWriter.AddedFileNameData[0], "File name");
                 Assert.IsTrue(fakeWriter.AddedStreamData[0].Length == 14, "Stream has data");
-                AssertCurrentDateIsPlausible(fakeWriter.AddedDates[0]);
+                Assert.That(fakeWriter.AddedDates[0], Is.EqualTo(DateTime.Now).Within(TimeSpan.FromSeconds(5)));
             }
-        }
-
-        private void AssertCurrentDateIsPlausible(DateTime currentDate)
-        {
-            //If this is failing check that the number of seconds is enough
-            const double seconds = 5.0;
-            DateTime maxDate = DateTime.Now.AddSeconds(seconds);
-            DateTime minDate = DateTime.Now.AddSeconds(-1.0 * seconds);
-            Assert.IsTrue(currentDate > minDate, "Date is > minimum");
-            Assert.IsTrue(currentDate < maxDate, "Date is < maximum");
         }
 
         [Test]
@@ -165,7 +155,7 @@ namespace XenAdminTests.ArchiveTests
             Assert.AreEqual(0, fakeWriter.AddedStreamData.Count);
             Assert.AreEqual(totalAdded, fakeWriter.AddedDates.Count);
             Assert.AreEqual(dirName, fakeWriter.AddedFileNameData[0], "File name");
-            AssertCurrentDateIsPlausible(fakeWriter.AddedDates[0]);
+            Assert.That(fakeWriter.AddedDates[0], Is.EqualTo(DateTime.Now).Within(TimeSpan.FromSeconds(5)));
         }
 
         [Test]
@@ -180,104 +170,88 @@ namespace XenAdminTests.ArchiveTests
         [TestCase(false, false)]
         public void CreateArchiveWithLongPath(bool longDirectoryPath, bool longFilePath)
         {
-            var relativeFilePath = PopulateLongPathArchive(true, longDirectoryPath, longFilePath);
-            Assert.Contains(relativeFilePath, fakeWriter.AddedFileNameData);
-            // 1 folder and one file
-            Assert.AreEqual(2, fakeWriter.AddedFileNameData.Count);
+            //set up the path to zip
+            var zipPath = PopulateLongPathArchive(true, longDirectoryPath, longFilePath, out var addedData);
+
+            fakeWriter.CreateArchive(zipPath);
+
+            foreach (var datum in addedData)
+                Assert.Contains(datum, fakeWriter.AddedFileNameData);
+
+            // 2 folders and one file
+            Assert.AreEqual(addedData.Count, fakeWriter.AddedFileNameData.Count);
+
+            //clean up: we need to ensure we're deleting the folder
+            if (longDirectoryPath || longFilePath)
+                zipPath = StringUtility.ToLongWindowsPathUnchecked(zipPath);
+
+            Directory.Delete(zipPath, true);
         }
 
-        [TestCase(true, true)]
-        [TestCase(false, true)]
-        [TestCase(true, false)]
-        [TestCase(false, false)]
-        public void CreateArchiveWithLongPath_PathTooLong(bool longDirectoryPath, bool longFilePath)
+        [Test]
+        public void CreateArchiveWithLongPath_PathTooLong()
         {
             //! N.B.: If this test fails it might be because the project has moved to a version of .NET Core
             //! that does not require calls to `StringUtils.ToLongWindowsPath`. Please review its uses
             //! and remove it from the codebase if possible.
 
-            if (!longDirectoryPath)
-            {
-                if(!longFilePath)
-                    Assert.DoesNotThrow(() => PopulateLongPathArchive(false, longDirectoryPath, longFilePath));
-                else
-                    Assert.Throws<DirectoryNotFoundException>(() => PopulateLongPathArchive(false, longDirectoryPath, longFilePath));
-            }
-            else
-            {
-                Assert.Throws<PathTooLongException>(() => PopulateLongPathArchive(false, longDirectoryPath, longFilePath));
-            }
-        }
-
-        [TestCase(true, true, ExpectedResult = true)]
-        [TestCase(true, true, ExpectedResult = true)]
-        [TestCase(false, true, ExpectedResult = true)]
-        [TestCase(false, false, ExpectedResult = false)]
-        public bool PopulateLongPathArchive_ThrowsErrorWhenNecessary(bool longDirectoryPath, bool longFilePath)
-        {
             // this test ensures PopulateLongPathArchive's correctness
             // since CreateArchiveWithLongPath depends on it
 
-            var exceptionThrown = false;
-            try
-            {
-                PopulateLongPathArchive(false, longDirectoryPath, longFilePath);
-            }
-            catch (PathTooLongException)
-            {
-                exceptionThrown = true;
-            }
-            catch (DirectoryNotFoundException)
-            {
-                if (!longDirectoryPath && longFilePath)
-                {
-                    exceptionThrown = true;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            
-            return exceptionThrown;
+            Assert.DoesNotThrow(() => PopulateLongPathArchive(false, false, false, out _));
+            Assert.Throws<DirectoryNotFoundException>(() => PopulateLongPathArchive(false, false, true, out _));
+            Assert.Throws<PathTooLongException>(() => PopulateLongPathArchive(false, true, true, out _));
+            Assert.Throws<PathTooLongException>(() => PopulateLongPathArchive(false, true, false, out _));
         }
 
         /// <summary>
-        /// Create an archive with 50 nested folders and one file.
+        /// Set up method creating a directory containing 2 subdirectories one of which has a file
         /// </summary>
         /// <param name="createValidPaths">set to true to ensure folders and files are prepended with \\?\</param>
-        /// <returns>the path of the one file that has been added</returns>
-        private string PopulateLongPathArchive(bool createValidPaths, bool longDirectoryPath = true, bool longFilePath = true)
+        /// <returns>the path to the folder</returns>
+        private string PopulateLongPathArchive(bool createValidPaths, bool longDirectoryPath, bool longFilePath, out List<string> addedData)
         {
             var zipPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Directory.CreateDirectory(zipPath);
 
-            var (relativeDirectoryPath, fileName) = ArchiveTestsUtils.GetDirectoryAndFilePaths(zipPath, longDirectoryPath, longFilePath);
+            var dirCharNumber1 = (longDirectoryPath ? 248 : 247) - zipPath.Length - 2;
+            //2 was removed for the combining slash between tempPath and dir, and the first character
+            var relativeDirectoryPath1 = 0 + new string('A', dirCharNumber1);
 
-            var directoryPath = Path.Combine(zipPath, relativeDirectoryPath);
-            var filePath = Path.Combine(directoryPath, fileName);
-            var relativeFilePath = Path.Combine(relativeDirectoryPath, fileName);
+            var dirCharNumber2 = (longDirectoryPath ? 248 : 247) - zipPath.Length - 3;
+            //3 was removed for the combining slash between zipPath and dir, the first character,
+            //and the combining slash between dir and filename
+            var relativeDirectoryPath2 = 1 + new string('A', dirCharNumber2);
+
+            var fileCharNumber = (longFilePath ? 260 : 259) - Path.Combine(zipPath, relativeDirectoryPath2).Length - 1;
+            //1 was removed for the combining slash between the full dir path and filename
+            var fileName = new string('B', fileCharNumber);
+            var relativeFilePath = Path.Combine(relativeDirectoryPath2, fileName);
+
+            addedData = new List<string>
+            {
+                relativeDirectoryPath1.Replace(@"\", "/"),
+                relativeDirectoryPath2.Replace(@"\", "/"),
+                relativeFilePath.Replace(@"\", "/")
+            };
+
+            var directoryPath1 = Path.Combine(zipPath, relativeDirectoryPath1);
+            var directoryPath2 = Path.Combine(zipPath, relativeDirectoryPath2);
+            var filePath = Path.Combine(directoryPath2, fileName);
 
             if (createValidPaths)
             {
-                directoryPath = StringUtility.ToLongWindowsPath(directoryPath);
-                filePath = StringUtility.ToLongWindowsPath(filePath);
+                directoryPath1 = StringUtility.ToLongWindowsPathUnchecked(directoryPath1);
+                directoryPath2 = StringUtility.ToLongWindowsPathUnchecked(directoryPath2);
+                filePath = StringUtility.ToLongWindowsPathUnchecked(filePath);
             }
 
-            Directory.CreateDirectory(directoryPath);
+            Directory.CreateDirectory(directoryPath1);
+            Directory.CreateDirectory(directoryPath2);
             File.WriteAllText(filePath, "Hello, World!");
 
-            fakeWriter.CreateArchive(zipPath);
-
-            // we need to ensure we're deleting the folder
-            if (longDirectoryPath || longFilePath)
-            {
-                directoryPath = StringUtility.ToLongWindowsPath(directoryPath, true);
-            }
-            Directory.Delete(directoryPath, true);
-
-            // fakeWriter paths have been "cleaned" using ArchiveWriter.CleanRelativePathName
-            return relativeFilePath.Replace(@"\\?\", string.Empty).Replace(@"\", "/");
+            
+            return zipPath;
         }
 
         [Test]
@@ -301,7 +275,7 @@ namespace XenAdminTests.ArchiveTests
             Assert.AreEqual(8, fakeWriter.AddedStreamData.Count);
 
             foreach (DateTime date in fakeWriter.AddedDates)
-                AssertCurrentDateIsPlausible(date);
+                Assert.That(date, Is.EqualTo(DateTime.Now).Within(TimeSpan.FromSeconds(5)));
 
             foreach (string name in fakeWriter.AddedFileNameData)
                 Assert.AreEqual(-1, name.IndexOfAny(@":\".ToArray()), "Unwanted chars found in path");

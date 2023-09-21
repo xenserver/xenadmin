@@ -66,7 +66,7 @@ namespace XenAdmin.Actions
         public ZipStatusReportAction(string tempFolder, string destFile, string timeString = null, bool suppressHistory = true)
             : base(null, Messages.BUGTOOL_SAVING, destFile, timeString, suppressHistory)
         {
-            _inputTempFolder = StringUtility.ToLongWindowsPath(tempFolder, true);
+            _inputTempFolder = StringUtility.ToLongWindowsPathUnchecked(tempFolder);
             _destFile = destFile;
         }
 
@@ -75,7 +75,7 @@ namespace XenAdmin.Actions
             Status = ReportStatus.inProgress;
             do
             {
-                _extractTempDir = StringUtility.ToLongWindowsPath(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()), true);
+                _extractTempDir = StringUtility.ToLongWindowsPathUnchecked(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
             } while (Directory.Exists(_extractTempDir));
 
             Directory.CreateDirectory(_extractTempDir);

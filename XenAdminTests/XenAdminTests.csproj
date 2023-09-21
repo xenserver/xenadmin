@@ -65,7 +65,6 @@
     </Compile>
     <Compile Include="ArchiveTests\ArchiveFactoryTests.cs" />
     <Compile Include="ArchiveTests\ArchiveIteratorTests.cs" />
-    <Compile Include="ArchiveTests\ArchiveTestsUtils.cs" />
     <Compile Include="ArchiveTests\ArchiveWriterTests.cs" />
     <Compile Include="ArchiveTests\ThirdPartyArchiveWriterTests.cs" />
     <Compile Include="ClassVerifiers.cs" />

@@ -33,6 +33,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections;
+using System.IO;
+
 
 namespace XenCenterLib
 {
@@ -224,19 +226,32 @@ namespace XenCenterLib
         /// Prepends \\?\ to path if it is longer than (MAX_PATH - 12) in Windows. This is the legacy directory length limit.<br /><br />
         /// See <see href='https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea'>CreateFileA</see> and <see href='https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry'>Maximum Path Length Limitation</see> for more info.
         /// </summary>
-        /// <param name="inputPath">The input file path</param>
-        /// <param name="force">Set to true to prepend \\?\ to the path regardless of input length</param>
-        /// <returns></returns>
-        public static string ToLongWindowsPath(string inputPath, bool force = false)
+        /// <param name="inputPath">The input path</param>
+        /// <param name="isDirectory">Whether the input path is a directory</param>
+        public static string ToLongWindowsPath(string inputPath, bool isDirectory)
         {
-            if (inputPath.StartsWith(@"\\?\"))
-            {
+            if (string.IsNullOrEmpty(inputPath) || inputPath.StartsWith(@"\\?\"))
                 return inputPath;
-            }
-            if (!force && (string.IsNullOrEmpty(inputPath) || inputPath.Length < 248))
-            {
+
+            if (isDirectory)
+                return inputPath.Length >= 248 ? ToLongWindowsPathUnchecked(inputPath) : inputPath;
+            
+            var dir = Path.GetDirectoryName(inputPath);
+            if (string.IsNullOrEmpty(dir))
                 return inputPath;
-            }
+
+            return dir.Length >= 248 || inputPath.Length >= 260 ? ToLongWindowsPathUnchecked(inputPath) : inputPath;
+        }
+
+        /// <summary>
+        /// To be used to format file and directory paths for File streams. <br />
+        /// Prepends \\?\ to path if it is longer than (MAX_PATH - 12) in Windows. This is the legacy directory length limit.<br /><br />
+        /// See <see href='https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea'>CreateFileA</see> and
+        /// <see href='https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry'>Maximum Path Length Limitation</see> for more info.
+        /// </summary>
+        /// <param name="inputPath">The input path</param>
+        public static string ToLongWindowsPathUnchecked(string inputPath)
+        {
             return $@"\\?\{inputPath}";
         }
     }
