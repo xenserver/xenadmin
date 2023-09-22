@@ -32,6 +32,7 @@ using System;
 using System.IO;
 using System.Text;
 using NUnit.Framework;
+using XenCenterLib;
 using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
@@ -55,7 +56,7 @@ namespace XenAdminTests.ArchiveTests
                     disposed = false;
                 }
             }
-            public string CurrentFileNameReturn { private get; set; }
+            public string CurrentFileNameReturn { get; set; }
             public long CurrentFileSizeReturn { private get; set; }
             public DateTime ModTimeReturn { private get; set; }
             public bool IsDirectoryReturn { private get; set; }
@@ -97,10 +98,10 @@ namespace XenAdminTests.ArchiveTests
 
             public override string CurrentFileName()
             {
-                if (String.IsNullOrEmpty(CurrentFileNameReturn))
+                if (string.IsNullOrEmpty(CurrentFileNameReturn))
                     return CurrentFileNameReturn;
 
-                return NumberOfCallsLeftReturn + CurrentFileNameReturn;
+                return CurrentFileNameReturn + NumberOfCallsLeftReturn;
             }
 
             public override long CurrentFileSize()
@@ -121,19 +122,15 @@ namespace XenAdminTests.ArchiveTests
             protected override void Dispose(bool disposing)
             {
                 base.Dispose(disposing);
-                if( !disposed )
-                {
-                    if( disposing )
-                    {
-                        if(extractedFile != null)
-                            extractedFile.Dispose();
-                    }
-                }
+
+                if (!disposed && disposing)
+                    extractedFile?.Dispose();
             }
         }
         #endregion
 
         private ArchiveIteratorFake fakeIterator;
+        private string tempPath;
 
         [OneTimeSetUp]
         public void Setup()
@@ -150,66 +147,101 @@ namespace XenAdminTests.ArchiveTests
         [SetUp]
         public void TestSetup()
         {
+            tempPath = null;
             fakeIterator.Reset();
+        }
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            if (Directory.Exists(tempPath))
+                Directory.Delete(tempPath, true);
         }
 
 
         [Test]
-        public void AnExceptionIsThrownForNullArgumentWhenCallingExtractAllContents()
+        public void TestExtractToNullDestinationPath()
         {
             Assert.Throws(typeof(ArgumentNullException), () => fakeIterator.ExtractAllContents(null));
         }
 
         [Test]
-        public void AnExceptionIsThrownForANullFileNameWhenCallingExtractAllContents()
+        public void TestExtractNullFile()
         {
             fakeIterator.CurrentFileNameReturn = null;
-            Assert.Throws(typeof(ArgumentNullException), () => fakeIterator.ExtractAllContents(Path.GetTempPath()));
+            Assert.Throws(typeof(NullReferenceException), () => fakeIterator.ExtractAllContents(Path.GetTempPath()));
         }
-        
-        [Test]
-        public void VerifyAFileIsWrittenWhenCallingExtractAllContents()
+
+        [TestCase(true, true)]
+        [TestCase(true, false)]
+        [TestCase(false, true)]
+        [TestCase(false, false)]
+        public void TestExtractFile(bool longDirectoryPath, bool longFilePath)
         {
-            string tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            
+            var dirCharNumber = (longDirectoryPath ? 248 : 247) - tempPath.Length - 2;
+            //2 was removed for the combining slash between tempPath and dir, and the combining slash between dir and filename
+            var dir = new string('A', dirCharNumber);
+            var fileCharNumber = (longFilePath ? 260 : 259) - Path.Combine(tempPath, dir).Length - 2;
+            //2 was removed for the combining slash between the full dir path and filename, and the NumberOfCallsLeftReturn
+            var fileName = new string('B', fileCharNumber);
+
             const int numberOfFiles = 3;
             fakeIterator.NumberOfCallsLeftReturn = numberOfFiles;
+            fakeIterator.CurrentFileNameReturn = Path.Combine(dir, fileName);
             fakeIterator.ExtractAllContents(tempPath);
 
-            //Test file has been created
-            string targetFile = Path.Combine(tempPath, fakeIterator.CurrentFileName());
-            Assert.IsTrue(File.Exists(targetFile), "File Exists");
+            for (var i = 0; i < 3; i++)
+            {
+                string targetFile = Path.Combine(tempPath, fakeIterator.CurrentFileNameReturn + i);
 
-            Assert.IsTrue(File.ReadAllBytes(targetFile).Length > 1, "File length > 1");
+                if (longDirectoryPath || longFilePath)
+                    targetFile = StringUtility.ToLongWindowsPathUnchecked(targetFile);
+
+                Assert.IsTrue(File.Exists(targetFile), "File should exist");
+                Assert.IsNotEmpty(File.ReadAllBytes(targetFile), "File should not be empty");
+
+                Assert.IsFalse((File.GetAttributes(targetFile) & FileAttributes.Directory) == FileAttributes.Directory,
+                    "It should not have directory attributes");
+            }
 
             //Check recursively that there are only the correct number of files
-            Assert.IsTrue(Directory.GetFiles(tempPath, "*.*", SearchOption.AllDirectories).Length == numberOfFiles, "File number is correct");
+            var actualFileNumber = Directory.GetFiles(tempPath, "*.*", SearchOption.AllDirectories).Length;
+            Assert.AreEqual(numberOfFiles, actualFileNumber, $"There should be {numberOfFiles}");
 
-            Assert.IsFalse((File.GetAttributes(targetFile) & FileAttributes.Directory) == FileAttributes.Directory, "Is not a dir");
-
-            Directory.Delete(tempPath,true);
+            if (longDirectoryPath || longFilePath)
+                tempPath = StringUtility.ToLongWindowsPathUnchecked(tempPath);
         }
 
-        [Test]
-        public void VerifyADirectoryIsWrittenWhenCallingExtractAllContents()
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void TestExtractDirectory(bool longDirectoryPath)
         {
-            string tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            var dirCharNumber = (longDirectoryPath ? 248 : 247) - tempPath.Length - 2;
+            //2 was removed for the combining slash between tempPath and dir, and the NumberOfCallsLeftReturn
+            var dir = new string('A', dirCharNumber);
+            
             fakeIterator.IsDirectoryReturn = true;
-            fakeIterator.CurrentFileNameReturn = "FakePath" + Path.DirectorySeparatorChar;
+            fakeIterator.CurrentFileNameReturn = dir;
             fakeIterator.ExtractAllContents(tempPath);
 
-            //Test file has been created
             string targetPath = Path.Combine(tempPath, fakeIterator.CurrentFileName());
-            Assert.IsFalse(File.Exists(targetPath), "No files exist");
-            Assert.IsTrue(Directory.Exists(targetPath), "Directories exist");
 
-            //No files - just a directory
-            Assert.IsTrue(Directory.GetFiles(tempPath).Length < 1, "No file in the directory" );
+            if (longDirectoryPath)
+                targetPath = StringUtility.ToLongWindowsPathUnchecked(targetPath);
 
-            //Check it's a directory
-            Assert.IsTrue((File.GetAttributes(targetPath) & FileAttributes.Directory) == FileAttributes.Directory, "Has directory attributes");
+            Assert.IsFalse(File.Exists(targetPath), "Files should not exist");
+            Assert.IsEmpty(Directory.GetFiles(tempPath), "Directory should not have files");
 
-            Directory.Delete(tempPath, true);
+            Assert.IsTrue(Directory.Exists(targetPath), "Directory should exist");
+            Assert.IsTrue((File.GetAttributes(targetPath) & FileAttributes.Directory) == FileAttributes.Directory,
+                "It should have directory attributes");
+
+            if (longDirectoryPath)
+                tempPath = StringUtility.ToLongWindowsPathUnchecked(tempPath);
         }
-
     }
 }

@@ -30,6 +30,7 @@
 
 using System;
 using System.IO;
+using XenCenterLib;
 using XenCenterLib.Archive;
 
 
@@ -65,7 +66,7 @@ namespace XenAdmin.Actions
         public ZipStatusReportAction(string tempFolder, string destFile, string timeString = null, bool suppressHistory = true)
             : base(null, Messages.BUGTOOL_SAVING, destFile, timeString, suppressHistory)
         {
-            _inputTempFolder = tempFolder;
+            _inputTempFolder = StringUtility.ToLongWindowsPathUnchecked(tempFolder);
             _destFile = destFile;
         }
 
@@ -74,7 +75,7 @@ namespace XenAdmin.Actions
             Status = ReportStatus.inProgress;
             do
             {
-                _extractTempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                _extractTempDir = StringUtility.ToLongWindowsPathUnchecked(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
             } while (Directory.Exists(_extractTempDir));
 
             Directory.CreateDirectory(_extractTempDir);
