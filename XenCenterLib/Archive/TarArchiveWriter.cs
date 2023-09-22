@@ -75,10 +75,10 @@ namespace XenCenterLib.Archive
             tar.CloseEntry();
         }
 
-        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
+        public override void Add(Stream fileToAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
         {
             TarEntry entry = TarEntry.CreateTarEntry(fileName);
-            entry.Size = filetoAdd.Length;
+            entry.Size = fileToAdd.Length;
             entry.ModTime = modificationTime;
 
             tar.PutNextEntry(entry);
@@ -87,9 +87,9 @@ namespace XenCenterLib.Archive
 
             //You have to do this because if using a memory stream the pointer will be at the end it
             //it's just been read and this will cause nothing to be written out
-            filetoAdd.Position = 0;
+            fileToAdd.Position = 0;
 
-            while ((n = filetoAdd.Read(buffer, 0, buffer.Length)) > 0)
+            while ((n = fileToAdd.Read(buffer, 0, buffer.Length)) > 0)
             {
                 cancellingDelegate?.Invoke();
                 tar.Write(buffer, 0, n);
