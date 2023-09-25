@@ -288,8 +288,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
                 if (e.Argument is Pool_update update)
                     groups = GenerateChecks(update);
-                else if (e.Argument is Pool_patch patch)
-                    groups = GenerateChecks(patch);
                 else
                     groups = GenerateChecks(); //this is the case for RPU and automated updates from CFU or CDN
 
@@ -550,61 +548,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (vSwitchChecks.Count > 0)
                     groups.Insert(2, new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
             }
-
-            return groups;
-        }
-
-        private List<CheckGroup> GenerateChecks(Pool_patch patch)
-        {
-            List<Host> applicableServers = patch != null ? SelectedServers.Where(h => patch.AppliedOn(h) == DateTime.MaxValue).ToList() : SelectedServers;
-
-            var groups = GenerateCommonChecks(applicableServers);
-
-            //Checking other things
-            if (patch != null)
-            {
-                var serverChecks = new List<Check>();
-                foreach (Host host in SelectedServers)
-                {
-                    List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
-                    Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => string.Equals(otherPatch.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase));
-                    serverChecks.Add(new PatchPrecheckCheck(host, poolPatchFromHost, LivePatchCodesByHost));
-                }
-                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SIDE_STATUS, serverChecks));
-            }
-
-            //Checking if the host needs a reboot
-            if (WizardMode == WizardMode.SingleUpdate)
-            {
-                var rebootChecks = new List<Check>();
-                var guidance = patch != null
-                    ? patch.after_apply_guidance
-                    : new List<after_apply_guidance> {after_apply_guidance.restartHost};
-
-                foreach (var host in applicableServers)
-                    rebootChecks.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
-
-                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_NEEDS_REBOOT, rebootChecks));
-            }
-
-            //Checking can evacuate host
-            //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
-            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
-            if (WizardMode == WizardMode.SingleUpdate && (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)))
-            {
-                var evacuateChecks = new List<Check>();
-                foreach (Host host in applicableServers)
-                    evacuateChecks.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
-
-                groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
-            }
-
-            //Checking if a reboot is pending on master
-            var restartChecks = new List<Check>();
-            foreach (var pool in SelectedPools)
-                restartChecks.Add(new RestartHostOrToolstackPendingOnCoordinatorCheck(pool, patch?.uuid));
-
-            groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
             return groups;
         }

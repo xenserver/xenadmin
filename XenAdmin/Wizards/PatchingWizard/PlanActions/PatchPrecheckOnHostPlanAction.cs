@@ -90,13 +90,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 List<Problem> problems = null;
 
-                if (mapping is PoolPatchMapping patchMapping)
-                {
-                    log.InfoFormat("Running patch precheck on '{0}'. Patch = '{1}' (uuid = '{2}'; opaque_ref = '{3}')", host.Name(), patchMapping.Pool_patch.Name(), patchMapping.Pool_patch.uuid, patchMapping.Pool_patch.opaque_ref);
-                    problems = new PatchPrecheckCheck(host, patchMapping.Pool_patch, livePatchStatus).RunAllChecks();
-                    updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, patchMapping.Pool_patch, livePatchStatus);
-                }
-                else if (mapping is PoolUpdateMapping updateMapping)
+                if (mapping is PoolUpdateMapping updateMapping)
                 {
                     log.InfoFormat("Running update precheck on '{0}'. Update = '{1}' (uuid = '{2}'; opaque_ref = '{3}'", host.Name(), updateMapping.Pool_update.Name(), updateMapping.Pool_update.uuid, updateMapping.Pool_update.opaque_ref);
                     problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
