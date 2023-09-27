@@ -29,13 +29,15 @@
  */
 
 using System;
-using System.Drawing;
-using System.Windows.Forms;
-using XenAPI;
-using XenAdmin.Actions;
 using System.Collections.Generic;
-using XenAdmin.Core;
+using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Core;
+using XenAdmin.Actions.NRPE;
+using XenAPI;
+
 
 namespace XenAdmin.SettingsPanels
 {

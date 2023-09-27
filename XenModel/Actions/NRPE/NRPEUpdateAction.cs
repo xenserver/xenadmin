@@ -33,7 +33,7 @@ using System.Linq;
 using XenAPI;
 
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Actions.NRPE
 {
     public class NRPEUpdateAction : AsyncAction
     {

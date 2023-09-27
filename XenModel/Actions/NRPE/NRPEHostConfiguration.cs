@@ -31,7 +31,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace XenAdmin
+namespace XenAdmin.Actions.NRPE
 {
     public class NRPEHostConfiguration : ICloneable
     {
