@@ -75,7 +75,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image => Images.StaticImages._000_EnablePowerControl_h32bit_16;
+        public Image Image => Images.StaticImages._000_Module_h32bit_16;
 
         public NRPEEditPage(bool isHost)
         {
@@ -122,11 +122,6 @@ namespace XenAdmin.SettingsPanels
             AllowHostsTextBox.GotFocus += AllowHostsTextBox_GotFocus;
             AllowHostsTextBox.LostFocus += AllowHostsTextBox_LostFocus;
 
-            if (isHost)
-            {
-                PoolTipsPicture.Hide();
-                PoolTipsLabel.Hide();
-            }
             InvalidParamToolTip = new ToolTip
             {
                 IsBalloon = true,
@@ -201,6 +196,10 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             Clone = clone;
+
+            descLabelHost.Visible = IsHost;
+            DescLabelPool.Visible = !IsHost;
+
             if (IsHost)
             {
                 InitNRPEGeneralConfiguration();
