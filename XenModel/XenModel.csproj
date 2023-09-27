@@ -88,7 +88,7 @@
     <Compile Include="Actions\Host\HostAbstractAction.cs" />
     <Compile Include="Actions\Host\RebootHostAction.cs" />
     <Compile Include="Actions\Host\RestartToolstackAction.cs" />
-    <Compile Include="Actions\Host\NRPEUpdateAction.cs" />
+    <Compile Include="Actions\NRPE\NRPEUpdateAction.cs" />
     <Compile Include="Actions\Host\ShutdownHostAction.cs" />
     <Compile Include="Actions\Host\UpdateIntegratedGpuPassthroughAction.cs" />
     <Compile Include="Actions\DummyAction.cs" />
@@ -199,7 +199,7 @@
     <Compile Include="Utils\Helpers.Versions.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TimeSpanExtensions.cs" />
-    <Compile Include="NRPE\NRPEHostConfiguration.cs" />
+    <Compile Include="Actions\NRPE\NRPEHostConfiguration.cs" />
     <Compile Include="WLB\WlbPoolConfiguration.cs" />
     <Compile Include="WLB\WlbReportInfo.cs" />
     <Compile Include="WLB\WlbReportSubscription.cs" />
