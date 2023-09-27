@@ -484,7 +484,6 @@
       <DependentUpon>NRPEEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\NRPEEditPage.CheckGroup.cs">
-      <DependentUpon>NRPEEditPage.cs</DependentUpon>
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SettingsPanels\PoolAdvancedEditPage.cs">
