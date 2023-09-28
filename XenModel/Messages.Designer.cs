@@ -29079,6 +29079,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NRPE.
+        /// </summary>
+        public static string NRPE {
+            get {
+                return ResourceManager.GetString("NRPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changing NRPE configuration....
         /// </summary>
         public static string NRPE_ACTION_CHANGING {
@@ -29097,7 +29106,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow hosts should not be empty..
+        ///   Looks up a localized string similar to Monitoring servers should not be empty..
         /// </summary>
         public static string NRPE_ALLOW_HOSTS_EMPTY_ERROR {
             get {
@@ -29106,7 +29115,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow hosts format is not correct.
+        ///   Looks up a localized string similar to Monitoring servers format is not correct.
         /// </summary>
         public static string NRPE_ALLOW_HOSTS_ERROR_TITLE {
             get {
@@ -29115,7 +29124,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow hosts should be comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com.
+        ///   Looks up a localized string similar to Monitoring servers should be comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com.
         /// </summary>
         public static string NRPE_ALLOW_HOSTS_FORMAT_ERROR {
             get {
@@ -29268,7 +29277,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Threshold value should be 3 numbers separated with comma..
+        ///   Looks up a localized string similar to Threshold value should consist of 3 comma separated numbers..
         /// </summary>
         public static string NRPE_THRESHOLD_SHOULD_BE_3_NUMBERS {
             get {
@@ -29277,7 +29286,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Threshold value should be number..
+        ///   Looks up a localized string similar to Threshold value should be a number..
         /// </summary>
         public static string NRPE_THRESHOLD_SHOULD_BE_NUMBER {
             get {
@@ -29295,7 +29304,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning threshold should be bigger than critical threshold..
+        ///   Looks up a localized string similar to Warning threshold should be greater than critical threshold..
         /// </summary>
         public static string NRPE_THRESHOLD_WARNING_SHOULD_BIGGER_THAN_CRITICAL {
             get {

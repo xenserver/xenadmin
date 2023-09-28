@@ -45,12 +45,11 @@ namespace XenAdmin.SettingsPanels
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-
         private static readonly Regex REGEX_IPV4 = new Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)");
         private static readonly Regex REGEX_IPV4_CIDR = new Regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$");
         private static readonly Regex REGEX_DOMAIN = new Regex("^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$");
 
-        private readonly bool IsHost = true;
+        private bool _isHost;
 
         private IXenObject Clone;
         private readonly ToolTip InvalidParamToolTip;
@@ -62,11 +61,12 @@ namespace XenAdmin.SettingsPanels
 
         private NRPEHostConfiguration NRPEOriginalConfig;
         private NRPEHostConfiguration NRPECurrentConfig;
+
         public string SubText
         {
             get
             {
-                if (IsHost)
+                if (_isHost)
                 {
                     return EnableNRPECheckBox.Checked ? Messages.NRPE_ACTIVE : Messages.NRPE_INACTIVE;
                 }
@@ -79,11 +79,10 @@ namespace XenAdmin.SettingsPanels
 
         public Image Image => Images.StaticImages._000_Module_h32bit_16;
 
-        public NRPEEditPage(bool isHost)
+        public NRPEEditPage()
         {
-            IsHost = isHost;
             InitializeComponent();
-            Text = "NRPE";
+            Text = Messages.NRPE;
 
             NRPECurrentConfig = new NRPEHostConfiguration
             {
@@ -118,7 +117,7 @@ namespace XenAdmin.SettingsPanels
                 CheckGroupDictByLabel.Add(checkGroup.NameCell.Value.ToString(), checkGroup);
             }
 
-            UpdateOtherComponentBasedEnableNRPECheckBox(false);
+            UpdateOtherComponentBasedEnableNRPECheckBox();
 
             AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
             AllowHostsTextBox.GotFocus += AllowHostsTextBox_GotFocus;
@@ -146,11 +145,7 @@ namespace XenAdmin.SettingsPanels
                     return true;
                 }
 
-                bool valid = true;
-                if (!IsAllowHostsValid())
-                {
-                    valid = false;
-                }
+                bool valid = IsAllowHostsValid();
 
                 foreach (CheckGroup checkGroup in CheckGroupList)
                 {
@@ -189,7 +184,7 @@ namespace XenAdmin.SettingsPanels
 
         public void HideLocalValidationMessages()
         {
-            if (InvalidParamToolTip.Tag is Control ctrl && ctrl != null)
+            if (InvalidParamToolTip.Tag is Control ctrl)
             {
                 InvalidParamToolTip.Hide(ctrl);
             }
@@ -198,11 +193,12 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             Clone = clone;
+            _isHost = Clone is Host;
 
-            descLabelHost.Visible = IsHost;
-            DescLabelPool.Visible = !IsHost;
+            descLabelHost.Visible = _isHost;
+            DescLabelPool.Visible = !_isHost;
 
-            if (IsHost)
+            if (_isHost)
             {
                 InitNRPEGeneralConfiguration();
                 InitNRPEThreshold();
@@ -257,7 +253,7 @@ namespace XenAdmin.SettingsPanels
             }
             NRPEOriginalConfig = (NRPEHostConfiguration) NRPECurrentConfig.Clone();
 
-            UpdateOtherComponentBasedEnableNRPECheckBox(EnableNRPECheckBox.Checked);
+            UpdateOtherComponentBasedEnableNRPECheckBox();
         }
 
         private void InitNRPEThreshold()
@@ -326,24 +322,18 @@ namespace XenAdmin.SettingsPanels
                 UpdatedAllowHosts.Substring(0, UpdatedAllowHosts.Length - 1);
         }
 
-        private void UpdateOtherComponentBasedEnableNRPECheckBox(bool check)
+        private void UpdateOtherComponentBasedEnableNRPECheckBox()
         {
-            if (check)
+            if (EnableNRPECheckBox.Checked)
             {
-                AllowHostsTextBox.Enabled = true;
-                AllowHostsLabel.Enabled = true;
-                DebugLogCheckBox.Enabled = true;
-                SslDebugLogCheckBox.Enabled = true;
+                GeneralConfigureGroupBox.Enabled = true;
                 CheckDataGridView.Enabled = true;
                 CheckDataGridView.BackgroundColor = Color.FromKnownColor(KnownColor.Window);
                 CheckDataGridView.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.Window);
             }
             else
             {
-                AllowHostsTextBox.Enabled = false;
-                AllowHostsLabel.Enabled = false;
-                DebugLogCheckBox.Enabled = false;
-                SslDebugLogCheckBox.Enabled = false;
+                GeneralConfigureGroupBox.Enabled = false;
                 CheckDataGridView.Enabled = false;
                 CheckDataGridView.BackgroundColor = Color.FromKnownColor(KnownColor.Control);
                 CheckDataGridView.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.Control);
@@ -352,7 +342,7 @@ namespace XenAdmin.SettingsPanels
 
         private void EnableNRPECheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateOtherComponentBasedEnableNRPECheckBox(EnableNRPECheckBox.Checked);
+            UpdateOtherComponentBasedEnableNRPECheckBox();
         }
 
         private void AllowHostsTextBox_GotFocus(object sender, EventArgs e)
@@ -375,8 +365,9 @@ namespace XenAdmin.SettingsPanels
 
         private void CheckDataGridView_BeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            DataGridViewCell currentCell = CheckDataGridView.CurrentRow.Cells[e.ColumnIndex];
-            if (!IsHost && currentCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlDark)))
+            DataGridViewCell currentCell = CheckDataGridView.CurrentRow?.Cells[e.ColumnIndex];
+            
+            if (currentCell != null && !_isHost && currentCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlDark)))
             {
                 currentCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
                 currentCell.Value = "";
@@ -385,13 +376,20 @@ namespace XenAdmin.SettingsPanels
 
         private void CheckDataGridView_EndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewCell currentCell = CheckDataGridView.CurrentRow.Cells[e.ColumnIndex];
-            if (!IsHost && currentCell.Value.ToString().Trim().Equals(""))
+            DataGridViewCell currentCell = CheckDataGridView.CurrentRow?.Cells[e.ColumnIndex];
+            
+            if (currentCell != null &&!_isHost && currentCell.Value.ToString().Trim().Equals(""))
             {
                 currentCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
                 CheckGroupDictByLabel.TryGetValue(CheckDataGridView.CurrentRow.Cells[0].Value.ToString(), out CheckGroup checkGroup);
-                currentCell.Value = currentCell.ColumnIndex == 1 ? 
-                    checkGroup.WarningThresholdDefault : (object)checkGroup.CriticalThresholdDefault;
+
+                if (checkGroup != null)
+                {
+                    if (currentCell.ColumnIndex == WarningThresholdColumn.Index)
+                        currentCell.Value = checkGroup.WarningThresholdDefault;
+                    else if (currentCell.ColumnIndex == CriticalThresholdColumn.Index)
+                        currentCell.Value = checkGroup.CriticalThresholdDefault;
+                }
             }
         }
     }
