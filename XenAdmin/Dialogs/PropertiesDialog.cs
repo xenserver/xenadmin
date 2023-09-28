@@ -320,7 +320,7 @@ namespace XenAdmin.Dialogs
                 }
                 if (isHost || isPool)
                 {
-                    NRPEEditPage = new NRPEEditPage(isHost);
+                    NRPEEditPage = new NRPEEditPage();
                     ShowTab(NRPEEditPage);
                 }
             }

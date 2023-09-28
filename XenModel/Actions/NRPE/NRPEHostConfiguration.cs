@@ -35,53 +35,49 @@ namespace XenAdmin.Actions.NRPE
 {
     public class NRPEHostConfiguration : ICloneable
     {
-        public static readonly string XAPI_NRPE_PLUGIN_NAME = "nrpe";
-        public static readonly string XAPI_NRPE_STATUS = "status";
-        public static readonly string XAPI_NRPE_GET_CONFIG = "get-config";
-        public static readonly string XAPI_NRPE_GET_THRESHOLD = "get-threshold";
-        public static readonly string XAPI_NRPE_ENABLE = "enable";
-        public static readonly string XAPI_NRPE_DISABLE = "disable";
-        public static readonly string XAPI_NRPE_SET_CONFIG = "set-config";
-        public static readonly string XAPI_NRPE_SET_THRESHOLD = "set-threshold";
-        public static readonly string XAPI_NRPE_RESTART = "restart";
+        public const string XAPI_NRPE_PLUGIN_NAME = "nrpe";
+        public const string XAPI_NRPE_STATUS = "status";
+        public const string XAPI_NRPE_GET_CONFIG = "get-config";
+        public const string XAPI_NRPE_GET_THRESHOLD = "get-threshold";
+        public const string XAPI_NRPE_ENABLE = "enable";
+        public const string XAPI_NRPE_DISABLE = "disable";
+        public const string XAPI_NRPE_SET_CONFIG = "set-config";
+        public const string XAPI_NRPE_SET_THRESHOLD = "set-threshold";
+        public const string XAPI_NRPE_RESTART = "restart";
 
-        public static readonly string DEBUG_ENABLE = "1";
-        public static readonly string DEBUG_DISABLE = "0";
+        public const string DEBUG_ENABLE = "1";
+        public const string DEBUG_DISABLE = "0";
 
-        public static readonly string SSL_LOGGING_ENABLE = "0xff";
-        public static readonly string SSL_LOGGING_DISABLE = "0x00";
+        public const string SSL_LOGGING_ENABLE = "0xff";
+        public const string SSL_LOGGING_DISABLE = "0x00";
 
         public static readonly string ALLOW_HOSTS_PLACE_HOLDER = Messages.NRPE_ALLOW_HOSTS_PLACE_HOLDER;
 
-        private bool enableNRPE;
-        private string allowHosts;
-        private bool debug;
-        private bool sslLogging;
         private readonly Dictionary<string, Check> checkDict = new Dictionary<string, Check>();
 
-        public bool EnableNRPE { get => enableNRPE; set => enableNRPE = value; }
-        public string AllowHosts { get => allowHosts; set => allowHosts = value; }
-        public bool Debug { get => debug; set => debug = value; }
-        public bool SslLogging { get => sslLogging; set => sslLogging = value; }
-        public Dictionary<string, Check> CheckDict { get => checkDict; }
+        public bool EnableNRPE { get; set; }
+
+        public string AllowHosts { get; set; }
+
+        public bool Debug { get; set; }
+
+        public bool SslLogging { get; set; }
+
+        public Dictionary<string, Check> CheckDict => checkDict;
 
         public class Check
         {
-            public string Name;
-            public string WarningThreshold;
-            public string CriticalThreshold;
+            public string Name { get; }
+            public string WarningThreshold { get; }
+            public string CriticalThreshold{ get; }
 
             public Check(string name, string warningThreshold, string criticalThreshold)
             {
-                this.Name = name;
-                this.WarningThreshold = warningThreshold;
-                this.CriticalThreshold = criticalThreshold;
+                Name = name;
+                WarningThreshold = warningThreshold;
+                CriticalThreshold = criticalThreshold;
             }
 
-        }
-
-        public NRPEHostConfiguration()
-        {
         }
 
         public void AddNRPECheck(Check checkItem)
@@ -98,10 +94,10 @@ namespace XenAdmin.Actions.NRPE
         {
             NRPEHostConfiguration cloned = new NRPEHostConfiguration
             {
-                enableNRPE = enableNRPE,
-                allowHosts = allowHosts,
-                debug = debug,
-                sslLogging = sslLogging
+                EnableNRPE = EnableNRPE,
+                AllowHosts = AllowHosts,
+                Debug = Debug,
+                SslLogging = SslLogging
             };
             return cloned;
         }
