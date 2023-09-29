@@ -71,7 +71,7 @@ namespace XenAdmin.Wlb
         /// Public method for updating the Wlb Server state when there is no error (Failure).
         /// This method clears any existing failure message for the connection
         /// </summary>
-        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="pool">The pool whose Wlb connection state we are updating</param>
         /// <param name="state">The current state of the pool's Wlb Server State</param>
         public static void SetState(Pool pool, ServerState state)
         {
@@ -81,7 +81,7 @@ namespace XenAdmin.Wlb
         /// Public method for updating the Wlb Server state.  If the state is ConnectionFailure and
         /// a Failure is supplied, it's message is stored in the OtherConfig
         /// </summary>
-        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="pool">The pool whose Wlb connection state we are updating</param>
         /// <param name="state">The current state of the pool's Wlb Server State</param>
         /// <param name="failure">The Failure (if any) describing the Connection Error</param>
         public static void SetState(Pool pool, ServerState state, Failure failure)
@@ -93,7 +93,7 @@ namespace XenAdmin.Wlb
         /// This method clears any existing failure message for the connection
         /// </summary>
         /// <param name="session">The User session use to do this operation</param>
-        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="pool">The pool whose Wlb connection state we are updating</param>
         /// <param name="state">The current state of the pool's Wlb Server State</param>
         public static void SetState(Session session, Pool pool, ServerState state)
         {
@@ -104,7 +104,7 @@ namespace XenAdmin.Wlb
         /// a Failure is supplied, it's message is stored in the OtherConfig
         /// </summary>
         /// <param name="session">The User session use to do this operation</param>
-        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="pool">The pool whose Wlb connection state we are updating</param>
         /// <param name="state">The current state of the pool's Wlb Server State</param>
         /// <param name="failure">The Failure (if any) describing the Connection Error</param>
         public static void SetState(Session session, Pool pool, ServerState state, Failure failure)
@@ -120,15 +120,16 @@ namespace XenAdmin.Wlb
 
                     if (null != failure && state == ServerState.ConnectionError)
                     {
-                        string error = String.Empty;
+                        string error = failure.Message;
+
                         if (failure.Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
                         {
-                            error = Messages.ResourceManager.GetString("WLB_ERROR_" + failure.ErrorDescription[1]);
+                            var wlbError = ConvertWlbError(failure.ErrorDescription[1]);
+
+                            if (wlbError != null)
+                                error = wlbError;
                         }
-                        else
-                        {
-                            error = failure.Message;
-                        }
+
                         Helpers.SetOtherConfig(session, pool, WLB_CONNECTION_ERROR, error);
                     }
                     else
@@ -142,7 +143,7 @@ namespace XenAdmin.Wlb
         /// <summary>
         /// Public method for retrieving the current state of a Pool's Wlb server connection
         /// </summary>
-        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="pool">The pool whose Wlb connection state we are updating</param>
         /// <returns>ServerState enumeration representing the current Wlb server conection state</returns>
         public static ServerState GetState(Pool pool)
         {
@@ -167,7 +168,7 @@ namespace XenAdmin.Wlb
         /// Private method for determining (initializing) the state of the WlbConnectin when there is 
         /// nothing yet stored in OtherConfig
         /// </summary>
-        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="pool">The pool whose Wlb connection state we are updating</param>
         /// <returns>Bool denoting whether we were able to ascertain the current server state</returns>
         private static bool CheckForKnownState(Pool pool)
         {
@@ -189,7 +190,7 @@ namespace XenAdmin.Wlb
         /// <summary>
         /// Public method for retrieving the Failure message string stored in OtherConfig for the pool
         /// </summary>
-        /// <param name="pool">The pool who's Wlb connection state we are retrieving</param>
+        /// <param name="pool">The pool whose Wlb connection state we are retrieving</param>
         /// <returns>A string containing the Failure message, or an empty string</returns>
         public static string GetFailureMessage(Pool pool)
         {
@@ -201,6 +202,70 @@ namespace XenAdmin.Wlb
             }
 
             return message;
+        }
+
+        public static string ConvertWlbError(string codeString)
+        {
+            if (!int.TryParse(codeString, out var code))
+                return null;
+
+            switch (code)
+            {
+                case 5:
+                    return Messages.WLB_ERROR_5;
+                case 6:
+                    return Messages.WLB_ERROR_6;
+                case 4000:
+                    return Messages.WLB_ERROR_4000;
+                case 4001:
+                    return Messages.WLB_ERROR_4001;
+                case 4002:
+                    return Messages.WLB_ERROR_4002;
+                case 4003:
+                    return Messages.WLB_ERROR_4003;
+                case 4004:
+                    return Messages.WLB_ERROR_4004;
+                case 4005:
+                    return Messages.WLB_ERROR_4005;
+                case 4006:
+                    return Messages.WLB_ERROR_4006;
+                case 4007:
+                    return Messages.WLB_ERROR_4007;
+                case 4008:
+                    return Messages.WLB_ERROR_4008;
+                case 4009:
+                    return Messages.WLB_ERROR_4009;
+                case 4010:
+                    return Messages.WLB_ERROR_4010;
+                case 4011:
+                    return Messages.WLB_ERROR_4011;
+                case 4012:
+                    return Messages.WLB_ERROR_4012;
+                case 4013:
+                    return Messages.WLB_ERROR_4013;
+                case 4014:
+                    return Messages.WLB_ERROR_4014;
+                case 4015:
+                    return Messages.WLB_ERROR_4015;
+                case 4016:
+                    return Messages.WLB_ERROR_4016;
+                case 4017:
+                    return Messages.WLB_ERROR_4017;
+                case 4018:
+                    return Messages.WLB_ERROR_4018;
+                case 4019:
+                    return Messages.WLB_ERROR_4019;
+                case 4020:
+                    return Messages.WLB_ERROR_4020;
+                case 4021:
+                    return Messages.WLB_ERROR_4021;
+                case 4022:
+                    return Messages.WLB_ERROR_4022;
+                case 4023:
+                    return Messages.WLB_ERROR_4023;
+                default:
+                    return null;
+            }
         }
     }
 }

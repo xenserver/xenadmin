@@ -103,8 +103,8 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._introduced_SRs, other._introduced_SRs);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_introduced_SRs, other._introduced_SRs);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, DR_task server)

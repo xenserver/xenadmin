@@ -85,8 +85,8 @@ namespace XenAdmin.Dialogs.ServerUpdates
             buttonApply.Enabled = buttonDiscard.Enabled = active;
             comboBoxRepo.Enabled = active;
 
-            textBoxProxyUrl.ReadOnly = textBoxProxyUsername.ReadOnly = textBoxProxyPassword.ReadOnly = !active;
-            checkBoxPeriodicSync.Enabled = radioButtonDaily.Enabled = radioButtonWeekly.Enabled = comboBoxWeekday.Enabled = active;
+            textBoxProxyUrl.Enabled = textBoxProxyUsername.Enabled = textBoxProxyPassword.Enabled =
+                checkBoxPeriodicSync.Enabled = radioButtonDaily.Enabled = radioButtonWeekly.Enabled = comboBoxWeekday.Enabled = active;
 
             if (!active)
                 UpdateConfigPanel();

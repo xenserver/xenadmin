@@ -28,46 +28,26 @@
  * SUCH DAMAGE.
  */
 
+using AxMSTSCLib;
 using System;
-using System.IO;
-using System.Xml;
-using XenAdmin.Actions;
 
-namespace CFUValidator.Updates
+namespace XenAdmin.RDP
 {
-    class ReadFromFileUpdatesXmlSource : DownloadCfuAction, ICheckForUpdatesXMLSource
+    /// <summary>
+    /// Interface used to address common fields of RPDClients without
+    /// changing AXMSTSCLib.cs
+    /// </summary>
+    internal interface IRdpClient
     {
-        private readonly string _location;
+        int DesktopWidth { get; set; }
+        string Server { get; set; }
+        int DesktopHeight { get; set; }
+        void Connect();
 
-        public ReadFromFileUpdatesXmlSource(string location)
-            : base(true, true, "CFU", location, true)
-        {
-            _location = location ?? throw new ArgumentNullException(nameof(location));
-        }
-
-        protected override XmlDocument FetchCheckForUpdatesXml()
-        {
-            if (!File.Exists(_location))
-            {
-                ErrorRaised = new CFUValidationException("File not found at: " + _location);
-                throw ErrorRaised;
-            }
-                 
-            try
-            {
-                XmlDocument xdoc = new XmlDocument();
-                using (StreamReader sr = new StreamReader(_location))
-                    xdoc.Load(sr);
-                return xdoc;
-            }
-            catch(Exception)
-            {
-                ErrorRaised = new CFUValidationException("Could not read/parse file: " + _location);
-                throw ErrorRaised;
-            }
-            
-        }
-
-        public Exception ErrorRaised { get; private set; }
+        event EventHandler OnConnected;
+        event EventHandler OnConnecting;
+        event IMsTscAxEvents_OnDisconnectedEventHandler OnDisconnected;
+        event EventHandler OnAuthenticationWarningDisplayed;
+        event EventHandler OnAuthenticationWarningDismissed;
     }
 }

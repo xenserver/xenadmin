@@ -145,7 +145,7 @@ namespace XenAdmin.Controls
             if (GpuGroup == null)
             {
                 //this refers to the item "None"
-                displayName = Messages.GPU_NONE;
+                displayName = Messages.NONE_UPPER;
             }
             else if (VgpuTypes == null || VgpuTypes.Length == 0 || VgpuTypes[0] == null)
             {

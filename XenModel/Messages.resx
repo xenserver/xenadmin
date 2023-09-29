@@ -1834,6 +1834,9 @@ This alarm is set to be triggered when the total throughput exceeds {4}.</value>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(Showing first {0} entries)</value>
   </data>
+  <data name="ALERT_CDN_NEVER_SYNC_TITLE" xml:space="preserve">
+    <value>You have never synchronized with the update channel.</value>
+  </data>
   <data name="ALERT_CDN_OUT_OF_SYNC_DESCRIPTION" xml:space="preserve">
     <value>The last synchronization with the update channel took place on {0}.</value>
   </data>
@@ -4233,24 +4236,6 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREDENTIALS_CHECKING" xml:space="preserve">
     <value>Checking user name and password...</value>
   </data>
-  <data name="CSLG_DELL_DIRECT" xml:space="preserve">
-    <value>Dell EqualLogic</value>
-  </data>
-  <data name="CSLG_DIRECT_CONNECTION" xml:space="preserve">
-    <value>Direct Connection</value>
-  </data>
-  <data name="CSLG_NETAPP_DIRECT" xml:space="preserve">
-    <value>NetApp</value>
-  </data>
-  <data name="CSLG_STORAGEADAPTER" xml:space="preserve">
-    <value>&amp;Storage adapter:</value>
-  </data>
-  <data name="CSLG_STORAGELINK_ADAPTERS" xml:space="preserve">
-    <value>StorageLink adapters</value>
-  </data>
-  <data name="CSLG_STORAGELINK_SERVER" xml:space="preserve">
-    <value>StorageLink Server ({0})</value>
-  </data>
   <data name="CSV_DESCRIPTION" xml:space="preserve">
     <value>Comma Separated Value</value>
   </data>
@@ -6463,9 +6448,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE" xml:space="preserve">
     <value>{0} (1 GPU)</value>
   </data>
-  <data name="GPU_NONE" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="GPU_ON_HOST_LABEL" xml:space="preserve">
     <value>On {0}:</value>
   </data>
@@ -6597,9 +6579,6 @@ not currently live:
   </data>
   <data name="HA_CANNOT_EVACUATE_COORDINATOR" xml:space="preserve">
     <value>Server '{0}' cannot be placed in Maintenance Mode because it is the coordinator of an HA-enabled pool.</value>
-  </data>
-  <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>HA and WLB check</value>
   </data>
   <data name="HA_CHOOSESR_PAGE_PAGETITLE" xml:space="preserve">
     <value>Choose a heartbeat SR</value>
@@ -6787,6 +6766,11 @@ Reduce protection levels, or bring more servers online to increase the maximum s
   <data name="HA_PAGE_ENABLING" xml:space="preserve">
     <value>HA is currently being enabled for '{0}'.</value>
   </data>
+  <data name="HA_PANEL_BLURB" xml:space="preserve">
+    <value>HA is not currently enabled for pool '{0}'.
+
+Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure.</value>
+  </data>
   <data name="HA_RESTART_PRIORITY" xml:space="preserve">
     <value>HA restart priority</value>
   </data>
@@ -6833,10 +6817,8 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review configuration and activate HA</value>
   </data>
-  <data name="HAPANEL_BLURB" xml:space="preserve">
-    <value>HA is not currently enabled for pool '{0}'.
-
-Click Configure HA to enable HA for this pool and allow your virtual machines to be automatically restarted in the event of unexpected server failure.</value>
+  <data name="HA_WLB_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>HA and WLB check</value>
   </data>
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>Has any custom field</value>
@@ -7167,6 +7149,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS" xml:space="preserve">
     <value>This server will be live patched. If live patch fails, a server reboot will be required.</value>
   </data>
+  <data name="HOTFIX_PRE_UPDATE_ACTIONS" xml:space="preserve">
+    <value>This server will be evacuated prior to installing updates</value>
+  </data>
   <data name="HOTFIX_RPMS_TO_INSTALL" xml:space="preserve">
     <value>{0} packages will be updated</value>
   </data>
@@ -7195,10 +7180,10 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>1 new feature</value>
   </data>
   <data name="HOTFIX_TYPE_PREVIEW_FEATURE_MANY" xml:space="preserve">
-    <value>{0} feature previews</value>
+    <value>{0} preview features</value>
   </data>
   <data name="HOTFIX_TYPE_PREVIEW_FEATURE_ONE" xml:space="preserve">
-    <value>1 new feature preview</value>
+    <value>1 preview feature</value>
   </data>
   <data name="HOTFIX_TYPE_SECURITY_FIX_MANY" xml:space="preserve">
     <value>{0} security fixes</value>
@@ -9939,6 +9924,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NONE_PARENS" xml:space="preserve">
     <value>(None)</value>
   </data>
+  <data name="NONE_UPPER" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="NOT_AGILE_NETWORK_NOT_SHARED" xml:space="preserve">
     <value>The VM is not using a shared network. Restart cannot be guaranteed.</value>
   </data>
@@ -10486,6 +10474,15 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0" xml:space="preserve">
     <value>Cannot install updates on this host because the coordinator is running a version higher than {0}</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CDN_NOT_SYNCHRONIZED" xml:space="preserve">
+    <value>You have never synchronized with the update channel.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CDN_REPOS_NOT_CONFIGURED" xml:space="preserve">
+    <value>You have not configured an update channel.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CDN_UPDATES_APPLIED" xml:space="preserve">
+    <value>All updates available at the last synchronization have been applied.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
@@ -10653,9 +10650,6 @@ This will cancel the upload process.</value>
   </data>
   <data name="PIF_NIC" xml:space="preserve">
     <value>NIC {0}</value>
-  </data>
-  <data name="PIF_NONE" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="PIF_STATIC" xml:space="preserve">
     <value>Static</value>
@@ -10903,7 +10897,7 @@ If this value does not correspond to a server within the selected resource pool 
     <value>Could not find the pool update in {0}'s cache.</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>Pool partially upgraded to {0} {1}</value>
+    <value>Pool partially upgraded to {0}</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
     <value>Partially upgraded</value>
@@ -14386,6 +14380,9 @@ A {1} user cannot alter the Workload Balancing settings.</value>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>WLB registry key is missing.</value>
   </data>
+  <data name="WLB_ERROR_4006" xml:space="preserve">
+    <value>WLB received an argument from the server that is not implemented.</value>
+  </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
     <value>WLB received an invalid argument from the server.</value>
   </data>
@@ -14572,9 +14569,6 @@ A {1} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_OPT_REASON_NETWORKWRITE" xml:space="preserve">
     <value>Network Writes</value>
-  </data>
-  <data name="WLB_OPT_REASON_NONE" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="WLB_OPT_REASON_POWEROFF" xml:space="preserve">
     <value>Release Resource</value>

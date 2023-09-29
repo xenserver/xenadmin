@@ -116,7 +116,7 @@ namespace XenAdmin.TabPages
 
                 if (xenObject is Pool p)
                 {
-                    var additionalString = PoolAdditionalLicenseString();
+                    var additionalString = PoolAdditionalLicenseString(p);
                     pdSectionGeneral.UpdateEntryValueWithKey(
                         Messages.POOL_LICENSE,
                         additionalString != string.Empty
@@ -555,10 +555,9 @@ namespace XenAdmin.TabPages
             var allHostCount = xenObject.Connection.Cache.HostCount;
 
             if (Helpers.CloudOrGreater(pool.Connection))
-            {
                 GenerateCdnUpdatesBox(pool);
-            }
-            else if (Helpers.ElyOrGreater(xenObject.Connection))
+
+            if (Helpers.ElyOrGreater(xenObject.Connection))
             {
                 foreach (var u in cache.Pool_updates)
                 {
@@ -1188,11 +1187,13 @@ namespace XenAdmin.TabPages
             if (host.software_version.ContainsKey("product_version"))
             {
                 var hotfixEligibilityString = AdditionalVersionString(host);
+                var versionString = $"{host.ProductBrand()} {host.ProductVersionText()}";
+                
                 if (string.IsNullOrEmpty(hotfixEligibilityString))
-                    pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, host.ProductVersionText());
+                    pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, versionString);
                 else
                     pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                        string.Format(Messages.MAINWINDOW_CONTEXT_REASON, host.ProductVersionText(), hotfixEligibilityString),
+                        string.Format(Messages.MAINWINDOW_CONTEXT_REASON, versionString, hotfixEligibilityString),
                         Color.Red);
             }
 
@@ -1498,7 +1499,7 @@ namespace XenAdmin.TabPages
 
             if (xenObject is Pool p)
             {
-                var additionalString = PoolAdditionalLicenseString();
+                var additionalString = PoolAdditionalLicenseString(p);
                 s.AddEntry(Messages.POOL_LICENSE,
                     additionalString != string.Empty
                         ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
@@ -1539,14 +1540,17 @@ namespace XenAdmin.TabPages
                 var coordinator = p.Connection.Resolve(p.master);
                 if (coordinator != null)
                 {
+                    var versionString = $"{coordinator.ProductBrand()} {coordinator.ProductVersionText()}";
+
                     if (p.IsPoolFullyUpgraded())
                     {
                         var hotfixEligibilityString = AdditionalVersionString(coordinator);
+
                         if (string.IsNullOrEmpty(hotfixEligibilityString))
-                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, coordinator.ProductVersionText());
+                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, versionString);
                         else
                             s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                                string.Format(Messages.MAINWINDOW_CONTEXT_REASON, coordinator.ProductVersionText(), hotfixEligibilityString),
+                                string.Format(Messages.MAINWINDOW_CONTEXT_REASON, versionString, hotfixEligibilityString),
                                 Color.Red);
                     }
                     else
@@ -1557,7 +1561,7 @@ namespace XenAdmin.TabPages
                             (sender, args) => cmd.Run());
 
                         s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, coordinator.ProductVersionText()),
+                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, versionString),
                             cmd, runRpuWizard);
                     }
                 }
@@ -1580,7 +1584,7 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("host.uuid"), xenObject.Get("uuid") as string);
         }
 
-        private string PoolAdditionalLicenseString()
+        private string PoolAdditionalLicenseString(IXenObject pool)
         {
             if (licenseStatus == null)
                 return string.Empty;
@@ -1590,7 +1594,8 @@ namespace XenAdmin.TabPages
                 case LicenseStatus.HostState.Expired:
                     return Messages.LICENSE_EXPIRED;
                 case LicenseStatus.HostState.Free:
-                    return Messages.LICENSE_UNLICENSED;
+                    // We don't show "Unlicensed" when the pool is in Trial edition
+                    return Helpers.NileOrGreater(pool?.Connection) ? string.Empty : Messages.LICENSE_UNLICENSED;
                 default:
                     return string.Empty;
             }

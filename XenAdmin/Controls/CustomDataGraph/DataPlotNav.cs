@@ -220,22 +220,22 @@ namespace XenAdmin.Controls.CustomDataGraph
             ArchiveInterval interval = GetCurrentLeftArchiveInterval();
 
             if (interval == ArchiveInterval.FiveSecond)
-                return TimeSpan.FromTicks(ArchiveMaintainer.TicksInTenMinutes);
+                return TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_TEN_MINUTES);
             if (interval == ArchiveInterval.OneMinute)
-                return TimeSpan.FromTicks(ArchiveMaintainer.TicksInTwoHours);
+                return TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_TWO_HOURS);
             if (interval == ArchiveInterval.OneHour)
-                return TimeSpan.FromTicks(ArchiveMaintainer.TicksInSevenDays);
-            return TimeSpan.FromTicks(ArchiveMaintainer.TicksInOneYear);
+                return TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_SEVEN_DAYS);
+            return TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_ONE_YEAR);
         }
 
         public ArchiveInterval GetCurrentLeftArchiveInterval()
         {
             //TimeSpan t = ArchiveMaintainer != null ? ArchiveMaintainer.ClientServerOffset : TimeSpan.Zero;
-            if (GraphOffset.Ticks + GraphWidth.Ticks < ArchiveMaintainer.TicksInTenMinutes)
+            if (GraphOffset.Ticks + GraphWidth.Ticks < ArchiveMaintainer.TICKS_IN_TEN_MINUTES)
                 return ArchiveInterval.FiveSecond;
-            if (GraphOffset.Ticks + GraphWidth.Ticks < ArchiveMaintainer.TicksInTwoHours)
+            if (GraphOffset.Ticks + GraphWidth.Ticks < ArchiveMaintainer.TICKS_IN_TWO_HOURS)
                 return ArchiveInterval.OneMinute;
-            if (GraphOffset.Ticks + GraphWidth.Ticks < ArchiveMaintainer.TicksInSevenDays)
+            if (GraphOffset.Ticks + GraphWidth.Ticks < ArchiveMaintainer.TICKS_IN_SEVEN_DAYS)
                 return ArchiveInterval.OneHour;
             return ArchiveInterval.OneDay;
         }
@@ -243,11 +243,11 @@ namespace XenAdmin.Controls.CustomDataGraph
         public ArchiveInterval GetCurrentWidthArchiveInterval()
         {
             //TimeSpan t = ArchiveMaintainer != null ? ArchiveMaintainer.ClientServerOffset : TimeSpan.Zero;
-            if (GraphWidth.Ticks < ArchiveMaintainer.TicksInTenMinutes)
+            if (GraphWidth.Ticks < ArchiveMaintainer.TICKS_IN_TEN_MINUTES)
                 return ArchiveInterval.FiveSecond;
-            if (GraphWidth.Ticks < ArchiveMaintainer.TicksInTwoHours)
+            if (GraphWidth.Ticks < ArchiveMaintainer.TICKS_IN_TWO_HOURS)
                 return ArchiveInterval.OneMinute;
-            if (GraphWidth.Ticks < ArchiveMaintainer.TicksInSevenDays)
+            if (GraphWidth.Ticks < ArchiveMaintainer.TICKS_IN_SEVEN_DAYS)
                 return ArchiveInterval.OneHour;
             return ArchiveInterval.OneDay;
         }
@@ -391,11 +391,11 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 TimeSpan width = Animating ? AnimateCurrentWidth : ScrollViewWidth;
                 TimeSpan offset = Animating ? AnimateCurrentOffset : ScrollViewOffset;
-                if (offset.Ticks + width.Ticks <= ArchiveMaintainer.TicksInTenMinutes)
+                if (offset.Ticks + width.Ticks <= ArchiveMaintainer.TICKS_IN_TEN_MINUTES)
                     return ArchiveInterval.FiveSecond;
-                else if (offset.Ticks + width.Ticks <= ArchiveMaintainer.TicksInTwoHours)
+                else if (offset.Ticks + width.Ticks <= ArchiveMaintainer.TICKS_IN_TWO_HOURS)
                     return ArchiveInterval.OneMinute;
-                else if (offset.Ticks + width.Ticks <= ArchiveMaintainer.TicksInSevenDays)
+                else if (offset.Ticks + width.Ticks <= ArchiveMaintainer.TICKS_IN_SEVEN_DAYS)
                     return ArchiveInterval.OneHour;
                 else
                     return ArchiveInterval.OneDay;
@@ -407,11 +407,11 @@ namespace XenAdmin.Controls.CustomDataGraph
             get
             {
                 TimeSpan width = Animating ? AnimateCurrentWidth : ScrollViewWidth;
-                if (width.Ticks <= ArchiveMaintainer.TicksInTenMinutes)
+                if (width.Ticks <= ArchiveMaintainer.TICKS_IN_TEN_MINUTES)
                     return ArchiveInterval.FiveSecond;
-                else if (width.Ticks <= ArchiveMaintainer.TicksInTwoHours)
+                else if (width.Ticks <= ArchiveMaintainer.TICKS_IN_TWO_HOURS)
                     return ArchiveInterval.OneMinute;
-                else if (width.Ticks <= ArchiveMaintainer.TicksInSevenDays)
+                else if (width.Ticks <= ArchiveMaintainer.TICKS_IN_SEVEN_DAYS)
                     return ArchiveInterval.OneHour;
                 else
                     return ArchiveInterval.OneDay;
@@ -567,7 +567,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             set { _scrollViewOffset = value; }
         }
 
-        private TimeSpan _scrollViewWidth = TimeSpan.FromTicks(ArchiveMaintainer.TicksInTwoHours);
+        private TimeSpan _scrollViewWidth = TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_TWO_HOURS);
 
         public TimeSpan ScrollViewWidth
         {
@@ -647,12 +647,12 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             while (true)
             {
-                if (GraphWidth.Ticks < ScrollViewWidth.Ticks * 0.1 && ScrollViewWidth.Ticks / 7 > ArchiveMaintainer.TicksInTenMinutes)
+                if (GraphWidth.Ticks < ScrollViewWidth.Ticks * 0.1 && ScrollViewWidth.Ticks / 7 > ArchiveMaintainer.TICKS_IN_TEN_MINUTES)
                 {
                     AnimateCurrentWidth = ScrollViewWidth;
                     Animating = true;
 
-                    if (ScrollViewWidth.Ticks / 7 > ArchiveMaintainer.TicksInTenMinutes)
+                    if (ScrollViewWidth.Ticks / 7 > ArchiveMaintainer.TICKS_IN_TEN_MINUTES)
                     {
                         ScrollViewWidth = TimeSpan.FromTicks(ScrollViewWidth.Ticks / 7);
                     }
@@ -661,10 +661,10 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     AnimateCurrentWidth = ScrollViewWidth;
                     Animating = true;
-                    ScrollViewWidth = TimeSpan.FromTicks(ArchiveMaintainer.TicksInTenMinutes);
+                    ScrollViewWidth = TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_TEN_MINUTES);
                     break;
                 }
-                else if (GraphWidth.Ticks > ScrollViewWidth.Ticks * 0.7 && ScrollViewWidth.Ticks * 7 < ArchiveMaintainer.TicksInOneYear)
+                else if (GraphWidth.Ticks > ScrollViewWidth.Ticks * 0.7 && ScrollViewWidth.Ticks * 7 < ArchiveMaintainer.TICKS_IN_ONE_YEAR)
                 {
                     AnimateCurrentWidth = ScrollViewWidth;
                     Animating = true;
@@ -674,7 +674,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     AnimateCurrentWidth = ScrollViewWidth;
                     Animating = true;
-                    ScrollViewWidth = TimeSpan.FromTicks(ArchiveMaintainer.TicksInOneYear);
+                    ScrollViewWidth = TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_ONE_YEAR);
                     break;
                 }
                 else
@@ -898,11 +898,11 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return;
                 GraphOffset = TimeSpan.Zero;
             }
-            else if (GraphOffset.Ticks + GraphWidth.Ticks - delta > ArchiveMaintainer.TicksInOneYear)
+            else if (GraphOffset.Ticks + GraphWidth.Ticks - delta > ArchiveMaintainer.TICKS_IN_ONE_YEAR)
             {
-                if (GraphOffset.Ticks == ArchiveMaintainer.TicksInOneYear - GraphWidth.Ticks)
+                if (GraphOffset.Ticks == ArchiveMaintainer.TICKS_IN_ONE_YEAR - GraphWidth.Ticks)
                     return;
-                GraphOffset = TimeSpan.FromTicks(ArchiveMaintainer.TicksInOneYear - GraphWidth.Ticks);
+                GraphOffset = TimeSpan.FromTicks(ArchiveMaintainer.TICKS_IN_ONE_YEAR - GraphWidth.Ticks);
             }
             else
             {

@@ -148,7 +148,7 @@ namespace XenAPI
             if (table.ContainsKey("utilisation"))
                 utilisation = Marshalling.ParseDouble(table, "utilisation");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Host_cpu other)
@@ -158,19 +158,19 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._number, other._number) &&
-                Helper.AreEqual2(this._vendor, other._vendor) &&
-                Helper.AreEqual2(this._speed, other._speed) &&
-                Helper.AreEqual2(this._modelname, other._modelname) &&
-                Helper.AreEqual2(this._family, other._family) &&
-                Helper.AreEqual2(this._model, other._model) &&
-                Helper.AreEqual2(this._stepping, other._stepping) &&
-                Helper.AreEqual2(this._flags, other._flags) &&
-                Helper.AreEqual2(this._features, other._features) &&
-                Helper.AreEqual2(this._utilisation, other._utilisation) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_number, other._number) &&
+                Helper.AreEqual2(_vendor, other._vendor) &&
+                Helper.AreEqual2(_speed, other._speed) &&
+                Helper.AreEqual2(_modelname, other._modelname) &&
+                Helper.AreEqual2(_family, other._family) &&
+                Helper.AreEqual2(_model, other._model) &&
+                Helper.AreEqual2(_stepping, other._stepping) &&
+                Helper.AreEqual2(_flags, other._flags) &&
+                Helper.AreEqual2(_features, other._features) &&
+                Helper.AreEqual2(_utilisation, other._utilisation) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host_cpu server)

@@ -97,7 +97,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://docs.xenserver.com/.
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/.
         /// </summary>
         public static string DOCS_URL {
             get {
@@ -165,15 +165,6 @@ namespace XenAdmin {
         public static string PLUGINS_URL {
             get {
                 return ResourceManager.GetString("PLUGINS_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US.
-        /// </summary>
-        public static string PRIVACY {
-            get {
-                return ResourceManager.GetString("PRIVACY", resourceCulture);
             }
         }
         

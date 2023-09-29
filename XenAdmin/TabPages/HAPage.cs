@@ -211,7 +211,7 @@ namespace XenAdmin.TabPages
                     else
                     {
                         buttonDisableHa.Visible = false;
-                        labelStatus.Text = String.Format(Messages.HAPANEL_BLURB, Helpers.GetName(pool).Ellipsise(30));
+                        labelStatus.Text = String.Format(Messages.HA_PANEL_BLURB, Helpers.GetName(pool).Ellipsise(30));
                     }
 
                     if ( xenObject is SR sr)

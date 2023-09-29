@@ -111,7 +111,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<vm_appliance_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vm_appliance_operation(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_vm_appliance_operation(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VMs"))
                 VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
         }
@@ -123,14 +123,14 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._VMs, other._VMs);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_VMs, other._VMs);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM_appliance server)

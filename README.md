@@ -6,11 +6,11 @@ XenCenter
 
 This repository contains the source code for XenCenter.
 
-XenCenter is a Windows-based management tool for Citrix Hypervisor environments,
+XenCenter is a Windows-based management tool for XenServer and Citrix Hypervisor environments,
 which enables users to manage and monitor server and resource pools,
 and to deploy, monitor, manage, and migrate virtual machines.
 
-XenCenter is written mostly in C#.
+XenCenter is written in C#.
 
 Contributions
 -------------
@@ -34,7 +34,7 @@ How to build XenCenter
 To build XenCenter, you need
 
 * the source from xenadmin repository
-* Visual Studio 2019
+* Visual Studio 2022
 * .NET Framework 4.8
 
 and also some libraries which we do not store in the source tree:
@@ -54,3 +54,7 @@ To run the [NUnit](http://www.nunit.org/) tests you will need the following libr
 * Moq.dll
 
 which can be obtained from <http://www.nuget.org/>.
+
+Note that the build script assumes that you have added MSBuild's location (usually
+`C:\Program Files\Microsoft Visual Studio\2022\<edition>\MSBuild\Current\Bin`)
+to your `PATH` environment variable.

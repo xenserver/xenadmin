@@ -156,7 +156,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<storage_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_storage_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_storage_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VDIs"))
                 VDIs = Marshalling.ParseSetRef<VDI>(table, "VDIs");
             if (table.ContainsKey("PBDs"))
@@ -174,13 +174,13 @@ namespace XenAPI
             if (table.ContainsKey("shared"))
                 shared = Marshalling.ParseBool(table, "shared");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("tags"))
                 tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("sm_config"))
-                sm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "sm_config"));
+                sm_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "sm_config"));
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
+                blobs = Maps.ToDictionary_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("local_cache_enabled"))
                 local_cache_enabled = Marshalling.ParseBool(table, "local_cache_enabled");
             if (table.ContainsKey("introduced_by"))
@@ -198,29 +198,29 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._VDIs, other._VDIs) &&
-                Helper.AreEqual2(this._PBDs, other._PBDs) &&
-                Helper.AreEqual2(this._virtual_allocation, other._virtual_allocation) &&
-                Helper.AreEqual2(this._physical_utilisation, other._physical_utilisation) &&
-                Helper.AreEqual2(this._physical_size, other._physical_size) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._content_type, other._content_type) &&
-                Helper.AreEqual2(this._shared, other._shared) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._sm_config, other._sm_config) &&
-                Helper.AreEqual2(this._blobs, other._blobs) &&
-                Helper.AreEqual2(this._local_cache_enabled, other._local_cache_enabled) &&
-                Helper.AreEqual2(this._introduced_by, other._introduced_by) &&
-                Helper.AreEqual2(this._clustered, other._clustered) &&
-                Helper.AreEqual2(this._is_tools_sr, other._is_tools_sr);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_VDIs, other._VDIs) &&
+                Helper.AreEqual2(_PBDs, other._PBDs) &&
+                Helper.AreEqual2(_virtual_allocation, other._virtual_allocation) &&
+                Helper.AreEqual2(_physical_utilisation, other._physical_utilisation) &&
+                Helper.AreEqual2(_physical_size, other._physical_size) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_content_type, other._content_type) &&
+                Helper.AreEqual2(_shared, other._shared) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_tags, other._tags) &&
+                Helper.AreEqual2(_sm_config, other._sm_config) &&
+                Helper.AreEqual2(_blobs, other._blobs) &&
+                Helper.AreEqual2(_local_cache_enabled, other._local_cache_enabled) &&
+                Helper.AreEqual2(_introduced_by, other._introduced_by) &&
+                Helper.AreEqual2(_clustered, other._clustered) &&
+                Helper.AreEqual2(_is_tools_sr, other._is_tools_sr);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SR server)

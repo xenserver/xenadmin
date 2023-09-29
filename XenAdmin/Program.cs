@@ -125,12 +125,12 @@ namespace XenAdmin
             var logFolder = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 BrandManager.ProductBrand,
-                BrandManager.BrandConsoleNoSpace,
+                BrandManager.BrandConsole,
                 "logs");
             
-            log4net.GlobalContext.Properties["LOG_FILE"] = Path.Combine(logFolder, $"{BrandManager.BrandConsoleNoSpace}.log");
-            log4net.GlobalContext.Properties["AUDIT_TRAIL"] = Path.Combine(logFolder, $"{BrandManager.BrandConsoleNoSpace}-AuditTrail.log");
-            log4net.GlobalContext.Properties["NETWORK_TRACE"] = Path.Combine(logFolder, $"{BrandManager.BrandConsoleNoSpace}-NetworkTrace.log");
+            log4net.GlobalContext.Properties["LOG_FILE"] = Path.Combine(logFolder, $"{BrandManager.BrandConsole}.log");
+            log4net.GlobalContext.Properties["AUDIT_TRAIL"] = Path.Combine(logFolder, $"{BrandManager.BrandConsole}-AuditTrail.log");
+            log4net.GlobalContext.Properties["NETWORK_TRACE"] = Path.Combine(logFolder, $"{BrandManager.BrandConsole}-NetworkTrace.log");
 
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));
             log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -145,7 +145,7 @@ namespace XenAdmin
         public static void Main(string[] args)
         {
             string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value;
-            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsoleNoSpace, Process.GetCurrentProcess().SessionId, Environment.UserName, appGuid);
+            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsole, Process.GetCurrentProcess().SessionId, Environment.UserName, appGuid);
 
             if (NamedPipes.Pipe.ExistsPipe(_pipePath))
             {

@@ -34,7 +34,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using XenAdmin.Properties;
 
-// General Information about an assembly is controlled through the following 
+// General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
@@ -43,8 +43,8 @@ using XenAdmin.Properties;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("[XenCenter]")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
+// Setting ComVisible to false makes the types in this assembly not visible
+// to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
@@ -55,7 +55,6 @@ using XenAdmin.Properties;
 
 [assembly: CustomBranding(
     "[XenCenter]",
-    "[XenCenter_No_Space]",
     "[Vendor]",
     "[XenServerProduct]",
     "[XenServer version]",
@@ -77,7 +76,6 @@ namespace XenAdmin.Properties
     {
         public CustomBrandingAttribute(
             string brandConsole,
-            string brandConsoleNoSpace,
             string companyNameShort,
             string productBrand,
             string productVersionText,
@@ -94,7 +92,6 @@ namespace XenAdmin.Properties
         )
         {
             BrandConsole = brandConsole;
-            BrandConsoleNoSpace = brandConsoleNoSpace;
             CompanyNameShort = companyNameShort;
             ProductBrand = productBrand;
             ProductVersionText = productVersionText;
@@ -111,7 +108,6 @@ namespace XenAdmin.Properties
         }
 
         public string BrandConsole { get; }
-        public string BrandConsoleNoSpace { get; }
         public string CompanyNameShort { get; }
         public string ProductBrand { get; }
         public string ProductVersionText { get; }

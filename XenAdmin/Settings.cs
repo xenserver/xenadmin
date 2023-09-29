@@ -781,7 +781,7 @@ namespace XenAdmin
                 Version previousVersion = null;
                 Version currentVersion = Program.Version;
 
-                var directories = companyFolder.GetDirectories($"{BrandManager.BrandConsoleNoSpace}*");
+                var directories = companyFolder.GetDirectories($"{BrandManager.BrandConsole}*");
 
                 foreach (var dir in directories)
                 {

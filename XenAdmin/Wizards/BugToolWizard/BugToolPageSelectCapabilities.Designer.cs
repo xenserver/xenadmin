@@ -36,7 +36,6 @@ namespace XenAdmin.Wizards.BugToolWizard
             this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.SelectButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.DescriptionValue = new System.Windows.Forms.Label();
@@ -110,15 +109,6 @@ namespace XenAdmin.Wizards.BugToolWizard
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoEllipsis = true;
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.tableLayoutPanel3.SetColumnSpan(this.linkLabel1, 2);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
@@ -166,9 +156,8 @@ namespace XenAdmin.Wizards.BugToolWizard
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.linkLabel1, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // label1
@@ -203,15 +192,14 @@ namespace XenAdmin.Wizards.BugToolWizard
         private System.Windows.Forms.Label SizeValue;
         private System.Windows.Forms.Label TotalSizeLabel;
         private System.Windows.Forms.Label TotalSizeValue;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button SelectButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewItems;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnItem;
         private System.Windows.Forms.DataGridViewImageColumn columnImage;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -342,7 +342,7 @@ namespace XenAdmin.SettingsPanels
                 return new Label
                 {
                     Anchor = AnchorStyles.Left | AnchorStyles.Right,
-                    Text = customFieldDefinition.Name.EscapeAmpersands().Ellipsise(25),
+                    Text = customFieldDefinition.Name.EscapeAmpersands().Ellipsise(45),
                     Font = Program.DefaultFont,
                     AutoSize = true,
                     AutoEllipsis = false

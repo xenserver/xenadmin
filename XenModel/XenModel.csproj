@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="17.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -224,10 +224,10 @@
     <Compile Include="OtherConfigWatcher.cs" />
     <Compile Include="PoolJoinRules.cs" />
     <Compile Include="Tags.cs" />
-    <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
+    <Compile Include="Actions\WLB\RetrieveWlbConfigurationAction.cs" />
     <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
     <Compile Include="WLB\WlbOptimizationRecommendation.cs" />
-    <Compile Include="WLB\WlbReportAction.cs" />
+    <Compile Include="Actions\WLB\WlbReportAction.cs" />
     <Compile Include="XenAdminConfigManager.cs" />
     <Compile Include="Actions\AD\AddRemoveRolesAction.cs" />
     <Compile Include="Actions\AD\AddRemoveSubjectsAction.cs" />

@@ -362,7 +362,7 @@ namespace XenAPI
             switch (ip_configuration_mode)
             {
                 case ip_configuration_mode.None:
-                    return Messages.PIF_NONE;
+                    return Messages.NONE_UPPER;
                 case ip_configuration_mode.DHCP:
                     return Messages.PIF_DHCP;
                 case ip_configuration_mode.Static:

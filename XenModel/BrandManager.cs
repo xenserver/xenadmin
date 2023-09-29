@@ -47,7 +47,6 @@ namespace XenAdmin.Core
             var customBranding = (CustomBrandingAttribute)assembly.GetCustomAttribute(typeof(CustomBrandingAttribute));
 
             BrandConsole = customBranding.BrandConsole;
-            BrandConsoleNoSpace = customBranding.BrandConsoleNoSpace;
             CompanyNameShort = customBranding.CompanyNameShort;
             ProductBrand = customBranding.ProductBrand;
             ProductVersionPost82 = customBranding.ProductVersionText;
@@ -65,8 +64,6 @@ namespace XenAdmin.Core
 
 
         public static readonly string BrandConsole;
-
-        public static readonly string BrandConsoleNoSpace;
 
         public static readonly string Cis = Get("CIS");
 

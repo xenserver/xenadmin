@@ -35,7 +35,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.labelInfoCdn = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.linkLabelCongifUpdates = new System.Windows.Forms.LinkLabel();
+            this.linkLabelConfigUpdates = new System.Windows.Forms.LinkLabel();
             this.UpdatesTableLayoutPanel.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -66,7 +66,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.labelInfoCdn, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.linkLabelCongifUpdates, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.linkLabelConfigUpdates, 2, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // labelInfoCdn
@@ -81,12 +81,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // linkLabelCongifUpdates
+            // linkLabelConfigUpdates
             // 
-            resources.ApplyResources(this.linkLabelCongifUpdates, "linkLabelCongifUpdates");
-            this.linkLabelCongifUpdates.Name = "linkLabelCongifUpdates";
-            this.linkLabelCongifUpdates.TabStop = true;
-            this.linkLabelCongifUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCongifUpdates_LinkClicked);
+            resources.ApplyResources(this.linkLabelConfigUpdates, "linkLabelConfigUpdates");
+            this.linkLabelConfigUpdates.Name = "linkLabelConfigUpdates";
+            this.linkLabelConfigUpdates.TabStop = true;
+            this.linkLabelConfigUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelConfigUpdates_LinkClicked);
             // 
             // UpdatesOptionsPage
             // 
@@ -112,6 +112,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox _checkBoxClientUpdates;
         private System.Windows.Forms.Label labelClientUpdates;
-        private System.Windows.Forms.LinkLabel linkLabelCongifUpdates;
+        private System.Windows.Forms.LinkLabel linkLabelConfigUpdates;
     }
 }

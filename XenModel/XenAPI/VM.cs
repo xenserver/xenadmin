@@ -138,8 +138,7 @@ namespace XenAPI
             string reference_label,
             domain_type domain_type,
             Dictionary<string, string> NVRAM,
-            List<update_guidances> pending_guidances,
-            List<update_guidances> recommended_guidances)
+            List<update_guidances> pending_guidances)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -229,7 +228,6 @@ namespace XenAPI
             this.domain_type = domain_type;
             this.NVRAM = NVRAM;
             this.pending_guidances = pending_guidances;
-            this.recommended_guidances = recommended_guidances;
         }
 
         /// <summary>
@@ -340,7 +338,6 @@ namespace XenAPI
             domain_type = record.domain_type;
             NVRAM = record.NVRAM;
             pending_guidances = record.pending_guidances;
-            recommended_guidances = record.recommended_guidances;
         }
 
         /// <summary>
@@ -356,7 +353,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<vm_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vm_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_vm_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("name_label"))
                 name_label = Marshalling.ParseString(table, "name_label");
             if (table.ContainsKey("name_description"))
@@ -390,7 +387,7 @@ namespace XenAPI
             if (table.ContainsKey("memory_static_min"))
                 memory_static_min = Marshalling.ParseLong(table, "memory_static_min");
             if (table.ContainsKey("VCPUs_params"))
-                VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
+                VCPUs_params = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
             if (table.ContainsKey("VCPUs_max"))
                 VCPUs_max = Marshalling.ParseLong(table, "VCPUs_max");
             if (table.ContainsKey("VCPUs_at_startup"))
@@ -430,21 +427,21 @@ namespace XenAPI
             if (table.ContainsKey("HVM_boot_policy"))
                 HVM_boot_policy = Marshalling.ParseString(table, "HVM_boot_policy");
             if (table.ContainsKey("HVM_boot_params"))
-                HVM_boot_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "HVM_boot_params"));
+                HVM_boot_params = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "HVM_boot_params"));
             if (table.ContainsKey("HVM_shadow_multiplier"))
                 HVM_shadow_multiplier = Marshalling.ParseDouble(table, "HVM_shadow_multiplier");
             if (table.ContainsKey("platform"))
-                platform = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "platform"));
+                platform = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "platform"));
             if (table.ContainsKey("PCI_bus"))
                 PCI_bus = Marshalling.ParseString(table, "PCI_bus");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("domid"))
                 domid = Marshalling.ParseLong(table, "domid");
             if (table.ContainsKey("domarch"))
                 domarch = Marshalling.ParseString(table, "domarch");
             if (table.ContainsKey("last_boot_CPU_flags"))
-                last_boot_CPU_flags = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "last_boot_CPU_flags"));
+                last_boot_CPU_flags = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "last_boot_CPU_flags"));
             if (table.ContainsKey("is_control_domain"))
                 is_control_domain = Marshalling.ParseBool(table, "is_control_domain");
             if (table.ContainsKey("metrics"))
@@ -456,7 +453,7 @@ namespace XenAPI
             if (table.ContainsKey("recommendations"))
                 recommendations = Marshalling.ParseString(table, "recommendations");
             if (table.ContainsKey("xenstore_data"))
-                xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
+                xenstore_data = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
             if (table.ContainsKey("ha_always_run"))
                 ha_always_run = Marshalling.ParseBool(table, "ha_always_run");
             if (table.ContainsKey("ha_restart_priority"))
@@ -472,13 +469,13 @@ namespace XenAPI
             if (table.ContainsKey("transportable_snapshot_id"))
                 transportable_snapshot_id = Marshalling.ParseString(table, "transportable_snapshot_id");
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
+                blobs = Maps.ToDictionary_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("tags"))
                 tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("blocked_operations"))
-                blocked_operations = Maps.convert_from_proxy_vm_operations_string(Marshalling.ParseHashTable(table, "blocked_operations"));
+                blocked_operations = Maps.ToDictionary_vm_operations_string(Marshalling.ParseHashTable(table, "blocked_operations"));
             if (table.ContainsKey("snapshot_info"))
-                snapshot_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "snapshot_info"));
+                snapshot_info = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "snapshot_info"));
             if (table.ContainsKey("snapshot_metadata"))
                 snapshot_metadata = Marshalling.ParseString(table, "snapshot_metadata");
             if (table.ContainsKey("parent"))
@@ -486,7 +483,7 @@ namespace XenAPI
             if (table.ContainsKey("children"))
                 children = Marshalling.ParseSetRef<VM>(table, "children");
             if (table.ContainsKey("bios_strings"))
-                bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
+                bios_strings = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
             if (table.ContainsKey("protection_policy"))
                 protection_policy = Marshalling.ParseRef<VMPP>(table, "protection_policy");
             if (table.ContainsKey("is_snapshot_from_vmpp"))
@@ -524,11 +521,9 @@ namespace XenAPI
             if (table.ContainsKey("domain_type"))
                 domain_type = (domain_type)Helper.EnumParseDefault(typeof(domain_type), Marshalling.ParseString(table, "domain_type"));
             if (table.ContainsKey("NVRAM"))
-                NVRAM = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "NVRAM"));
+                NVRAM = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "NVRAM"));
             if (table.ContainsKey("pending_guidances"))
                 pending_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "pending_guidances"));
-            if (table.ContainsKey("recommended_guidances"))
-                recommended_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "recommended_guidances"));
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -538,97 +533,96 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._power_state, other._power_state) &&
-                Helper.AreEqual2(this._user_version, other._user_version) &&
-                Helper.AreEqual2(this._is_a_template, other._is_a_template) &&
-                Helper.AreEqual2(this._is_default_template, other._is_default_template) &&
-                Helper.AreEqual2(this._suspend_VDI, other._suspend_VDI) &&
-                Helper.AreEqual2(this._resident_on, other._resident_on) &&
-                Helper.AreEqual2(this._scheduled_to_be_resident_on, other._scheduled_to_be_resident_on) &&
-                Helper.AreEqual2(this._affinity, other._affinity) &&
-                Helper.AreEqual2(this._memory_overhead, other._memory_overhead) &&
-                Helper.AreEqual2(this._memory_target, other._memory_target) &&
-                Helper.AreEqual2(this._memory_static_max, other._memory_static_max) &&
-                Helper.AreEqual2(this._memory_dynamic_max, other._memory_dynamic_max) &&
-                Helper.AreEqual2(this._memory_dynamic_min, other._memory_dynamic_min) &&
-                Helper.AreEqual2(this._memory_static_min, other._memory_static_min) &&
-                Helper.AreEqual2(this._VCPUs_params, other._VCPUs_params) &&
-                Helper.AreEqual2(this._VCPUs_max, other._VCPUs_max) &&
-                Helper.AreEqual2(this._VCPUs_at_startup, other._VCPUs_at_startup) &&
-                Helper.AreEqual2(this._actions_after_softreboot, other._actions_after_softreboot) &&
-                Helper.AreEqual2(this._actions_after_shutdown, other._actions_after_shutdown) &&
-                Helper.AreEqual2(this._actions_after_reboot, other._actions_after_reboot) &&
-                Helper.AreEqual2(this._actions_after_crash, other._actions_after_crash) &&
-                Helper.AreEqual2(this._consoles, other._consoles) &&
-                Helper.AreEqual2(this._VIFs, other._VIFs) &&
-                Helper.AreEqual2(this._VBDs, other._VBDs) &&
-                Helper.AreEqual2(this._VUSBs, other._VUSBs) &&
-                Helper.AreEqual2(this._crash_dumps, other._crash_dumps) &&
-                Helper.AreEqual2(this._VTPMs, other._VTPMs) &&
-                Helper.AreEqual2(this._PV_bootloader, other._PV_bootloader) &&
-                Helper.AreEqual2(this._PV_kernel, other._PV_kernel) &&
-                Helper.AreEqual2(this._PV_ramdisk, other._PV_ramdisk) &&
-                Helper.AreEqual2(this._PV_args, other._PV_args) &&
-                Helper.AreEqual2(this._PV_bootloader_args, other._PV_bootloader_args) &&
-                Helper.AreEqual2(this._PV_legacy_args, other._PV_legacy_args) &&
-                Helper.AreEqual2(this._HVM_boot_policy, other._HVM_boot_policy) &&
-                Helper.AreEqual2(this._HVM_boot_params, other._HVM_boot_params) &&
-                Helper.AreEqual2(this._HVM_shadow_multiplier, other._HVM_shadow_multiplier) &&
-                Helper.AreEqual2(this._platform, other._platform) &&
-                Helper.AreEqual2(this._PCI_bus, other._PCI_bus) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._domid, other._domid) &&
-                Helper.AreEqual2(this._domarch, other._domarch) &&
-                Helper.AreEqual2(this._last_boot_CPU_flags, other._last_boot_CPU_flags) &&
-                Helper.AreEqual2(this._is_control_domain, other._is_control_domain) &&
-                Helper.AreEqual2(this._metrics, other._metrics) &&
-                Helper.AreEqual2(this._guest_metrics, other._guest_metrics) &&
-                Helper.AreEqual2(this._last_booted_record, other._last_booted_record) &&
-                Helper.AreEqual2(this._recommendations, other._recommendations) &&
-                Helper.AreEqual2(this._xenstore_data, other._xenstore_data) &&
-                Helper.AreEqual2(this._ha_always_run, other._ha_always_run) &&
-                Helper.AreEqual2(this._ha_restart_priority, other._ha_restart_priority) &&
-                Helper.AreEqual2(this._is_a_snapshot, other._is_a_snapshot) &&
-                Helper.AreEqual2(this._snapshot_of, other._snapshot_of) &&
-                Helper.AreEqual2(this._snapshots, other._snapshots) &&
-                Helper.AreEqual2(this._snapshot_time, other._snapshot_time) &&
-                Helper.AreEqual2(this._transportable_snapshot_id, other._transportable_snapshot_id) &&
-                Helper.AreEqual2(this._blobs, other._blobs) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._blocked_operations, other._blocked_operations) &&
-                Helper.AreEqual2(this._snapshot_info, other._snapshot_info) &&
-                Helper.AreEqual2(this._snapshot_metadata, other._snapshot_metadata) &&
-                Helper.AreEqual2(this._parent, other._parent) &&
-                Helper.AreEqual2(this._children, other._children) &&
-                Helper.AreEqual2(this._bios_strings, other._bios_strings) &&
-                Helper.AreEqual2(this._protection_policy, other._protection_policy) &&
-                Helper.AreEqual2(this._is_snapshot_from_vmpp, other._is_snapshot_from_vmpp) &&
-                Helper.AreEqual2(this._snapshot_schedule, other._snapshot_schedule) &&
-                Helper.AreEqual2(this._is_vmss_snapshot, other._is_vmss_snapshot) &&
-                Helper.AreEqual2(this._appliance, other._appliance) &&
-                Helper.AreEqual2(this._start_delay, other._start_delay) &&
-                Helper.AreEqual2(this._shutdown_delay, other._shutdown_delay) &&
-                Helper.AreEqual2(this._order, other._order) &&
-                Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
-                Helper.AreEqual2(this._attached_PCIs, other._attached_PCIs) &&
-                Helper.AreEqual2(this._suspend_SR, other._suspend_SR) &&
-                Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._generation_id, other._generation_id) &&
-                Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
-                Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device) &&
-                Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
-                Helper.AreEqual2(this._reference_label, other._reference_label) &&
-                Helper.AreEqual2(this._domain_type, other._domain_type) &&
-                Helper.AreEqual2(this._NVRAM, other._NVRAM) &&
-                Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
-                Helper.AreEqual2(this._recommended_guidances, other._recommended_guidances);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_power_state, other._power_state) &&
+                Helper.AreEqual2(_user_version, other._user_version) &&
+                Helper.AreEqual2(_is_a_template, other._is_a_template) &&
+                Helper.AreEqual2(_is_default_template, other._is_default_template) &&
+                Helper.AreEqual2(_suspend_VDI, other._suspend_VDI) &&
+                Helper.AreEqual2(_resident_on, other._resident_on) &&
+                Helper.AreEqual2(_scheduled_to_be_resident_on, other._scheduled_to_be_resident_on) &&
+                Helper.AreEqual2(_affinity, other._affinity) &&
+                Helper.AreEqual2(_memory_overhead, other._memory_overhead) &&
+                Helper.AreEqual2(_memory_target, other._memory_target) &&
+                Helper.AreEqual2(_memory_static_max, other._memory_static_max) &&
+                Helper.AreEqual2(_memory_dynamic_max, other._memory_dynamic_max) &&
+                Helper.AreEqual2(_memory_dynamic_min, other._memory_dynamic_min) &&
+                Helper.AreEqual2(_memory_static_min, other._memory_static_min) &&
+                Helper.AreEqual2(_VCPUs_params, other._VCPUs_params) &&
+                Helper.AreEqual2(_VCPUs_max, other._VCPUs_max) &&
+                Helper.AreEqual2(_VCPUs_at_startup, other._VCPUs_at_startup) &&
+                Helper.AreEqual2(_actions_after_softreboot, other._actions_after_softreboot) &&
+                Helper.AreEqual2(_actions_after_shutdown, other._actions_after_shutdown) &&
+                Helper.AreEqual2(_actions_after_reboot, other._actions_after_reboot) &&
+                Helper.AreEqual2(_actions_after_crash, other._actions_after_crash) &&
+                Helper.AreEqual2(_consoles, other._consoles) &&
+                Helper.AreEqual2(_VIFs, other._VIFs) &&
+                Helper.AreEqual2(_VBDs, other._VBDs) &&
+                Helper.AreEqual2(_VUSBs, other._VUSBs) &&
+                Helper.AreEqual2(_crash_dumps, other._crash_dumps) &&
+                Helper.AreEqual2(_VTPMs, other._VTPMs) &&
+                Helper.AreEqual2(_PV_bootloader, other._PV_bootloader) &&
+                Helper.AreEqual2(_PV_kernel, other._PV_kernel) &&
+                Helper.AreEqual2(_PV_ramdisk, other._PV_ramdisk) &&
+                Helper.AreEqual2(_PV_args, other._PV_args) &&
+                Helper.AreEqual2(_PV_bootloader_args, other._PV_bootloader_args) &&
+                Helper.AreEqual2(_PV_legacy_args, other._PV_legacy_args) &&
+                Helper.AreEqual2(_HVM_boot_policy, other._HVM_boot_policy) &&
+                Helper.AreEqual2(_HVM_boot_params, other._HVM_boot_params) &&
+                Helper.AreEqual2(_HVM_shadow_multiplier, other._HVM_shadow_multiplier) &&
+                Helper.AreEqual2(_platform, other._platform) &&
+                Helper.AreEqual2(_PCI_bus, other._PCI_bus) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_domid, other._domid) &&
+                Helper.AreEqual2(_domarch, other._domarch) &&
+                Helper.AreEqual2(_last_boot_CPU_flags, other._last_boot_CPU_flags) &&
+                Helper.AreEqual2(_is_control_domain, other._is_control_domain) &&
+                Helper.AreEqual2(_metrics, other._metrics) &&
+                Helper.AreEqual2(_guest_metrics, other._guest_metrics) &&
+                Helper.AreEqual2(_last_booted_record, other._last_booted_record) &&
+                Helper.AreEqual2(_recommendations, other._recommendations) &&
+                Helper.AreEqual2(_xenstore_data, other._xenstore_data) &&
+                Helper.AreEqual2(_ha_always_run, other._ha_always_run) &&
+                Helper.AreEqual2(_ha_restart_priority, other._ha_restart_priority) &&
+                Helper.AreEqual2(_is_a_snapshot, other._is_a_snapshot) &&
+                Helper.AreEqual2(_snapshot_of, other._snapshot_of) &&
+                Helper.AreEqual2(_snapshots, other._snapshots) &&
+                Helper.AreEqual2(_snapshot_time, other._snapshot_time) &&
+                Helper.AreEqual2(_transportable_snapshot_id, other._transportable_snapshot_id) &&
+                Helper.AreEqual2(_blobs, other._blobs) &&
+                Helper.AreEqual2(_tags, other._tags) &&
+                Helper.AreEqual2(_blocked_operations, other._blocked_operations) &&
+                Helper.AreEqual2(_snapshot_info, other._snapshot_info) &&
+                Helper.AreEqual2(_snapshot_metadata, other._snapshot_metadata) &&
+                Helper.AreEqual2(_parent, other._parent) &&
+                Helper.AreEqual2(_children, other._children) &&
+                Helper.AreEqual2(_bios_strings, other._bios_strings) &&
+                Helper.AreEqual2(_protection_policy, other._protection_policy) &&
+                Helper.AreEqual2(_is_snapshot_from_vmpp, other._is_snapshot_from_vmpp) &&
+                Helper.AreEqual2(_snapshot_schedule, other._snapshot_schedule) &&
+                Helper.AreEqual2(_is_vmss_snapshot, other._is_vmss_snapshot) &&
+                Helper.AreEqual2(_appliance, other._appliance) &&
+                Helper.AreEqual2(_start_delay, other._start_delay) &&
+                Helper.AreEqual2(_shutdown_delay, other._shutdown_delay) &&
+                Helper.AreEqual2(_order, other._order) &&
+                Helper.AreEqual2(_VGPUs, other._VGPUs) &&
+                Helper.AreEqual2(_attached_PCIs, other._attached_PCIs) &&
+                Helper.AreEqual2(_suspend_SR, other._suspend_SR) &&
+                Helper.AreEqual2(_version, other._version) &&
+                Helper.AreEqual2(_generation_id, other._generation_id) &&
+                Helper.AreEqual2(_hardware_platform_version, other._hardware_platform_version) &&
+                Helper.AreEqual2(_has_vendor_device, other._has_vendor_device) &&
+                Helper.AreEqual2(_requires_reboot, other._requires_reboot) &&
+                Helper.AreEqual2(_reference_label, other._reference_label) &&
+                Helper.AreEqual2(_domain_type, other._domain_type) &&
+                Helper.AreEqual2(_NVRAM, other._NVRAM) &&
+                Helper.AreEqual2(_pending_guidances, other._pending_guidances);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1884,17 +1878,6 @@ namespace XenAPI
         public static List<update_guidances> get_pending_guidances(Session session, string _vm)
         {
             return session.JsonRpcClient.vm_get_pending_guidances(session.opaque_ref, _vm);
-        }
-
-        /// <summary>
-        /// Get the recommended_guidances field of the given VM.
-        /// Experimental. First published in 23.18.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        public static List<update_guidances> get_recommended_guidances(Session session, string _vm)
-        {
-            return session.JsonRpcClient.vm_get_recommended_guidances(session.opaque_ref, _vm);
         }
 
         /// <summary>
@@ -5851,23 +5834,5 @@ namespace XenAPI
             }
         }
         private List<update_guidances> _pending_guidances = new List<update_guidances>() {};
-
-        /// <summary>
-        /// The set of recommended guidances after applying updates
-        /// Experimental. First published in 23.18.0.
-        /// </summary>
-        public virtual List<update_guidances> recommended_guidances
-        {
-            get { return _recommended_guidances; }
-            set
-            {
-                if (!Helper.AreEqual(value, _recommended_guidances))
-                {
-                    _recommended_guidances = value;
-                    NotifyPropertyChanged("recommended_guidances");
-                }
-            }
-        }
-        private List<update_guidances> _recommended_guidances = new List<update_guidances>() {};
     }
 }

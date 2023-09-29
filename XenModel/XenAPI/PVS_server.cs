@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._addresses, other._addresses) &&
-                Helper.AreEqual2(this._first_port, other._first_port) &&
-                Helper.AreEqual2(this._last_port, other._last_port) &&
-                Helper.AreEqual2(this._site, other._site);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_addresses, other._addresses) &&
+                Helper.AreEqual2(_first_port, other._first_port) &&
+                Helper.AreEqual2(_last_port, other._last_port) &&
+                Helper.AreEqual2(_site, other._site);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PVS_server server)

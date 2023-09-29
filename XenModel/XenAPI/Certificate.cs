@@ -128,13 +128,13 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name, other._name) &&
-                Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._not_before, other._not_before) &&
-                Helper.AreEqual2(this._not_after, other._not_after) &&
-                Helper.AreEqual2(this._fingerprint, other._fingerprint);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name, other._name) &&
+                Helper.AreEqual2(_type, other._type) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_not_before, other._not_before) &&
+                Helper.AreEqual2(_not_after, other._not_after) &&
+                Helper.AreEqual2(_fingerprint, other._fingerprint);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Certificate server)

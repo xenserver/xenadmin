@@ -1,6 +1,4 @@
-#!/bin/sh
-
-# Copyright (c) Cloud Software Group, Inc. 
+# Copyright (c) Cloud Software Group, Inc.
 #
 # Redistribution and use in source and binary forms,
 # with or without modification, are permitted provided
@@ -29,16 +27,22 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-BRANDING_COMPANY_NAME_LEGAL="[Vendor Legal]"
-BRANDING_COMPANY_NAME_SHORT="[Vendor]"
-BRANDING_PRODUCT_BRAND="[XenServerProduct]"
-BRANDING_SERVER="[XenServer host]"
-BRANDING_BRAND_CONSOLE="[XenCenter]"
-BRANDING_BRAND_CONSOLE_NO_SPACE="[XenCenter]"
-BRANDING_BRAND_CONSOLE_SHORT=XenCente
-BRANDING_HELP_PATH=xencenter/current-release/
-BRANDING_PV_TOOLS="[Guest Tools]"
-BRANDING_PRODUCT_VERSION_TEXT=0.0.0
-BRANDING_XC_PRODUCT_VERSION=0.0.0
-BRANDING_XC_PRODUCT_VERSION_INSTALLER=0.0.0
-UPDATES_URL="[Updates url]"
+$BRANDING_COMPANY_NAME_LEGAL="[Vendor Legal]"
+$BRANDING_COMPANY_NAME_SHORT="[Vendor]"
+$BRANDING_PRODUCT_BRAND="[XenServerProduct]"
+$BRANDING_SERVER="[XenServer host]"
+$BRANDING_BRAND_CONSOLE="[XenCenter]"
+$BRANDING_BRAND_CONSOLE_SHORT="XenCente"
+$BRANDING_HELP_PATH="xencenter/current-release/"
+$BRANDING_PV_TOOLS="[Guest Tools]"
+$BRANDING_PRODUCT_VERSION_TEXT="0.0.0"
+$BRANDING_XC_PRODUCT_VERSION="0.0.0"
+$BRANDING_XC_PRODUCT_VERSION_INSTALLER="0.0.0"
+$XC_UPDATES_URL="[Xc updates url]"
+$CFU_URL="[Cfu url]"
+$YUM_REPO_BASE_BIN="[YumRepoBaseBin]"
+$YUM_REPO_BASE_SRC="[YumRepoBaseSource]"
+$YUM_REPO_EARLY_ACCESS_BIN="[YumRepoEarlyAccessBin]"
+$YUM_REPO_EARLY_ACCESS_SRC="[YumRepoEarlyAccessSource]"
+$YUM_REPO_NORMAL_BIN="[YumRepoNormalBin]"
+$YUM_REPO_NORMAL_SRC="[YumRepoNormalSource]"

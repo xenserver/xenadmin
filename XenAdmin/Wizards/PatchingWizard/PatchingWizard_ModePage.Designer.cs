@@ -1,5 +1,3 @@
-using System.Windows.Forms;
-
 namespace XenAdmin.Wizards.PatchingWizard
 {
     partial class PatchingWizard_ModePage
@@ -125,7 +123,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
         private System.Windows.Forms.CheckBox removeUpdateFileCheckBox;
-        private RadioButton AutomaticRadioButton;
-        private ToolTip automaticRadioButtonTooltip;
+        private System.Windows.Forms.RadioButton AutomaticRadioButton;
+        private System.Windows.Forms.ToolTip automaticRadioButtonTooltip;
     }
 }

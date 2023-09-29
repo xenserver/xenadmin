@@ -98,7 +98,7 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid);
+            return Helper.AreEqual2(_uuid, other._uuid);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, LVHD server)

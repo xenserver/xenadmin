@@ -134,7 +134,7 @@ namespace XenAdmin.Dialogs
 
                 ShowTab(GeneralEditPage = new GeneralEditPage());
 
-                if (!isVmAppliance)
+                if (!isVmAppliance && !isVmss)
                     ShowTab(CustomFieldsEditPage = new CustomFieldsDisplayPage {AutoScroll = true});
 
                 if (isVm)

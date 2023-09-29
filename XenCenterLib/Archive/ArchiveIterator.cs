@@ -47,21 +47,30 @@ namespace XenCenterLib.Archive
         /// <exception cref="NullReferenceException">If while combining path and current file name a null arises</exception>
         public void ExtractAllContents(string pathToExtractTo, Action cancellingDelegate = null)
         {
-            if (String.IsNullOrEmpty(pathToExtractTo))
+            if (string.IsNullOrEmpty(pathToExtractTo))
                 throw new ArgumentNullException();
 
             while (HasNext())
             {
-                //Make the file path from the details in the archive making the path windows friendly
-                string conflatedPath = Path.Combine(pathToExtractTo, CurrentFileName()).Replace('/', Path.DirectorySeparatorChar);
+                //make the path Windows friendly
+                var fileName = CurrentFileName();
+                var isDirectory = IsDirectory();
 
-                //Create directories - empty ones will be made too
-                Directory.CreateDirectory(Path.GetDirectoryName(conflatedPath));
+                var sanitizedName = fileName.Replace('/', Path.DirectorySeparatorChar);
+                var conflatedPath = Path.Combine(pathToExtractTo, sanitizedName);
+
+                var dir = isDirectory ? conflatedPath : Path.GetDirectoryName(conflatedPath);
+                dir = StringUtility.ToLongWindowsPath(dir, true);
+
+                //Create directory - empty one will be made too
+                Directory.CreateDirectory(dir);
 
                 //If we have a file extract the contents
-                if (!IsDirectory())
+                if (!isDirectory)
                 {
-                    using (FileStream fs = File.Create(conflatedPath))
+                    conflatedPath = StringUtility.ToLongWindowsPath(conflatedPath, false);
+
+                    using (var fs = File.Create(conflatedPath))
                         ExtractCurrentFile(fs, cancellingDelegate);
                 }
             }

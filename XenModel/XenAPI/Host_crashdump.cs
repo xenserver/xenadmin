@@ -108,7 +108,7 @@ namespace XenAPI
             if (table.ContainsKey("size"))
                 size = Marshalling.ParseLong(table, "size");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Host_crashdump other)
@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._timestamp, other._timestamp) &&
-                Helper.AreEqual2(this._size, other._size) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_timestamp, other._timestamp) &&
+                Helper.AreEqual2(_size, other._size) &&
+                Helper.AreEqual2(_other_config, other._other_config);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host_crashdump server)

@@ -49,6 +49,9 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            //this waits for 1 minute
+            Connection.WaitFor(() => Host.allowed_operations.Contains(host_allowed_operations.apply_updates), null);
+
             try
             {
                 RelatedTask = Host.async_apply_updates(Session, Host.opaque_ref, _updateInfo.Checksum);

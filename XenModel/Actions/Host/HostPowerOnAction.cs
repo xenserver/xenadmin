@@ -39,9 +39,9 @@ namespace XenAdmin.Actions.HostActions
 {
     public class HostPowerOnAction : AsyncAction
     {
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public HostPowerOnAction(XenAPI.Host host)
+
+        public HostPowerOnAction(Host host)
             : base(host.Connection, Messages.HOST_POWER_ON)
         {
             Host = host;
@@ -55,47 +55,43 @@ namespace XenAdmin.Actions.HostActions
         {
             bool succeeded = false;
             string name = Helpers.GetName(Host);
-            XenAPI.Host coordinator = Helpers.GetCoordinator(Connection);
+            Host coordinator = Helpers.GetCoordinator(Connection);
             AppliesTo.Add(coordinator.opaque_ref);
             Title = string.Format(Messages.ACTION_HOST_START_TITLE, name);
             Description = Messages.ACTION_HOST_STARTING;
+
             try
             {
-                XenAPI.Host.power_on(Session, Host.opaque_ref);
+                Host.power_on(Session, Host.opaque_ref);
                 Description = Messages.ACTION_HOST_STARTED;
                 succeeded = true;
-
-                /* WLB: Below code doesn't work, becasue RelatedTask is not set. 
-                 *      Need to explore other option when enabling set poweron task value for wlb reporting
-                if (Helpers.IsWLBEnabled(this.Connection)
-                    && Host.other_config.ContainsKey(WlbOptimizePoolAction.OPTIMIZINGPOOL))
-                {
-                    // set host poweroff task key values for wlb reporting purpose
-                    Task.add_to_other_config(this.Session, this.RelatedTask.opaque_ref, "wlb_advised", Host.other_config[WlbOptimizePoolAction.OPTIMIZINGPOOL]);
-                    Task.add_to_other_config(this.Session, this.RelatedTask.opaque_ref, "wlb_action", "host_poweron");
-                    Task.add_to_other_config(this.Session, this.RelatedTask.opaque_ref, "wlb_action_obj_ref", Host.opaque_ref);
-                    Task.add_to_other_config(this.Session, this.RelatedTask.opaque_ref, "wlb_action_obj_type", "host");
-                }
-                */
             }
             catch (Exception e)
             {
-                Failure f = e as Failure;
-                if (f != null)
+                if (e is Failure f)
                 {
-                    string msg = f.ErrorDescription.Count > 2 ? Messages.ResourceManager.GetString(f.ErrorDescription[2]) : null;
-                    if (msg != null)
-                        throw new Exception(msg);
-                    else
+                    if (f.ErrorDescription.Count > 2)
                     {
-                        throw new Exception(string.Format(Messages.POWER_ON_REQUEST_FAILED, this.Host));
+                        switch (f.ErrorDescription[2])
+                        {
+                            case "DRAC_NO_SUPP_PACK":
+                                throw new Exception(Messages.DRAC_NO_SUPP_PACK);
+                            case "DRAC_POWERON_FAILED":
+                                throw new Exception(Messages.DRAC_POWERON_FAILED);
+                            case "ILO_CONNECTION_ERROR":
+                                throw new Exception(Messages.ILO_CONNECTION_ERROR);
+                            case "ILO_POWERON_FAILED":
+                                throw new Exception(Messages.ILO_POWERON_FAILED);
+                        }
                     }
+
+                    throw new Exception(string.Format(Messages.POWER_ON_REQUEST_FAILED, Host));
                 }
                 throw;
             }
             finally
             {
-                if (Helpers.WlbConfigured(this.Connection) && Helpers.WlbEnabledAndConfigured(this.Connection))
+                if (Helpers.WlbConfigured(Connection) && Helpers.WlbEnabledAndConfigured(Connection))
                 {
                     UpdateHostLastPowerOnSucceeded(succeeded, Host);
                 }
@@ -105,18 +101,18 @@ namespace XenAdmin.Actions.HostActions
         /// <summary>
         /// Attempts to set the LastPowerOnSucceeded flag in the WLB Host configuration
         /// </summary>
-        private void UpdateHostLastPowerOnSucceeded(bool succeeded, XenAPI.Host host)
+        private void UpdateHostLastPowerOnSucceeded(bool succeeded, Host host)
         {
             try
             {
-                //Helpers.SetOtherConfig(this.Host.Connection.Session, this.Host, "LastPowerOnsucceeded", successful.ToString());
                 WlbHostConfiguration hostConfig = new WlbHostConfiguration(host.uuid);
                 hostConfig.LastPowerOnSucceeded = succeeded;
                 if (!succeeded)
                 {
                     hostConfig.ParticipatesInPowerManagement = false;
                 }
-                XenAPI.Pool pool = Helpers.GetPoolOfOne(host.Connection);
+
+                Pool pool = Helpers.GetPoolOfOne(host.Connection);
                 if (null != pool)
                 {
                     SendWlbConfigurationAction action = new SendWlbConfigurationAction(pool, hostConfig.ToDictionary(), SendWlbConfigurationKind.SetHostConfiguration);

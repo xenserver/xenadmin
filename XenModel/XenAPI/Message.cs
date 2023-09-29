@@ -128,13 +128,13 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name, other._name) &&
-                Helper.AreEqual2(this._priority, other._priority) &&
-                Helper.AreEqual2(this._cls, other._cls) &&
-                Helper.AreEqual2(this._obj_uuid, other._obj_uuid) &&
-                Helper.AreEqual2(this._timestamp, other._timestamp) &&
-                Helper.AreEqual2(this._body, other._body);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name, other._name) &&
+                Helper.AreEqual2(_priority, other._priority) &&
+                Helper.AreEqual2(_cls, other._cls) &&
+                Helper.AreEqual2(_obj_uuid, other._obj_uuid) &&
+                Helper.AreEqual2(_timestamp, other._timestamp) &&
+                Helper.AreEqual2(_body, other._body);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Message server)

@@ -104,8 +104,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string Text => Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT;
 
-        public override string HelpID => "UpdatePrechecks";
-
         private void Connection_ConnectionStateChanged(IXenConnection conn)
         {
             Program.Invoke(this, RefreshRechecks);
@@ -364,11 +362,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             //HA checks
 
             var haChecks = new List<Check>();
-            foreach (Host host in SelectedServers)
-            {
-                if (Helpers.HostIsCoordinator(host))
-                    haChecks.Add(new HAOffCheck(host));
-            }
+            foreach (Pool pool in SelectedPools)
+                haChecks.Add(new HaWlbOffCheck(pool));
+
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //PBDsPluggedCheck
@@ -414,16 +410,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (host == null)
                                 continue;
 
-                            if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
-                            {
+                            var guidance = hostUpdateInfo.RecommendedGuidance;
+
+                            if (guidance.Contains(CdnGuidance.RebootHost))
                                 rebootChecks.Add(new HostNeedsRebootCheck(host));
+                            if (guidance.Contains(CdnGuidance.RebootHost) || guidance.Contains(CdnGuidance.EvacuateHost))
                                 evacuateChecks.Add(new AssertCanEvacuateCheck(host));
-                            }
-                            else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost) ||
-                                     hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack))
-                            {
-                                evacuateChecks.Add(new AssertCanEvacuateCheck(host));
-                            }
                         }
                     }
                     else

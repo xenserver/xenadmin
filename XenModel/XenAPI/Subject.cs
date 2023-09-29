@@ -101,7 +101,7 @@ namespace XenAPI
             if (table.ContainsKey("subject_identifier"))
                 subject_identifier = Marshalling.ParseString(table, "subject_identifier");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("roles"))
                 roles = Marshalling.ParseSetRef<Role>(table, "roles");
         }
@@ -113,10 +113,10 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._subject_identifier, other._subject_identifier) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._roles, other._roles);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_subject_identifier, other._subject_identifier) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_roles, other._roles);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Subject server)

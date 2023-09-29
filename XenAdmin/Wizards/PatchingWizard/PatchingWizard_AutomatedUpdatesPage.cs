@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using XenAPI;
 using System.Linq;
 using System.Text;
+using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Alerts;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
@@ -60,8 +61,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
 
         public override string PageTitle => Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE;
-
-        public override string HelpID => string.Empty;
 
         #endregion
 
@@ -172,28 +171,49 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private HostPlan GetCdnUpdatePlanActionsForHost(Host host, CdnPoolUpdateInfo poolUpdateInfo, CdnHostUpdateInfo hostUpdateInfo)
         {
+            // pre-update tasks and, last in the list, the update itself
             var planActionsPerHost = new List<PlanAction>();
+            // post-update tasks
             var delayedActionsPerHost = new List<PlanAction>();
 
-            if (hostUpdateInfo.RecommendedGuidance.Length > 0 && PostUpdateTasksAutomatically)
+            // hostUpdateInfo.RecommendedGuidance is what's prescribed by the metadata,
+            // host.pending_guidances is what's left there from previous updates
+
+            // evacuate host is a pre-update task and needs to be done either the user has
+            // opted to carry out the post-update tasks automatically or manually, see CA-381225
+            // restart toolstack should run before other post-update tasks, see CA-381718
+
+            if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack) ||
+                host.pending_guidances.Contains(update_guidances.restart_toolstack))
             {
-                if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
-                {
-                    planActionsPerHost.Add(new EvacuateHostPlanAction(host));
-                    delayedActionsPerHost.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
-                }
-                else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack))
-                {
+                if (PostUpdateTasksAutomatically)
                     delayedActionsPerHost.Add(new RestartAgentPlanAction(host));
-                }
-                else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost))
-                {
-                    planActionsPerHost.Add(new EvacuateHostPlanAction(host));
-                }
-                else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartDeviceModel))
-                {
+            }
+
+            if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost) ||
+                host.pending_guidances.Contains(update_guidances.reboot_host) ||
+                host.pending_guidances.Contains(update_guidances.reboot_host_on_livepatch_failure))
+            {
+                planActionsPerHost.Add(new EvacuateHostPlanAction(host));
+
+                if (PostUpdateTasksAutomatically)
+                    delayedActionsPerHost.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
+            }
+
+            if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost) &&
+                !planActionsPerHost.Any(a => a is EvacuateHostPlanAction))
+            {
+                planActionsPerHost.Add(new EvacuateHostPlanAction(host));
+            }
+
+            if (PostUpdateTasksAutomatically)
+                delayedActionsPerHost.Add(new EnableHostPlanAction(host));
+
+            if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartDeviceModel) ||
+                host.pending_guidances.Contains(update_guidances.restart_device_model))
+            {
+                if (PostUpdateTasksAutomatically)
                     delayedActionsPerHost.Add(new RebootVMsPlanAction(host, host.GetRunningVMs()));
-                }
             }
 
             planActionsPerHost.Add(new ApplyCdnUpdatesPlanAction(host, poolUpdateInfo));

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <!-- Path to the Windows Kits 10 folder -->
-    <WinKits10Path>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot10', null, RegistryView.Registry32, RegistryView.Default))</WinKits10Path>
-
-    <PostBuildEvent Condition="'$(Configuration)' == 'Release'">"$(WinKits10Path)bin\10.0.18362.0\x64\mt.exe" -verbose -manifest "$(ProjectDir)app.manifest" -outputresource:"$(TargetDir)$(TargetFileName)";#1</PostBuildEvent>
-  </PropertyGroup>
-</Project>

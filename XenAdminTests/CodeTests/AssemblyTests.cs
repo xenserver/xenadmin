@@ -44,7 +44,7 @@ namespace XenAdminTests.CodeTests
     [TestFixture, Category(TestCategories.Unit)]
     public class AssemblyTests
     {
-        private static readonly string MainAssemblyName = BrandManager.BrandConsoleNoSpace;
+        private static readonly string MainAssemblyName = BrandManager.BrandConsole;
 
         public class TestDataClass
         {

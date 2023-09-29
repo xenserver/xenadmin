@@ -41,4 +41,4 @@ xs-devel@lists.xenserver.org.
 
 ----------------------------------------------------------------------------
 	  
-For a list of maintainers, please see MAINTAINERS file.
+For a list of maintainers, please see [MAINTAINERS](./MAINTAINERS.md) file.

@@ -116,7 +116,6 @@ namespace XenAPI
             bool tls_verification_enabled,
             DateTime last_software_update,
             bool https_only,
-            List<update_guidances> recommended_guidances,
             latest_synced_updates_applied_state latest_synced_updates_applied)
         {
             this.uuid = uuid;
@@ -184,7 +183,6 @@ namespace XenAPI
             this.tls_verification_enabled = tls_verification_enabled;
             this.last_software_update = last_software_update;
             this.https_only = https_only;
-            this.recommended_guidances = recommended_guidances;
             this.latest_synced_updates_applied = latest_synced_updates_applied;
         }
 
@@ -273,7 +271,6 @@ namespace XenAPI
             tls_verification_enabled = record.tls_verification_enabled;
             last_software_update = record.last_software_update;
             https_only = record.https_only;
-            recommended_guidances = record.recommended_guidances;
             latest_synced_updates_applied = record.latest_synced_updates_applied;
         }
 
@@ -296,7 +293,7 @@ namespace XenAPI
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<host_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_host_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
+                current_operations = Maps.ToDictionary_string_host_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("API_version_major"))
                 API_version_major = Marshalling.ParseLong(table, "API_version_major");
             if (table.ContainsKey("API_version_minor"))
@@ -304,17 +301,17 @@ namespace XenAPI
             if (table.ContainsKey("API_version_vendor"))
                 API_version_vendor = Marshalling.ParseString(table, "API_version_vendor");
             if (table.ContainsKey("API_version_vendor_implementation"))
-                API_version_vendor_implementation = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "API_version_vendor_implementation"));
+                API_version_vendor_implementation = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "API_version_vendor_implementation"));
             if (table.ContainsKey("enabled"))
                 enabled = Marshalling.ParseBool(table, "enabled");
             if (table.ContainsKey("software_version"))
-                software_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "software_version"));
+                software_version = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "software_version"));
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("capabilities"))
                 capabilities = Marshalling.ParseStringArray(table, "capabilities");
             if (table.ContainsKey("cpu_configuration"))
-                cpu_configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_configuration"));
+                cpu_configuration = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "cpu_configuration"));
             if (table.ContainsKey("sched_policy"))
                 sched_policy = Marshalling.ParseString(table, "sched_policy");
             if (table.ContainsKey("supported_bootloaders"))
@@ -322,7 +319,7 @@ namespace XenAPI
             if (table.ContainsKey("resident_VMs"))
                 resident_VMs = Marshalling.ParseSetRef<VM>(table, "resident_VMs");
             if (table.ContainsKey("logging"))
-                logging = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "logging"));
+                logging = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "logging"));
             if (table.ContainsKey("PIFs"))
                 PIFs = Marshalling.ParseSetRef<PIF>(table, "PIFs");
             if (table.ContainsKey("suspend_image_sr"))
@@ -340,7 +337,7 @@ namespace XenAPI
             if (table.ContainsKey("host_CPUs"))
                 host_CPUs = Marshalling.ParseSetRef<Host_cpu>(table, "host_CPUs");
             if (table.ContainsKey("cpu_info"))
-                cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
+                cpu_info = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
             if (table.ContainsKey("hostname"))
                 hostname = Marshalling.ParseString(table, "hostname");
             if (table.ContainsKey("address"))
@@ -348,13 +345,13 @@ namespace XenAPI
             if (table.ContainsKey("metrics"))
                 metrics = Marshalling.ParseRef<Host_metrics>(table, "metrics");
             if (table.ContainsKey("license_params"))
-                license_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "license_params"));
+                license_params = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "license_params"));
             if (table.ContainsKey("ha_statefiles"))
                 ha_statefiles = Marshalling.ParseStringArray(table, "ha_statefiles");
             if (table.ContainsKey("ha_network_peers"))
                 ha_network_peers = Marshalling.ParseStringArray(table, "ha_network_peers");
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
+                blobs = Maps.ToDictionary_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("tags"))
                 tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("external_auth_type"))
@@ -362,21 +359,21 @@ namespace XenAPI
             if (table.ContainsKey("external_auth_service_name"))
                 external_auth_service_name = Marshalling.ParseString(table, "external_auth_service_name");
             if (table.ContainsKey("external_auth_configuration"))
-                external_auth_configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "external_auth_configuration"));
+                external_auth_configuration = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "external_auth_configuration"));
             if (table.ContainsKey("edition"))
                 edition = Marshalling.ParseString(table, "edition");
             if (table.ContainsKey("license_server"))
-                license_server = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "license_server"));
+                license_server = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "license_server"));
             if (table.ContainsKey("bios_strings"))
-                bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
+                bios_strings = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
             if (table.ContainsKey("power_on_mode"))
                 power_on_mode = Marshalling.ParseString(table, "power_on_mode");
             if (table.ContainsKey("power_on_config"))
-                power_on_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "power_on_config"));
+                power_on_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "power_on_config"));
             if (table.ContainsKey("local_cache_sr"))
                 local_cache_sr = Marshalling.ParseRef<SR>(table, "local_cache_sr");
             if (table.ContainsKey("chipset_info"))
-                chipset_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "chipset_info"));
+                chipset_info = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "chipset_info"));
             if (table.ContainsKey("PCIs"))
                 PCIs = Marshalling.ParseSetRef<PCI>(table, "PCIs");
             if (table.ContainsKey("PGPUs"))
@@ -386,7 +383,7 @@ namespace XenAPI
             if (table.ContainsKey("ssl_legacy"))
                 ssl_legacy = Marshalling.ParseBool(table, "ssl_legacy");
             if (table.ContainsKey("guest_VCPUs_params"))
-                guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
+                guest_VCPUs_params = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
             if (table.ContainsKey("display"))
                 display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
             if (table.ContainsKey("virtual_hardware_platform_versions"))
@@ -415,8 +412,6 @@ namespace XenAPI
                 last_software_update = Marshalling.ParseDateTime(table, "last_software_update");
             if (table.ContainsKey("https_only"))
                 https_only = Marshalling.ParseBool(table, "https_only");
-            if (table.ContainsKey("recommended_guidances"))
-                recommended_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "recommended_guidances"));
             if (table.ContainsKey("latest_synced_updates_applied"))
                 latest_synced_updates_applied = (latest_synced_updates_applied_state)Helper.EnumParseDefault(typeof(latest_synced_updates_applied_state), Marshalling.ParseString(table, "latest_synced_updates_applied"));
         }
@@ -428,75 +423,74 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(current_operations, other.current_operations))
                 return false;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._memory_overhead, other._memory_overhead) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._API_version_major, other._API_version_major) &&
-                Helper.AreEqual2(this._API_version_minor, other._API_version_minor) &&
-                Helper.AreEqual2(this._API_version_vendor, other._API_version_vendor) &&
-                Helper.AreEqual2(this._API_version_vendor_implementation, other._API_version_vendor_implementation) &&
-                Helper.AreEqual2(this._enabled, other._enabled) &&
-                Helper.AreEqual2(this._software_version, other._software_version) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._capabilities, other._capabilities) &&
-                Helper.AreEqual2(this._cpu_configuration, other._cpu_configuration) &&
-                Helper.AreEqual2(this._sched_policy, other._sched_policy) &&
-                Helper.AreEqual2(this._supported_bootloaders, other._supported_bootloaders) &&
-                Helper.AreEqual2(this._resident_VMs, other._resident_VMs) &&
-                Helper.AreEqual2(this._logging, other._logging) &&
-                Helper.AreEqual2(this._PIFs, other._PIFs) &&
-                Helper.AreEqual2(this._suspend_image_sr, other._suspend_image_sr) &&
-                Helper.AreEqual2(this._crash_dump_sr, other._crash_dump_sr) &&
-                Helper.AreEqual2(this._crashdumps, other._crashdumps) &&
-                Helper.AreEqual2(this._patches, other._patches) &&
-                Helper.AreEqual2(this._updates, other._updates) &&
-                Helper.AreEqual2(this._PBDs, other._PBDs) &&
-                Helper.AreEqual2(this._host_CPUs, other._host_CPUs) &&
-                Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
-                Helper.AreEqual2(this._hostname, other._hostname) &&
-                Helper.AreEqual2(this._address, other._address) &&
-                Helper.AreEqual2(this._metrics, other._metrics) &&
-                Helper.AreEqual2(this._license_params, other._license_params) &&
-                Helper.AreEqual2(this._ha_statefiles, other._ha_statefiles) &&
-                Helper.AreEqual2(this._ha_network_peers, other._ha_network_peers) &&
-                Helper.AreEqual2(this._blobs, other._blobs) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._external_auth_type, other._external_auth_type) &&
-                Helper.AreEqual2(this._external_auth_service_name, other._external_auth_service_name) &&
-                Helper.AreEqual2(this._external_auth_configuration, other._external_auth_configuration) &&
-                Helper.AreEqual2(this._edition, other._edition) &&
-                Helper.AreEqual2(this._license_server, other._license_server) &&
-                Helper.AreEqual2(this._bios_strings, other._bios_strings) &&
-                Helper.AreEqual2(this._power_on_mode, other._power_on_mode) &&
-                Helper.AreEqual2(this._power_on_config, other._power_on_config) &&
-                Helper.AreEqual2(this._local_cache_sr, other._local_cache_sr) &&
-                Helper.AreEqual2(this._chipset_info, other._chipset_info) &&
-                Helper.AreEqual2(this._PCIs, other._PCIs) &&
-                Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
-                Helper.AreEqual2(this._PUSBs, other._PUSBs) &&
-                Helper.AreEqual2(this._ssl_legacy, other._ssl_legacy) &&
-                Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
-                Helper.AreEqual2(this._display, other._display) &&
-                Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
-                Helper.AreEqual2(this._control_domain, other._control_domain) &&
-                Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot) &&
-                Helper.AreEqual2(this._features, other._features) &&
-                Helper.AreEqual2(this._iscsi_iqn, other._iscsi_iqn) &&
-                Helper.AreEqual2(this._multipathing, other._multipathing) &&
-                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
-                Helper.AreEqual2(this._certificates, other._certificates) &&
-                Helper.AreEqual2(this._editions, other._editions) &&
-                Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
-                Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
-                Helper.AreEqual2(this._last_software_update, other._last_software_update) &&
-                Helper.AreEqual2(this._https_only, other._https_only) &&
-                Helper.AreEqual2(this._recommended_guidances, other._recommended_guidances) &&
-                Helper.AreEqual2(this._latest_synced_updates_applied, other._latest_synced_updates_applied);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_memory_overhead, other._memory_overhead) &&
+                Helper.AreEqual2(_allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(_API_version_major, other._API_version_major) &&
+                Helper.AreEqual2(_API_version_minor, other._API_version_minor) &&
+                Helper.AreEqual2(_API_version_vendor, other._API_version_vendor) &&
+                Helper.AreEqual2(_API_version_vendor_implementation, other._API_version_vendor_implementation) &&
+                Helper.AreEqual2(_enabled, other._enabled) &&
+                Helper.AreEqual2(_software_version, other._software_version) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_capabilities, other._capabilities) &&
+                Helper.AreEqual2(_cpu_configuration, other._cpu_configuration) &&
+                Helper.AreEqual2(_sched_policy, other._sched_policy) &&
+                Helper.AreEqual2(_supported_bootloaders, other._supported_bootloaders) &&
+                Helper.AreEqual2(_resident_VMs, other._resident_VMs) &&
+                Helper.AreEqual2(_logging, other._logging) &&
+                Helper.AreEqual2(_PIFs, other._PIFs) &&
+                Helper.AreEqual2(_suspend_image_sr, other._suspend_image_sr) &&
+                Helper.AreEqual2(_crash_dump_sr, other._crash_dump_sr) &&
+                Helper.AreEqual2(_crashdumps, other._crashdumps) &&
+                Helper.AreEqual2(_patches, other._patches) &&
+                Helper.AreEqual2(_updates, other._updates) &&
+                Helper.AreEqual2(_PBDs, other._PBDs) &&
+                Helper.AreEqual2(_host_CPUs, other._host_CPUs) &&
+                Helper.AreEqual2(_cpu_info, other._cpu_info) &&
+                Helper.AreEqual2(_hostname, other._hostname) &&
+                Helper.AreEqual2(_address, other._address) &&
+                Helper.AreEqual2(_metrics, other._metrics) &&
+                Helper.AreEqual2(_license_params, other._license_params) &&
+                Helper.AreEqual2(_ha_statefiles, other._ha_statefiles) &&
+                Helper.AreEqual2(_ha_network_peers, other._ha_network_peers) &&
+                Helper.AreEqual2(_blobs, other._blobs) &&
+                Helper.AreEqual2(_tags, other._tags) &&
+                Helper.AreEqual2(_external_auth_type, other._external_auth_type) &&
+                Helper.AreEqual2(_external_auth_service_name, other._external_auth_service_name) &&
+                Helper.AreEqual2(_external_auth_configuration, other._external_auth_configuration) &&
+                Helper.AreEqual2(_edition, other._edition) &&
+                Helper.AreEqual2(_license_server, other._license_server) &&
+                Helper.AreEqual2(_bios_strings, other._bios_strings) &&
+                Helper.AreEqual2(_power_on_mode, other._power_on_mode) &&
+                Helper.AreEqual2(_power_on_config, other._power_on_config) &&
+                Helper.AreEqual2(_local_cache_sr, other._local_cache_sr) &&
+                Helper.AreEqual2(_chipset_info, other._chipset_info) &&
+                Helper.AreEqual2(_PCIs, other._PCIs) &&
+                Helper.AreEqual2(_PGPUs, other._PGPUs) &&
+                Helper.AreEqual2(_PUSBs, other._PUSBs) &&
+                Helper.AreEqual2(_ssl_legacy, other._ssl_legacy) &&
+                Helper.AreEqual2(_guest_VCPUs_params, other._guest_VCPUs_params) &&
+                Helper.AreEqual2(_display, other._display) &&
+                Helper.AreEqual2(_virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
+                Helper.AreEqual2(_control_domain, other._control_domain) &&
+                Helper.AreEqual2(_updates_requiring_reboot, other._updates_requiring_reboot) &&
+                Helper.AreEqual2(_features, other._features) &&
+                Helper.AreEqual2(_iscsi_iqn, other._iscsi_iqn) &&
+                Helper.AreEqual2(_multipathing, other._multipathing) &&
+                Helper.AreEqual2(_uefi_certificates, other._uefi_certificates) &&
+                Helper.AreEqual2(_certificates, other._certificates) &&
+                Helper.AreEqual2(_editions, other._editions) &&
+                Helper.AreEqual2(_pending_guidances, other._pending_guidances) &&
+                Helper.AreEqual2(_tls_verification_enabled, other._tls_verification_enabled) &&
+                Helper.AreEqual2(_last_software_update, other._last_software_update) &&
+                Helper.AreEqual2(_https_only, other._https_only) &&
+                Helper.AreEqual2(_latest_synced_updates_applied, other._latest_synced_updates_applied);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1329,17 +1323,6 @@ namespace XenAPI
         public static bool get_https_only(Session session, string _host)
         {
             return session.JsonRpcClient.host_get_https_only(session.opaque_ref, _host);
-        }
-
-        /// <summary>
-        /// Get the recommended_guidances field of the given host.
-        /// Experimental. First published in 23.18.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_host">The opaque_ref of the given host</param>
-        public static List<update_guidances> get_recommended_guidances(Session session, string _host)
-        {
-            return session.JsonRpcClient.host_get_recommended_guidances(session.opaque_ref, _host);
         }
 
         /// <summary>
@@ -4276,24 +4259,6 @@ namespace XenAPI
             }
         }
         private bool _https_only = false;
-
-        /// <summary>
-        /// The set of recommended guidances after applying updates
-        /// Experimental. First published in 23.18.0.
-        /// </summary>
-        public virtual List<update_guidances> recommended_guidances
-        {
-            get { return _recommended_guidances; }
-            set
-            {
-                if (!Helper.AreEqual(value, _recommended_guidances))
-                {
-                    _recommended_guidances = value;
-                    NotifyPropertyChanged("recommended_guidances");
-                }
-            }
-        }
-        private List<update_guidances> _recommended_guidances = new List<update_guidances>() {};
 
         /// <summary>
         /// Default as 'unknown', 'yes' if the host is up to date with updates synced from remote CDN, otherwise 'no'

@@ -129,7 +129,7 @@ namespace XenAPI
             if (table.ContainsKey("host"))
                 host = Marshalling.ParseRef<Host>(table, "host");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("supported_VGPU_types"))
                 supported_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "supported_VGPU_types");
             if (table.ContainsKey("enabled_VGPU_types"))
@@ -137,13 +137,13 @@ namespace XenAPI
             if (table.ContainsKey("resident_VGPUs"))
                 resident_VGPUs = Marshalling.ParseSetRef<VGPU>(table, "resident_VGPUs");
             if (table.ContainsKey("supported_VGPU_max_capacities"))
-                supported_VGPU_max_capacities = Maps.convert_from_proxy_XenRefVGPU_type_long(Marshalling.ParseHashTable(table, "supported_VGPU_max_capacities"));
+                supported_VGPU_max_capacities = Maps.ToDictionary_XenRefVGPU_type_long(Marshalling.ParseHashTable(table, "supported_VGPU_max_capacities"));
             if (table.ContainsKey("dom0_access"))
                 dom0_access = (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), Marshalling.ParseString(table, "dom0_access"));
             if (table.ContainsKey("is_system_display_device"))
                 is_system_display_device = Marshalling.ParseBool(table, "is_system_display_device");
             if (table.ContainsKey("compatibility_metadata"))
-                compatibility_metadata = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
+                compatibility_metadata = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
         }
 
         public bool DeepEquals(PGPU other)
@@ -153,18 +153,18 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._PCI, other._PCI) &&
-                Helper.AreEqual2(this._GPU_group, other._GPU_group) &&
-                Helper.AreEqual2(this._host, other._host) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._supported_VGPU_types, other._supported_VGPU_types) &&
-                Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types) &&
-                Helper.AreEqual2(this._resident_VGPUs, other._resident_VGPUs) &&
-                Helper.AreEqual2(this._supported_VGPU_max_capacities, other._supported_VGPU_max_capacities) &&
-                Helper.AreEqual2(this._dom0_access, other._dom0_access) &&
-                Helper.AreEqual2(this._is_system_display_device, other._is_system_display_device) &&
-                Helper.AreEqual2(this._compatibility_metadata, other._compatibility_metadata);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_PCI, other._PCI) &&
+                Helper.AreEqual2(_GPU_group, other._GPU_group) &&
+                Helper.AreEqual2(_host, other._host) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_supported_VGPU_types, other._supported_VGPU_types) &&
+                Helper.AreEqual2(_enabled_VGPU_types, other._enabled_VGPU_types) &&
+                Helper.AreEqual2(_resident_VGPUs, other._resident_VGPUs) &&
+                Helper.AreEqual2(_supported_VGPU_max_capacities, other._supported_VGPU_max_capacities) &&
+                Helper.AreEqual2(_dom0_access, other._dom0_access) &&
+                Helper.AreEqual2(_is_system_display_device, other._is_system_display_device) &&
+                Helper.AreEqual2(_compatibility_metadata, other._compatibility_metadata);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PGPU server)

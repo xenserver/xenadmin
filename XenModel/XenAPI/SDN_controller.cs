@@ -113,10 +113,10 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._protocol, other._protocol) &&
-                Helper.AreEqual2(this._address, other._address) &&
-                Helper.AreEqual2(this._port, other._port);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_protocol, other._protocol) &&
+                Helper.AreEqual2(_address, other._address) &&
+                Helper.AreEqual2(_port, other._port);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SDN_controller server)

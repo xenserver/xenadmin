@@ -127,7 +127,7 @@ namespace XenAPI
             if (table.ContainsKey("GPU_types"))
                 GPU_types = Marshalling.ParseStringArray(table, "GPU_types");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+                other_config = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("allocation_algorithm"))
                 allocation_algorithm = (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), Marshalling.ParseString(table, "allocation_algorithm"));
             if (table.ContainsKey("supported_VGPU_types"))
@@ -143,16 +143,16 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
-                Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
-                Helper.AreEqual2(this._GPU_types, other._GPU_types) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._allocation_algorithm, other._allocation_algorithm) &&
-                Helper.AreEqual2(this._supported_VGPU_types, other._supported_VGPU_types) &&
-                Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_PGPUs, other._PGPUs) &&
+                Helper.AreEqual2(_VGPUs, other._VGPUs) &&
+                Helper.AreEqual2(_GPU_types, other._GPU_types) &&
+                Helper.AreEqual2(_other_config, other._other_config) &&
+                Helper.AreEqual2(_allocation_algorithm, other._allocation_algorithm) &&
+                Helper.AreEqual2(_supported_VGPU_types, other._supported_VGPU_types) &&
+                Helper.AreEqual2(_enabled_VGPU_types, other._enabled_VGPU_types);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, GPU_group server)

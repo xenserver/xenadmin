@@ -128,13 +128,13 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._size, other._size) &&
-                Helper.AreEqual2(this._pubblic, other._pubblic) &&
-                Helper.AreEqual2(this._last_updated, other._last_updated) &&
-                Helper.AreEqual2(this._mime_type, other._mime_type);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_size, other._size) &&
+                Helper.AreEqual2(_pubblic, other._pubblic) &&
+                Helper.AreEqual2(_last_updated, other._last_updated) &&
+                Helper.AreEqual2(_mime_type, other._mime_type);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Blob server)

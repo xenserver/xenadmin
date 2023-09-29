@@ -117,7 +117,7 @@ namespace XenAPI
             if (table.ContainsKey("hosts"))
                 hosts = Marshalling.ParseSetRef<Host>(table, "hosts");
             if (table.ContainsKey("attributes"))
-                attributes = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "attributes"));
+                attributes = Maps.ToDictionary_string_string(Marshalling.ParseHashTable(table, "attributes"));
             if (table.ContainsKey("endpoints"))
                 endpoints = Marshalling.ParseStringArray(table, "endpoints");
             if (table.ContainsKey("components"))
@@ -133,14 +133,14 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._hosts, other._hosts) &&
-                Helper.AreEqual2(this._attributes, other._attributes) &&
-                Helper.AreEqual2(this._endpoints, other._endpoints) &&
-                Helper.AreEqual2(this._components, other._components) &&
-                Helper.AreEqual2(this._enabled, other._enabled);
+            return Helper.AreEqual2(_uuid, other._uuid) &&
+                Helper.AreEqual2(_name_label, other._name_label) &&
+                Helper.AreEqual2(_name_description, other._name_description) &&
+                Helper.AreEqual2(_hosts, other._hosts) &&
+                Helper.AreEqual2(_attributes, other._attributes) &&
+                Helper.AreEqual2(_endpoints, other._endpoints) &&
+                Helper.AreEqual2(_components, other._components) &&
+                Helper.AreEqual2(_enabled, other._enabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Observer server)

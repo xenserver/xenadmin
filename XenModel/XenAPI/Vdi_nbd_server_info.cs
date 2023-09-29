@@ -118,11 +118,11 @@ namespace XenAPI
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Helper.AreEqual2(this._exportname, other._exportname) &&
-                Helper.AreEqual2(this._address, other._address) &&
-                Helper.AreEqual2(this._port, other._port) &&
-                Helper.AreEqual2(this._cert, other._cert) &&
-                Helper.AreEqual2(this._subject, other._subject);
+            return Helper.AreEqual2(_exportname, other._exportname) &&
+                Helper.AreEqual2(_address, other._address) &&
+                Helper.AreEqual2(_port, other._port) &&
+                Helper.AreEqual2(_cert, other._cert) &&
+                Helper.AreEqual2(_subject, other._subject);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Vdi_nbd_server_info server)
