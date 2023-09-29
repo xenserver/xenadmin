@@ -1066,7 +1066,7 @@ namespace XenAdmin.Core
         /// </summary>
         /// <param name="priority"></param>
         /// <returns></returns>
-        public static string RestartPriorityI18n(VM.HA_Restart_Priority? priority)
+        public static string RestartPriorityI18n(VM.HaRestartPriority? priority)
         {
             if (priority == null)
             {
@@ -1078,7 +1078,7 @@ namespace XenAdmin.Core
             }
         }
 
-        public static string RestartPriorityDescription(VM.HA_Restart_Priority? priority)
+        public static string RestartPriorityDescription(VM.HaRestartPriority? priority)
         {
             if (priority == null)
             {
@@ -1096,9 +1096,9 @@ namespace XenAdmin.Core
         /// </summary>
         /// <param name="connection">Must not be null.</param>
         /// <returns></returns>
-        public static Dictionary<VM, VM.HA_Restart_Priority> GetVmHaRestartPriorities(IXenConnection connection, bool showHiddenVMs)
+        public static Dictionary<VM, VM.HaRestartPriority> GetVmHaRestartPriorities(IXenConnection connection, bool showHiddenVMs)
         {
-            Dictionary<VM, VM.HA_Restart_Priority> result = new Dictionary<VM, VM.HA_Restart_Priority>();
+            Dictionary<VM, VM.HaRestartPriority> result = new Dictionary<VM, VM.HaRestartPriority>();
             foreach (VM vm in connection.Cache.VMs)
             {
                 if (vm.HaCanProtect(showHiddenVMs))
@@ -1115,12 +1115,12 @@ namespace XenAdmin.Core
         /// </summary>
         /// <param name="settings">Must not be null.</param>
         /// <returns></returns>
-        public static Dictionary<XenRef<VM>, string> GetVmHaRestartPrioritiesForApi(Dictionary<VM, VM.HA_Restart_Priority> settings)
+        public static Dictionary<XenRef<VM>, string> GetVmHaRestartPrioritiesForApi(Dictionary<VM, VM.HaRestartPriority> settings)
         {
             Dictionary<XenRef<VM>, string> result = new Dictionary<XenRef<VM>, string>();
             foreach (VM vm in settings.Keys)
             {
-                if (settings[vm] == VM.HA_Restart_Priority.BestEffort || settings[vm] == VM.HA_Restart_Priority.DoNotRestart)
+                if (settings[vm] == VM.HaRestartPriority.BestEffort || settings[vm] == VM.HaRestartPriority.DoNotRestart)
                 {
                     // The server doesn't want to know about best-effort/do not restart VMs.
                     // (They don't influence the plan, and sending in the dictionary gives an error).

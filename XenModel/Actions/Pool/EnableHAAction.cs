@@ -84,7 +84,7 @@ namespace XenAdmin.Actions
                 foreach (VM vm in startupOptions.Keys)
                 {
                     log.DebugFormat("Setting HA priority on {0} to {1}", vm.Name(), startupOptions[vm].HaRestartPriority);
-                    VM.SetHaRestartPriority(Session, vm, (VM.HA_Restart_Priority)startupOptions[vm].HaRestartPriority);
+                    VM.SetHaRestartPriority(Session, vm, (VM.HaRestartPriority)startupOptions[vm].HaRestartPriority);
 
                     log.DebugFormat("Setting start order on {0} to {1}", vm.Name(), startupOptions[vm].Order);
                     VM.set_order(Session, vm.opaque_ref, startupOptions[vm].Order);

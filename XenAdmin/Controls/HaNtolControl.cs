@@ -54,7 +54,7 @@ namespace XenAdmin.Controls
         protected long ntolMax = -1;
         protected long ntol = -1;
         private IXenConnection connection;
-        private Dictionary<VM, VM.HA_Restart_Priority> settings;
+        private Dictionary<VM, VM.HaRestartPriority> settings;
 
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
 
@@ -111,13 +111,13 @@ namespace XenAdmin.Controls
         /// ha_compute_hypothetical_max_host_failures_to_tolerate. May not be null.
         /// </summary>
         [Browsable(false), ReadOnly(true)]
-        public Dictionary<VM, VM.HA_Restart_Priority> Settings
+        public Dictionary<VM, VM.HaRestartPriority> Settings
         {
             get { return settings; }
             set
             {
                 System.Diagnostics.Trace.Assert(value != null);
-                settings = new Dictionary<VM, VM.HA_Restart_Priority>(value);
+                settings = new Dictionary<VM, VM.HaRestartPriority>(value);
                 // Trigger ntol update
                 waitingNtolUpdate.Set();
             }

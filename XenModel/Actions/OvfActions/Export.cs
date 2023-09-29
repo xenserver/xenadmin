@@ -292,6 +292,11 @@ namespace XenAdmin.Actions.OvfActions
                 OVF.AddOtherSystemSettingData(ovfEnv, vsId, "recommendations", vm.recommendations, hypervisorInfo);
             }
 
+            if (!string.IsNullOrEmpty(vm.reference_label))
+            {
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "reference_label", vm.reference_label, hypervisorInfo);
+            }
+
             if (vm.has_vendor_device)
             {
                 //serialise it with a different name to avoid it being deserialised automatically and getting the wrong type

@@ -235,7 +235,7 @@ namespace XenAdmin.Diagnostics.Checks
         private static CannotMigrateVM.CannotMigrateVMReason GetMoreSpecificReasonForCannotMigrateVm(VM vm, CannotMigrateVM.CannotMigrateVMReason reason)
         {
             var gm = vm.Connection.Resolve(vm.guest_metrics);
-            var status = vm.GetVirtualisationStatus(out _);
+            var status = vm.GetVirtualizationStatus(out _);
 
             if (vm.IsWindows())
             {
@@ -244,7 +244,7 @@ namespace XenAdmin.Diagnostics.Checks
                     reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
                 }
             }
-            else if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            else if (status == VM.VirtualizationStatus.NotInstalled || status.HasFlag(VM.VirtualizationStatus.PvDriversOutOfDate))
             {
                 reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
             }

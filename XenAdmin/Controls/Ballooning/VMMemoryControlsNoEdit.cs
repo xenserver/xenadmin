@@ -93,7 +93,7 @@ namespace XenAdmin.Controls.Ballooning
 
             editButton.Visible = vms.All(vm =>
                 vm.power_state == vm_power_state.Halted ||
-                vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN));
+                vm.power_state == vm_power_state.Running && !vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.Unknown));
 
             vmShinyBar.Populate(vms, false);
 

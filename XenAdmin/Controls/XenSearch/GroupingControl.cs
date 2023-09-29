@@ -71,14 +71,14 @@ namespace XenAdmin.Controls.XenSearch
             potentialGroups.Add(hostGroup);
             potentialGroups.Add(new PropertyGroupingType<String>(ObjectTypes.VM, PropertyNames.os_name));
             potentialGroups.Add(new PropertyGroupingType<vm_power_state>(ObjectTypes.VM, PropertyNames.power_state));
-            potentialGroups.Add(new PropertyGroupingType<VM.VirtualisationStatus>(ObjectTypes.VM, PropertyNames.virtualisation_status));
+            potentialGroups.Add(new PropertyGroupingType<VM.VirtualizationStatus>(ObjectTypes.VM, PropertyNames.virtualisation_status));
             potentialGroups.Add(new PropertyGroupingType<ObjectTypes>(ObjectTypes.AllExcFolders, PropertyNames.type));
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<XenAPI.Network>(ObjectTypes.VM, PropertyNames.networks, poolGroup));
             XenModelObjectPropertyGroupingType<SR> srGroup =
                 new XenModelObjectPropertyGroupingType<SR>(ObjectTypes.VM | ObjectTypes.VDI, PropertyNames.storage, poolGroup);
             potentialGroups.Add(srGroup);
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<VDI>(ObjectTypes.VM, PropertyNames.disks, srGroup));
-            potentialGroups.Add(new PropertyGroupingType<VM.HA_Restart_Priority>(ObjectTypes.VM, PropertyNames.ha_restart_priority));
+            potentialGroups.Add(new PropertyGroupingType<VM.HaRestartPriority>(ObjectTypes.VM, PropertyNames.ha_restart_priority));
             potentialGroups.Add(new BoolGroupingType(ObjectTypes.VM, PropertyNames.read_caching_enabled));
             potentialGroups.Add(new BoolGroupingType(ObjectTypes.VM, PropertyNames.vendor_device_state));
 			potentialGroups.Add(applianceGroup);

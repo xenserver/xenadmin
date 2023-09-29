@@ -99,31 +99,31 @@ namespace XenAdmin.XenSearch
             VM vm = o as VM;
             if (vm != null)
             {
-                VM.VirtualisationStatus status = vm.GetVirtualisationStatus(out _);
+                VM.VirtualizationStatus status = vm.GetVirtualizationStatus(out _);
                 if (vm.power_state != vm_power_state.Running ||
-                    status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED) ||
-                    status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+                    status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled | VM.VirtualizationStatus.ManagementInstalled) ||
+                    status.HasFlag(VM.VirtualizationStatus.Unknown))
                     return false;
 
-                if (property == PropertyNames.memoryValue && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                if (property == PropertyNames.memoryValue && status.HasFlag(VM.VirtualizationStatus.ManagementInstalled))
                     return false;
 
-                if ((property == PropertyNames.diskText || property == PropertyNames.networkText) && status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                if ((property == PropertyNames.diskText || property == PropertyNames.networkText) && status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
                     return false;
 
                 string warningMessage;
                 int colSpan;                
 
-                if (property == PropertyNames.memoryValue && !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                if (property == PropertyNames.memoryValue && !status.HasFlag(VM.VirtualizationStatus.ManagementInstalled))
                 {
-                    if (vm.HasNewVirtualisationStates())
+                    if (vm.HasNewVirtualizationStates())
                     {
                         warningMessage = Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
                         colSpan = 1;
                     }
                     else
                     {
-                        warningMessage = vm.GetVirtualisationWarningMessages();
+                        warningMessage = vm.GetVirtualizationWarningMessages();
                         colSpan = 3;
                     }
 
@@ -160,7 +160,7 @@ namespace XenAdmin.XenSearch
                     }
                 }
 
-                if (property == PropertyNames.diskText && vm.HasNewVirtualisationStates() && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                if (property == PropertyNames.diskText && vm.HasNewVirtualizationStates() && !status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
                 {
                     warningMessage = Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED;
                     colSpan = 2;
