@@ -298,22 +298,7 @@ $source_checksum | Out-File -LiteralPath "$OUTPUT_DIR\$appName-source.zip.checks
 
 Write-Host "INFO: Calculated checksum source checksum: $source_checksum"
 
-$xmlFormat=@"
-<?xml version="1.0" ?>
-<patchdata>
-    <versions>
-        <version
-            latest="true"
-            latestcr="true"
-            name="{0}"
-            timestamp="{1}"
-            url="{2}"
-            checksum="{3}"
-            value="{4}"
-        />
-    </versions>
-</patchdata>
-"@
+$xmlFormat='<?xml version="1.0" ?><patchdata><versions><version latest="true" latestcr="true" name="{0}" timestamp="{1}" url="{2}" checksum="{3}" value="{4}" /></versions></patchdata>'
 
 $msi_url = $XC_UPDATES_URL -replace "XCUpdates.xml","$appName.msi"
 $date=(Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
