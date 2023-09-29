@@ -299,7 +299,7 @@ $source_checksum | Out-File -LiteralPath "$OUTPUT_DIR\$appName-source.zip.checks
 Write-Host "INFO: Calculated checksum source checksum: $source_checksum"
 
 $xmlFormat=@"
-<?xml version=\"1.0\" ?>
+<?xml version="1.0" ?>
 <patchdata>
     <versions>
         <version
