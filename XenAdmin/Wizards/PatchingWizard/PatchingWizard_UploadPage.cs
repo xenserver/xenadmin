@@ -220,8 +220,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (download)
                 planActions.Add(new DownloadPatchPlanAction(coordinator.Connection, alertPatch, AllDownloadedPatches, PatchFromDisk));
 
-            var skipDiskSpaceCheck = SelectedUpdateType != UpdateType.Legacy ||
-                                     Helpers.ElyOrGreater(coordinator.Connection); //this is superfluous; just added for completeness
+            var skipDiskSpaceCheck = SelectedUpdateType != UpdateType.Legacy;
 
             if (alertPatch != null)
             {

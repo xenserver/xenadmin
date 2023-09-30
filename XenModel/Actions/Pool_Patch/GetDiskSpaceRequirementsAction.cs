@@ -82,31 +82,12 @@ namespace XenAdmin.Actions
         {
             Description = string.Format(Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION, Host.Name());
 
-            string result;
-
-            // get required disk space
             long requiredDiskSpace = updateSize;
-            if (!Helpers.ElyOrGreater(Host))  // for ElyOrGreater we don't need to call get_required_space, because it will always return updateSize
-            {
-                try
-                {
-                    var args = new Dictionary<string, string> { { "size", updateSize.ToString() } };
-
-                    result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", args);
-                    requiredDiskSpace = Convert.ToInt64(result);
-                }
-                catch (Failure failure)
-                {
-                    log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name(), failure.Message);
-                    requiredDiskSpace = 0;
-                }
-            }
-
-            // get available disk space
             long availableDiskSpace = 0;
+
             try
             {
-                result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_avail_host_disk_space", new Dictionary<string, string>());
+                var result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_avail_host_disk_space", new Dictionary<string, string>());
                 availableDiskSpace = Convert.ToInt64(result);
             }
             catch (Failure failure)
@@ -116,22 +97,6 @@ namespace XenAdmin.Actions
 
             // get reclaimable disk space (excluding current patch)
             long reclaimableDiskSpace = 0;
-
-            if (availableDiskSpace < requiredDiskSpace && !Helpers.ElyOrGreater(Host))  // for ElyOrGreater we shouldn't call get_reclaimable_disk_space
-            {
-                try
-                {
-                    var args = new Dictionary<string, string>();
-                    if (currentPatch != null)
-                        args.Add("exclude", currentPatch.uuid);
-                    result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_reclaimable_disk_space", args);
-                    reclaimableDiskSpace = Convert.ToInt64(result);
-                }
-                catch (Failure failure)
-                {
-                    log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name(), failure.Message);
-                }
-            }
 
             DiskSpaceRequirements = new DiskSpaceRequirements(operation, Host, updateName, requiredDiskSpace, availableDiskSpace, reclaimableDiskSpace);
 

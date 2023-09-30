@@ -62,45 +62,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     where xpm != null && xpm.Matches(coordinator, xenServerPatch)
                     select xpm).FirstOrDefault();
 
-                if (!Helpers.ElyOrGreater(session.Connection))
+                if (existing is PoolUpdateMapping mapping && mapping.IsValid)
                 {
-                    Pool_patch poolPatch = null;
-                    var mapping = existing as PoolPatchMapping;
+                    var poolUpdate = mapping.Pool_update;
+                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolUpdate.Name()));
 
-                    if (mapping != null && mapping.IsValid)
-                    {
-                        poolPatch = mapping.Pool_patch;
-                    }
-                    else
-                    {
-                        poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, xenServerPatch.Uuid, StringComparison.InvariantCultureIgnoreCase));
-                    }
-
-                    if (mapping != null && poolPatch != null && poolPatch.opaque_ref != null)
-                    {
-                        AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolPatch.Name()));
-                        var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
-                        PollTaskForResultAndDestroy(Connection, ref session, task);
-
-                        patchMappings.Remove(mapping);
-                    }
-                }
-                else
-                {
-                    var mapping = existing as PoolUpdateMapping;
-
-                    if (mapping != null && mapping.IsValid)
-                    {
-                        var poolUpdate = mapping.Pool_update;
-                        AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolUpdate.Name()));
-
-                        Pool_update.pool_clean(session, poolUpdate.opaque_ref);
+                    Pool_update.pool_clean(session, poolUpdate.opaque_ref);
                         
-                        if (!poolUpdate.AppliedOnHosts().Any())
-                            Pool_update.destroy(session, poolUpdate.opaque_ref);
+                    if (!poolUpdate.AppliedOnHosts().Any())
+                        Pool_update.destroy(session, poolUpdate.opaque_ref);
 
-                        patchMappings.Remove(mapping);
-                    }
+                    patchMappings.Remove(mapping);
                 }
             }
             catch (Exception ex)

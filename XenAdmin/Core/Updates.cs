@@ -425,22 +425,17 @@ namespace XenAdmin.Core
             // 2. the host has all the required patches installed and
             // 3. the host doesn't have any of the conflicting patches installed
 
-            bool elyOrGreater = Helpers.ElyOrGreater(host);
             var appliedUpdates = host.AppliedUpdates();
-            var appliedPatches = host.AppliedPatches();
 
             // 1. patch is not already installed 
-            if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                return false;
-            if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+            if (appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
                 return false;
 
             // 2. the host has all the required patches installed
             if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
                 !serverPatch.RequiredPatches
                 .All(requiredPatchUuid =>
-                    elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
-                    || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
                     )
                 )
                 return false;
@@ -449,8 +444,7 @@ namespace XenAdmin.Core
             if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
                 serverPatch.ConflictingPatches
                 .Any(conflictingPatchUuid =>
-                    elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
-                    || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
                     )
                 )
                 return false;
@@ -507,20 +501,9 @@ namespace XenAdmin.Core
                 if (minimumPatches == null) //unknown
                     return null;
 
-                bool elyOrGreater = Helpers.ElyOrGreater(host);
-
-                var appliedPatches = host.AppliedPatches();
                 var appliedUpdates = host.AppliedUpdates();
 
-                if (elyOrGreater)
-                {
-                    recommendedPatches = minimumPatches.FindAll(p => !appliedUpdates.Any(au => string.Equals(au.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
-                }
-                else
-                {
-                    recommendedPatches = minimumPatches.FindAll(p => !appliedPatches.Any(ap => string.Equals(ap.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
-                }
-
+                recommendedPatches = minimumPatches.FindAll(p => !appliedUpdates.Any(au => string.Equals(au.uuid, p.Uuid, StringComparison.OrdinalIgnoreCase)));
             }
 
             return recommendedPatches;
@@ -689,9 +672,7 @@ namespace XenAdmin.Core
             if (minimalPatches == null)
                 return null;
 
-            var appliedUpdateUuids = Helpers.ElyOrGreater(h)
-                ? h.AppliedUpdates().Select(u => u.uuid).ToList()
-                : h.AppliedPatches().Select(p => p.uuid).ToList();
+            var appliedUpdateUuids = h.AppliedUpdates().Select(u => u.uuid).ToList();
 
             var neededPatches = new List<XenServerPatch>(minimalPatches);
             var sequence = new List<XenServerPatch>();

@@ -540,7 +540,7 @@ namespace XenAdmin.TabPages
             if (!(xenObject is Pool pool))
                 return;
 
-            var messages = CheckPoolUpdate(pool);
+            var messages = CheckPoolUpdate();
             if (messages.Count > 0)
             {
                 foreach (var kvp in messages)
@@ -557,37 +557,21 @@ namespace XenAdmin.TabPages
             if (Helpers.CloudOrGreater(pool.Connection))
                 GenerateCdnUpdatesBox(pool);
 
-            if (Helpers.ElyOrGreater(xenObject.Connection))
+            foreach (var u in cache.Pool_updates)
             {
-                foreach (var u in cache.Pool_updates)
-                {
-                    var entry = Helpers.UpdatesFriendlyNameAndVersion(u);
-                    var appliedHostCount = u.AppliedOnHosts().Count;
+                var entry = Helpers.UpdatesFriendlyNameAndVersion(u);
+                var appliedHostCount = u.AppliedOnHosts().Count;
 
-                    if (appliedHostCount == allHostCount)
-                    {
-                        fullyApplied.Add(entry);
-                    }
-                    else if (appliedHostCount > 0)
-                    {
-                        if (u.EnforceHomogeneity())
-                            partAppliedError.Add(entry);
-                        else
-                            partApplied.Add(entry);
-                    }
+                if (appliedHostCount == allHostCount)
+                {
+                    fullyApplied.Add(entry);
                 }
-            }
-            else
-            {
-                foreach (var p in cache.Pool_patches)
+                else if (appliedHostCount > 0)
                 {
-                    var entry = p.name_label;
-                    var appliedHostCount = p.host_patches.Count;
-
-                    if (appliedHostCount == allHostCount)
-                        fullyApplied.Add(entry);
-                    else if (appliedHostCount > 0)
+                    if (u.EnforceHomogeneity())
                         partAppliedError.Add(entry);
+                    else
+                        partApplied.Add(entry);
                 }
             }
 
@@ -680,12 +664,10 @@ namespace XenAdmin.TabPages
             if (!(xenObject is Host host))
                 return;
 
-            bool elyOrGreater = Helpers.ElyOrGreater(host);
-
             // As of Ely we use host.updates_requiring_reboot to generate the list of reboot required messages
             // For older versions no change to how messages are generated
             
-            var messages = elyOrGreater ? CheckHostUpdatesRequiringReboot(host) : CheckServerUpdates(host);
+            var messages = CheckHostUpdatesRequiringReboot(host);
 
             foreach (var kvp in messages)
                 pdSectionUpdates.AddEntry(kvp.Key, kvp.Value);
@@ -699,14 +681,6 @@ namespace XenAdmin.TabPages
             
             if (!string.IsNullOrEmpty(recommendedPatches))
                 pdSectionUpdates.AddEntry(FriendlyName("Pool_patch.required-updates"), recommendedPatches);
-
-            if (!elyOrGreater)
-            {
-                var suppPacks = hostInstalledSuppPacks(host);
-
-                if (!string.IsNullOrEmpty(suppPacks))
-                    pdSectionUpdates.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
-            }
 
             if (Helpers.CloudOrGreater(host))
             {
@@ -1180,9 +1154,6 @@ namespace XenAdmin.TabPages
 
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, buildDate);
             }
-
-            if (!Helpers.ElyOrGreater(host) && host.software_version.ContainsKey("build_number"))
-                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
 
             if (host.software_version.ContainsKey("product_version"))
             {
@@ -2010,25 +1981,14 @@ namespace XenAdmin.TabPages
         /// </summary>
         /// <param name="pool"></param>
         /// <returns></returns>
-        private List<KeyValuePair<String, String>> CheckPoolUpdate(Pool pool)
+        private List<KeyValuePair<String, String>> CheckPoolUpdate()
         {
-            List<KeyValuePair<String, String>> warnings = new List<KeyValuePair<string, string>>();
+            var warnings = new List<KeyValuePair<string, string>>();
 
-            if (Helpers.ElyOrGreater(pool.Connection))
+            // As of Ely we use CheckHostUpdatesRequiringReboot to get reboot messages for a host
+            foreach (Host host in xenObject.Connection.Cache.Hosts)
             {
-                // As of Ely we use CheckHostUpdatesRequiringReboot to get reboot messages for a host
-                foreach (Host host in xenObject.Connection.Cache.Hosts)
-                {
-                    warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
-                }
-            }
-            else
-            {
-                // Earlier versions use the old server updates method
-                foreach (Host host in xenObject.Connection.Cache.Hosts)
-                {
-                    warnings.AddRange(CheckServerUpdates(host));
-                }
+                warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
             }
             return warnings;
         }

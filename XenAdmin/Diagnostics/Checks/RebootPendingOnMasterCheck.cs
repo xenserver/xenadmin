@@ -38,7 +38,7 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class RestartHostOrToolstackPendingOnCoordinatorCheck : HostPostLivenessCheck
     {
-        public string UpdateUuid { get; private set; }
+        public string UpdateUuid { get; }
         private readonly Pool pool;
 
         public RestartHostOrToolstackPendingOnCoordinatorCheck(Pool pool, string updateUuid)
@@ -50,44 +50,23 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunHostCheck()
         {           
-            var elyOrGreater = Helpers.ElyOrGreater(Host);
-
-            double bootTime = Host.BootTime();
             double agentStart = Host.AgentStartTime();
 
             //check reboot
-            if (elyOrGreater)
+            foreach (var updateRef in Host.updates_requiring_reboot)
             {
-                foreach (var updateRef in Host.updates_requiring_reboot)
+                var update = Host.Connection.Resolve(updateRef);
+
+                if (string.IsNullOrEmpty(UpdateUuid) || //automated mode, any update
+                    (update != null && string.Equals(update.uuid, UpdateUuid, System.StringComparison.InvariantCultureIgnoreCase))) //normal mode the given update
                 {
-                    var update = Host.Connection.Resolve(updateRef);
-
-                    if (string.IsNullOrEmpty(UpdateUuid) || //automated mode, any update
-                        (update != null && string.Equals(update.uuid, UpdateUuid, System.StringComparison.InvariantCultureIgnoreCase))) //normal mode the given update
-                    {
-                        return new CoordinatorIsPendingRestartHostProblem(this, pool);
-                    }
-                }
-            }
-            else
-            {
-                if (bootTime == 0.0 || agentStart == 0.0)
-                    return null; //fine
-
-                var hostRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartHost) && Util.ToUnixTime(p.AppliedOn(Host)) > agentStart);
-
-                foreach (Pool_patch patch in hostRestartRequiredPatches)
-                {
-                    if (string.IsNullOrEmpty(UpdateUuid) //automated mode, any update
-                            || string.Equals(patch.uuid, UpdateUuid, System.StringComparison.InvariantCultureIgnoreCase)) //normal mode the given update
-                    {
-                        return new CoordinatorIsPendingRestartHostProblem(this, pool);
-                    }
+                    return new CoordinatorIsPendingRestartHostProblem(this, pool);
                 }
             }
 
             //check toolstack restart
             var toolstackRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartXAPI) && Util.ToUnixTime(p.AppliedOn(Host)) > agentStart);
+
             foreach (Pool_patch patch in toolstackRestartRequiredPatches)
             {
                 if (string.IsNullOrEmpty(UpdateUuid)) //automated mode
@@ -95,29 +74,15 @@ namespace XenAdmin.Diagnostics.Checks
                     return new CoordinatorIsPendingRestartToolstackProblem(this, pool);
                 }
 
-                if (!elyOrGreater) //normal mode pre-Ely
+                var poolUpdate = Host.Connection.Resolve(patch.pool_update);
+                if (poolUpdate != null && string.Equals(UpdateUuid, poolUpdate.uuid, System.StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (bootTime == 0.0 || agentStart == 0.0)
-                        return null; //fine
-
-                    if (string.Equals(patch.uuid, UpdateUuid, System.StringComparison.InvariantCultureIgnoreCase))
-                        return new CoordinatorIsPendingRestartToolstackProblem(this, pool);
-                }
-                else //normal mode Ely+
-                {
-                    var poolUpdate = Host.Connection.Resolve(patch.pool_update);
-                    if (poolUpdate != null && string.Equals(UpdateUuid, poolUpdate.uuid, System.StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        return new CoordinatorIsPendingRestartToolstackProblem(this, pool);
-                    }
+                    return new CoordinatorIsPendingRestartToolstackProblem(this, pool);
                 }
             }
             return null;
         }
 
-        public override string Description
-        {
-            get { return Messages.PENDING_RESTART_CHECK; }
-        }
+        public override string Description => Messages.PENDING_RESTART_CHECK;
     }
 }

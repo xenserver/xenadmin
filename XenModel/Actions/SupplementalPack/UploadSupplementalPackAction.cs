@@ -180,52 +180,44 @@ namespace XenAdmin.Actions
                 //after having tried to remove the VDI, the original exception is thrown for the UI
                 if (ex is TargetInvocationException && ex.InnerException != null)
                     throw ex.InnerException;
-                else
-                    throw; 
+                
+                throw; 
             }
 
-            //introduce ISO for Ely and higher
-            if (Helpers.ElyOrGreater(Connection))
+            try
             {
+                var poolUpdateRef = Pool_update.introduce(Connection.Session, vdiRef);
+                poolUpdate = Connection.WaitForCache(poolUpdateRef);
+
+                if (poolUpdate == null)
+                    throw new Exception(Messages.UPDATE_ERROR_INTRODUCE); // This should not happen, because such case will result in a XAPI Failure. But this code has to be protected at this point.
+            }
+            catch (Exception ex)
+            {
+                //clean-up the VDI we've just created
                 try
                 {
-                    var poolUpdateRef = Pool_update.introduce(Connection.Session, vdiRef);
-                    poolUpdate = Connection.WaitForCache(poolUpdateRef);
-
-                    if (poolUpdate == null)
-                        throw new Exception(Messages.UPDATE_ERROR_INTRODUCE); // This should not happen, because such case will result in a XAPI Failure. But this code has to be protected at this point.
+                    log.ErrorFormat("Deleting VDI '{0}' on a best effor basis.", vdiRef);
+                    VDI.destroy(Session, vdiRef);
                 }
-                catch (Exception ex)
+                catch (Exception removeEx)
                 {
-                    //clean-up the VDI we've just created
-                    try
-                    {
-                        log.ErrorFormat("Deleting VDI '{0}' on a best effor basis.", vdiRef);
-                        VDI.destroy(Session, vdiRef);
-                    }
-                    catch (Exception removeEx)
-                    {
-                        log.Error("Failed to remove VDI", removeEx);
-                    }
-                    
-                    var failure = ex as Failure;
-                    if (failure != null && failure.ErrorDescription != null && failure.ErrorDescription.Count > 1 && failure.ErrorDescription[0] == Failure.UPDATE_ALREADY_EXISTS)
-                    {
-                        string uuidFound = failure.ErrorDescription[1];
-
-                        poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, StringComparison.InvariantCultureIgnoreCase));
-                    }
-                    else
-                    {
-                        log.Error("Failed to introduce the update", ex);
-                        poolUpdate = null;
-                        throw;
-                    }
+                    log.Error("Failed to remove VDI", removeEx);
                 }
-            }
-            else
-            {
-                poolUpdate = null;
+                    
+                var failure = ex as Failure;
+                if (failure != null && failure.ErrorDescription != null && failure.ErrorDescription.Count > 1 && failure.ErrorDescription[0] == Failure.UPDATE_ALREADY_EXISTS)
+                {
+                    string uuidFound = failure.ErrorDescription[1];
+
+                    poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, StringComparison.InvariantCultureIgnoreCase));
+                }
+                else
+                {
+                    log.Error("Failed to introduce the update", ex);
+                    poolUpdate = null;
+                    throw;
+                }
             }
 
             if (localStorageHost != null)
@@ -251,7 +243,7 @@ namespace XenAdmin.Actions
             vdi.SR = new XenRef<SR>(sr);
             vdi.virtual_size = _totalUpdateSize;
             vdi.name_label = new FileInfo(suppPackFilePath).Name;
-            vdi.name_description = Helpers.ElyOrGreater(Connection) ? Messages.UPDATE_TEMP_VDI_DESCRIPTION : Messages.SUPP_PACK_TEMP_VDI_DESCRIPTION;
+            vdi.name_description = Messages.UPDATE_TEMP_VDI_DESCRIPTION;
             vdi.sharable = false;
             vdi.type = vdi_type.user;
             vdi.SetVmHint("");
@@ -266,16 +258,14 @@ namespace XenAdmin.Actions
              * that would be a shared SR or the coordinator's local SR.
              * 
              * For earlier (supplemental packs) we need an SR that can be seen from all hosts;
-             * that would be a shared SR, otherwise we have to upload to each hosts's local SR
+             * that would be a shared SR, otherwise we have to upload to each host's local SR
              * 
              * The selection priority is default SRs over non-default and shared over local.
              */
 
-            SR defaultSr = Pool != null ? Pool.Connection.Resolve(Pool.default_SR) : null;
+            SR defaultSr = Pool?.Connection.Resolve(Pool.default_SR);
             
-            var serversToConsider = Helpers.ElyOrGreater(Connection)
-                ? new List<Host> {Helpers.GetCoordinator(Connection)}
-                : new List<Host>(servers);
+            var serversToConsider = new List<Host> {Helpers.GetCoordinator(Connection)};
 
             var srList = new List<SR>();
 

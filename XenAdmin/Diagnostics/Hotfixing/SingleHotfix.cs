@@ -28,7 +28,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,37 +46,17 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public sealed override void Apply(Host host, Session session)
         {
-            bool elyOrGreater = Helpers.ElyOrGreater(host);
-            if (elyOrGreater)
-                UploadAndApplyUpdate(host, session);
-            else
-                UploadAndApplyPatch(host, session);
+            UploadAndApplyUpdate(host, session);
 
             IXenObject patch;
             int numberRetries = 0;
             do
             {
                 Thread.Sleep(500);
-                patch = elyOrGreater
-                    ? (IXenObject)host.Connection.Cache.Find_By_Uuid<Pool_update>(UUID)
-                    : host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
+                patch = host.Connection.Cache.Find_By_Uuid<Pool_update>(UUID);
                 numberRetries++;
 
             } while (patch == null && numberRetries < 10);
-        }
-
-        private void UploadAndApplyPatch(Host host, Session session)
-        {
-            var patch = host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
-            if (patch == null)
-            {
-                var coordinator = Helpers.GetCoordinator(host.Connection);
-                var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, BrandManager.ExtensionUpdate));
-                var action = new UploadPatchAction(coordinator.Connection, filePath, false, false);
-                action.RunSync(session);
-                patch = action.Patch;
-            }
-            new ApplyPatchAction(patch, host).RunSync(session);
         }
 
         private void UploadAndApplyUpdate(Host host, Session session)
@@ -96,14 +75,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
         
         public override bool ShouldBeAppliedTo(Host host)
         {
-            if (Helpers.ElyOrGreater(host))
-            {
-                var updates = host.Connection.ResolveAll(host.updates);
-                return !updates.Any(update => UUID.ToLowerInvariant().Contains(update.uuid.ToLowerInvariant()));
-            }
-            var patches = host.Connection.ResolveAll(host.patches);
-            var poolPatches = patches.Select(hostPatch => hostPatch.Connection.Resolve(hostPatch.pool_patch));
-            return !poolPatches.Any(patch => UUID.ToLowerInvariant().Contains(patch.uuid.ToLowerInvariant()));
+            var updates = host.Connection.ResolveAll(host.updates);
+            return !updates.Any(update => UUID.ToLowerInvariant().Contains(update.uuid.ToLowerInvariant()));
         }
     }
 

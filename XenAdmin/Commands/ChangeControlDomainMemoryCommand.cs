@@ -30,7 +30,6 @@
 
 using System.Collections.Generic;
 using XenAPI;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
 
@@ -65,14 +64,11 @@ namespace XenAdmin.Commands
                 dlg.ShowDialog(Program.MainWindow);
         }
 
-        protected override bool ConfirmationRequired
-        {
-            get { return false; }
-        }
-        
+        protected override bool ConfirmationRequired => false;
+
         private bool CanRun(Host host)
         {
-            return host != null && host.IsLive() && Helpers.ElyOrGreater(host);
+            return host != null && host.IsLive();
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
@@ -80,12 +76,6 @@ namespace XenAdmin.Commands
             return selection.ContainsOneItemOfType<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanRun);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.HOST_MENU_CONTROL_DOMAIN_MEMORY;
-            }
-        }
+        public override string MenuText => Messages.HOST_MENU_CONTROL_DOMAIN_MEMORY;
     }
 }

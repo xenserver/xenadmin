@@ -286,9 +286,7 @@ namespace XenAdmin.TabPages
         {
             List<string> result = new List<string>();
 
-            result.AddRange(Helpers.ElyOrGreater(host)
-                ? host.AppliedUpdates().Select(u => u.Name())
-                : host.AppliedPatches().Select(p => p.Name()));
+            result.AddRange(host.AppliedUpdates().Select(u => u.Name()));
 
             result.Sort(StringUtility.NaturalCompare);
             return string.Join(", ", result.ToArray());
