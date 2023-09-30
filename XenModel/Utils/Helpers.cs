@@ -1446,9 +1446,7 @@ namespace XenAdmin.Core
             if (coordinator == null || StockholmOrGreater(connection))
                 return false;
 
-            if (ElyOrGreater(connection))
-                return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer"));
-            return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer"));
+            return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer"));
         }
 
         public static bool PvsCacheCapability(IXenConnection connection)
@@ -1485,16 +1483,8 @@ namespace XenAdmin.Core
         {
             List<string> result = new List<string>();
 
-            if (ElyOrGreater(host))
-            {
-                foreach (var update in host.AppliedUpdates())
-                    result.Add(UpdatesFriendlyNameAndVersion(update));
-            }
-            else
-            {
-                foreach (Pool_patch patch in host.AppliedPatches())
-                    result.Add(patch.Name());
-            }
+            foreach (var update in host.AppliedUpdates())
+                result.Add(UpdatesFriendlyNameAndVersion(update));
 
             result.Sort(StringUtility.NaturalCompare);
 

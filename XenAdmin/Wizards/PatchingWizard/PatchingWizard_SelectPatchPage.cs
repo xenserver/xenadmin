@@ -308,9 +308,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         : null;
 
                     var distinctHosts = UpdateAlertFromWeb?.DistinctHosts;
-                    SelectedUpdateType = distinctHosts != null && distinctHosts.Any(Helpers.ElyOrGreater)
-                        ? UpdateType.ISO
-                        : UpdateType.Legacy;
+                    SelectedUpdateType = distinctHosts != null ? UpdateType.ISO : UpdateType.Legacy;
 
                     AlertFromFileOnDisk = null;
                     FileFromDiskHasUpdateXml = false;

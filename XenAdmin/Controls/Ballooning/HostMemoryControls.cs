@@ -33,7 +33,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Dialogs;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Controls.Ballooning
@@ -64,16 +63,9 @@ namespace XenAdmin.Controls.Ballooning
                     if (metrics != null)
                         metrics.PropertyChanged += vm_metrics_PropertyChanged;
                 }
-                if (Helpers.ElyOrGreater(_host))
-                {
-                    valueControlDomain.LinkBehavior = LinkBehavior.AlwaysUnderline;
-                    valueControlDomain.Links[0].Enabled = true;
-                }
-                else
-                {
-                    valueControlDomain.LinkBehavior = LinkBehavior.NeverUnderline;
-                    valueControlDomain.Links[0].Enabled = false;
-                }
+
+                valueControlDomain.LinkBehavior = LinkBehavior.AlwaysUnderline;
+                valueControlDomain.Links[0].Enabled = true;
             }
         }
 

@@ -1274,13 +1274,8 @@ namespace XenAdmin
                         host.Connection.FriendlyName = Helpers.GetName(host);
                     break;
 
-                case "patches":
-                    if (!Helpers.ElyOrGreater(host))
-                        Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
-                    break;
                 case "updates":
-                    if (Helpers.ElyOrGreater(host))
-                        Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
+                    Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
                     break;
             }
         }

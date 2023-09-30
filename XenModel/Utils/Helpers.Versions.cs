@@ -168,28 +168,6 @@ namespace XenAdmin.Core
         #region Versions
 
         /// <summary>
-        /// Ely platform version is 2.1.1
-        /// </summary>
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool ElyOrGreater(IXenConnection conn)
-        {
-            return conn == null || ElyOrGreater(GetCoordinator(conn));
-        }
-
-        /// <summary>
-        /// Ely platform version is 2.1.1
-        /// </summary>
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool ElyOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-
-            string platformVersion = HostPlatformVersion(host);
-            return platformVersion != null && ProductVersionCompare(platformVersion, "2.1.1") >= 0;
-        }
-
-        /// <summary>
         /// Falcon platform version is 2.3.0
         /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>

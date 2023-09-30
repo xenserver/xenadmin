@@ -112,10 +112,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (xenServerPatch != null)
             {
-                if (Helpers.ElyOrGreater(coordinator))
-                    UploadUpdate(conn, session, coordinator, path);
-                else
-                    UploadLegacyPatch(conn, session, path);
+                UploadUpdate(conn, session, coordinator, path);
             }
             else if (updateFilePath != null)
             {
@@ -130,43 +127,22 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             if (xenServerPatch != null)
             {
-                if (Helpers.ElyOrGreater(coordinator))
-                {
-                    var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
+                var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
 
-                    return (from HostUpdateMapping hum in mappings
-                        let pum = hum as PoolUpdateMapping
-                        where pum != null && poolUpdates.Any(p => pum.Matches(coordinator, xenServerPatch, p))
-                        select pum).FirstOrDefault();
-                }
-                else
-                {
-                    var poolPatches = new List<Pool_patch>(conn.Cache.Pool_patches);
-
-                    return (from HostUpdateMapping hum in mappings
-                        let ppm = hum as PoolPatchMapping
-                        where ppm != null && poolPatches.Any(p => ppm.Matches(coordinator, xenServerPatch, p))
-                        select ppm).FirstOrDefault();
-                }
+                return (from HostUpdateMapping hum in mappings
+                    let pum = hum as PoolUpdateMapping
+                    where pum != null && poolUpdates.Any(p => pum.Matches(coordinator, xenServerPatch, p))
+                    select pum).FirstOrDefault();
             }
-            else if (updateFilePath != null)
-            {
-                if (Helpers.ElyOrGreater(coordinator))
-                {
-                    var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
 
-                    return (from HostUpdateMapping hum in mappings
-                        let spm = hum as SuppPackMapping
-                        where spm != null && poolUpdates.Any(p => spm.Matches(coordinator, updateFilePath, p))
-                        select spm).FirstOrDefault();
-                }
-                else
-                {
-                    return (from HostUpdateMapping hum in mappings
-                        let spm = hum as SuppPackMapping
-                        where spm != null && spm.Matches(coordinator, updateFilePath)
-                        select spm).FirstOrDefault();
-                }
+            if (updateFilePath != null)
+            {
+                var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
+
+                return (from HostUpdateMapping hum in mappings
+                    let spm = hum as SuppPackMapping
+                    where spm != null && poolUpdates.Any(p => spm.Matches(coordinator, updateFilePath, p))
+                    select spm).FirstOrDefault();
             }
 
             return null;

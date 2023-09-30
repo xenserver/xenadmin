@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public bool SkipRestartHost(Host host)
         {
             // if the precheck didn't mark this host as requiring reboot, then skip the reboot
-            if (Helpers.ElyOrGreater(host) && hostsNeedReboot != null && !hostsNeedReboot.Contains(host.uuid))
+            if (hostsNeedReboot != null && !hostsNeedReboot.Contains(host.uuid))
                 return true;
 
             return false;

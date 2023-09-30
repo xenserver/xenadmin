@@ -490,18 +490,7 @@ namespace XenAPI
 
         public static bool RestrictVcpuHotplug(Host h)
         {
-            if (Helpers.ElyOrGreater(h.Connection))
-            {
-                return BoolKeyPreferTrue(h.license_params, "restrict_set_vcpus_number_live");
-            }
-            // Pre-Ely hosts:
-            // allowed on Premium edition only
-            var hostEdition = GetEdition(h.edition);
-            if (hostEdition == Edition.Premium)
-            {
-                return h.LicenseExpiryUTC() < DateTime.UtcNow - h.Connection.ServerTimeOffset; // restrict if the license has expired
-            }
-            return true;
+            return BoolKeyPreferTrue(h.license_params, "restrict_set_vcpus_number_live");
         }
 
         /// <summary>
@@ -686,33 +675,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// For legacy build numbers only (used to be integers + one char at the end)
-        /// From Falcon, this property is not used.
-        /// </summary>
-        /// <remarks>
-        /// Return the build number of this host, or -1 if none can be found.  This will often be
-        /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
-        /// they were brand new.
-        /// </remarks>
-        internal int BuildNumber()
-        {
-            Debug.Assert(!Helpers.ElyOrGreater(this));
-
-            string bn = BuildNumberRaw();
-            if (bn == null)
-                return -1;
-            while (bn.Length > 0 && !char.IsDigit(bn[bn.Length - 1]))
-            {
-                bn = bn.Substring(0, bn.Length - 1);
-            }
-            int result;
-            if (int.TryParse(bn, out result))
-                return result;
-            else
-                return -1;
-        }
-
-        /// <summary>
         /// Return the exact build_number of this host
         /// </summary>
         /// <remarks>
@@ -729,7 +691,7 @@ namespace XenAPI
         public virtual string LongProductVersion()
         {
             string productVersion = ProductVersion();
-            return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.ElyOrGreater(this) ? BuildNumberRaw() : BuildNumber().ToString()) : null;
+            return productVersion != null ? $"{productVersion}.{BuildNumberRaw()}" : null;
         }
 
         /// <summary>

@@ -71,17 +71,6 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanRun);
         }
 
-        // We only need to check for IO Drivers for hosts before Ely
-        private bool AreIODriversNeededAndMissing(VM vm)
-        {
-            if (Helpers.ElyOrGreater(vm.Connection))
-            {
-                return false;
-            }
-
-            return !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
-        }
-
         private bool CanRun(VBD vbd)
         {
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
@@ -91,8 +80,6 @@ namespace XenAdmin.Commands
             if (vm.power_state != vm_power_state.Running)
                 return false;
             if (vdi.type == vdi_type.system && vbd.GetIsOwner())
-                return false;
-            if (AreIODriversNeededAndMissing(vm))
                 return false;
             if (!vbd.currently_attached)
                 return false;
@@ -138,11 +125,6 @@ namespace XenAdmin.Commands
 
             if (vdi.type == vdi_type.system && vbd.GetIsOwner())
                 return Messages.TOOLTIP_DEACTIVATE_SYSVDI;
-
-            if (AreIODriversNeededAndMissing(vm))
-                return vm.HasNewVirtualisationStates()
-                    ? string.Format(Messages.CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS, Helpers.GetName(vm).Ellipsise(50))
-                    : string.Format(Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS, BrandManager.VmTools, Helpers.GetName(vm).Ellipsise(50));
 
             if (!vbd.currently_attached)
                 return string.Format(Messages.CANNOT_DEACTIVATE_NOT_ACTIVE, Helpers.GetName(vm).Ellipsise(50));

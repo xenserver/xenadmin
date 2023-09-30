@@ -279,7 +279,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             tooltipText = null;
 
-            if (Helpers.FeatureForbidden(host, Host.RestrictHotfixApply) && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
+            if (Helpers.FeatureForbidden(host, Host.RestrictHotfixApply))
             {
                 tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return false;
@@ -288,25 +288,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             switch (SelectedUpdateType)
             {
                 case UpdateType.Legacy:
-                    if (Helpers.ElyOrGreater(host))
-                    {
-                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
-                        return false;
-                    }
-
-                    if (!IsHostAmongApplicable(host, out var reason))
-                    {
-                        tooltipText = reason;
-                        return false;
-                    }
-
-                    if (!Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the coordinator is Ely or greater
-                    {
-                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0, BrandManager.ProductVersion70);
-                        return false;
-                    }
-
-                    return true;
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                    return false;
 
                 case UpdateType.ISO:
                     //from Ely onwards, iso does not mean supplemental pack
@@ -316,14 +299,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);
 
-                    // here a file from disk was selected, but it was not an update (FileFromDiskAlert == null)
-                    if (!Helpers.ElyOrGreater(host.Connection) && FileFromDiskHasUpdateXml)
-                    {
-                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
-                        return false;
-                    }
 
-                    if (Helpers.ElyOrGreater(host.Connection) && !FileFromDiskHasUpdateXml)
+                    if (!FileFromDiskHasUpdateXml)
                     {
                         tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE_OR_INVALID;
                         return false;
@@ -396,22 +373,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool IsPatchApplied(string uuid, Host host) 
         {
-            if (Helpers.ElyOrGreater(host))
-            {
-                return host.AppliedUpdates().Any(u => u != null && string.Equals(u.uuid, uuid, StringComparison.InvariantCultureIgnoreCase));
-            }
-            else
-            {
-                List<Pool_patch> hostPatches = host.AppliedPatches();
-                foreach (Pool_patch patch in hostPatches)
-                {
-                    if (string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return host.AppliedUpdates().Any(u => u != null && string.Equals(u.uuid, uuid, StringComparison.InvariantCultureIgnoreCase));
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)

@@ -42,6 +42,7 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class DiskSpaceForAutomatedUpdatesCheck : HostPostLivenessCheck
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Dictionary<Host, List<XenServerPatch>> updateSequence;
 
         public DiskSpaceForAutomatedUpdatesCheck(Host host, Dictionary<Host, List<XenServerPatch>> updateSequence)
@@ -55,14 +56,8 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.Connection.IsConnected)
                 throw new EndOfStreamException(Helpers.GetName(Host.Connection));
 
-            var elyOrGreater = Helpers.ElyOrGreater(Host.Connection);
-
             // check the disk space on host
-            var requiredDiskSpace = elyOrGreater
-                ? updateSequence[Host].Sum(p => p.InstallationSize) // all updates on this host (for installation)
-                : Host.IsCoordinator()
-                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(p => p).Distinct().Sum(p => p.InstallationSize) // coordinator: all updates on coordinator (for installation) + all updates in pool (for upload)
-                    : updateSequence[Host].Sum(p => p.InstallationSize) * 2; // non-coordinator: all updates on this host x 2 (for installation + upload)
+            var requiredDiskSpace = updateSequence[Host].Sum(p => p.InstallationSize);
 
             var action = new GetDiskSpaceRequirementsAction(Host, requiredDiskSpace, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
 
@@ -79,7 +74,7 @@ namespace XenAdmin.Diagnostics.Checks
                 return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
 
             // check the disk space for uploading the update files to the pool's SRs (only needs to be done once, so only run this on the coordinator)
-            if (elyOrGreater && Host.IsCoordinator())
+            if (Host.IsCoordinator())
             {
                 var allPatches = updateSequence.Values.SelectMany(p => p).Distinct().ToList();
                 var maxFileSize = allPatches.Max(p => p.DownloadSize);
@@ -108,11 +103,6 @@ namespace XenAdmin.Diagnostics.Checks
             return null;
         }
 
-        public override string Description
-        {
-            get { return Messages.SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION; }
-        }
-
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public override string Description => Messages.SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION;
     }
 }

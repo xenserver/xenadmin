@@ -418,7 +418,6 @@ namespace XenAdmin.Core
                 return true;
 
             return
-                !Helpers.ElyOrGreater(coordinator) && !Helpers.ElyOrGreater(supporter) && supporter.BuildNumber() != coordinator.BuildNumber() ||
                 supporter.PlatformVersion() != coordinator.PlatformVersion() ||
                 supporter.ProductBrand() != coordinator.ProductBrand();
         }
@@ -430,9 +429,6 @@ namespace XenAdmin.Core
         private static bool DifferentHomogeneousUpdates(Host supporter, Host coordinator)
         {
             if (supporter == null || coordinator == null)
-                return false;
-
-            if (!Helpers.ElyOrGreater(supporter) || !Helpers.ElyOrGreater(coordinator))
                 return false;
 
             var coordinatorUpdates = coordinator.AppliedUpdates().Where(update => update.EnforceHomogeneity()).Select(update => update.uuid).ToList();

@@ -145,8 +145,7 @@ namespace XenAdmin.Actions
             {
                 Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_NETWORKS : Messages.IMPORTVM_UPDATING_NETWORKS;
 
-                // For ElyOrGreater hosts, we can move the VIFs to another network, 
-                // but for older hosts we need to destroy all vifs and recreate them
+                // For ElyOrGreater hosts, we can move the VIFs to another network
 
                 List<XenRef<VIF>> vifs = VM.get_VIFs(Session, vmRef);
                 List<XenAPI.Network> networks = new List<XenAPI.Network>();
@@ -158,23 +157,20 @@ namespace XenAdmin.Actions
                     if (network != null)
                         networks.Add(network);
 
-                    if (Helpers.ElyOrGreater(Connection))
+                    var vifObj = Connection.Resolve(vif);
+                    if (vifObj == null)
+                        continue;
+
+                    // try to find a VIF in the m_VIFs list which matches the device field,
+                    // then move it to the desired network and remove it from the m_VIFs list
+                    // so we don't create it again later
+
+                    var matchingVif = m_VIFs.FirstOrDefault(v => v.device == vifObj.device);
+                    if (matchingVif != null)
                     {
-                        var vifObj = Connection.Resolve(vif);
-                        if (vifObj == null)
-                            continue;
-
-                        // try to find a VIF in the m_VIFs list which matches the device field,
-                        // then move it to the desired network and remove it from the m_VIFs list
-                        // so we don't create it again later
-
-                        var matchingVif = m_VIFs.FirstOrDefault(v => v.device == vifObj.device);
-                        if (matchingVif != null)
-                        {
-                            VIF.move(Session, vif, matchingVif.network);
-                            m_VIFs.Remove(matchingVif);
-                            continue;
-                        }
+                        VIF.move(Session, vif, matchingVif.network);
+                        m_VIFs.Remove(matchingVif);
+                        continue;
                     }
 
                     // destroy the VIF, if we haven't managed to move it

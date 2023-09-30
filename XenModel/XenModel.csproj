@@ -124,7 +124,6 @@
     <Compile Include="Actions\StatusReport\StatusReportAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
-    <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
     <Compile Include="Actions\SR\SrTrimAction.cs" />
