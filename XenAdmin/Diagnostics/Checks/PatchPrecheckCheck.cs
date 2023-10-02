@@ -137,11 +137,8 @@ namespace XenAdmin.Diagnostics.Checks
             log.Error(m.ToString());
             XmlNode errorNode = doc.FirstChild;
 
-            string errorcode = errorNode.Attributes != null && errorNode.Attributes["errorcode"] != null
-                                   ? errorNode.Attributes["errorcode"].Value
-                                   : string.Empty;
-
-            if (errorcode == "")
+            string errorCode = errorNode.Attributes?["errorcode"]?.Value;
+            if (string.IsNullOrEmpty(errorCode))
                 return null;
 
             var found = "";
@@ -154,8 +151,18 @@ namespace XenAdmin.Diagnostics.Checks
                 else if (node.Name == "required")
                     required = node.InnerXml;
             }
-            var problem = FindProblem(errorcode, "", found, required);
-            return problem ?? new PrecheckFailed(this, Host, new Failure(errorcode));
+
+            switch (errorCode)
+            {
+                case "UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" when !string.IsNullOrEmpty(found):
+                    return new ConflictingUpdatePresent(this, found, Host);
+
+                case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING" when !string.IsNullOrEmpty(required):
+                    return new PrerequisiteUpdateMissing(this, required, Host);
+            }
+
+            var problem = FindProblem(errorCode, "", found, required);
+            return problem ?? new PrecheckFailed(this, Host, new Failure(errorCode));
         }
 
         /// <summary>
@@ -188,17 +195,17 @@ namespace XenAdmin.Diagnostics.Checks
             if (failure.ErrorDescription.Count == 0)
                 return null;
 
-            var errorcode = failure.ErrorDescription[0];
+            var errorCode = failure.ErrorDescription[0];
             var param1 = failure.ErrorDescription.Count > 1 ? failure.ErrorDescription[1] : "";
             var param2 = failure.ErrorDescription.Count > 2 ? failure.ErrorDescription[2] : "";
             var param3 = failure.ErrorDescription.Count > 3 ? failure.ErrorDescription[3] : "";
 
-            return FindProblem(errorcode, param1, param2, param3);  
+            return FindProblem(errorCode, param1, param2, param3);  
         }
 
-        private Problem FindProblem(string errorcode, string param1, string param2, string param3)
+        private Problem FindProblem(string errorCode, string param1, string param2, string param3)
         {
-            switch (errorcode)
+            switch (errorCode)
             {
                 case "UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION":
                     return new WrongServerVersion(this, Host);
@@ -207,7 +214,7 @@ namespace XenAdmin.Diagnostics.Checks
                     return new ConflictingUpdatePresent(this, param2, Host);
 
                 case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING":
-                    return new PrerequisiteUpdateMissing(this, param3, Host);
+                    return new PrerequisiteUpdateMissing(this, param2, Host);
 
                 case "UPDATE_PRECHECK_FAILED_OUT_OF_SPACE":
                     long.TryParse(param2, out var foundSpace);
@@ -245,8 +252,8 @@ namespace XenAdmin.Diagnostics.Checks
                             return new VSwitchControllerProblem(this, pool);
                         return null;
                     }
-                    else
-                        return FindProblem(param2);
+                    
+                    return FindProblem(param2);
             }
             return null;
         }
