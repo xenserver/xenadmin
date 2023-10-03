@@ -60,6 +60,7 @@
             this.buttonApply = new System.Windows.Forms.Button();
             this.buttonDiscard = new System.Windows.Forms.Button();
             this.labelNoConnections = new System.Windows.Forms.Label();
+            this.autoHeightLabelBlurb = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.ColumnCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -245,9 +246,10 @@
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.dataGridViewExPools, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanelConfig, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.dataGridViewExPools, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanelConfig, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.autoHeightLabelBlurb, 0, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // dataGridViewExPools
@@ -290,6 +292,12 @@
             this.labelNoConnections.BackColor = System.Drawing.SystemColors.Window;
             resources.ApplyResources(this.labelNoConnections, "labelNoConnections");
             this.labelNoConnections.Name = "labelNoConnections";
+            // 
+            // autoHeightLabelBlurb
+            // 
+            resources.ApplyResources(this.autoHeightLabelBlurb, "autoHeightLabelBlurb");
+            this.tableLayoutPanel5.SetColumnSpan(this.autoHeightLabelBlurb, 2);
+            this.autoHeightLabelBlurb.Name = "autoHeightLabelBlurb";
             // 
             // ColumnCheck
             // 
@@ -375,5 +383,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnCheck;
         private System.Windows.Forms.DataGridViewImageColumn ColumnImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private Controls.Common.AutoHeightLabel autoHeightLabelBlurb;
     }
 }
