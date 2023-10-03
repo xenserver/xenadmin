@@ -313,6 +313,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Observations of system actions in the form of distributed traces, spans, and metrics.
+        /// </summary>
+        public static string Description_host_system_status_observer {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-observer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collects data specific to your OEM provider.
         /// </summary>
         public static string Description_host_system_status_oem {
@@ -1416,6 +1425,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_NVIDIA_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-NVIDIA-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Observability Traces and Metrics.
+        /// </summary>
+        public static string Label_host_system_status_observer {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-observer", resourceCulture);
             }
         }
         
