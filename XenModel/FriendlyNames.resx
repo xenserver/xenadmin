@@ -687,9 +687,6 @@
   <data name="Label-host.XenMemory" xml:space="preserve">
     <value>{0}</value>
   </data>
-  <data name="Label-performance.avg_cpu" xml:space="preserve">
-    <value>Average CPU</value>
-  </data>
   <data name="Label-performance.bond_rx" xml:space="preserve">
     <value>{0} Receive</value>
   </data>

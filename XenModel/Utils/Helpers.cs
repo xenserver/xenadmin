@@ -651,7 +651,7 @@ namespace XenAdmin.Core
         public static Regex CpuRegex = new Regex("^cpu([0-9]+)$");
         static Regex CpuAvgFreqRegex = new Regex("^CPU([0-9]+)-avg-freq$");
         public static Regex CpuStateRegex = new Regex("^cpu([0-9]+)-(C|P)([0-9]+)$");
-        static Regex CpuOtherRegex = new Regex("^cpu_avg|avg_cpu$");
+        static Regex CpuOtherRegex = new Regex("^cpu_avg$");
         private static Regex VcpuRegex = new Regex("^runstate_(blocked|concurrency_hazard|full_contention|fullrun|partial_contention|partial_run)$");
         static Regex VifRegex = new Regex("^vif_([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifEthRegex = new Regex("^pif_eth([0-9]+)_(tx|rx)((_errors)?)$");

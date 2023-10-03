@@ -59,12 +59,6 @@ namespace XenAdmin.Actions
                 return;
 
             DataSources.AddRange(sources);
-
-            // add custom datasources
-            // - CA-89512: We are provided the Avg CPU for server >= Tampa - otherwise work it out for ourselves
-
-            if (DataSources.All(d => d.name_label != "cpu_avg"))
-                DataSources.Add(new Data_source("avg_cpu", "", true, false, "percentage", 0d, double.MaxValue, 0d));
         }
     }
 
