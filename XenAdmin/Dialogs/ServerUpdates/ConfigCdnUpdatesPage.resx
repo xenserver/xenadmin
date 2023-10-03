@@ -409,7 +409,7 @@
     <value>3, 6, 6, 6</value>
   </data>
   <data name="groupBoxProxy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 163</value>
+    <value>438, 177</value>
   </data>
   <data name="groupBoxProxy.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -922,7 +922,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanelConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 0</value>
+    <value>296, 25</value>
   </data>
   <data name="tableLayoutPanelConfig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -970,19 +970,19 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="dataGridViewExPools.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 28</value>
   </data>
   <data name="dataGridViewExPools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 425</value>
+    <value>290, 436</value>
   </data>
   <data name="dataGridViewExPools.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;dataGridViewExPools.Name" xml:space="preserve">
     <value>dataGridViewExPools</value>
   </data>
   <data name="&gt;&gt;dataGridViewExPools.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewExPools.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
@@ -1054,7 +1054,7 @@
     <value>Fill</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 431</value>
+    <value>0, 467</value>
   </data>
   <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1063,7 +1063,7 @@
     <value>296, 30</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -1077,6 +1077,39 @@
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="autoHeightLabelBlurb.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoHeightLabelBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="autoHeightLabelBlurb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="autoHeightLabelBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 10</value>
+  </data>
+  <data name="autoHeightLabelBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>734, 15</value>
+  </data>
+  <data name="autoHeightLabelBlurb.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="autoHeightLabelBlurb.Text" xml:space="preserve">
+    <value>Configure your pools or standalone hosts to synchronize with an update channel.</value>
+  </data>
+  <data name="&gt;&gt;autoHeightLabelBlurb.Name" xml:space="preserve">
+    <value>autoHeightLabelBlurb</value>
+  </data>
+  <data name="&gt;&gt;autoHeightLabelBlurb.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;autoHeightLabelBlurb.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;autoHeightLabelBlurb.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1084,13 +1117,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 3</value>
   </data>
   <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>740, 461</value>
+    <value>740, 497</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1108,13 +1141,13 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dataGridViewExPools" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelConfig" Row="0" RowSpan="2" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,40,Percent,60" /&gt;&lt;Rows Styles="Percent,100,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dataGridViewExPools" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelConfig" Row="1" RowSpan="2" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="autoHeightLabelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,40,Percent,60" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanelConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 461</value>
+    <value>444, 472</value>
   </data>
   <data name="tableLayoutPanelConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelConfig.Name" xml:space="preserve">
     <value>tableLayoutPanelConfig</value>
@@ -1141,10 +1174,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelNoConnections.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 3</value>
   </data>
   <data name="labelNoConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>740, 461</value>
+    <value>740, 497</value>
   </data>
   <data name="labelNoConnections.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1176,8 +1209,11 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>740, 461</value>
+    <value>740, 500</value>
   </data>
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
