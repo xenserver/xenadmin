@@ -201,6 +201,9 @@
   <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
     <value>Contains logs and details useful for diagnosing problems with NVIDIA's graphics drivers</value>
   </data>
+  <data name="Description-host.system_status-observer" xml:space="preserve">
+    <value>Observations of system actions in the form of distributed traces, spans, and metrics</value>
+  </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
     <value>Collects data specific to your OEM provider</value>
   </data>
@@ -569,6 +572,9 @@
   </data>
   <data name="Label-host.system_status-NVIDIA-logs" xml:space="preserve">
     <value>NVIDIA Graphics Driver logs</value>
+  </data>
+  <data name="Label-host.system_status-observer" xml:space="preserve">
+    <value>Observability Traces and Metrics</value>
   </data>
   <data name="Label-host.system_status-oem" xml:space="preserve">
     <value>OEM-specific logs</value>
