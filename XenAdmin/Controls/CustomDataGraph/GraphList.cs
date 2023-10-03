@@ -493,7 +493,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     }
                 }
 
-                if (!dsi.DataSource.standard && dsi.DataSource.name_label != "avg_cpu")
+                if (!dsi.DataSource.standard)
                     dsi.Enabled = found;
             }
         }

@@ -597,9 +597,6 @@
   <data name="Label-host.VMMemory" xml:space="preserve">
     <value>VM</value>
   </data>
-  <data name="Label-performance.avg_cpu" xml:space="preserve">
-    <value>平均 CPU</value>
-  </data>
   <data name="Label-performance.bond_rx" xml:space="preserve">
     <value>{0} 受信</value>
   </data>

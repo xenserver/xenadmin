@@ -351,45 +351,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             bool isNanOrInfinity = double.IsNaN(value) || double.IsInfinity(value);
             double yValue = isNanOrInfinity ? NEGATIVE_VALUE : value * _multiplyingFactor;
 
-            #region cpu
-
-            var matchDelegate = new Func<string, bool>(s => Helpers.CpuRegex.IsMatch(s) &&
-                                                            !Helpers.CpuStateRegex.IsMatch(s));
-
-            if (matchDelegate(DataSourceName))
-            {
-                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "avg_cpu");
-                if (other == null)
-                {
-                    other = new DataSet(XenObject, false, "avg_cpu", dataSources);
-                    setsAdded.Add(other);
-                }
-
-                DataPoint pt = other.GetPointAt(currentTime);
-                if (pt == null)
-                {
-                    pt = new DataPoint(currentTime, 0);
-                    other.AddPoint(pt);
-                }
-
-                if (isNanOrInfinity || pt.Y < 0)
-                    pt.Y = NEGATIVE_VALUE;
-                else
-                {
-                    double cpu_vals_added = 0d;
-
-                    foreach (DataSet s in setsAdded)
-                    {
-                        if (matchDelegate(s.DataSourceName) && s.GetPointAt(currentTime) != null && s != this)
-                            cpu_vals_added++;
-                    }
-
-                    pt.Y = (((pt.Y * cpu_vals_added) + (value * 100d)) / (cpu_vals_added + 1d)); // update average in the usual way
-                }
-            }
-
-            #endregion
-
             #region memory
 
             if (DataSourceName == "memory_total_kib")

@@ -1753,15 +1753,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Average CPU.
-        /// </summary>
-        public static string Label_performance_avg_cpu {
-            get {
-                return ResourceManager.GetString("Label-performance.avg_cpu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} Receive.
         /// </summary>
         public static string Label_performance_bond_rx {
