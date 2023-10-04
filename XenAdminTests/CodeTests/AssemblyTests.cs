@@ -103,6 +103,7 @@ namespace XenAdminTests.CodeTests
                 $"Resources without a static counterpart: {string.Join(", ", extraImages)}");
         }
 
+        [Ignore("Currently not shipping localized resources")]
         [Test, TestCaseSource(typeof(AssemblyTests), nameof(TestCasesForI18NFiles))]
         [Description("Checks all resx files in the project have their i18n counterparts in place")]
         public void TestEnsureI18NFilesInPlace(TestDataClass tc)

@@ -2875,15 +2875,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>ConsolePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BootModesControl.ja.resx">
-      <DependentUpon>BootModesControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BootModesControl.resx">
-      <DependentUpon>BootModesControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BootModesControl.zh-CN.resx">
       <DependentUpon>BootModesControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
