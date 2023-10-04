@@ -139,8 +139,8 @@ namespace XenAdmin.TabPages.CdnUpdates
                         : string.Format(Messages.HOTFIX_TYPE_IMPROVEMENT_MANY, numberOfUpdates);
                 case CdnUpdateType.Foundational:
                     return numberOfUpdates == 1
-                        ? Messages.HOTFIX_TYPE_IMPROVEMENT_ONE
-                        : string.Format(Messages.HOTFIX_TYPE_IMPROVEMENT_MANY, numberOfUpdates);
+                        ? Messages.HOTFIX_TYPE_FOUNDATIONAL_ONE
+                        : string.Format(Messages.HOTFIX_TYPE_FOUNDATIONAL_MANY, numberOfUpdates);
                 default:
                     return Messages.UNKNOWN;
             }
