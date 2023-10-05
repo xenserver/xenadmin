@@ -31,11 +31,14 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Cache;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Actions.Updates
 {
@@ -270,5 +273,100 @@ namespace XenAdmin.Actions.Updates
             CanCancel = !Cancelling && !IsCompleted && (_fileState == DownloadState.InProgress);
         }
     }
+
+    public class DownloadAndUpdateClientAction : DownloadFileAction, IByteProgressAction
+    {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private readonly string _checksum;
+        private FileStream _msiStream;
+
+        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
+            : base(updateName,
+                  uri,
+                  outputFileName,
+                  string.Join("", updateName, ".msi"),
+                  true)
+        {
+            _checksum = checksum;
+        }
+
+        protected override void Run()
+        {
+            if (!CanDownloadFile)
+                return;
+
+            log.InfoFormat("Downloading '{0}' installer (from '{1}') to '{2}'", FileName, Address, OutputPathAndFileName);
+            Description = string.Format(Messages.DOWNLOADING_FILE, FileName);
+            LogDescriptionChanges = false;
+            DownloadFile();
+            LogDescriptionChanges = true;
+
+            if (IsCompleted || Cancelled)
+                return;
+
+            if (Cancelling)
+                throw new CancelledException();
+
+            if (!File.Exists(OutputPathAndFileName))
+                throw new Exception(Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND);
+
+            ValidateMsi();
+
+            Description = Messages.COMPLETED;
+        }
+
+
+
+        private void ValidateMsi()
+        {
+            Description = Messages.UPDATE_CLIENT_VALIDATING_INSTALLER;
+
+            _msiStream = new FileStream(OutputPathAndFileName, FileMode.Open, FileAccess.Read);
+
+            var calculatedChecksum = string.Empty;
+
+            var hash = StreamUtilities.ComputeHash(_msiStream, out _);
+            if (hash != null)
+                calculatedChecksum = string.Join(string.Empty, hash.Select(b => $"{b:x2}"));
+
+            // Check if calculatedChecksum matches what is in chcupdates.xml
+            if (!_checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))
+                throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM);
+
+            bool valid;
+            try
+            {
+                // Check digital signature of .msi
+                using (var basicSigner = X509Certificate.CreateFromSignedFile(OutputPathAndFileName))
+                {
+                    using (var cert = new X509Certificate2(basicSigner))
+                        valid = cert.Verify();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, e);
+            }
+
+            if (!valid)
+                throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
+        }
+    }
+
+    public class DownloadSourceAction : DownloadFileAction, IByteProgressAction
+    {
+        public DownloadSourceAction(string sourceName, Version version, Uri uri, string outputFileName)
+            : base(sourceName + " source",
+                  uri,
+                  outputFileName,
+                  string.Format(Messages.DOWNLOADING_FILE, version.ToString() + " " + outputFileName),
+                  false)
+        {
+
+        }
+    }
+
+
 }
 
