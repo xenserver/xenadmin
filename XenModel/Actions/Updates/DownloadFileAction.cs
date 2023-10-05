@@ -352,6 +352,24 @@ namespace XenAdmin.Actions.Updates
             if (!valid)
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
         }
+
+        public new void ReleaseDownloadedContent(bool deleteDownloadedContent = false)
+        {
+            _msiStream.Dispose();
+
+            if (!deleteDownloadedContent)
+                return;
+
+            try
+            {
+                if (File.Exists(OutputPathAndFileName))
+                    File.Delete(OutputPathAndFileName);
+            }
+            catch
+            {
+                //ignore
+            }
+        }
     }
 
     public class DownloadSourceAction : DownloadFileAction, IByteProgressAction
