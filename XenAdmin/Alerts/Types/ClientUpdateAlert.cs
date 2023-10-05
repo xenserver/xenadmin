@@ -166,7 +166,8 @@ namespace XenAdmin.Alerts
             }
 
             var clientVersion = Updates.ClientVersions.FirstOrDefault();
-            if (clientVersion == null) { return; }
+            if (clientVersion == null) 
+                return;
             var sourceUrl = clientVersion.SourceUrl;
             var downloadSourceAction = new DownloadSourceAction(clientVersion.Name, clientVersion.Version, new Uri(sourceUrl), outputPathAndFileName);
 
@@ -177,22 +178,7 @@ namespace XenAdmin.Alerts
             }
 
             if (!downloadSourceAction.Succeeded)
-                return;
-
-            bool currentTasks = false;
-            foreach (ActionBase a in ConnectionsManager.History)
-            {
-                if (a is MeddlingAction || a.IsCompleted)
-                    continue;
-
-                currentTasks = true;
-                break;
-            }
-
-            if (currentTasks && new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
-            {
-                downloadSourceAction.ReleaseDownloadedContent();               
-            }
+                return;            
         }
     }
 }

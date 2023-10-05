@@ -2776,7 +2776,7 @@
     <value>186, 22</value>
   </data>
   <data name="downloadLatestSourceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Download v{0} source.</value>
+    <value>Download v{0} source</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>

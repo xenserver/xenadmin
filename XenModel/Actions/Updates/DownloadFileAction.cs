@@ -270,7 +270,7 @@ namespace XenAdmin.Actions.Updates
 
         public override void RecomputeCanCancel()
         {
-            CanCancel = !Cancelling && !IsCompleted && (_fileState == DownloadState.InProgress);
+            CanCancel = !Cancelling && !IsCompleted && _fileState == DownloadState.InProgress;
         }
     }
 
@@ -330,7 +330,7 @@ namespace XenAdmin.Actions.Updates
             if (hash != null)
                 calculatedChecksum = string.Join(string.Empty, hash.Select(b => $"{b:x2}"));
 
-            // Check if calculatedChecksum matches what is in chcupdates.xml
+            // Check if calculatedChecksum matches what is in xcupdates.xml
             if (!_checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM);
 

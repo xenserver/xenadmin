@@ -2718,11 +2718,11 @@ namespace XenAdmin
             if (updateAlert != null)
             {
                 relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
-                downloadLatestSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, updateAlert.NewVersion.Version);
+                downloadSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, updateAlert.NewVersion.Version);
             }
-            var clientVersion = Updates.ClientVersions.FirstOrDefault();
-            downloadSourceToolStripMenuItem.Visible = clientVersion != null;
-            downloadSourceToolStripMenuItem.Text = clientVersion != null
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();            
+            downloadLatestSourceToolStripMenuItem.Visible = clientVersion != null;
+            downloadLatestSourceToolStripMenuItem.Text = clientVersion != null
                 ? string.Format(Messages.DOWNLOAD_SOURCE, clientVersion.Version)
                 : string.Empty;
             updateClientToolStripMenuItem.Visible = updateAlert != null;
