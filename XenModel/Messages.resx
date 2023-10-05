@@ -4962,14 +4962,8 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_TITLE" xml:space="preserve">
     <value>Download and extract update {0}</value>
   </data>
-  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION" xml:space="preserve">
-    <value>Downloading {0} installer</value>
-  </data>
   <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Downloading {0} installer ({1} of {2})...</value>
-  </data>
-  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE" xml:space="preserve">
-    <value>Download {0} installer</value>
   </data>
   <data name="DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND" xml:space="preserve">
     <value>The downloaded installer can no longer be found.</value>
@@ -4989,14 +4983,8 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWNLOAD_SOURCE" xml:space="preserve">
     <value>Download v{0} source</value>
   </data>
-  <data name="DOWNLOAD_SOURCE_ACTION" xml:space="preserve">
-    <value>Download {0} source</value>
-  </data>
-  <data name="DOWNLOAD_SOURCE_ACTION_DESCRIPTION" xml:space="preserve">
-    <value>Downloading {0} source</value>
-  </data>
-  <data name="DOWNLOAD_SOURCE_ACTION_TITLE" xml:space="preserve">
-    <value>Download {0} source</value>
+  <data name="DOWNLOADING_FILE" xml:space="preserve">
+    <value>Downloading {0}</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
     <value>Downloading update from '{0}' ({1} of {2})...</value>

@@ -66,14 +66,13 @@ namespace XenAdmin.Actions.Updates
         private Exception _downloadError;
         private readonly string _authToken;
         private WebClient _client;
-        private string _description;
 
 
         public string ByteProgressDescription { get; set; }
 
         
 
-        public DownloadFileAction(string fileName, Uri uri, string outputFileName, string title, string description, bool suppressHistory)
+        public DownloadFileAction(string fileName, Uri uri, string outputFileName, string title, bool suppressHistory)
             : base(null, title, fileName, suppressHistory)
         {
             _fileName = fileName;
@@ -81,7 +80,8 @@ namespace XenAdmin.Actions.Updates
             _canDownloadFile = _address != null;
             _outputPathAndFileName = outputFileName;
             _authToken = XenAdminConfigManager.Provider.GetClientUpdatesQueryParam();
-            _description = description;
+            Title = string.Format(Messages.DOWNLOADING_FILE, fileName);
+            Description = Title;
         }
 
         protected void DownloadFile()
@@ -197,7 +197,6 @@ namespace XenAdmin.Actions.Updates
                 return;
 
             log.InfoFormat("Downloading '{0}' (from '{1}') to '{2}'", FileName, _address, _outputPathAndFileName); 
-            Description = string.Format(_description, FileName);
             LogDescriptionChanges = false;
             DownloadFile();
             LogDescriptionChanges = true;

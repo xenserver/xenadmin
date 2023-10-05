@@ -45,10 +45,9 @@ namespace XenAdmin.Actions.Updates
 
         public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
             : base(updateName,
-                  uri, 
-                  outputFileName, 
-                  string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE, updateName), 
-                  string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, updateName), 
+                  uri,
+                  outputFileName,
+                  string.Join("", updateName, ".msi"),
                   true)
         {
             _checksum = checksum;
@@ -60,7 +59,7 @@ namespace XenAdmin.Actions.Updates
                 return;
 
             log.InfoFormat("Downloading '{0}' installer (from '{1}') to '{2}'", FileName, Address, OutputPathAndFileName);
-            Description = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, FileName);
+            Description = string.Format(Messages.DOWNLOADING_FILE, FileName);
             LogDescriptionChanges = false;
             DownloadFile();
             LogDescriptionChanges = true;

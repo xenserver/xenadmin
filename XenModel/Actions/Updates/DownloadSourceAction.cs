@@ -45,8 +45,7 @@ namespace XenAdmin.Actions.Updates
             : base(sourceName + " source", 
                   uri, 
                   outputFileName, 
-                  string.Format(Messages.DOWNLOAD_SOURCE_ACTION_TITLE, version.ToString()), 
-                  Messages.DOWNLOAD_SOURCE_ACTION_DESCRIPTION, 
+                  string.Format(Messages.DOWNLOADING_FILE, version.ToString() + " " + outputFileName ), 
                   false)
         {
 
