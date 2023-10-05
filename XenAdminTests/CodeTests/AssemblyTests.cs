@@ -103,42 +103,6 @@ namespace XenAdminTests.CodeTests
                 $"Resources without a static counterpart: {string.Join(", ", extraImages)}");
         }
 
-        [Ignore("Currently not shipping localized resources")]
-        [Test, TestCaseSource(typeof(AssemblyTests), nameof(TestCasesForI18NFiles))]
-        [Description("Checks all resx files in the project have their i18n counterparts in place")]
-        public void TestEnsureI18NFilesInPlace(TestDataClass tc)
-        {
-            var assembly = FindAssemblyByNameRecursively(tc.AssemblyName);
-            Assert.NotNull($"Assembly {tc.AssemblyName} was not found.");
-
-            var excludeFromCheck = new[] {"XenAdmin.Help.HelpManager", "DotNetVnc.KeyMap"};
-            var missing = new List<string>();
-            var extra = new List<string>();
-
-            List<string> defaultResx = new List<string>(assembly.GetManifestResourceNames().Where(resource => resource.EndsWith("resources")));
-
-            CultureInfo cultureInfo = new CultureInfo(tc.Locale);
-            Assembly localeDll = assembly.GetSatelliteAssembly(cultureInfo);
-            List<string> localeResx = new List<string>(localeDll.GetManifestResourceNames());
-
-            foreach (string def in defaultResx)
-            {
-                var name = def.Substring(0, def.Length - ".resources".Length);
-                var exclude = excludeFromCheck.Contains(name);
-
-                string localName = $"{name}.{tc.Locale}.resources";
-                var localized = localeResx.Contains(localName);
-
-                if (localized && exclude)
-                    extra.Add(localName);
-                else if (!localized && !exclude)
-                    missing.Add(localName);
-            }
-
-            Assert.IsEmpty(missing, "Missing resources detected.");
-            Assert.IsEmpty(extra, "Unnecessary resources detected.");
-        }
-
         [Test, TestCaseSource(typeof(AssemblyTests), nameof(TestCasesForRoaming))]
         [Description("Checks that if there are user-scoped settings in an assembly, these have roaming=true")]
         public void TestUserSettingsAreRoaming(TestDataClass tc)
