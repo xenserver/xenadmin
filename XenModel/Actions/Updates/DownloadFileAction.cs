@@ -49,15 +49,11 @@ namespace XenAdmin.Actions.Updates
         //If you consider increasing this for any reason (I think 5 is already more than enough), have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
         private const int MAX_NUMBER_OF_TRIES = 5;
 
-        public Uri Address => _address;
-        public string OutputPathAndFileName => _outputPathAndFileName;
-        public string FileName => _fileName;
-        public bool CanDownloadFile => _canDownloadFile;
-        public Exception DownloadError => _downloadError;
-        public string AuthToken => _authToken;
-        public WebClient Client => _client;
-
-
+        protected Uri Address => _address;
+        protected string OutputPathAndFileName => _outputPathAndFileName;
+        protected string FileName => _fileName;
+        protected bool CanDownloadFile => _canDownloadFile;
+       
         private readonly Uri _address;
         private readonly string _outputPathAndFileName;
         private readonly string _fileName;
@@ -109,22 +105,22 @@ namespace XenAdmin.Actions.Updates
 
                     needToRetry = false;
 
-                    Client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
+                    _client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
                     //start the download
                     _fileState = DownloadState.InProgress;
 
                     var uriBuilder = new UriBuilder(_address);
 
-                    if (!string.IsNullOrEmpty(AuthToken))
+                    if (!string.IsNullOrEmpty(_authToken))
                     {
                         var uri = uriBuilder.Uri;
                         if (!uri.IsFile)
                         {
-                            uriBuilder.Query = Helpers.AddAuthTokenToQueryString(AuthToken, uriBuilder.Query);
+                            uriBuilder.Query = Helpers.AddAuthTokenToQueryString(_authToken, uriBuilder.Query);
                         }
                     }
-                    Client.DownloadFileAsync(uriBuilder.Uri, _outputPathAndFileName);
+                    _client.DownloadFileAsync(uriBuilder.Uri, _outputPathAndFileName);
 
                     bool updateDownloadCancelling = false;
 
@@ -134,7 +130,7 @@ namespace XenAdmin.Actions.Updates
                         if (!updateDownloadCancelling && (Cancelling || Cancelled))
                         {
                             Description = Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC;
-                            Client.CancelAsync();
+                            _client.CancelAsync();
                             updateDownloadCancelling = true;
                         }
 
@@ -156,38 +152,38 @@ namespace XenAdmin.Actions.Updates
                             "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
                             _address, errorCount, MAX_NUMBER_OF_TRIES);
 
-                        if (DownloadError == null)
+                        if (_downloadError == null)
                             log.Error("An unknown error occurred.");
                         else
-                            log.Error(DownloadError);
+                            log.Error(_downloadError);
                     }
                 } while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry);
             }
             finally
             {
-                Client.DownloadProgressChanged -= client_DownloadProgressChanged;
-                Client.DownloadFileCompleted -= client_DownloadFileCompleted;
+                _client.DownloadProgressChanged -= client_DownloadProgressChanged;
+                _client.DownloadFileCompleted -= client_DownloadFileCompleted;
 
                 NetworkChange.NetworkAvailabilityChanged -= NetworkAvailabilityChanged;
 
-                Client.Dispose();
+                _client.Dispose();
             }
 
             //if this is still the case after having retried MAX_NUMBER_OF_TRIES number of times.
             if (_fileState == DownloadState.Error)
             {
                 log.ErrorFormat("Giving up - Maximum number of retries ({0}) has been reached.", MAX_NUMBER_OF_TRIES);
-                throw DownloadError ?? new Exception(Messages.ERROR_UNKNOWN);
+                throw _downloadError ?? new Exception(Messages.ERROR_UNKNOWN);
             }
         }
 
         private void NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
         {
-            if (!e.IsAvailable && Client != null && _fileState == DownloadState.InProgress)
+            if (!e.IsAvailable && _client != null && _fileState == DownloadState.InProgress)
             {
                 _downloadError = new WebException(Messages.NETWORK_CONNECTIVITY_ERROR);
                 _fileState = DownloadState.Error;
-                Client.CancelAsync();
+                _client.CancelAsync();
             }
         }
 
