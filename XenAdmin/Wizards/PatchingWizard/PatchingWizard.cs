@@ -249,16 +249,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
             {
-                if (_isNewGeneration)
-                {
-                    PatchingWizard_AutomatedUpdatesPage.PostUpdateTasksAutomatically = PatchingWizard_ModePage.IsAutomaticMode;
-                    PatchingWizard_AutomatedUpdatesPage.ManualTextInstructions = PatchingWizard_ModePage.ManualTextInstructions;
-                }
-                else
+                if (_wizardMode == WizardMode.SingleUpdate)
                 {
                     PatchingWizard_PatchingPage.ManualTextInstructions = PatchingWizard_ModePage.ManualTextInstructions;
                     PatchingWizard_PatchingPage.IsAutomaticMode = PatchingWizard_ModePage.IsAutomaticMode;
                     PatchingWizard_PatchingPage.RemoveUpdateFile = PatchingWizard_ModePage.RemoveUpdateFile;
+                }
+                else
+                {
+                    PatchingWizard_AutomatedUpdatesPage.PostUpdateTasksAutomatically = PatchingWizard_ModePage.IsAutomaticMode;
+                    PatchingWizard_AutomatedUpdatesPage.ManualTextInstructions = PatchingWizard_ModePage.ManualTextInstructions;
                 }
             }
             else if (prevPageType == typeof(PatchingWizard_PrecheckPage))
