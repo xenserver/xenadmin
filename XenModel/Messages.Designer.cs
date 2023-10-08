@@ -29088,11 +29088,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing NRPE configuration....
+        ///   Looks up a localized string similar to Changing NRPE configuration.
         /// </summary>
         public static string NRPE_ACTION_CHANGING {
             get {
                 return ResourceManager.GetString("NRPE_ACTION_CHANGING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving NRPE configuration.
+        /// </summary>
+        public static string NRPE_ACTION_RETRIEVING {
+            get {
+                return ResourceManager.GetString("NRPE_ACTION_RETRIEVING", resourceCulture);
             }
         }
         
@@ -29138,6 +29147,15 @@ namespace XenAdmin {
         public static string NRPE_ALLOW_HOSTS_PLACE_HOLDER {
             get {
                 return ResourceManager.GetString("NRPE_ALLOW_HOSTS_PLACE_HOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please remove duplicated address.
+        /// </summary>
+        public static string NRPE_ALLOW_HOSTS_SAME_ADDRESS {
+            get {
+                return ResourceManager.GetString("NRPE_ALLOW_HOSTS_SAME_ADDRESS", resourceCulture);
             }
         }
         
@@ -29268,6 +29286,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retrieve NRPE configuration failed, please check XenCenter logs..
+        /// </summary>
+        public static string NRPE_RETRIEVE_FAILED {
+            get {
+                return ResourceManager.GetString("NRPE_RETRIEVE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving NRPE configuration....
+        /// </summary>
+        public static string NRPE_RETRIEVING_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("NRPE_RETRIEVING_CONFIGURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Threshold value should range from {0} to {1}..
         /// </summary>
         public static string NRPE_THRESHOLD_RANGE_ERROR {
@@ -29318,6 +29354,15 @@ namespace XenAdmin {
         public static string NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL {
             get {
                 return ResourceManager.GetString("NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupport NRPE, please upgrade your XenServer version..
+        /// </summary>
+        public static string NRPE_UNSUPPORT {
+            get {
+                return ResourceManager.GetString("NRPE_UNSUPPORT", resourceCulture);
             }
         }
         

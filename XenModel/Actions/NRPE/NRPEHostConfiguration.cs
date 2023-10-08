@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using XenAPI;
 
 namespace XenAdmin.Actions.NRPE
 {
@@ -48,12 +49,12 @@ namespace XenAdmin.Actions.NRPE
         public const string DEBUG_ENABLE = "1";
         public const string DEBUG_DISABLE = "0";
 
-        public const string SSL_LOGGING_ENABLE = "0xff";
+        public const string SSL_LOGGING_ENABLE = "0x2f";
         public const string SSL_LOGGING_DISABLE = "0x00";
 
         public static readonly string ALLOW_HOSTS_PLACE_HOLDER = Messages.NRPE_ALLOW_HOSTS_PLACE_HOLDER;
 
-        private readonly Dictionary<string, Check> checkDict = new Dictionary<string, Check>();
+        private Dictionary<string, Check> _checkDict = new Dictionary<string, Check>();
 
         public bool EnableNRPE { get; set; }
 
@@ -63,7 +64,17 @@ namespace XenAdmin.Actions.NRPE
 
         public bool SslLogging { get; set; }
 
-        public Dictionary<string, Check> CheckDict => checkDict;
+        public Dictionary<string, Check> CheckDict => _checkDict;
+
+        public RetrieveNRPEStatus Status { get; set; }
+
+        public enum RetrieveNRPEStatus
+        {
+            Retrieving,
+            Successful,
+            Failed,
+            Unsupport
+        }
 
         public class Check
         {
@@ -82,12 +93,12 @@ namespace XenAdmin.Actions.NRPE
 
         public void AddNRPECheck(Check checkItem)
         {
-            checkDict.Add(checkItem.Name, checkItem);
+            _checkDict.Add(checkItem.Name, checkItem);
         }
 
         public bool GetNRPECheck(string name, out Check check)
         {
-            return checkDict.TryGetValue(name, out check);
+            return _checkDict.TryGetValue(name, out check);
         }
 
         public object Clone()
@@ -99,6 +110,12 @@ namespace XenAdmin.Actions.NRPE
                 Debug = Debug,
                 SslLogging = SslLogging
             };
+            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _checkDict)
+            {
+                NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
+                cloned.AddNRPECheck(new Check(CurrentCheck.Name, CurrentCheck.WarningThreshold, CurrentCheck.CriticalThreshold));
+            }
+
             return cloned;
         }
     }

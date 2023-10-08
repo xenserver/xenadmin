@@ -10096,7 +10096,10 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>NRPE</value>
   </data>
   <data name="NRPE_ACTION_CHANGING" xml:space="preserve">
-    <value>Changing NRPE configuration...</value>
+    <value>Changing NRPE configuration</value>
+  </data>
+  <data name="NRPE_ACTION_RETRIEVING" xml:space="preserve">
+    <value>Retrieving NRPE configuration</value>
   </data>
   <data name="NRPE_ACTIVE" xml:space="preserve">
     <value>NRPE service is active</value>
@@ -10112,6 +10115,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   </data>
   <data name="NRPE_ALLOW_HOSTS_PLACE_HOLDER" xml:space="preserve">
     <value>Comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com</value>
+  </data>
+  <data name="NRPE_ALLOW_HOSTS_SAME_ADDRESS" xml:space="preserve">
+    <value>Please remove duplicated address</value>
   </data>
   <data name="NRPE_BATCH_CONFIGURATION" xml:space="preserve">
     <value>NRPE batch configuration</value>
@@ -10155,6 +10161,12 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NRPE_INACTIVE" xml:space="preserve">
     <value>NRPE service is inactive</value>
   </data>
+  <data name="NRPE_RETRIEVE_FAILED" xml:space="preserve">
+    <value>Retrieve NRPE configuration failed, please check XenCenter logs.</value>
+  </data>
+  <data name="NRPE_RETRIEVING_CONFIGURATION" xml:space="preserve">
+    <value>Retrieving NRPE configuration...</value>
+  </data>
   <data name="NRPE_THRESHOLD_RANGE_ERROR" xml:space="preserve">
     <value>Threshold value should range from {0} to {1}.</value>
   </data>
@@ -10172,6 +10184,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   </data>
   <data name="NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL" xml:space="preserve">
     <value>Warning threshold should be less than critical threshold.</value>
+  </data>
+  <data name="NRPE_UNSUPPORT" xml:space="preserve">
+    <value>Unsupport NRPE, please upgrade your XenServer version.</value>
   </data>
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>Number of snapshots to keep</value>
@@ -15137,7 +15152,7 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
     <value>Normal</value>
   </data>
   <data name="YUM_REPO_PROXY" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="YUM_REPO_SYNC_AFTER_CONFIG" xml:space="preserve">
     <value>{0} recommends that you synchronize the selected pool(s) or standalone host(s) with the specified update channel as soon as possible to retrieve the latest available updates.
