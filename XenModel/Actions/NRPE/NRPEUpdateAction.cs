@@ -39,22 +39,22 @@ namespace XenAdmin.Actions.NRPE
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly NRPEHostConfiguration NRPEOriginalConfig;  // NRPE configuration fetched from host
-        private readonly NRPEHostConfiguration NRPEHostConfiguration;  // NRPE configuration after user modified
+        private readonly NRPEHostConfiguration _nrpeOriginalConfig;  // NRPE configuration fetched from host
+        private readonly NRPEHostConfiguration _nrpeHostConfiguration;  // NRPE configuration after user modified
 
-        private readonly IXenObject Clone;
+        private readonly IXenObject _clone;
 
         public NRPEUpdateAction(IXenObject host, NRPEHostConfiguration nrpeHostConfiguration, NRPEHostConfiguration nrpeOriginalConfig, bool suppressHistory)
-            : base(host.Connection, Messages.ACTION_CHANGE_POWER_ON, Messages.NRPE_ACTION_CHANGING, suppressHistory)
+            : base(host.Connection, Messages.NRPE_ACTION_CHANGING, Messages.NRPE_ACTION_CHANGING, suppressHistory)
         {
-            Clone = host;
-            NRPEHostConfiguration = nrpeHostConfiguration;
-            NRPEOriginalConfig = nrpeOriginalConfig;
+            _clone = host;
+            _nrpeHostConfiguration = nrpeHostConfiguration;
+            _nrpeOriginalConfig = nrpeOriginalConfig;
         }
 
         protected override void Run()
         {
-            if (Clone is Host)
+            if (_clone is Host)
             {
                 SetNRPEConfigureForHost();
             }
@@ -67,43 +67,43 @@ namespace XenAdmin.Actions.NRPE
         private void SetNRPEConfigureForHost()
         {
             // Enable/Disable NRPE
-            if (!NRPEHostConfiguration.EnableNRPE == NRPEOriginalConfig.EnableNRPE)
+            if (!_nrpeHostConfiguration.EnableNRPE == _nrpeOriginalConfig.EnableNRPE)
             {
-                SetNRPEStatus(Clone, NRPEHostConfiguration.EnableNRPE);
+                SetNRPEStatus(_clone, _nrpeHostConfiguration.EnableNRPE);
             }
-            if (!NRPEHostConfiguration.EnableNRPE) // If disable, return
+            if (!_nrpeHostConfiguration.EnableNRPE) // If disable, return
             {
                 return;
             }
 
             // NRPE General Configuration
-            if (!NRPEHostConfiguration.AllowHosts.Equals(NRPEOriginalConfig.AllowHosts)
-                || !NRPEHostConfiguration.Debug.Equals(NRPEOriginalConfig.Debug)
-                || !NRPEHostConfiguration.SslLogging.Equals(NRPEOriginalConfig.SslLogging))
+            if (!_nrpeHostConfiguration.AllowHosts.Equals(_nrpeOriginalConfig.AllowHosts)
+                || !_nrpeHostConfiguration.Debug.Equals(_nrpeOriginalConfig.Debug)
+                || !_nrpeHostConfiguration.SslLogging.Equals(_nrpeOriginalConfig.SslLogging))
             {
-                SetNRPEGeneralConfiguration(Clone, NRPEHostConfiguration.AllowHosts, NRPEHostConfiguration.Debug, NRPEHostConfiguration.SslLogging);
+                SetNRPEGeneralConfiguration(_clone, _nrpeHostConfiguration.AllowHosts, _nrpeHostConfiguration.Debug, _nrpeHostConfiguration.SslLogging);
             }
 
             // NRPE Check Threshold
-            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in NRPEHostConfiguration.CheckDict)
+            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _nrpeHostConfiguration.CheckDict)
             {
                 NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
-                NRPEOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
+                _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
                 if (CurrentCheck != null && OriginalCheck != null
                     && (!CurrentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
                     || !CurrentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
                 {
-                    SetNRPEThreshold(Clone, CurrentCheck.Name, CurrentCheck.WarningThreshold, CurrentCheck.CriticalThreshold);
+                    SetNRPEThreshold(_clone, CurrentCheck.Name, CurrentCheck.WarningThreshold, CurrentCheck.CriticalThreshold);
                 }
             }
 
-            RestartNRPE(Clone);
+            RestartNRPE(_clone);
         }
 
         private void SetNRPEConfigureForPool()
         {
             List<Host> hostList = null;
-            if (Clone is Pool p)
+            if (_clone is Pool p)
             {
                 hostList = p.Connection.Cache.Hosts.ToList();
             }
@@ -111,20 +111,20 @@ namespace XenAdmin.Actions.NRPE
             hostList.ForEach(host =>
             {
                 // Enable/Disable NRPE
-                SetNRPEStatus(host, NRPEHostConfiguration.EnableNRPE);
-                if (!NRPEHostConfiguration.EnableNRPE) // If disable, return
+                SetNRPEStatus(host, _nrpeHostConfiguration.EnableNRPE);
+                if (!_nrpeHostConfiguration.EnableNRPE) // If disable, return
                 {
                     return;
                 }
 
                 // NRPE General Configuration
-                SetNRPEGeneralConfiguration(host, NRPEHostConfiguration.AllowHosts, NRPEHostConfiguration.Debug, NRPEHostConfiguration.SslLogging);
+                SetNRPEGeneralConfiguration(host, _nrpeHostConfiguration.AllowHosts, _nrpeHostConfiguration.Debug, _nrpeHostConfiguration.SslLogging);
 
                 // NRPE Check Threshold
-                foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in NRPEHostConfiguration.CheckDict)
+                foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _nrpeHostConfiguration.CheckDict)
                 {
                     NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
-                    NRPEOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
+                    _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
                     if (CurrentCheck != null)
                     {
                         SetNRPEThreshold(host, CurrentCheck.Name, CurrentCheck.WarningThreshold, CurrentCheck.CriticalThreshold);
@@ -156,9 +156,9 @@ namespace XenAdmin.Actions.NRPE
                 NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG, ConfigArgDict);
             log.InfoFormat("Execute nrpe {0}, allowed_hosts={1}, debug={2}, ssl_logging={3}, return: {4}",
                 NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG,
-                NRPEHostConfiguration.AllowHosts,
-                NRPEHostConfiguration.Debug,
-                NRPEHostConfiguration.SslLogging,
+                _nrpeHostConfiguration.AllowHosts,
+                _nrpeHostConfiguration.Debug,
+                _nrpeHostConfiguration.SslLogging,
                 result);
         }
 

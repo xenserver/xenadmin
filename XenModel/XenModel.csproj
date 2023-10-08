@@ -57,6 +57,7 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,8 @@
     <Compile Include="Actions\Host\HostAbstractAction.cs" />
     <Compile Include="Actions\Host\RebootHostAction.cs" />
     <Compile Include="Actions\Host\RestartToolstackAction.cs" />
+    <Compile Include="Actions\NRPE\CheckGroup.cs" />
+    <Compile Include="Actions\NRPE\NRPERetrieveAction.cs" />
     <Compile Include="Actions\NRPE\NRPEUpdateAction.cs" />
     <Compile Include="Actions\Host\ShutdownHostAction.cs" />
     <Compile Include="Actions\Host\UpdateIntegratedGpuPassthroughAction.cs" />

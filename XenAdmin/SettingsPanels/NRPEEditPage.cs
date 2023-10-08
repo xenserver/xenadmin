@@ -37,7 +37,7 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Actions.NRPE;
 using XenAPI;
-
+using System.Linq;
 
 namespace XenAdmin.SettingsPanels
 {
@@ -51,31 +51,16 @@ namespace XenAdmin.SettingsPanels
 
         private bool _isHost;
 
-        private IXenObject Clone;
-        private readonly ToolTip InvalidParamToolTip;
-        private string InvalidParamToolTipText = "";
+        private IXenObject _clone;
+        private readonly ToolTip _invalidParamToolTip;
+        private string _invalidParamToolTipText = "";
 
-        private readonly List<CheckGroup> CheckGroupList = new List<CheckGroup>();
-        private readonly Dictionary<string, CheckGroup> CheckGroupDictByName = new Dictionary<string, CheckGroup>();
-        private readonly Dictionary<string, CheckGroup> CheckGroupDictByLabel = new Dictionary<string, CheckGroup>();
+        private readonly List<CheckGroup> _checkGroupList = new List<CheckGroup>();
+        private readonly Dictionary<string, CheckGroup> _checkGroupDictByName = new Dictionary<string, CheckGroup>();
+        private readonly Dictionary<string, CheckGroup> _checkGroupDictByLabel = new Dictionary<string, CheckGroup>();
 
-        private NRPEHostConfiguration NRPEOriginalConfig;
-        private NRPEHostConfiguration NRPECurrentConfig;
-
-        public string SubText
-        {
-            get
-            {
-                if (_isHost)
-                {
-                    return EnableNRPECheckBox.Checked ? Messages.NRPE_ACTIVE : Messages.NRPE_INACTIVE;
-                }
-                else
-                {
-                    return Messages.NRPE_BATCH_CONFIGURATION;
-                }
-            }
-        }
+        private NRPEHostConfiguration _nrpeOriginalConfig;
+        private NRPEHostConfiguration _nrpeCurrentConfig;
 
         public Image Image => Images.StaticImages._000_Module_h32bit_16;
 
@@ -84,61 +69,70 @@ namespace XenAdmin.SettingsPanels
             InitializeComponent();
             Text = Messages.NRPE;
 
-            NRPECurrentConfig = new NRPEHostConfiguration
+            _nrpeOriginalConfig = new NRPEHostConfiguration
             {
                 EnableNRPE = false,
                 AllowHosts = NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER,
                 Debug = false,
                 SslLogging = false
             };
-            NRPEOriginalConfig = (NRPEHostConfiguration) NRPECurrentConfig.Clone();
 
-            EnableNRPECheckBox.DataBindings.Add("Checked", NRPECurrentConfig, "enableNRPE");
-            AllowHostsTextBox.DataBindings.Add("Text", NRPECurrentConfig, "allowHosts");
-            DebugLogCheckBox.DataBindings.Add("Checked", NRPECurrentConfig, "debug");
-            SslDebugLogCheckBox.DataBindings.Add("Checked", NRPECurrentConfig, "sslLogging");
+            _checkGroupList.Add(new HostLoadCheckGroup("check_host_load", Messages.NRPE_CHECK_HOST_LOAD));
+            _checkGroupList.Add(new CheckGroup("check_host_cpu", Messages.NRPE_CHECK_HOST_CPU));
+            _checkGroupList.Add(new CheckGroup("check_host_memory", Messages.NRPE_CHECK_HOST_MEMORY));
+            _checkGroupList.Add(new CheckGroup("check_vgpu", Messages.NRPE_CHECK_VGPU));
+            _checkGroupList.Add(new CheckGroup("check_vgpu_memory", Messages.NRPE_CHECK_VGPU_MEMORY));
+            _checkGroupList.Add(new Dom0LoadCheckGroup("check_load", Messages.NRPE_CHECK_LOAD));
+            _checkGroupList.Add(new CheckGroup("check_cpu", Messages.NRPE_CHECK_CPU));
+            _checkGroupList.Add(new CheckGroup("check_memory", Messages.NRPE_CHECK_MEMORY));
+            _checkGroupList.Add(new FreeCheckGroup("check_swap", Messages.NRPE_CHECK_SWAP));
+            _checkGroupList.Add(new FreeCheckGroup("check_disk_root", Messages.NRPE_CHECK_DISK_ROOT));
+            _checkGroupList.Add(new FreeCheckGroup("check_disk_log", Messages.NRPE_CHECK_DISK_LOG));
 
-            CheckGroupList.Add(new HostLoadCheckGroup("check_host_load", Messages.NRPE_CHECK_HOST_LOAD));
-            CheckGroupList.Add(new CheckGroup("check_host_cpu", Messages.NRPE_CHECK_HOST_CPU));
-            CheckGroupList.Add(new CheckGroup("check_host_memory", Messages.NRPE_CHECK_HOST_MEMORY));
-            CheckGroupList.Add(new CheckGroup("check_vgpu", Messages.NRPE_CHECK_VGPU));
-            CheckGroupList.Add(new CheckGroup("check_vgpu_memory", Messages.NRPE_CHECK_VGPU_MEMORY));
-            CheckGroupList.Add(new Dom0LoadCheckGroup("check_load", Messages.NRPE_CHECK_LOAD));
-            CheckGroupList.Add(new CheckGroup("check_cpu", Messages.NRPE_CHECK_CPU));
-            CheckGroupList.Add(new CheckGroup("check_memory", Messages.NRPE_CHECK_MEMORY));
-            CheckGroupList.Add(new FreeCheckGroup("check_swap", Messages.NRPE_CHECK_SWAP));
-            CheckGroupList.Add(new FreeCheckGroup("check_disk_root", Messages.NRPE_CHECK_DISK_ROOT));
-            CheckGroupList.Add(new FreeCheckGroup("check_disk_log", Messages.NRPE_CHECK_DISK_LOG));
-
-            foreach (CheckGroup checkGroup in CheckGroupList)
+            foreach (CheckGroup checkGroup in _checkGroupList)
             {
                 CheckDataGridView.Rows.Add(checkGroup.CheckThresholdRow);
-                CheckGroupDictByName.Add(checkGroup.Name, checkGroup);
-                CheckGroupDictByLabel.Add(checkGroup.NameCell.Value.ToString(), checkGroup);
+                _checkGroupDictByName.Add(checkGroup.Name, checkGroup);
+                _checkGroupDictByLabel.Add(checkGroup.NameCell.Value.ToString(), checkGroup);
             }
-
-            UpdateOtherComponentBasedEnableNRPECheckBox();
 
             AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
             AllowHostsTextBox.GotFocus += AllowHostsTextBox_GotFocus;
             AllowHostsTextBox.LostFocus += AllowHostsTextBox_LostFocus;
 
-            InvalidParamToolTip = new ToolTip
+            _invalidParamToolTip = new ToolTip
             {
                 IsBalloon = true,
                 ToolTipIcon = ToolTipIcon.Warning,
                 ToolTipTitle = Messages.INVALID_PARAMETER,
                 Tag = AllowHostsTextBox
             };
+            DisableAllComponent();
+        }
+
+        public string SubText
+        {
+            get
+            {
+                if (_isHost)
+                {
+                    return Messages.NRPE_EDIT_PAGE_TEXT;
+                }
+                else
+                {
+                    return Messages.NRPE_BATCH_CONFIGURATION;
+                }
+            }
         }
 
         public bool ValidToSave
         {
             get
             {
-                InvalidParamToolTipText = "";
-                InvalidParamToolTip.ToolTipTitle = "";
+                _invalidParamToolTipText = "";
+                _invalidParamToolTip.ToolTipTitle = "";
                 CheckDataGridView.ShowCellToolTips = false;
+                CheckDataGridView.ShowCellErrors = false;
 
                 if (!EnableNRPECheckBox.Checked)
                 {
@@ -147,10 +141,12 @@ namespace XenAdmin.SettingsPanels
 
                 bool valid = IsAllowHostsValid();
 
-                foreach (CheckGroup checkGroup in CheckGroupList)
+                foreach (CheckGroup checkGroup in _checkGroupList)
                 {
                     if (!checkGroup.CheckValue())
                     {
+                        CheckDataGridView.ShowCellToolTips = true;
+                        CheckDataGridView.ShowCellErrors = true;
                         valid = false;
                     }
                 }
@@ -162,7 +158,15 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return true;
+                UpdateCurrentNRPEConfiguration();
+                if (_isHost)
+                {
+                    return IsNRPEConfigurationChanged();
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 
@@ -172,133 +176,165 @@ namespace XenAdmin.SettingsPanels
 
         public void ShowLocalValidationMessages()
         {
-            if (InvalidParamToolTip.Tag is Control ctrl)
+            if (_invalidParamToolTip.Tag is Control ctrl)
             {
-                InvalidParamToolTip.Hide(ctrl);
-                if (!InvalidParamToolTipText.Equals(""))
+                _invalidParamToolTip.Hide(ctrl);
+                if (!_invalidParamToolTipText.Equals(""))
                 {
-                    HelpersGUI.ShowBalloonMessage(ctrl, InvalidParamToolTip, InvalidParamToolTipText);
+                    HelpersGUI.ShowBalloonMessage(ctrl, _invalidParamToolTip, _invalidParamToolTipText);
                 }
             }
         }
 
         public void HideLocalValidationMessages()
         {
-            if (InvalidParamToolTip.Tag is Control ctrl)
+            if (_invalidParamToolTip.Tag is Control ctrl)
             {
-                InvalidParamToolTip.Hide(ctrl);
-            }
-        }
-
-        public void SetXenObjects(IXenObject orig, IXenObject clone)
-        {
-            Clone = clone;
-            _isHost = Clone is Host;
-
-            descLabelHost.Visible = _isHost;
-            DescLabelPool.Visible = !_isHost;
-
-            if (_isHost)
-            {
-                InitNRPEGeneralConfiguration();
-                InitNRPEThreshold();
+                _invalidParamToolTip.Hide(ctrl);
             }
         }
 
         public AsyncAction SaveSettings()
         {
-            foreach (KeyValuePair<string, CheckGroup> item in CheckGroupDictByName)
-            {
-                if (item.Value.WarningThresholdCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlText))
-                    && item.Value.CriticalThresholdCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlText)))
-                {
-                    NRPECurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(item.Key,
-                        item.Value.WarningThresholdCell.Value.ToString(), item.Value.CriticalThresholdCell.Value.ToString()));
-                }
-            }
-            return new NRPEUpdateAction(Clone, NRPECurrentConfig, NRPEOriginalConfig, false);
+            return new NRPEUpdateAction(_clone, _nrpeCurrentConfig, _nrpeOriginalConfig, true);
         }
 
-        private void InitNRPEGeneralConfiguration()
+        public bool IsNRPEAvailable(IXenObject clone)
         {
-            string status = Host.call_plugin(Clone.Connection.Session, Clone.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
-                NRPEHostConfiguration.XAPI_NRPE_STATUS, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_STATUS, status);
-            NRPECurrentConfig.EnableNRPE = status.Trim().Equals("active enabled");
-
-            string nrpeConfig = Host.call_plugin(Clone.Connection.Session, Clone.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
-                NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, nrpeConfig);
-
-            string[] nrpeConfigArray = nrpeConfig.Split('\n');
-            foreach (string nrpeConfigItem in nrpeConfigArray)
+            IXenObject checkHost;
+            if (clone is Host h)
             {
-                if (nrpeConfigItem.Trim().StartsWith("allowed_hosts:"))
-                {
-                    string allowHosts = nrpeConfigItem.Replace("allowed_hosts:", "").Trim();
-                    NRPECurrentConfig.AllowHosts = AllowHostsWithoutLocalAddress(allowHosts);
-                    AllowHostsTextBox.ForeColor = AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ?
-                        Color.FromKnownColor(KnownColor.ControlDark) : Color.FromKnownColor(KnownColor.ControlText);
-                }
-                else if (nrpeConfigItem.Trim().StartsWith("debug:"))
-                {
-                    string enableDebug = nrpeConfigItem.Replace("debug:", "").Trim();
-                    NRPECurrentConfig.Debug = enableDebug.Equals(NRPEHostConfiguration.DEBUG_ENABLE);
-                }
-                else if (nrpeConfigItem.Trim().StartsWith("ssl_logging:"))
-                {
-                    string enableSslLogging = nrpeConfigItem.Replace("ssl_logging:", "").Trim();
-                    NRPECurrentConfig.SslLogging = enableSslLogging.Equals(NRPEHostConfiguration.SSL_LOGGING_ENABLE);
-                }
+                checkHost = h;
             }
-            NRPEOriginalConfig = (NRPEHostConfiguration) NRPECurrentConfig.Clone();
-
-            UpdateOtherComponentBasedEnableNRPECheckBox();
+            else if (clone is Pool p)
+            {
+                List<Host> hostList = p.Connection.Cache.Hosts.ToList();
+                checkHost = hostList[0];
+            }
+            else
+            {
+                return false;
+            }
+            try
+            {
+                Host.call_plugin(checkHost.Connection.Session, checkHost.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
+                    NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, null);
+            }
+            catch (Exception e)
+            {
+                log.InfoFormat("Execute NRPE plugin failed, failed reason: {0}. It may not support NRPE.", e.Message);
+                return false;
+            }
+            return true;
         }
 
-        private void InitNRPEThreshold()
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            string nrpeThreshold = Host.call_plugin(Clone.Connection.Session, Clone.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME, 
-                NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, nrpeThreshold);
+            _clone = clone;
+            _isHost = _clone is Host;
 
-            string[] nrpeThresholdArray = nrpeThreshold.Split('\n');
-            foreach (string nrpeThresholdItem in nrpeThresholdArray)
+            DescLabelHost.Visible = _isHost;
+            DescLabelPool.Visible = !_isHost;
+            UpdateRetrievingNRPETip(NRPEHostConfiguration.RetrieveNRPEStatus.Retrieving);
+            DisableAllComponent();
+
+            NRPERetrieveAction action = new NRPERetrieveAction(_clone, _nrpeOriginalConfig, _checkGroupDictByName, true);
+            action.Completed += ActionCompleted;
+            action.RunAsync();
+        }
+
+        private void ActionCompleted(ActionBase sender)
+        {
+            Program.Invoke(this.Parent, UpdateRetrieveStatus);
+        }
+
+        private void UpdateRetrieveStatus()
+        {
+            if (_nrpeOriginalConfig.Status == NRPEHostConfiguration.RetrieveNRPEStatus.Successful)
             {
-                // Return string format for each line: check_cpu warning threshold - 50 critical threshold - 80
-                string[] thresholdRtnArray = nrpeThresholdItem.Split(' ');
-                string checkName = thresholdRtnArray[0];
-                if (CheckGroupDictByName.TryGetValue(thresholdRtnArray[0], out CheckGroup thresholdCheck))
-                {
-                    string warningThreshold = thresholdRtnArray[4];
-                    string criticalThreshold = thresholdRtnArray[8];
-                    thresholdCheck.UpdateThreshold(warningThreshold, criticalThreshold);
-                    NRPEOriginalConfig.AddNRPECheck(new NRPEHostConfiguration.Check(checkName, warningThreshold, criticalThreshold));
-                }
+                AllowHostsTextBox.ForeColor = AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ?
+                    Color.FromKnownColor(KnownColor.ControlDark) : Color.FromKnownColor(KnownColor.ControlText);
+                UpdateOtherComponentBasedEnableNRPECheckBox();
+                UpdateComponentBasedConfiguration();
             }
+            UpdateRetrievingNRPETip(_nrpeOriginalConfig.Status);
+        }
+
+        private void UpdateRetrievingNRPETip(NRPEHostConfiguration.RetrieveNRPEStatus status)
+        {
+            switch (status)
+            {
+                case NRPEHostConfiguration.RetrieveNRPEStatus.Retrieving:
+                    RetrieveNRPELabel.Text = Messages.NRPE_RETRIEVING_CONFIGURATION;
+                    RetrieveNRPEPicture.Image = Images.StaticImages.ajax_loader;
+                    RetrieveNRPEPicture.Visible = true;
+                    break;
+                case NRPEHostConfiguration.RetrieveNRPEStatus.Successful:
+                    RetrieveNRPELabel.Text = "";
+                    RetrieveNRPEPicture.Image = Images.StaticImages._000_Tick_h32bit_16;
+                    RetrieveNRPEPicture.Visible = false;
+                    break;
+                case NRPEHostConfiguration.RetrieveNRPEStatus.Failed:
+                    RetrieveNRPELabel.Text = Messages.NRPE_RETRIEVE_FAILED;
+                    RetrieveNRPEPicture.Image = Images.StaticImages._000_error_h32bit_16;
+                    RetrieveNRPEPicture.Visible = true;
+                    break;
+                case NRPEHostConfiguration.RetrieveNRPEStatus.Unsupport:
+                    RetrieveNRPELabel.Text = Messages.NRPE_UNSUPPORT;
+                    RetrieveNRPEPicture.Image = Images.StaticImages._000_error_h32bit_16;
+                    RetrieveNRPEPicture.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void DisableAllComponent()
+        {
+            EnableNRPECheckBox.Enabled = false;
+            GeneralConfigureGroupBox.Enabled = false;
+            CheckDataGridView.Enabled = false;
         }
 
         private bool IsAllowHostsValid()
         {
-            InvalidParamToolTip.ToolTipTitle = Messages.NRPE_ALLOW_HOSTS_ERROR_TITLE;
-            InvalidParamToolTip.Tag = AllowHostsTextBox;
+            _invalidParamToolTip.ToolTipTitle = Messages.NRPE_ALLOW_HOSTS_ERROR_TITLE;
+            _invalidParamToolTip.Tag = AllowHostsTextBox;
             CheckDataGridView.ShowCellToolTips = true;
 
             string str = AllowHostsTextBox.Text;
             if (str.Trim().Length == 0 || str.Trim().Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER))
             {
-                InvalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_EMPTY_ERROR;
+                _invalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_EMPTY_ERROR;
                 return false;
             }
 
             string[] hostArray = str.Split(',');
+            for ( int i = 0; i < hostArray.Length; i++ )
+            {
+                if (!REGEX_IPV4.Match(hostArray[i].Trim()).Success &&
+                    !REGEX_IPV4_CIDR.Match(hostArray[i].Trim()).Success &&
+                    !REGEX_DOMAIN.Match(hostArray[i].Trim()).Success)
+                {
+                    _invalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_FORMAT_ERROR;
+                    return false;
+                }
+                for ( int j = 0; j < i; j++ )
+                {
+                    if (hostArray[i].Trim().Equals(hostArray[j].Trim()))
+                    {
+                        _invalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_SAME_ADDRESS;
+                        return false;
+                    }
+                }
+            }
             foreach (string host in hostArray)
             {
                 if (!REGEX_IPV4.Match(host.Trim()).Success &&
                     !REGEX_IPV4_CIDR.Match(host.Trim()).Success &&
                     !REGEX_DOMAIN.Match(host.Trim()).Success)
                 {
-                    InvalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_FORMAT_ERROR;
+                    _invalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_FORMAT_ERROR;
                     return false;
                 }
             }
@@ -324,19 +360,85 @@ namespace XenAdmin.SettingsPanels
 
         private void UpdateOtherComponentBasedEnableNRPECheckBox()
         {
-            if (EnableNRPECheckBox.Checked)
+            GeneralConfigureGroupBox.Enabled = EnableNRPECheckBox.Checked;
+            UpdateCheckDataGridViewAvailableStatus();
+        }
+
+        private void UpdateComponentBasedConfiguration()
+        {
+            EnableNRPECheckBox.Enabled = true;
+            EnableNRPECheckBox.Checked = _nrpeOriginalConfig.EnableNRPE;
+            AllowHostsTextBox.Text = AllowHostsWithoutLocalAddress(_nrpeOriginalConfig.AllowHosts);
+            AllowHostsTextBox.ForeColor = AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ?
+                Color.FromKnownColor(KnownColor.ControlDark) : AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+            DebugLogCheckBox.Checked = _nrpeOriginalConfig.Debug;
+            SslDebugLogCheckBox.Checked = _nrpeOriginalConfig.SslLogging;
+            UpdateCheckDataGridViewAvailableStatus();
+        }
+
+        private void UpdateCheckDataGridViewAvailableStatus()
+        {
+            CheckDataGridView.Enabled = EnableNRPECheckBox.Checked;
+            CheckDataGridView.DefaultCellStyle.BackColor = EnableNRPECheckBox.Checked ?
+                Color.FromKnownColor(KnownColor.Window) : Color.FromKnownColor(KnownColor.Control);
+            if (_isHost)
             {
-                GeneralConfigureGroupBox.Enabled = true;
-                CheckDataGridView.Enabled = true;
-                CheckDataGridView.BackgroundColor = Color.FromKnownColor(KnownColor.Window);
-                CheckDataGridView.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.Window);
+                foreach (var checkGroup in _checkGroupList)
+                {
+                    if (EnableNRPECheckBox.Checked)
+                    {
+                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                    }
+                    else
+                    {
+                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
+                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
+                    }
+                }
             }
-            else
+        }
+
+        private bool IsNRPEConfigurationChanged()
+        {
+            if (_nrpeCurrentConfig.EnableNRPE != _nrpeOriginalConfig.EnableNRPE ||
+                !_nrpeCurrentConfig.AllowHosts.Equals(_nrpeOriginalConfig.AllowHosts) ||
+                _nrpeCurrentConfig.Debug != _nrpeOriginalConfig.Debug ||
+                _nrpeCurrentConfig.SslLogging != _nrpeOriginalConfig.SslLogging)
             {
-                GeneralConfigureGroupBox.Enabled = false;
-                CheckDataGridView.Enabled = false;
-                CheckDataGridView.BackgroundColor = Color.FromKnownColor(KnownColor.Control);
-                CheckDataGridView.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.Control);
+                return true;
+            }
+            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _nrpeCurrentConfig.CheckDict)
+            {
+                NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
+                _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
+                if (CurrentCheck != null && OriginalCheck != null
+                    && (!CurrentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
+                    || !CurrentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void UpdateCurrentNRPEConfiguration()
+        {
+            _nrpeCurrentConfig = new NRPEHostConfiguration
+            {
+                EnableNRPE = EnableNRPECheckBox.Checked,
+                AllowHosts = AllowHostsTextBox.Text,
+                Debug = DebugLogCheckBox.Checked,
+                SslLogging = SslDebugLogCheckBox.Checked
+            };
+            foreach (KeyValuePair<string, CheckGroup> item in _checkGroupDictByName)
+            {
+                if (item.Value.WarningThresholdCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlText))
+                    && item.Value.CriticalThresholdCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlText)))
+                {
+                    _nrpeCurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(item.Key,
+                        item.Value.WarningThresholdCell.Value.ToString(), item.Value.CriticalThresholdCell.Value.ToString()));
+                }
             }
         }
 
@@ -350,8 +452,8 @@ namespace XenAdmin.SettingsPanels
             if (AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER))
             {
                 AllowHostsTextBox.Text = "";
-                AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
             }
+            AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
         }
 
         private void AllowHostsTextBox_LostFocus(object sender, EventArgs e)
@@ -381,7 +483,7 @@ namespace XenAdmin.SettingsPanels
             if (currentCell != null &&!_isHost && currentCell.Value.ToString().Trim().Equals(""))
             {
                 currentCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-                CheckGroupDictByLabel.TryGetValue(CheckDataGridView.CurrentRow.Cells[0].Value.ToString(), out CheckGroup checkGroup);
+                _checkGroupDictByLabel.TryGetValue(CheckDataGridView.CurrentRow.Cells[0].Value.ToString(), out CheckGroup checkGroup);
 
                 if (checkGroup != null)
                 {
@@ -390,6 +492,7 @@ namespace XenAdmin.SettingsPanels
                     else if (currentCell.ColumnIndex == CriticalThresholdColumn.Index)
                         currentCell.Value = checkGroup.CriticalThresholdDefault;
                 }
+                _nrpeOriginalConfig.CheckDict.TryGetValue(checkGroup.Name, out NRPEHostConfiguration.Check check);
             }
         }
     }
