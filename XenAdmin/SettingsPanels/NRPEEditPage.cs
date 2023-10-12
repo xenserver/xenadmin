@@ -96,6 +96,7 @@ namespace XenAdmin.SettingsPanels
                 _checkGroupDictByLabel.Add(checkGroup.NameCell.Value.ToString(), checkGroup);
             }
 
+            AllowHostsTextBox.Text = NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER;
             AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
             AllowHostsTextBox.GotFocus += AllowHostsTextBox_GotFocus;
             AllowHostsTextBox.LostFocus += AllowHostsTextBox_LostFocus;
@@ -158,15 +159,13 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                UpdateCurrentNRPEConfiguration();
-                if (_isHost)
+                if (_isHost && IsNRPEConfigurationChanged() ||
+                    !_isHost && BatchConfigurationCheckBox.Checked)
                 {
-                    return IsNRPEConfigurationChanged();
-                }
-                else
-                {
+                    UpdateCurrentNRPEConfiguration();
                     return true;
                 }
+                return false;
             }
         }
 
@@ -235,6 +234,7 @@ namespace XenAdmin.SettingsPanels
 
             DescLabelHost.Visible = _isHost;
             DescLabelPool.Visible = !_isHost;
+            BatchConfigurationCheckBox.Visible = !_isHost;
             UpdateRetrievingNRPETip(NRPEHostConfiguration.RetrieveNRPEStatus.Retrieving);
             DisableAllComponent();
 
@@ -252,10 +252,16 @@ namespace XenAdmin.SettingsPanels
         {
             if (_nrpeOriginalConfig.Status == NRPEHostConfiguration.RetrieveNRPEStatus.Successful)
             {
-                AllowHostsTextBox.ForeColor = AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ?
-                    Color.FromKnownColor(KnownColor.ControlDark) : Color.FromKnownColor(KnownColor.ControlText);
-                UpdateOtherComponentBasedEnableNRPECheckBox();
-                UpdateComponentBasedConfiguration();
+                if (_isHost)
+                {
+                    EnableNRPECheckBox.Enabled = true;
+                    UpdateComponentValueBasedConfiguration();
+                    UpdateComponentStatusBasedEnableNRPECheckBox();
+                }
+                else
+                {
+                    BatchConfigurationCheckBox.Enabled = true;
+                }
             }
             UpdateRetrievingNRPETip(_nrpeOriginalConfig.Status);
         }
@@ -294,6 +300,53 @@ namespace XenAdmin.SettingsPanels
             EnableNRPECheckBox.Enabled = false;
             GeneralConfigureGroupBox.Enabled = false;
             CheckDataGridView.Enabled = false;
+        }
+
+        private void UpdateComponentValueBasedConfiguration()
+        {
+            EnableNRPECheckBox.Checked = _nrpeOriginalConfig.EnableNRPE;
+            AllowHostsTextBox.Text = AllowHostsWithoutLocalAddress(_nrpeOriginalConfig.AllowHosts);
+            AllowHostsTextBox.ForeColor = AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ?
+                Color.FromKnownColor(KnownColor.ControlDark) : AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+            DebugLogCheckBox.Checked = _nrpeOriginalConfig.Debug;
+            SslDebugLogCheckBox.Checked = _nrpeOriginalConfig.SslLogging;
+        }
+
+        private void UpdateComponentStatusBasedBatchConfigurationCheckBox()
+        {
+            if (BatchConfigurationCheckBox.Checked)
+            {
+                EnableNRPECheckBox.Enabled = true;
+                UpdateComponentStatusBasedEnableNRPECheckBox();
+            }
+            else
+            {
+                DisableAllComponent();
+            }
+        }
+
+        private void UpdateComponentStatusBasedEnableNRPECheckBox()
+        {
+            GeneralConfigureGroupBox.Enabled = EnableNRPECheckBox.Checked;
+            CheckDataGridView.Enabled = EnableNRPECheckBox.Checked;
+            CheckDataGridView.DefaultCellStyle.BackColor = EnableNRPECheckBox.Checked ?
+                Color.FromKnownColor(KnownColor.Window) : Color.FromKnownColor(KnownColor.Control);
+            if (_isHost)
+            {
+                foreach (var checkGroup in _checkGroupList)
+                {
+                    if (EnableNRPECheckBox.Checked)
+                    {
+                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                    }
+                    else
+                    {
+                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
+                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
+                    }
+                }
+            }
         }
 
         private bool IsAllowHostsValid()
@@ -358,47 +411,6 @@ namespace XenAdmin.SettingsPanels
                 UpdatedAllowHosts.Substring(0, UpdatedAllowHosts.Length - 1);
         }
 
-        private void UpdateOtherComponentBasedEnableNRPECheckBox()
-        {
-            GeneralConfigureGroupBox.Enabled = EnableNRPECheckBox.Checked;
-            UpdateCheckDataGridViewAvailableStatus();
-        }
-
-        private void UpdateComponentBasedConfiguration()
-        {
-            EnableNRPECheckBox.Enabled = true;
-            EnableNRPECheckBox.Checked = _nrpeOriginalConfig.EnableNRPE;
-            AllowHostsTextBox.Text = AllowHostsWithoutLocalAddress(_nrpeOriginalConfig.AllowHosts);
-            AllowHostsTextBox.ForeColor = AllowHostsTextBox.Text.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ?
-                Color.FromKnownColor(KnownColor.ControlDark) : AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-            DebugLogCheckBox.Checked = _nrpeOriginalConfig.Debug;
-            SslDebugLogCheckBox.Checked = _nrpeOriginalConfig.SslLogging;
-            UpdateCheckDataGridViewAvailableStatus();
-        }
-
-        private void UpdateCheckDataGridViewAvailableStatus()
-        {
-            CheckDataGridView.Enabled = EnableNRPECheckBox.Checked;
-            CheckDataGridView.DefaultCellStyle.BackColor = EnableNRPECheckBox.Checked ?
-                Color.FromKnownColor(KnownColor.Window) : Color.FromKnownColor(KnownColor.Control);
-            if (_isHost)
-            {
-                foreach (var checkGroup in _checkGroupList)
-                {
-                    if (EnableNRPECheckBox.Checked)
-                    {
-                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-                    }
-                    else
-                    {
-                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-                    }
-                }
-            }
-        }
-
         private bool IsNRPEConfigurationChanged()
         {
             if (_nrpeCurrentConfig.EnableNRPE != _nrpeOriginalConfig.EnableNRPE ||
@@ -442,9 +454,14 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        private void BatchConfigurationCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateComponentStatusBasedBatchConfigurationCheckBox();
+        }
+
         private void EnableNRPECheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateOtherComponentBasedEnableNRPECheckBox();
+            UpdateComponentStatusBasedEnableNRPECheckBox();
         }
 
         private void AllowHostsTextBox_GotFocus(object sender, EventArgs e)

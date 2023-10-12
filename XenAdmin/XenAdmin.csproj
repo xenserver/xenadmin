@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>[XenCenter]</AssemblyName>
+    <AssemblyName>XenCenter</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
