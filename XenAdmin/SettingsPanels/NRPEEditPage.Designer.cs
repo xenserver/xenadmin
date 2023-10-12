@@ -30,8 +30,7 @@ namespace XenAdmin.SettingsPanels
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NRPEEditPage));
             this.NRPETableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.DescLabelPool = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.DescLabelHost = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.BatchConfigurationCheckBox = new System.Windows.Forms.CheckBox();
             this.EnableNRPECheckBox = new System.Windows.Forms.CheckBox();
             this.GeneralConfigureGroupBox = new System.Windows.Forms.GroupBox();
             this.GeneralConfigTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -39,19 +38,21 @@ namespace XenAdmin.SettingsPanels
             this.AllowHostsTextBox = new System.Windows.Forms.TextBox();
             this.DebugLogCheckBox = new System.Windows.Forms.CheckBox();
             this.SslDebugLogCheckBox = new System.Windows.Forms.CheckBox();
+            this.RetrieveNRPEPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.RetrieveNRPELabel = new System.Windows.Forms.Label();
+            this.RetrieveNRPEPicture = new System.Windows.Forms.PictureBox();
+            this.DescLabelPool = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.DescLabelHost = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.CheckDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.CheckColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WarningThresholdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CriticalThresholdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RetrieveNRPEPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.RetrieveNRPELabel = new System.Windows.Forms.Label();
-            this.RetrieveNRPEPicture = new System.Windows.Forms.PictureBox();
             this.NRPETableLayoutPanel.SuspendLayout();
             this.GeneralConfigureGroupBox.SuspendLayout();
             this.GeneralConfigTableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).BeginInit();
             this.RetrieveNRPEPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RetrieveNRPEPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // NRPETableLayoutPanel
@@ -59,21 +60,19 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.NRPETableLayoutPanel, "NRPETableLayoutPanel");
             this.NRPETableLayoutPanel.Controls.Add(this.DescLabelPool, 0, 0);
             this.NRPETableLayoutPanel.Controls.Add(this.DescLabelHost, 0, 1);
-            this.NRPETableLayoutPanel.Controls.Add(this.EnableNRPECheckBox, 0, 2);
-            this.NRPETableLayoutPanel.Controls.Add(this.GeneralConfigureGroupBox, 0, 3);
-            this.NRPETableLayoutPanel.Controls.Add(this.CheckDataGridView, 0, 4);
-            this.NRPETableLayoutPanel.Controls.Add(this.RetrieveNRPEPanel, 0, 5);
+            this.NRPETableLayoutPanel.Controls.Add(this.BatchConfigurationCheckBox, 0, 2);
+            this.NRPETableLayoutPanel.Controls.Add(this.EnableNRPECheckBox, 0, 3);
+            this.NRPETableLayoutPanel.Controls.Add(this.GeneralConfigureGroupBox, 0, 4);
+            this.NRPETableLayoutPanel.Controls.Add(this.CheckDataGridView, 0, 5);
+            this.NRPETableLayoutPanel.Controls.Add(this.RetrieveNRPEPanel, 0, 6);
             this.NRPETableLayoutPanel.Name = "NRPETableLayoutPanel";
             // 
-            // DescLabelPool
+            // BatchConfigurationCheckBox
             // 
-            resources.ApplyResources(this.DescLabelPool, "DescLabelPool");
-            this.DescLabelPool.Name = "DescLabelPool";
-            // 
-            // DescLabelHost
-            // 
-            resources.ApplyResources(this.DescLabelHost, "DescLabelHost");
-            this.DescLabelHost.Name = "DescLabelHost";
+            resources.ApplyResources(this.BatchConfigurationCheckBox, "BatchConfigurationCheckBox");
+            this.BatchConfigurationCheckBox.Name = "BatchConfigurationCheckBox";
+            this.BatchConfigurationCheckBox.UseVisualStyleBackColor = true;
+            this.BatchConfigurationCheckBox.CheckedChanged += new System.EventHandler(this.BatchConfigurationCheckBox_CheckedChanged);
             // 
             // EnableNRPECheckBox
             // 
@@ -122,6 +121,34 @@ namespace XenAdmin.SettingsPanels
             this.SslDebugLogCheckBox.Name = "SslDebugLogCheckBox";
             this.SslDebugLogCheckBox.UseVisualStyleBackColor = true;
             // 
+            // RetrieveNRPEPanel
+            // 
+            resources.ApplyResources(this.RetrieveNRPEPanel, "RetrieveNRPEPanel");
+            this.RetrieveNRPEPanel.Controls.Add(this.RetrieveNRPELabel, 1, 0);
+            this.RetrieveNRPEPanel.Controls.Add(this.RetrieveNRPEPicture, 0, 0);
+            this.RetrieveNRPEPanel.Name = "RetrieveNRPEPanel";
+            // 
+            // RetrieveNRPELabel
+            // 
+            resources.ApplyResources(this.RetrieveNRPELabel, "RetrieveNRPELabel");
+            this.RetrieveNRPELabel.Name = "RetrieveNRPELabel";
+            // 
+            // RetrieveNRPEPicture
+            // 
+            resources.ApplyResources(this.RetrieveNRPEPicture, "RetrieveNRPEPicture");
+            this.RetrieveNRPEPicture.Name = "RetrieveNRPEPicture";
+            this.RetrieveNRPEPicture.TabStop = false;
+            // 
+            // DescLabelPool
+            // 
+            resources.ApplyResources(this.DescLabelPool, "DescLabelPool");
+            this.DescLabelPool.Name = "DescLabelPool";
+            // 
+            // DescLabelHost
+            // 
+            resources.ApplyResources(this.DescLabelHost, "DescLabelHost");
+            this.DescLabelHost.Name = "DescLabelHost";
+            // 
             // CheckDataGridView
             // 
             this.CheckDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -141,40 +168,22 @@ namespace XenAdmin.SettingsPanels
             // 
             // CheckColumn
             // 
-            this.CheckColumn.FillWeight = 40F;
+            this.CheckColumn.FillWeight = 15.57632F;
             resources.ApplyResources(this.CheckColumn, "CheckColumn");
             this.CheckColumn.Name = "CheckColumn";
             this.CheckColumn.ReadOnly = true;
             // 
             // WarningThresholdColumn
             // 
-            this.WarningThresholdColumn.FillWeight = 30F;
+            this.WarningThresholdColumn.FillWeight = 42.21184F;
             resources.ApplyResources(this.WarningThresholdColumn, "WarningThresholdColumn");
             this.WarningThresholdColumn.Name = "WarningThresholdColumn";
             // 
             // CriticalThresholdColumn
             // 
-            this.CriticalThresholdColumn.FillWeight = 30F;
+            this.CriticalThresholdColumn.FillWeight = 42.21184F;
             resources.ApplyResources(this.CriticalThresholdColumn, "CriticalThresholdColumn");
             this.CriticalThresholdColumn.Name = "CriticalThresholdColumn";
-            // 
-            // RetrieveNRPEPanel
-            // 
-            resources.ApplyResources(this.RetrieveNRPEPanel, "RetrieveNRPEPanel");
-            this.RetrieveNRPEPanel.Controls.Add(this.RetrieveNRPELabel, 1, 0);
-            this.RetrieveNRPEPanel.Controls.Add(this.RetrieveNRPEPicture, 0, 0);
-            this.RetrieveNRPEPanel.Name = "RetrieveNRPEPanel";
-            // 
-            // RetrieveNRPELabel
-            // 
-            resources.ApplyResources(this.RetrieveNRPELabel, "RetrieveNRPELabel");
-            this.RetrieveNRPELabel.Name = "RetrieveNRPELabel";
-            // 
-            // RetrieveNRPEPicture
-            // 
-            resources.ApplyResources(this.RetrieveNRPEPicture, "RetrieveNRPEPicture");
-            this.RetrieveNRPEPicture.Name = "RetrieveNRPEPicture";
-            this.RetrieveNRPEPicture.TabStop = false;
             // 
             // NRPEEditPage
             // 
@@ -188,9 +197,9 @@ namespace XenAdmin.SettingsPanels
             this.GeneralConfigureGroupBox.PerformLayout();
             this.GeneralConfigTableLayoutPanel.ResumeLayout(false);
             this.GeneralConfigTableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).EndInit();
             this.RetrieveNRPEPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RetrieveNRPEPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -213,6 +222,7 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.Label RetrieveNRPELabel;
         private System.Windows.Forms.TableLayoutPanel RetrieveNRPEPanel;
         private System.Windows.Forms.PictureBox RetrieveNRPEPicture;
+        private System.Windows.Forms.CheckBox BatchConfigurationCheckBox;
     }
 }
    
