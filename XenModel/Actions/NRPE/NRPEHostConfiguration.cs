@@ -34,7 +34,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions.NRPE
 {
-    public class NRPEHostConfiguration : ICloneable
+    public class NRPEHostConfiguration : ICloneable, IEquatable<NRPEHostConfiguration>
     {
         public const string XAPI_NRPE_PLUGIN_NAME = "nrpe";
         public const string XAPI_NRPE_STATUS = "status";
@@ -99,6 +99,29 @@ namespace XenAdmin.Actions.NRPE
         public bool GetNRPECheck(string name, out Check check)
         {
             return _checkDict.TryGetValue(name, out check);
+        }
+
+        public bool Equals(NRPEHostConfiguration other)
+        {
+            if (EnableNRPE != other.EnableNRPE ||
+                !AllowHosts.Equals(other.AllowHosts) ||
+                Debug != other.Debug ||
+                SslLogging != other.SslLogging)
+            {
+                return false;
+            }
+            foreach (KeyValuePair<string, Check> kvp in CheckDict)
+            {
+                Check CurrentCheck = kvp.Value;
+                other.GetNRPECheck(kvp.Key, out Check OriginalCheck);
+                if (CurrentCheck != null && OriginalCheck != null
+                    && (!CurrentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
+                    || !CurrentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public object Clone()

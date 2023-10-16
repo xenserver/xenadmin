@@ -318,7 +318,7 @@ namespace XenAdmin.Dialogs
                         dialog.ShowDialog(Program.MainWindow);
                     }
                 }
-                if ((isHost || isPool) &&
+                if (isPoolOrStandalone &&
                     (connection.Session.IsLocalSuperuser || connection.Session.Roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)))
                 {
                     NRPEEditPage = new NRPEEditPage();

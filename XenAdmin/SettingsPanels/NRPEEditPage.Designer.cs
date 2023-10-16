@@ -30,7 +30,8 @@ namespace XenAdmin.SettingsPanels
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NRPEEditPage));
             this.NRPETableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.BatchConfigurationCheckBox = new System.Windows.Forms.CheckBox();
+            this.DescLabelPool = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.DescLabelHost = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.EnableNRPECheckBox = new System.Windows.Forms.CheckBox();
             this.GeneralConfigureGroupBox = new System.Windows.Forms.GroupBox();
             this.GeneralConfigTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -38,21 +39,19 @@ namespace XenAdmin.SettingsPanels
             this.AllowHostsTextBox = new System.Windows.Forms.TextBox();
             this.DebugLogCheckBox = new System.Windows.Forms.CheckBox();
             this.SslDebugLogCheckBox = new System.Windows.Forms.CheckBox();
+            this.CheckDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.RetrieveNRPEPanel = new System.Windows.Forms.TableLayoutPanel();
             this.RetrieveNRPELabel = new System.Windows.Forms.Label();
             this.RetrieveNRPEPicture = new System.Windows.Forms.PictureBox();
-            this.DescLabelPool = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.DescLabelHost = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.CheckDataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.CheckColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WarningThresholdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CriticalThresholdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NRPETableLayoutPanel.SuspendLayout();
             this.GeneralConfigureGroupBox.SuspendLayout();
             this.GeneralConfigTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).BeginInit();
             this.RetrieveNRPEPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RetrieveNRPEPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // NRPETableLayoutPanel
@@ -60,19 +59,21 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.NRPETableLayoutPanel, "NRPETableLayoutPanel");
             this.NRPETableLayoutPanel.Controls.Add(this.DescLabelPool, 0, 0);
             this.NRPETableLayoutPanel.Controls.Add(this.DescLabelHost, 0, 1);
-            this.NRPETableLayoutPanel.Controls.Add(this.BatchConfigurationCheckBox, 0, 2);
             this.NRPETableLayoutPanel.Controls.Add(this.EnableNRPECheckBox, 0, 3);
             this.NRPETableLayoutPanel.Controls.Add(this.GeneralConfigureGroupBox, 0, 4);
             this.NRPETableLayoutPanel.Controls.Add(this.CheckDataGridView, 0, 5);
             this.NRPETableLayoutPanel.Controls.Add(this.RetrieveNRPEPanel, 0, 6);
             this.NRPETableLayoutPanel.Name = "NRPETableLayoutPanel";
             // 
-            // BatchConfigurationCheckBox
+            // DescLabelPool
             // 
-            resources.ApplyResources(this.BatchConfigurationCheckBox, "BatchConfigurationCheckBox");
-            this.BatchConfigurationCheckBox.Name = "BatchConfigurationCheckBox";
-            this.BatchConfigurationCheckBox.UseVisualStyleBackColor = true;
-            this.BatchConfigurationCheckBox.CheckedChanged += new System.EventHandler(this.BatchConfigurationCheckBox_CheckedChanged);
+            resources.ApplyResources(this.DescLabelPool, "DescLabelPool");
+            this.DescLabelPool.Name = "DescLabelPool";
+            // 
+            // DescLabelHost
+            // 
+            resources.ApplyResources(this.DescLabelHost, "DescLabelHost");
+            this.DescLabelHost.Name = "DescLabelHost";
             // 
             // EnableNRPECheckBox
             // 
@@ -121,6 +122,21 @@ namespace XenAdmin.SettingsPanels
             this.SslDebugLogCheckBox.Name = "SslDebugLogCheckBox";
             this.SslDebugLogCheckBox.UseVisualStyleBackColor = true;
             // 
+            // CheckDataGridView
+            // 
+            this.CheckDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.CheckDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            resources.ApplyResources(this.CheckDataGridView, "CheckDataGridView");
+            this.CheckDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.CheckDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CheckColumn,
+            this.WarningThresholdColumn,
+            this.CriticalThresholdColumn});
+            this.CheckDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.CheckDataGridView.Name = "CheckDataGridView";
+            this.CheckDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.CheckDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            // 
             // RetrieveNRPEPanel
             // 
             resources.ApplyResources(this.RetrieveNRPEPanel, "RetrieveNRPEPanel");
@@ -139,49 +155,22 @@ namespace XenAdmin.SettingsPanels
             this.RetrieveNRPEPicture.Name = "RetrieveNRPEPicture";
             this.RetrieveNRPEPicture.TabStop = false;
             // 
-            // DescLabelPool
-            // 
-            resources.ApplyResources(this.DescLabelPool, "DescLabelPool");
-            this.DescLabelPool.Name = "DescLabelPool";
-            // 
-            // DescLabelHost
-            // 
-            resources.ApplyResources(this.DescLabelHost, "DescLabelHost");
-            this.DescLabelHost.Name = "DescLabelHost";
-            // 
-            // CheckDataGridView
-            // 
-            this.CheckDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.CheckDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            resources.ApplyResources(this.CheckDataGridView, "CheckDataGridView");
-            this.CheckDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.CheckDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CheckColumn,
-            this.WarningThresholdColumn,
-            this.CriticalThresholdColumn});
-            this.CheckDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.CheckDataGridView.Name = "CheckDataGridView";
-            this.CheckDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.CheckDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.CheckDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.CheckDataGridView_BeginEdit);
-            this.CheckDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CheckDataGridView_EndEdit);
-            // 
             // CheckColumn
             // 
-            this.CheckColumn.FillWeight = 15.57632F;
+            this.CheckColumn.FillWeight = 40F;
             resources.ApplyResources(this.CheckColumn, "CheckColumn");
             this.CheckColumn.Name = "CheckColumn";
             this.CheckColumn.ReadOnly = true;
             // 
             // WarningThresholdColumn
             // 
-            this.WarningThresholdColumn.FillWeight = 42.21184F;
+            this.WarningThresholdColumn.FillWeight = 30F;
             resources.ApplyResources(this.WarningThresholdColumn, "WarningThresholdColumn");
             this.WarningThresholdColumn.Name = "WarningThresholdColumn";
             // 
             // CriticalThresholdColumn
             // 
-            this.CriticalThresholdColumn.FillWeight = 42.21184F;
+            this.CriticalThresholdColumn.FillWeight = 30F;
             resources.ApplyResources(this.CriticalThresholdColumn, "CriticalThresholdColumn");
             this.CriticalThresholdColumn.Name = "CriticalThresholdColumn";
             // 
@@ -197,9 +186,9 @@ namespace XenAdmin.SettingsPanels
             this.GeneralConfigureGroupBox.PerformLayout();
             this.GeneralConfigTableLayoutPanel.ResumeLayout(false);
             this.GeneralConfigTableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).EndInit();
             this.RetrieveNRPEPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RetrieveNRPEPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CheckDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -216,13 +205,12 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.CheckBox SslDebugLogCheckBox;
         private Controls.DataGridViewEx.DataGridViewEx CheckDataGridView;
         private Controls.Common.AutoHeightLabel DescLabelHost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CheckColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WarningThresholdColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CriticalThresholdColumn;
         private System.Windows.Forms.Label RetrieveNRPELabel;
         private System.Windows.Forms.TableLayoutPanel RetrieveNRPEPanel;
         private System.Windows.Forms.PictureBox RetrieveNRPEPicture;
-        private System.Windows.Forms.CheckBox BatchConfigurationCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CheckColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WarningThresholdColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CriticalThresholdColumn;
     }
 }
    
