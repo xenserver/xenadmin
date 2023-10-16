@@ -150,6 +150,11 @@ namespace XenAdmin.Alerts
 
         public static void DownloadSource(IWin32Window parent)
         {
+            // If no update no need to show where to save dialog
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();
+            if (clientVersion == null)
+                return;
+
             string outputPathAndFileName;
             using (var saveSourceDialog = new SaveFileDialog())
             {
@@ -165,9 +170,6 @@ namespace XenAdmin.Alerts
                 outputPathAndFileName = saveSourceDialog.FileName;
             }
 
-            var clientVersion = Updates.ClientVersions.FirstOrDefault();
-            if (clientVersion == null) 
-                return;
             var sourceUrl = clientVersion.SourceUrl;
             var downloadSourceAction = new DownloadSourceAction(clientVersion.Name, clientVersion.Version, new Uri(sourceUrl), outputPathAndFileName);
 
