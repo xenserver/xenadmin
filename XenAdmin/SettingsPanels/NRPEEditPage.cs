@@ -37,14 +37,11 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Actions.NRPE;
 using XenAPI;
-using System.Linq;
 
 namespace XenAdmin.SettingsPanels
 {
     public partial class NRPEEditPage : UserControl, IEditPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private static readonly Regex REGEX_IPV4 = new Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)");
         private static readonly Regex REGEX_IPV4_CIDR = new Regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$");
         private static readonly Regex REGEX_DOMAIN = new Regex("^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$");
@@ -108,21 +105,13 @@ namespace XenAdmin.SettingsPanels
                 ToolTipTitle = Messages.INVALID_PARAMETER,
                 Tag = AllowHostsTextBox
             };
-            DisableAllComponent();
         }
 
         public string SubText
         {
             get
             {
-                if (_isHost)
-                {
-                    return Messages.NRPE_EDIT_PAGE_TEXT;
-                }
-                else
-                {
-                    return Messages.NRPE_BATCH_CONFIGURATION;
-                }
+                return Messages.NRPE_EDIT_PAGE_TEXT;
             }
         }
 
@@ -159,10 +148,9 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                if (_isHost && IsNRPEConfigurationChanged() ||
-                    !_isHost && BatchConfigurationCheckBox.Checked)
+                UpdateCurrentNRPEConfiguration();
+                if (!_nrpeCurrentConfig.Equals(_nrpeOriginalConfig))
                 {
-                    UpdateCurrentNRPEConfiguration();
                     return true;
                 }
                 return false;
@@ -198,35 +186,6 @@ namespace XenAdmin.SettingsPanels
             return new NRPEUpdateAction(_clone, _nrpeCurrentConfig, _nrpeOriginalConfig, true);
         }
 
-        public bool IsNRPEAvailable(IXenObject clone)
-        {
-            IXenObject checkHost;
-            if (clone is Host h)
-            {
-                checkHost = h;
-            }
-            else if (clone is Pool p)
-            {
-                List<Host> hostList = p.Connection.Cache.Hosts.ToList();
-                checkHost = hostList[0];
-            }
-            else
-            {
-                return false;
-            }
-            try
-            {
-                Host.call_plugin(checkHost.Connection.Session, checkHost.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
-                    NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, null);
-            }
-            catch (Exception e)
-            {
-                log.InfoFormat("Execute NRPE plugin failed, failed reason: {0}. It may not support NRPE.", e.Message);
-                return false;
-            }
-            return true;
-        }
-
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             _clone = clone;
@@ -234,7 +193,6 @@ namespace XenAdmin.SettingsPanels
 
             DescLabelHost.Visible = _isHost;
             DescLabelPool.Visible = !_isHost;
-            BatchConfigurationCheckBox.Visible = !_isHost;
             UpdateRetrievingNRPETip(NRPEHostConfiguration.RetrieveNRPEStatus.Retrieving);
             DisableAllComponent();
 
@@ -252,16 +210,9 @@ namespace XenAdmin.SettingsPanels
         {
             if (_nrpeOriginalConfig.Status == NRPEHostConfiguration.RetrieveNRPEStatus.Successful)
             {
-                if (_isHost)
-                {
-                    EnableNRPECheckBox.Enabled = true;
-                    UpdateComponentValueBasedConfiguration();
-                    UpdateComponentStatusBasedEnableNRPECheckBox();
-                }
-                else
-                {
-                    BatchConfigurationCheckBox.Enabled = true;
-                }
+                EnableNRPECheckBox.Enabled = true;
+                UpdateComponentValueBasedConfiguration();
+                UpdateComponentStatusBasedEnableNRPECheckBox();
             }
             UpdateRetrievingNRPETip(_nrpeOriginalConfig.Status);
         }
@@ -312,39 +263,24 @@ namespace XenAdmin.SettingsPanels
             SslDebugLogCheckBox.Checked = _nrpeOriginalConfig.SslLogging;
         }
 
-        private void UpdateComponentStatusBasedBatchConfigurationCheckBox()
-        {
-            if (BatchConfigurationCheckBox.Checked)
-            {
-                EnableNRPECheckBox.Enabled = true;
-                UpdateComponentStatusBasedEnableNRPECheckBox();
-            }
-            else
-            {
-                DisableAllComponent();
-            }
-        }
-
         private void UpdateComponentStatusBasedEnableNRPECheckBox()
         {
             GeneralConfigureGroupBox.Enabled = EnableNRPECheckBox.Checked;
             CheckDataGridView.Enabled = EnableNRPECheckBox.Checked;
+            CheckDataGridView.ScrollBars = ScrollBars.Both;
             CheckDataGridView.DefaultCellStyle.BackColor = EnableNRPECheckBox.Checked ?
                 Color.FromKnownColor(KnownColor.Window) : Color.FromKnownColor(KnownColor.Control);
-            if (_isHost)
+            foreach (var checkGroup in _checkGroupList)
             {
-                foreach (var checkGroup in _checkGroupList)
+                if (EnableNRPECheckBox.Checked)
                 {
-                    if (EnableNRPECheckBox.Checked)
-                    {
-                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-                    }
-                    else
-                    {
-                        checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-                        checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-                    }
+                    checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                    checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                }
+                else
+                {
+                    checkGroup.WarningThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
+                    checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
                 }
             }
         }
@@ -411,29 +347,6 @@ namespace XenAdmin.SettingsPanels
                 UpdatedAllowHosts.Substring(0, UpdatedAllowHosts.Length - 1);
         }
 
-        private bool IsNRPEConfigurationChanged()
-        {
-            if (_nrpeCurrentConfig.EnableNRPE != _nrpeOriginalConfig.EnableNRPE ||
-                !_nrpeCurrentConfig.AllowHosts.Equals(_nrpeOriginalConfig.AllowHosts) ||
-                _nrpeCurrentConfig.Debug != _nrpeOriginalConfig.Debug ||
-                _nrpeCurrentConfig.SslLogging != _nrpeOriginalConfig.SslLogging)
-            {
-                return true;
-            }
-            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _nrpeCurrentConfig.CheckDict)
-            {
-                NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
-                _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
-                if (CurrentCheck != null && OriginalCheck != null
-                    && (!CurrentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
-                    || !CurrentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         private void UpdateCurrentNRPEConfiguration()
         {
             _nrpeCurrentConfig = new NRPEHostConfiguration
@@ -445,18 +358,9 @@ namespace XenAdmin.SettingsPanels
             };
             foreach (KeyValuePair<string, CheckGroup> item in _checkGroupDictByName)
             {
-                if (item.Value.WarningThresholdCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlText))
-                    && item.Value.CriticalThresholdCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlText)))
-                {
-                    _nrpeCurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(item.Key,
-                        item.Value.WarningThresholdCell.Value.ToString(), item.Value.CriticalThresholdCell.Value.ToString()));
-                }
+                _nrpeCurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(item.Key,
+                    item.Value.WarningThresholdCell.Value.ToString(), item.Value.CriticalThresholdCell.Value.ToString()));
             }
-        }
-
-        private void BatchConfigurationCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateComponentStatusBasedBatchConfigurationCheckBox();
         }
 
         private void EnableNRPECheckBox_CheckedChanged(object sender, EventArgs e)
@@ -479,37 +383,6 @@ namespace XenAdmin.SettingsPanels
             {
                 AllowHostsTextBox.Text = NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER;
                 AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-            }
-        }
-
-        private void CheckDataGridView_BeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            DataGridViewCell currentCell = CheckDataGridView.CurrentRow?.Cells[e.ColumnIndex];
-            
-            if (currentCell != null && !_isHost && currentCell.Style.ForeColor.Equals(Color.FromKnownColor(KnownColor.ControlDark)))
-            {
-                currentCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-                currentCell.Value = "";
-            }
-        }
-
-        private void CheckDataGridView_EndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridViewCell currentCell = CheckDataGridView.CurrentRow?.Cells[e.ColumnIndex];
-            
-            if (currentCell != null &&!_isHost && currentCell.Value.ToString().Trim().Equals(""))
-            {
-                currentCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
-                _checkGroupDictByLabel.TryGetValue(CheckDataGridView.CurrentRow.Cells[0].Value.ToString(), out CheckGroup checkGroup);
-
-                if (checkGroup != null)
-                {
-                    if (currentCell.ColumnIndex == WarningThresholdColumn.Index)
-                        currentCell.Value = checkGroup.WarningThresholdDefault;
-                    else if (currentCell.ColumnIndex == CriticalThresholdColumn.Index)
-                        currentCell.Value = checkGroup.CriticalThresholdDefault;
-                }
-                _nrpeOriginalConfig.CheckDict.TryGetValue(checkGroup.Name, out NRPEHostConfiguration.Check check);
             }
         }
     }

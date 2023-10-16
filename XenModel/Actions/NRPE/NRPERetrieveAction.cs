@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -58,46 +59,29 @@ namespace XenAdmin.Actions.NRPE
         protected override void Run()
         {
             _nrpeCurrentConfig.Status = NRPEHostConfiguration.RetrieveNRPEStatus.Successful;
-            if (_clone is Pool p)
+            // For pool, retrieve the configuration from the master of the pool.
+            IXenObject o = _clone is Pool p ? Helpers.GetCoordinator(p) : _clone;
+            try
             {
-                List<Host> hostList = p.Connection.Cache.Hosts.ToList();
-                Host checkHost = hostList[0];
-                try
-                {
-                    Host.call_plugin(checkHost.Connection.Session, checkHost.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
-                        NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, null);
-                }
-                catch (Exception e)
-                {
-                    log.ErrorFormat("Execute NRPE plugin failed, failed reason: {0}.", e.Message);
-                    _nrpeCurrentConfig.Status = e.Message.Contains("UNKNOWN_XENAPI_PLUGIN_FUNCTION") ?
-                        NRPEHostConfiguration.RetrieveNRPEStatus.Unsupport : NRPEHostConfiguration.RetrieveNRPEStatus.Failed;
-                }
+                InitNRPEGeneralConfiguration(o);
+                InitNRPEThreshold(o);
             }
-            else
+            catch (Exception e)
             {
-                try
-                {
-                    InitNRPEGeneralConfiguration();
-                    InitNRPEThreshold();
-                }
-                catch (Exception e)
-                {
-                    log.ErrorFormat("Execute NRPE plugin failed, failed reason: {0}.", e.Message);
-                    _nrpeCurrentConfig.Status = e.Message.Contains("UNKNOWN_XENAPI_PLUGIN_FUNCTION") ?
-                        NRPEHostConfiguration.RetrieveNRPEStatus.Unsupport : NRPEHostConfiguration.RetrieveNRPEStatus.Failed;
-                }
+                log.ErrorFormat("Execute NRPE plugin failed, failed reason: {0}", e.Message);
+                _nrpeCurrentConfig.Status = e.Message.Contains("UNKNOWN_XENAPI_PLUGIN_FUNCTION") || e.Message.Contains("The requested plug-in could not be found") ?
+                    NRPEHostConfiguration.RetrieveNRPEStatus.Unsupport : NRPEHostConfiguration.RetrieveNRPEStatus.Failed;
             }
         }
 
-        private void InitNRPEGeneralConfiguration()
+        private void InitNRPEGeneralConfiguration(IXenObject o)
         {
-            string status = Host.call_plugin(_clone.Connection.Session, _clone.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
+            string status = Host.call_plugin(o.Connection.Session, o.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
             NRPEHostConfiguration.XAPI_NRPE_STATUS, null);
             log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_STATUS, status);
             _nrpeCurrentConfig.EnableNRPE = status.Trim().Equals("active enabled");
 
-            string nrpeConfig = Host.call_plugin(_clone.Connection.Session, _clone.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
+            string nrpeConfig = Host.call_plugin(o.Connection.Session, o.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, null);
             log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, nrpeConfig);
 
@@ -122,9 +106,9 @@ namespace XenAdmin.Actions.NRPE
             }
         }
 
-        private void InitNRPEThreshold()
+        private void InitNRPEThreshold(IXenObject o)
         {
-            string nrpeThreshold = Host.call_plugin(_clone.Connection.Session, _clone.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
+            string nrpeThreshold = Host.call_plugin(o.Connection.Session, o.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, null);
             log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, nrpeThreshold);
 
