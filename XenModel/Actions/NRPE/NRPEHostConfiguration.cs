@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAPI;
 
 namespace XenAdmin.Actions.NRPE
 {
@@ -54,7 +53,7 @@ namespace XenAdmin.Actions.NRPE
 
         public static readonly string ALLOW_HOSTS_PLACE_HOLDER = Messages.NRPE_ALLOW_HOSTS_PLACE_HOLDER;
 
-        private Dictionary<string, Check> _checkDict = new Dictionary<string, Check>();
+        private readonly Dictionary<string, Check> _checkDict = new Dictionary<string, Check>();
 
         public bool EnableNRPE { get; set; }
 
@@ -72,8 +71,7 @@ namespace XenAdmin.Actions.NRPE
         {
             Retrieving,
             Successful,
-            Failed,
-            Unsupport
+            Failed
         }
 
         public class Check
@@ -133,9 +131,9 @@ namespace XenAdmin.Actions.NRPE
                 Debug = Debug,
                 SslLogging = SslLogging
             };
-            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _checkDict)
+            foreach (KeyValuePair<string, Check> kvp in _checkDict)
             {
-                NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
+                Check CurrentCheck = kvp.Value;
                 cloned.AddNRPECheck(new Check(CurrentCheck.Name, CurrentCheck.WarningThreshold, CurrentCheck.CriticalThreshold));
             }
 

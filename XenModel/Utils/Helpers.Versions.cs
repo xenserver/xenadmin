@@ -528,6 +528,12 @@ namespace XenAdmin.Core
             return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "23.18.0") >= 0;
         }
 
+        public static bool XapiEqualOrGreater_23_27_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "23.27.0") >= 0;
+        }
+
         #endregion
     }
 }

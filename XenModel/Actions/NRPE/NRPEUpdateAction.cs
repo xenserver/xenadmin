@@ -87,13 +87,13 @@ namespace XenAdmin.Actions.NRPE
             // NRPE Check Threshold
             foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _nrpeHostConfiguration.CheckDict)
             {
-                NRPEHostConfiguration.Check CurrentCheck = kvp.Value;
+                NRPEHostConfiguration.Check currentCheck = kvp.Value;
                 _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
-                if (CurrentCheck != null && OriginalCheck != null
-                    && (!CurrentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
-                    || !CurrentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
+                if (currentCheck != null && OriginalCheck != null
+                    && (!currentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
+                    || !currentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
                 {
-                    SetNRPEThreshold(o, CurrentCheck.Name, CurrentCheck.WarningThreshold, CurrentCheck.CriticalThreshold);
+                    SetNRPEThreshold(o, currentCheck.Name, currentCheck.WarningThreshold, currentCheck.CriticalThreshold);
                 }
             }
 
@@ -120,14 +120,14 @@ namespace XenAdmin.Actions.NRPE
 
         private void SetNRPEGeneralConfiguration(IXenObject host, string allowHosts, bool debug, bool sslLogging)
         {
-            Dictionary<string, string> ConfigArgDict = new Dictionary<string, string>
+            Dictionary<string, string> configArgDict = new Dictionary<string, string>
                 {
                     { "allowed_hosts", "127.0.0.1,::1," + (allowHosts.Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER) ? "" : allowHosts) },
                     { "debug", debug ? NRPEHostConfiguration.DEBUG_ENABLE : NRPEHostConfiguration.DEBUG_DISABLE },
                     { "ssl_logging", sslLogging ? NRPEHostConfiguration.SSL_LOGGING_ENABLE : NRPEHostConfiguration.SSL_LOGGING_DISABLE}
                 };
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
-                NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG, ConfigArgDict);
+                NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG, configArgDict);
             log.InfoFormat("Execute nrpe {0}, allowed_hosts={1}, debug={2}, ssl_logging={3}, return: {4}",
                 NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG,
                 _nrpeHostConfiguration.AllowHosts,
@@ -138,14 +138,14 @@ namespace XenAdmin.Actions.NRPE
 
         private void SetNRPEThreshold(IXenObject host, string checkName, string warningThreshold, string criticalThreshold)
         {
-            Dictionary<string, string> ThresholdArgDict = new Dictionary<string, string>
+            Dictionary<string, string> thresholdArgDict = new Dictionary<string, string>
                         {
                             { checkName, null },
                             { "w", warningThreshold },
                             { "c", criticalThreshold }
                         };
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
-                NRPEHostConfiguration.XAPI_NRPE_SET_THRESHOLD, ThresholdArgDict);
+                NRPEHostConfiguration.XAPI_NRPE_SET_THRESHOLD, thresholdArgDict);
             log.InfoFormat("Execute nrpe {0}, check={1}, w={2}, c={3}, return: {4}",
                 NRPEHostConfiguration.XAPI_NRPE_SET_THRESHOLD,
                 checkName,
