@@ -10185,9 +10185,6 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL" xml:space="preserve">
     <value>Warning threshold should be less than critical threshold.</value>
   </data>
-  <data name="NRPE_UNSUPPORT" xml:space="preserve">
-    <value>Unsupport NRPE, please upgrade your XenServer version.</value>
-  </data>
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>Number of snapshots to keep</value>
   </data>

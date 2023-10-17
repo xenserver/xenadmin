@@ -29358,15 +29358,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unsupport NRPE, please upgrade your XenServer version..
-        /// </summary>
-        public static string NRPE_UNSUPPORT {
-            get {
-                return ResourceManager.GetString("NRPE_UNSUPPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Number of snapshots to keep.
         /// </summary>
         public static string NUMBER_OF_SNAPSHOTS_TO_KEEP {

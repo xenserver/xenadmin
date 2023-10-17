@@ -30,9 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -69,8 +66,7 @@ namespace XenAdmin.Actions.NRPE
             catch (Exception e)
             {
                 log.ErrorFormat("Execute NRPE plugin failed, failed reason: {0}", e.Message);
-                _nrpeCurrentConfig.Status = e.Message.Contains("UNKNOWN_XENAPI_PLUGIN_FUNCTION") || e.Message.Contains("The requested plug-in could not be found") ?
-                    NRPEHostConfiguration.RetrieveNRPEStatus.Unsupport : NRPEHostConfiguration.RetrieveNRPEStatus.Failed;
+                _nrpeCurrentConfig.Status = NRPEHostConfiguration.RetrieveNRPEStatus.Failed;
             }
         }
 
@@ -128,20 +124,20 @@ namespace XenAdmin.Actions.NRPE
             }
         }
 
-        private string AllowHostsWithoutLocalAddress(string allowHosts)
+        private static string AllowHostsWithoutLocalAddress(string allowHosts)
         {
-            string UpdatedAllowHosts = "";
-            string[] AllowHostArray = allowHosts.Split(',');
-            foreach (string allowHost in AllowHostArray)
+            string updatedAllowHosts = "";
+            string[] allowHostArray = allowHosts.Split(',');
+            foreach (string allowHost in allowHostArray)
             {
                 if (!allowHost.Trim().Equals("127.0.0.1") &&
                     !allowHost.Trim().Equals("::1"))
                 {
-                    UpdatedAllowHosts += allowHost + ",";
+                    updatedAllowHosts += allowHost + ",";
                 }
             }
-            return UpdatedAllowHosts.Length == 0 ? NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER :
-                UpdatedAllowHosts.Substring(0, UpdatedAllowHosts.Length - 1);
+            return updatedAllowHosts.Length == 0 ? NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER :
+                updatedAllowHosts.Substring(0, updatedAllowHosts.Length - 1);
         }
     }
 }

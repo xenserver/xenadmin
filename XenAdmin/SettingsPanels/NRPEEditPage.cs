@@ -37,11 +37,15 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Actions.NRPE;
 using XenAPI;
+using System.Linq;
+using XenAdmin.Network;
 
 namespace XenAdmin.SettingsPanels
 {
     public partial class NRPEEditPage : UserControl, IEditPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private static readonly Regex REGEX_IPV4 = new Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)");
         private static readonly Regex REGEX_IPV4_CIDR = new Regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$");
         private static readonly Regex REGEX_DOMAIN = new Regex("^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$");
@@ -107,13 +111,7 @@ namespace XenAdmin.SettingsPanels
             };
         }
 
-        public string SubText
-        {
-            get
-            {
-                return Messages.NRPE_EDIT_PAGE_TEXT;
-            }
-        }
+        public string SubText => Messages.NRPE_EDIT_PAGE_TEXT;
 
         public bool ValidToSave
         {
@@ -149,11 +147,7 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 UpdateCurrentNRPEConfiguration();
-                if (!_nrpeCurrentConfig.Equals(_nrpeOriginalConfig))
-                {
-                    return true;
-                }
-                return false;
+                return !_nrpeCurrentConfig.Equals(_nrpeOriginalConfig);
             }
         }
 
@@ -236,13 +230,8 @@ namespace XenAdmin.SettingsPanels
                     RetrieveNRPEPicture.Image = Images.StaticImages._000_error_h32bit_16;
                     RetrieveNRPEPicture.Visible = true;
                     break;
-                case NRPEHostConfiguration.RetrieveNRPEStatus.Unsupport:
-                    RetrieveNRPELabel.Text = Messages.NRPE_UNSUPPORT;
-                    RetrieveNRPEPicture.Image = Images.StaticImages._000_error_h32bit_16;
-                    RetrieveNRPEPicture.Visible = true;
-                    break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException(nameof(status), status, null);
             }
         }
 

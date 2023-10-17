@@ -318,8 +318,8 @@ namespace XenAdmin.Dialogs
                         dialog.ShowDialog(Program.MainWindow);
                     }
                 }
-                if (isPoolOrStandalone &&
-                    (connection.Session.IsLocalSuperuser || connection.Session.Roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)))
+                if (isPoolOrStandalone && Helpers.XapiEqualOrGreater_23_27_0(connection)
+                    && (connection.Session.IsLocalSuperuser || connection.Session.Roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)))
                 {
                     NRPEEditPage = new NRPEEditPage();
                     ShowTab(NRPEEditPage);
