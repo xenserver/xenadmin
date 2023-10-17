@@ -119,14 +119,16 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            var vms = new List<VM> {vm};
+            if (preselectedHost != null)
+            {
+                var vms = new List<VM> {vm};
 
-            if (preselectedHost != null && new ResidentHostIsSameAsSelectionFilter(preselectedHost, vms).FailureFound(out failureReason))
-                return false;
+                if (new ResidentHostIsSameAsSelectionFilter(preselectedHost, vms).FailureFound(out failureReason))
+                    return false;
 
-            if (preselectedHost != null && new CrossPoolMigrateFilter(preselectedHost, new List<VM> {vm},
-                    WizardMode.Migrate, cache).FailureFound(out failureReason))
-                return false;
+                if (new CrossPoolMigrateFilter(preselectedHost, vms, WizardMode.Migrate, cache).FailureFound(out failureReason))
+                    return false;
+            }
 
             failureReason = string.Empty;
             return true;
