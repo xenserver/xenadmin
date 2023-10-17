@@ -44,7 +44,7 @@ namespace XenAdmin.Controls
 {
     public partial class MultipleDvdIsoList : UserControl
     {
-        bool inRefresh = false;
+        private bool _inRefresh;
 
         public MultipleDvdIsoList()
         {
@@ -61,7 +61,7 @@ namespace XenAdmin.Controls
                 cdChanger1.VM = value;
                 if (value != null)
                     cdChanger1.VM.PropertyChanged += vm_PropertyChanged;
-                refreshDrives();
+                RefreshDrives();
             }
             get => cdChanger1.VM;
         }
@@ -72,24 +72,24 @@ namespace XenAdmin.Controls
         [Category("Appearance")]
         public Color LabelSingleDvdForeColor
         {
-            get { return labelSingleDvd.ForeColor; }
-            set { labelSingleDvd.ForeColor = value; }
+            get => labelSingleDvd.ForeColor;
+            set => labelSingleDvd.ForeColor = value;
         }
 
         [Browsable(true)]
         [Category("Appearance")]
         public Color LabelNewCdForeColor
         {
-            get { return newCDLabel.ForeColor; }
-            set { newCDLabel.ForeColor = value; }
+            get => newCDLabel.ForeColor;
+            set => newCDLabel.ForeColor = value;
         }
 
         [Browsable(true)]
         [Category("Appearance")]
         public Color LinkLabelLinkColor
         {
-            get { return linkLabel1.LinkColor; }
-            set { linkLabel1.LinkColor = value; }
+            get => linkLabel1.LinkColor;
+            set => linkLabel1.LinkColor = value;
         }
 
         #endregion
@@ -115,24 +115,25 @@ namespace XenAdmin.Controls
             cdChanger1.DeregisterEvents();
         }
 
-        void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "VBDs")
-                refreshDrives();
+                RefreshDrives();
         }
 
-        private void refreshDrives()
+        private void RefreshDrives()
         {
             VbdCombiItem prevSelection = comboBoxDrive.SelectedItem as VbdCombiItem;
-            inRefresh = true;
+            _inRefresh = true;
 
             foreach (object o in comboBoxDrive.Items)
             {
-                VbdCombiItem v = o as VbdCombiItem;
-                v.vbd.PropertyChanged -= new PropertyChangedEventHandler(vbd_PropertyChanged);
+                if (o is VbdCombiItem v)
+                    v.Vbd.PropertyChanged -= vbd_PropertyChanged;
             }
 
             comboBoxDrive.Items.Clear();
+
             if (VM != null && !VM.is_control_domain)
             {
                 List<VBD> vbds = VM.Connection.ResolveAll(VM.VBDs);
@@ -142,31 +143,32 @@ namespace XenAdmin.Controls
                     VM.Connection.CachePopulated += CachePopulatedMethod;
                     return;
                 }
+
                 vbds.RemoveAll(vbd => !vbd.IsCDROM() && !vbd.IsFloppyDrive());
                 vbds.Sort();
+
                 int dvdCount = 0;
                 int floppyCount = 0;
+
                 foreach (VBD vbd in vbds)
                 {
-                    vbd.PropertyChanged +=new PropertyChangedEventHandler(vbd_PropertyChanged);
+                    vbd.PropertyChanged += vbd_PropertyChanged;
+                    VbdCombiItem item;
+
                     if (vbd.IsCDROM())
                     {
                         dvdCount++;
-                        VbdCombiItem i = new VbdCombiItem();
-                        i.name = string.Format(Messages.DVD_DRIVE_LABEL_NUMBERED, dvdCount);
-                        i.vbd = vbd;
-                        comboBoxDrive.Items.Add(i);                       
+                        item = new VbdCombiItem(string.Format(Messages.DVD_DRIVE_LABEL_NUMBERED, dvdCount), vbd);
                     }
                     else
                     {
                         floppyCount++;
-                        VbdCombiItem i = new VbdCombiItem();
-                        i.name = string.Format(Messages.FLOPPY_DRIVE_LABEL_NUMBERED, floppyCount);
-                        i.vbd = vbd;
-                        comboBoxDrive.Items.Add(i);
-                    }               
+                        item = new VbdCombiItem(string.Format(Messages.FLOPPY_DRIVE_LABEL_NUMBERED, floppyCount), vbd);
+                    }
+                    comboBoxDrive.Items.Add(item);
                 }
             }
+
             if (comboBoxDrive.Items.Count == 0)
             {
                 comboBoxDrive.Visible = false;
@@ -197,54 +199,59 @@ namespace XenAdmin.Controls
                 newCDLabel.Visible = false;
                 linkLabel1.Visible = true;
             }
-            inRefresh = false;
+
+            _inRefresh = false;
+
             // Restore prev selection or select the top item by default
             if (prevSelection != null)
             {
                 foreach (object o in comboBoxDrive.Items)
                 {
-                    VbdCombiItem v = o as VbdCombiItem;
-                    if (v.vbd.uuid == prevSelection.vbd.uuid)
+                    if (o is VbdCombiItem v && v.Vbd.uuid == prevSelection.Vbd.uuid)
                     {
                         comboBoxDrive.SelectedItem = o;
                         return;
                     }
                 }
             }
-            if (comboBoxDrive.Items.Count == 0)
-                comboBoxDrive.SelectedItem = null;
-            else
-                comboBoxDrive.SelectedItem = comboBoxDrive.Items[0];
+
+            comboBoxDrive.SelectedItem = comboBoxDrive.Items.Count == 0 ? null : comboBoxDrive.Items[0];
         }
 
-        void vbd_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void vbd_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            refreshDrives();
+            RefreshDrives();
         }
 
         private void CachePopulatedMethod(IXenConnection conn)
         {
             VM.Connection.CachePopulated -= CachePopulatedMethod;
-            refreshDrives();
+            RefreshDrives();
         }
 
-        internal class VbdCombiItem
+        private class VbdCombiItem
         {
-            public string name;
-            public VBD vbd;
+            public string Name { get; }
+            public VBD Vbd { get; }
+
+            public VbdCombiItem(string name, VBD vbd)
+            {
+                Name = name;
+                Vbd = vbd;
+            }
 
             public override string ToString()
             {
-                return name;
+                return Name;
             }
         }
 
         private void comboBoxDrive_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (inRefresh)
+            if (_inRefresh)
                 return;
 
-            cdChanger1.Drive = (comboBoxDrive.SelectedItem as VbdCombiItem)?.vbd;
+            cdChanger1.Drive = (comboBoxDrive.SelectedItem as VbdCombiItem)?.Vbd;
         }
 
 

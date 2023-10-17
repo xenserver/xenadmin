@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            string vbdServerRef = VBD.create(Session, vbd);
+            string vbdRef = VBD.create(Session, vbd);
 
             if (!VM.IsHVM() && vbd.empty)
             {
@@ -71,12 +71,12 @@ namespace XenAdmin.Actions
             }
 
             // Then if we can plug the vbd in, do so...
-            if (vbdServerRef != null && 
-                VBD.get_allowed_operations(Session, vbdServerRef).Contains(vbd_operations.plug))
+            if (vbdRef != null && 
+                VBD.get_allowed_operations(Session, vbdRef).Contains(vbd_operations.plug))
             {
 
                 log.DebugFormat("Attempting to hot plug VBD {0}.", vbd.uuid);
-                RelatedTask = VBD.async_plug(Session, vbdServerRef);
+                RelatedTask = VBD.async_plug(Session, vbdRef);
                 PollToCompletion();
                 Description = Messages.ATTACHDISKWIZARD_ATTACHED;
             }
