@@ -88,8 +88,8 @@ namespace XenAdmin.Controls
         [Category("Appearance")]
         public Color LinkLabelLinkColor
         {
-            get => linkLabel1.LinkColor;
-            set => linkLabel1.LinkColor = value;
+            get => linkLabelEject.LinkColor;
+            set => linkLabelEject.LinkColor = value;
         }
 
         #endregion
@@ -174,8 +174,7 @@ namespace XenAdmin.Controls
                 comboBoxDrive.Visible = false;
                 cdChanger1.Visible = false;
                 labelSingleDvd.Visible = false;
-                linkLabel1.Visible = false;
-                panel1.Visible = false;
+                linkLabelEject.Visible = false;
                 newCDLabel.Visible = VM != null && !VM.is_control_domain;
                 
             }
@@ -187,17 +186,15 @@ namespace XenAdmin.Controls
                 labelSingleDvd.Visible = true;
                 tableLayoutPanel1.ColumnStyles[0].Width = labelSingleDvd.Width;
                 newCDLabel.Visible = false;
-                panel1.Visible = true;
-                linkLabel1.Visible = true;
+                linkLabelEject.Visible = true;
             }
             else
             {
                 comboBoxDrive.Visible = true;
                 cdChanger1.Visible = true;
                 labelSingleDvd.Visible = false;
-                panel1.Visible = true;
                 newCDLabel.Visible = false;
-                linkLabel1.Visible = true;
+                linkLabelEject.Visible = true;
             }
 
             _inRefresh = false;
@@ -279,7 +276,7 @@ namespace XenAdmin.Controls
             });
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelEject_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (cdChanger1.Drive != null)
                 cdChanger1.ChangeCD(null);
