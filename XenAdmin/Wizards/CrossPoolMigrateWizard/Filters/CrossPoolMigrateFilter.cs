@@ -38,7 +38,7 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 {
-    public class CrossPoolMigrateCanMigrateFilter : ReasoningFilter
+    public class CrossPoolMigrateFilter : ReasoningFilter
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly WizardMode _wizardMode;
@@ -47,7 +47,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
         private bool _canceled;
         private static readonly object _cacheLock = new object();
 
-        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToFilterOn, List<VM> preSelectedVMs, WizardMode wizardMode, Dictionary<string, Dictionary<string, string>> cache = null)
+        public CrossPoolMigrateFilter(IXenObject itemAddedToFilterOn, List<VM> preSelectedVMs, WizardMode wizardMode, Dictionary<string, Dictionary<string, string>> cache = null)
             : base(itemAddedToFilterOn)
         {
             _wizardMode = wizardMode;

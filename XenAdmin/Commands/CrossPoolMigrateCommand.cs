@@ -124,7 +124,7 @@ namespace XenAdmin.Commands
             if (preselectedHost != null && new ResidentHostIsSameAsSelectionFilter(preselectedHost, vms).FailureFound(out failureReason))
                 return false;
 
-            if (preselectedHost != null && new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm},
+            if (preselectedHost != null && new CrossPoolMigrateFilter(preselectedHost, new List<VM> {vm},
                     WizardMode.Migrate, cache).FailureFound(out failureReason))
                 return false;
 
