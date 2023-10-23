@@ -29,7 +29,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -41,16 +40,14 @@ namespace XenAdmin.Actions.NRPE
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly NRPEHostConfiguration _nrpeCurrentConfig;
-        private readonly Dictionary<string, CheckGroup> _checkGroupDictByName;
 
         private readonly IXenObject _clone;
 
-        public NRPERetrieveAction(IXenObject host, NRPEHostConfiguration nrpeHostConfiguration, Dictionary<string, CheckGroup> checkGroupDictByName, bool suppressHistory)
+        public NRPERetrieveAction(IXenObject host, NRPEHostConfiguration nrpeHostConfiguration, bool suppressHistory)
             : base(host.Connection, Messages.NRPE_ACTION_RETRIEVING, Messages.NRPE_ACTION_RETRIEVING, suppressHistory)
         {
             _clone = host;
             _nrpeCurrentConfig = nrpeHostConfiguration;
-            _checkGroupDictByName = checkGroupDictByName;
         }
 
         protected override void Run()
@@ -65,7 +62,7 @@ namespace XenAdmin.Actions.NRPE
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Execute NRPE plugin failed, failed reason: {0}", e.Message);
+                log.ErrorFormat("Run NRPE plugin failed, failed reason: {0}", e.Message);
                 _nrpeCurrentConfig.Status = NRPEHostConfiguration.RetrieveNRPEStatus.Failed;
             }
         }
@@ -74,12 +71,12 @@ namespace XenAdmin.Actions.NRPE
         {
             string status = Host.call_plugin(o.Connection.Session, o.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
             NRPEHostConfiguration.XAPI_NRPE_STATUS, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_STATUS, status);
+            log.InfoFormat("Run NRPE {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_STATUS, status);
             _nrpeCurrentConfig.EnableNRPE = status.Trim().Equals("active enabled");
 
             string nrpeConfig = Host.call_plugin(o.Connection.Session, o.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, nrpeConfig);
+            log.InfoFormat("Run NRPE {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_CONFIG, nrpeConfig);
 
             string[] nrpeConfigArray = nrpeConfig.Split('\n');
             foreach (string nrpeConfigItem in nrpeConfigArray)
@@ -106,21 +103,15 @@ namespace XenAdmin.Actions.NRPE
         {
             string nrpeThreshold = Host.call_plugin(o.Connection.Session, o.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, nrpeThreshold);
+            log.InfoFormat("Run NRPE {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_GET_THRESHOLD, nrpeThreshold);
 
             string[] nrpeThresholdArray = nrpeThreshold.Split('\n');
             foreach (string nrpeThresholdItem in nrpeThresholdArray)
             {
                 // Return string format for each line: check_cpu warning threshold - 50 critical threshold - 80
                 string[] thresholdRtnArray = nrpeThresholdItem.Split(' ');
-                string checkName = thresholdRtnArray[0];
-                if (_checkGroupDictByName.TryGetValue(thresholdRtnArray[0], out CheckGroup thresholdCheck))
-                {
-                    string warningThreshold = thresholdRtnArray[4];
-                    string criticalThreshold = thresholdRtnArray[8];
-                    thresholdCheck.UpdateThreshold(warningThreshold, criticalThreshold);
-                    _nrpeCurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(checkName, warningThreshold, criticalThreshold));
-                }
+                _nrpeCurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(thresholdRtnArray[0], 
+                    thresholdRtnArray[4], thresholdRtnArray[8]));
             }
         }
 

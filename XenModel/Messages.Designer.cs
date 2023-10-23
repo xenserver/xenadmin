@@ -29151,7 +29151,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please remove duplicated address.
+        ///   Looks up a localized string similar to Please remove duplicate addresses.
         /// </summary>
         public static string NRPE_ALLOW_HOSTS_SAME_ADDRESS {
             get {
@@ -29286,7 +29286,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrieve NRPE configuration failed, please check XenCenter logs..
+        ///   Looks up a localized string similar to Failed to retrieve NRPE configuration, please check XenCenter logs..
         /// </summary>
         public static string NRPE_RETRIEVE_FAILED {
             get {

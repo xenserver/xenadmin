@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>XenCenter</AssemblyName>
+    <AssemblyName>[XenCenter]</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -482,6 +482,10 @@
     </Compile>
     <Compile Include="SettingsPanels\NRPEEditPage.Designer.cs">
       <DependentUpon>NRPEEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\NRPEEditPage.CheckGroup.cs">
+      <DependentUpon>NRPEEditPage.cs</DependentUpon>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SettingsPanels\PoolAdvancedEditPage.cs">
       <SubType>UserControl</SubType>

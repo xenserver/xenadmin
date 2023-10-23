@@ -37,15 +37,11 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Actions.NRPE;
 using XenAPI;
-using System.Linq;
-using XenAdmin.Network;
 
 namespace XenAdmin.SettingsPanels
 {
     public partial class NRPEEditPage : UserControl, IEditPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private static readonly Regex REGEX_IPV4 = new Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)");
         private static readonly Regex REGEX_IPV4_CIDR = new Regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$");
         private static readonly Regex REGEX_DOMAIN = new Regex("^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$");
@@ -119,8 +115,6 @@ namespace XenAdmin.SettingsPanels
             {
                 _invalidParamToolTipText = "";
                 _invalidParamToolTip.ToolTipTitle = "";
-                CheckDataGridView.ShowCellToolTips = false;
-                CheckDataGridView.ShowCellErrors = false;
 
                 if (!EnableNRPECheckBox.Checked)
                 {
@@ -129,14 +123,22 @@ namespace XenAdmin.SettingsPanels
 
                 bool valid = IsAllowHostsValid();
 
+                DataGridViewTextBoxCell focusCellWhenErrorOccurs = null;
                 foreach (CheckGroup checkGroup in _checkGroupList)
                 {
                     if (!checkGroup.CheckValue())
                     {
-                        CheckDataGridView.ShowCellToolTips = true;
-                        CheckDataGridView.ShowCellErrors = true;
                         valid = false;
+                        if (focusCellWhenErrorOccurs == null)
+                        {
+                            focusCellWhenErrorOccurs = checkGroup.NameCell;
+                        }
                     }
+                }
+                if (focusCellWhenErrorOccurs != null)
+                {
+                    CheckDataGridView.CurrentCell = CheckDataGridView.Rows[0].Cells[0];
+                    CheckDataGridView.CurrentCell = focusCellWhenErrorOccurs;
                 }
                 return valid;
             }
@@ -190,7 +192,7 @@ namespace XenAdmin.SettingsPanels
             UpdateRetrievingNRPETip(NRPEHostConfiguration.RetrieveNRPEStatus.Retrieving);
             DisableAllComponent();
 
-            NRPERetrieveAction action = new NRPERetrieveAction(_clone, _nrpeOriginalConfig, _checkGroupDictByName, true);
+            NRPERetrieveAction action = new NRPERetrieveAction(_clone, _nrpeOriginalConfig, true);
             action.Completed += ActionCompleted;
             action.RunAsync();
         }
@@ -250,6 +252,12 @@ namespace XenAdmin.SettingsPanels
                 Color.FromKnownColor(KnownColor.ControlDark) : AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
             DebugLogCheckBox.Checked = _nrpeOriginalConfig.Debug;
             SslDebugLogCheckBox.Checked = _nrpeOriginalConfig.SslLogging;
+
+            foreach (KeyValuePair<string, NRPEHostConfiguration.Check> check in _nrpeOriginalConfig.CheckDict)
+            {
+                _checkGroupDictByName.TryGetValue(check.Key, out CheckGroup cg);
+                cg?.UpdateThreshold(check.Value.WarningThreshold, check.Value.CriticalThreshold);
+            }
         }
 
         private void UpdateComponentStatusBasedEnableNRPECheckBox()
@@ -272,13 +280,14 @@ namespace XenAdmin.SettingsPanels
                     checkGroup.CriticalThresholdCell.Style.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
                 }
             }
+            CheckDataGridView.ShowCellToolTips = EnableNRPECheckBox.Checked;
+            CheckDataGridView.ShowCellErrors = EnableNRPECheckBox.Checked;
         }
 
         private bool IsAllowHostsValid()
         {
             _invalidParamToolTip.ToolTipTitle = Messages.NRPE_ALLOW_HOSTS_ERROR_TITLE;
             _invalidParamToolTip.Tag = AllowHostsTextBox;
-            CheckDataGridView.ShowCellToolTips = true;
 
             string str = AllowHostsTextBox.Text;
             if (str.Trim().Length == 0 || str.Trim().Equals(NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER))
@@ -316,7 +325,6 @@ namespace XenAdmin.SettingsPanels
                     return false;
                 }
             }
-            CheckDataGridView.ShowCellToolTips = false;
             return true;
         }
 
@@ -341,14 +349,14 @@ namespace XenAdmin.SettingsPanels
             _nrpeCurrentConfig = new NRPEHostConfiguration
             {
                 EnableNRPE = EnableNRPECheckBox.Checked,
-                AllowHosts = AllowHostsTextBox.Text,
+                AllowHosts = AllowHostsTextBox.Text.Replace(" ", string.Empty),
                 Debug = DebugLogCheckBox.Checked,
                 SslLogging = SslDebugLogCheckBox.Checked
             };
             foreach (KeyValuePair<string, CheckGroup> item in _checkGroupDictByName)
             {
                 _nrpeCurrentConfig.AddNRPECheck(new NRPEHostConfiguration.Check(item.Key,
-                    item.Value.WarningThresholdCell.Value.ToString(), item.Value.CriticalThresholdCell.Value.ToString()));
+                    item.Value.WarningThresholdCell.Value.ToString().Trim(), item.Value.CriticalThresholdCell.Value.ToString().Trim()));
             }
         }
 
@@ -372,6 +380,14 @@ namespace XenAdmin.SettingsPanels
             {
                 AllowHostsTextBox.Text = NRPEHostConfiguration.ALLOW_HOSTS_PLACE_HOLDER;
                 AllowHostsTextBox.ForeColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+        }
+
+        private void CheckDataGridView_EndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (CheckGroup checkGroup in _checkGroupList)
+            {
+                checkGroup.CheckValue();
             }
         }
     }

@@ -10117,7 +10117,7 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>Comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com</value>
   </data>
   <data name="NRPE_ALLOW_HOSTS_SAME_ADDRESS" xml:space="preserve">
-    <value>Please remove duplicated address</value>
+    <value>Please remove duplicate addresses</value>
   </data>
   <data name="NRPE_BATCH_CONFIGURATION" xml:space="preserve">
     <value>NRPE batch configuration</value>
@@ -10162,7 +10162,7 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>NRPE service is inactive</value>
   </data>
   <data name="NRPE_RETRIEVE_FAILED" xml:space="preserve">
-    <value>Retrieve NRPE configuration failed, please check XenCenter logs.</value>
+    <value>Failed to retrieve NRPE configuration, please check XenCenter logs.</value>
   </data>
   <data name="NRPE_RETRIEVING_CONFIGURATION" xml:space="preserve">
     <value>Retrieving NRPE configuration...</value>
