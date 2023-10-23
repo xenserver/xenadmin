@@ -30,6 +30,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using XenAPI;
 
 
@@ -60,7 +61,8 @@ namespace XenAdmin.Actions.NRPE
             }
             else
             {
-                SetNRPEConfigureForPool();
+                List<Host> hostList = ((Pool) _clone).Connection.Cache.Hosts.ToList();
+                hostList.ForEach(SetNRPEConfigureForHost);
             }
         }
 
@@ -88,10 +90,10 @@ namespace XenAdmin.Actions.NRPE
             foreach (KeyValuePair<string, NRPEHostConfiguration.Check> kvp in _nrpeHostConfiguration.CheckDict)
             {
                 NRPEHostConfiguration.Check currentCheck = kvp.Value;
-                _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check OriginalCheck);
-                if (currentCheck != null && OriginalCheck != null
-                    && (!currentCheck.WarningThreshold.Equals(OriginalCheck.WarningThreshold)
-                    || !currentCheck.CriticalThreshold.Equals(OriginalCheck.CriticalThreshold)))
+                _nrpeOriginalConfig.GetNRPECheck(kvp.Key, out NRPEHostConfiguration.Check originalCheck);
+                if (currentCheck != null && originalCheck != null
+                    && (!currentCheck.WarningThreshold.Equals(originalCheck.WarningThreshold)
+                    || !currentCheck.CriticalThreshold.Equals(originalCheck.CriticalThreshold)))
                 {
                     SetNRPEThreshold(o, currentCheck.Name, currentCheck.WarningThreshold, currentCheck.CriticalThreshold);
                 }
@@ -100,22 +102,13 @@ namespace XenAdmin.Actions.NRPE
             RestartNRPE(o);
         }
 
-        private void SetNRPEConfigureForPool()
-        {
-            List<Host> hostList = ((Pool) _clone).Connection.Cache.Hosts.ToList();
-            hostList.ForEach(host =>
-            {
-                SetNRPEConfigureForHost(host);
-            });
-        }
-
         private void SetNRPEStatus(IXenObject host, bool enableNRPE)
         {
             string nrpeUpdateStatusMethod = enableNRPE ?
                 NRPEHostConfiguration.XAPI_NRPE_ENABLE : NRPEHostConfiguration.XAPI_NRPE_DISABLE;
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 nrpeUpdateStatusMethod, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", nrpeUpdateStatusMethod, result);
+            log.InfoFormat("Run NRPE {0}, return: {1}", nrpeUpdateStatusMethod, result);
         }
 
         private void SetNRPEGeneralConfiguration(IXenObject host, string allowHosts, bool debug, bool sslLogging)
@@ -128,7 +121,7 @@ namespace XenAdmin.Actions.NRPE
                 };
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG, configArgDict);
-            log.InfoFormat("Execute nrpe {0}, allowed_hosts={1}, debug={2}, ssl_logging={3}, return: {4}",
+            log.InfoFormat("Run NRPE {0}, allowed_hosts={1}, debug={2}, ssl_logging={3}, return: {4}",
                 NRPEHostConfiguration.XAPI_NRPE_SET_CONFIG,
                 _nrpeHostConfiguration.AllowHosts,
                 _nrpeHostConfiguration.Debug,
@@ -146,7 +139,7 @@ namespace XenAdmin.Actions.NRPE
                         };
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_SET_THRESHOLD, thresholdArgDict);
-            log.InfoFormat("Execute nrpe {0}, check={1}, w={2}, c={3}, return: {4}",
+            log.InfoFormat("Run NRPE {0}, check={1}, w={2}, c={3}, return: {4}",
                 NRPEHostConfiguration.XAPI_NRPE_SET_THRESHOLD,
                 checkName,
                 warningThreshold,
@@ -159,7 +152,7 @@ namespace XenAdmin.Actions.NRPE
         {
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
                 NRPEHostConfiguration.XAPI_NRPE_RESTART, null);
-            log.InfoFormat("Execute nrpe {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_RESTART, result);
+            log.InfoFormat("Run NRPE {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_RESTART, result);
         }
     }
 }
