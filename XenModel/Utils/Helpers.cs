@@ -671,6 +671,7 @@ namespace XenAdmin.Core
         static Regex XapiMemoryRegex = new Regex("^xapi_(allocation|free_memory|live_memory|memory_usage)_kib$");
         static Regex StatefileLatencyRegex = new Regex("^statefile/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/latency$");
         static Regex LoadAvgRegex = new Regex("loadavg");
+        static Regex HostLoadRegex = new Regex("hostload");
         static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
@@ -704,6 +705,9 @@ namespace XenAdmin.Core
                 return DataSourceCategory.Latency;
 
             if (LoadAvgRegex.IsMatch(name))
+                return DataSourceCategory.LoadAverage;
+
+            if (HostLoadRegex.IsMatch(name))
                 return DataSourceCategory.LoadAverage;
 
             if (name.StartsWith("pvsaccelerator"))
@@ -898,6 +902,9 @@ namespace XenAdmin.Core
 
             if (LoadAvgRegex.IsMatch(name))
                 return FriendlyNameManager.GetFriendlyName("Label-performance.loadavg");
+
+            if (HostLoadRegex.IsMatch(name))
+                return FriendlyNames.OPERATIONAL_METRICS_HOSTLOAD;
 
             return FriendlyNameManager.GetFriendlyName(string.Format("Label-performance.{0}", name));
         }
