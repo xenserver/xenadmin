@@ -54,8 +54,8 @@ namespace XenAdmin.SettingsPanels
             {
                 Name = name;
                 NameCell = new DataGridViewTextBoxCell { Value = labelName };
-                WarningThresholdCell = new DataGridViewTextBoxCell();
-                CriticalThresholdCell = new DataGridViewTextBoxCell();
+                WarningThresholdCell = new DataGridViewTextBoxCell { Value = "" };
+                CriticalThresholdCell = new DataGridViewTextBoxCell { Value = "" };
                 CheckThresholdRow = new DataGridViewRow();
                 CheckThresholdRow.Cells.AddRange(NameCell, WarningThresholdCell, CriticalThresholdCell);
                 CheckThresholdRow.DefaultCellStyle.Format = "N2";
