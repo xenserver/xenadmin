@@ -147,9 +147,6 @@
   <data name="LOCALE" xml:space="preserve">
     <value>en-US</value>
   </data>
-  <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
-    <value>https://www.xenserver.com/downloads</value>
-  </data>
   <data name="PLUGINS_URL" xml:space="preserve">
     <value>https://github.com/xenserver/xencenter-samples</value>
   </data>
@@ -167,5 +164,8 @@
   </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.xenserver.com/</value>
+  </data>
+  <data name="WEBSITE_DOWNLOADS" xml:space="preserve">
+    <value>https://www.xenserver.com/downloads</value>
   </data>
 </root>

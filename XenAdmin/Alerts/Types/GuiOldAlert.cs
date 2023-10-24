@@ -49,7 +49,7 @@ namespace XenAdmin.Alerts
 
         public override Action FixLinkAction
         {
-            get { return () => Program.OpenURL(InvisibleMessages.OUT_OF_DATE_WEBSITE); }
+            get { return () => Program.OpenURL(InvisibleMessages.WEBSITE_DOWNLOADS); }
         }
 
         public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;

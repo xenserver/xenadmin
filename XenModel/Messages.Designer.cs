@@ -14095,6 +14095,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download latest source.
+        /// </summary>
+        public static string DOWNLOAD_LATEST_SOURCE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_LATEST_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is now available. Download the latest at the {1} downloads website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {

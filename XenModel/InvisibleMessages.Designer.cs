@@ -151,15 +151,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.xenserver.com/downloads.
-        /// </summary>
-        public static string OUT_OF_DATE_WEBSITE {
-            get {
-                return ResourceManager.GetString("OUT_OF_DATE_WEBSITE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://github.com/xenserver/xencenter-samples.
         /// </summary>
         public static string PLUGINS_URL {
@@ -210,6 +201,15 @@ namespace XenAdmin {
         public static string UPSELL_LEARNMOREURL_TRIAL {
             get {
                 return ResourceManager.GetString("UPSELL_LEARNMOREURL_TRIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.xenserver.com/downloads.
+        /// </summary>
+        public static string WEBSITE_DOWNLOADS {
+            get {
+                return ResourceManager.GetString("WEBSITE_DOWNLOADS", resourceCulture);
             }
         }
     }

@@ -152,35 +152,42 @@ namespace XenAdmin.Alerts
         {
             // If no update no need to show where to save dialog
             var clientVersion = Updates.ClientVersions.FirstOrDefault();
+
+            DownloadSourceAction downloadSourceAction;
             if (clientVersion == null)
+            {
+                // There is no XCupdates.xml so direct to website.
+                Program.OpenURL(InvisibleMessages.WEBSITE_DOWNLOADS);
                 return;
-
-            string outputPathAndFileName;
-            using (var saveSourceDialog = new SaveFileDialog())
+            }
+            else
             {
-                saveSourceDialog.FileName = BrandManager.BrandConsole + "-source.zip";
-                saveSourceDialog.DefaultExt = "zip";
-                saveSourceDialog.Filter = "(*.zip)|*.zip|All files (*.*)|*.*";
-                saveSourceDialog.InitialDirectory = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
-
-                if (saveSourceDialog.ShowDialog() != DialogResult.OK)
+                string outputPathAndFileName;
+                using (var saveSourceDialog = new SaveFileDialog())
                 {
-                    return;
+                    saveSourceDialog.FileName = BrandManager.BrandConsole + $"-v{clientVersion.Version}" + "-source.zip";
+                    saveSourceDialog.DefaultExt = "zip";
+                    saveSourceDialog.Filter = "(*.zip)|*.zip|All files (*.*)|*.*";
+                    saveSourceDialog.InitialDirectory = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
+
+                    if (saveSourceDialog.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+                    outputPathAndFileName = saveSourceDialog.FileName;
                 }
-                outputPathAndFileName = saveSourceDialog.FileName;
-            }
 
-            var sourceUrl = clientVersion.SourceUrl;
-            var downloadSourceAction = new DownloadSourceAction(clientVersion.Name, clientVersion.Version, new Uri(sourceUrl), outputPathAndFileName);
+                downloadSourceAction = new DownloadSourceAction(clientVersion.Name, clientVersion.Version, new Uri(clientVersion.SourceUrl), outputPathAndFileName);
 
-            using (var dlg = new ActionProgressDialog(downloadSourceAction, ProgressBarStyle.Continuous))
-            {
-                dlg.ShowCancel = true;
-                dlg.ShowDialog(parent);
-            }
+                using (var dlg = new ActionProgressDialog(downloadSourceAction, ProgressBarStyle.Continuous))
+                {
+                    dlg.ShowCancel = true;
+                    dlg.ShowDialog(parent);
+                }
 
-            if (!downloadSourceAction.Succeeded)
-                return;            
+                if (!downloadSourceAction.Succeeded)
+                    return;
+            }           
         }
     }
 }

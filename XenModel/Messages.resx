@@ -4977,6 +4977,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWNLOAD_FILE_NOT_FOUND" xml:space="preserve">
     <value>The downloaded file can no longer be found.</value>
   </data>
+  <data name="DOWNLOAD_LATEST_SOURCE" xml:space="preserve">
+    <value>Download latest source</value>
+  </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
     <value>{0} is now available. Download the latest at the {1} downloads website.</value>
   </data>

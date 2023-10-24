@@ -270,6 +270,7 @@ namespace XenAdmin
             statusButtonAlerts.Visible = statusButtonUpdates.Visible = statusButtonCdnUpdates.Visible = statusButtonProgress.Visible = statusButtonErrors.Visible = false;
             statusButtonUpdates.ToolTipText = string.Format(statusButtonUpdates.ToolTipText, BrandManager.ProductVersion821);
             statusButtonCdnUpdates.ToolTipText = string.Format(statusButtonCdnUpdates.ToolTipText, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            downloadLatestSourceToolStripMenuItem.Text = Messages.DOWNLOAD_LATEST_SOURCE;
         }
 
         private void RegisterEvents()
@@ -967,7 +968,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate
                     {
                         var msg = string.Format(Messages.GUI_OUT_OF_DATE, BrandManager.BrandConsole, Helpers.GetName(coordinator));
-                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var url = InvisibleMessages.WEBSITE_DOWNLOADS;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
@@ -995,7 +996,7 @@ namespace XenAdmin
                     {
                         var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductVersion712,
                             BrandManager.ProductVersion80, Helpers.GetName(coordinator));
-                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var url = InvisibleMessages.WEBSITE_DOWNLOADS;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
@@ -2721,10 +2722,9 @@ namespace XenAdmin
                 downloadSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, updateAlert.NewVersion.Version);
             }
             var clientVersion = Updates.ClientVersions.FirstOrDefault();            
-            downloadLatestSourceToolStripMenuItem.Visible = clientVersion != null;
             downloadLatestSourceToolStripMenuItem.Text = clientVersion != null
                 ? string.Format(Messages.DOWNLOAD_SOURCE, clientVersion.Version)
-                : string.Empty;
+                : Messages.DOWNLOAD_LATEST_SOURCE;
             updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 
