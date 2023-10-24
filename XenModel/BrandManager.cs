@@ -53,7 +53,6 @@ namespace XenAdmin.Core
             ProductVersionPost82 = customBranding.ProductVersionText;
             XcUpdatesUrl = customBranding.XcUpdatesUrl;
             CfuUrl = customBranding.CfuUrl;
-            SourceUrl = XcUpdatesUrl.Replace("XCUpdates.xml", "XenCenter-source.zip");
             VmTools = customBranding.VmTools;
             XenHost = customBranding.XenHost;
             YumRepoBaseBin = customBranding.YumRepoBaseBin;
