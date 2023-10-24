@@ -260,7 +260,10 @@ namespace XenAPI
         /// <returns>The value if found. If not found, null is returned instead</returns>
         private static T? GetRestrictionValueFromMatchingTemplate<T>(VM vm, string field, string attribute) where T : struct
         {
-            if (!vm.is_a_template && !string.IsNullOrEmpty(vm.reference_label))
+            if(vm.is_a_template)
+                return GetRestrictionValue<T>(vm, field, attribute);
+
+            if (!string.IsNullOrEmpty(vm.reference_label))
             {
                 var matchingTemplate = vm.Connection.Cache.VMs
                     .FirstOrDefault(v => v.is_a_template && v.reference_label == vm.reference_label);
@@ -288,6 +291,13 @@ namespace XenAPI
             var xn = xd?.SelectSingleNode($@"restrictions/restriction[@field='{field}']");
             var resultString = xn?.Attributes?[attribute]?.Value;
             T? result = null;
+
+            // avoid the expensive operation of throwing an exception
+            if (string.IsNullOrEmpty(resultString))
+            {
+                return null;
+            }
+
             try
             {
                 var converter = TypeDescriptor.GetConverter(typeof(T));
@@ -320,6 +330,7 @@ namespace XenAPI
         private static List<T> GetRestrictionValueAcrossTemplates<T>(IXenObject vm, string field, string attribute) where T : struct
         {
             return vm.Connection.Cache.VMs
+                .AsParallel()
                 .Where(v => v.is_a_template)
                 .Select(v => GetRestrictionValue<T>(v, field, attribute))
                 .Where(value => value != null)
@@ -343,7 +354,8 @@ namespace XenAPI
                 return (T) value;
 
             var templateValues = GetRestrictionValueAcrossTemplates<T>(vm, field, "max");
-            return templateValues.Count == 0 ? defaultValue : templateValues.Max();
+            templateValues.Add(defaultValue);
+            return templateValues.Max();
         }
 
         /// <summary>
@@ -362,7 +374,8 @@ namespace XenAPI
                 return (T)value;
 
             var templateValues = GetRestrictionValueAcrossTemplates<T>(vm, field, "min");
-            return templateValues.Count == 0 ? defaultValue : templateValues.Min();
+            templateValues.Add(defaultValue);
+            return templateValues.Min();
         }
 
         /// <summary>
