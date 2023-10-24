@@ -5274,6 +5274,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host CPU Load.
+        /// </summary>
+        public static string OPERATIONAL_METRICS_HOSTLOAD {
+            get {
+                return ResourceManager.GetString("OPERATIONAL_METRICS_HOSTLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was an error in preparing the host for upgrade..
         /// </summary>
         public static string PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST {
