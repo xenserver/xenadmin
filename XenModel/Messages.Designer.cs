@@ -35390,6 +35390,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}-v{1}-source.
+        /// </summary>
+        public static string SOURCE_FILE_NAME {
+            get {
+                return ResourceManager.GetString("SOURCE_FILE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  - .
         /// </summary>
         public static string SPACED_HYPHEN {

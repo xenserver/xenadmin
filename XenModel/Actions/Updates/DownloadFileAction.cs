@@ -375,7 +375,7 @@ namespace XenAdmin.Actions.Updates
     public class DownloadSourceAction : DownloadFileAction, IByteProgressAction
     {
         public DownloadSourceAction(string sourceName, Version version, Uri uri, string outputFileName)
-            : base(sourceName + " source",
+            : base(String.Format(Messages.SOURCE_FILE_NAME, sourceName, version),
                   uri,
                   outputFileName,
                   string.Format(Messages.DOWNLOADING_FILE, version.ToString() + " " + outputFileName),

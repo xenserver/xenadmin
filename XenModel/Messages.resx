@@ -12241,6 +12241,9 @@ Reverting to this snapshot will revert the VM back to the point in time that the
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>Some errors were encountered. See the application log for more information.</value>
   </data>
+  <data name="SOURCE_FILE_NAME" xml:space="preserve">
+    <value>{0}-v{1}-source</value>
+  </data>
   <data name="SPACED_HYPHEN" xml:space="preserve">
     <value> - </value>
   </data>
