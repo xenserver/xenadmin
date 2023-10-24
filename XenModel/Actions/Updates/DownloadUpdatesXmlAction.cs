@@ -121,7 +121,7 @@ namespace XenAdmin.Actions
                             latestCr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
-                        else if (attrib.Name == "source")
+                        else if (attrib.Name == "sourceUrl")
                             sourceUrl = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;

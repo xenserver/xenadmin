@@ -310,7 +310,7 @@ $xmlFormat=@"
             url="{2}"
             checksum="{3}"
             value="{4}"
-            source="{5}"
+            sourceUrl="{5}"
         />
     </versions>
 </patchdata>
