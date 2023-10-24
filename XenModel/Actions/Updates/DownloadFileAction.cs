@@ -285,7 +285,7 @@ namespace XenAdmin.Actions.Updates
             : base(updateName,
                   uri,
                   outputFileName,
-                  string.Join("", updateName, ".msi"),
+                  $"{updateName}.msi",
                   true)
         {
             _checksum = checksum;
