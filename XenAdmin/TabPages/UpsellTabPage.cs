@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System.ComponentModel;
 using XenAdmin.Core;
 
 
@@ -35,31 +36,28 @@ namespace XenAdmin.TabPages
 {
     public partial class UpsellTabPage : BaseTabPage
     {
-        protected UpsellTabPage(string title, string blurb)
+        protected UpsellTabPage()
         {
             InitializeComponent();
-            base.Text = title;
-
-            BlurbText = blurb;
-            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL;
         }
 
-        public string BlurbText
+        protected string BlurbText
         {
             set => upsellPage1.BlurbText = value;
         }
 
-        public string LearnMoreUrl
+        protected string Title
         {
-            set => upsellPage1.LearnMoreUrl = value;
+            set => Text = value;
         }
     }
 
     public class ADUpsellPage : UpsellTabPage
     {
         public ADUpsellPage()
-            : base(Messages.ACTIVE_DIRECTORY_TAB_TITLE, string.Format(Messages.UPSELL_BLURB_AD, BrandManager.ProductBrand))
         {
+            Title = Messages.ACTIVE_DIRECTORY_TAB_TITLE;
+            BlurbText = string.Format(Messages.UPSELL_BLURB_AD, BrandManager.ProductBrand);
         }
 
         public override string HelpID => "TabPageADUpsell";
@@ -68,8 +66,10 @@ namespace XenAdmin.TabPages
     public class HAUpsellPage : UpsellTabPage
     {
         public HAUpsellPage()
-            : base(Messages.HIGH_AVAILABILITY, Messages.UPSELL_BLURB_HA)
-        { }
+        {
+            Title = Messages.HIGH_AVAILABILITY;
+            BlurbText = Messages.UPSELL_BLURB_HA;
+        }
 
         public override string HelpID => "TabPageHAUpsell";
     }
@@ -77,8 +77,10 @@ namespace XenAdmin.TabPages
     public class WLBUpsellPage : UpsellTabPage
     {
         public WLBUpsellPage()
-            : base(Messages.WORKLOAD_BALANCING, Messages.UPSELL_BLURB_WLB)
-        { }
+        {
+            Title = Messages.WORKLOAD_BALANCING;
+            BlurbText = Messages.UPSELL_BLURB_WLB;
+        }
 
         public override string HelpID => "TabPageWLBUpsell";
     }

@@ -104,6 +104,7 @@ namespace XenAdmin
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
         internal readonly UsbPage UsbPage = new UsbPage();
+        private readonly SnapshotsPage snapshotPage = new SnapshotsPage();
 
         private readonly NotificationsBasePage[] _notificationPages;
 
@@ -188,6 +189,7 @@ namespace XenAdmin
             components.Add(DockerProcessPage);
             components.Add(DockerDetailsPage);
             components.Add(UsbPage);
+            components.Add(snapshotPage);
 
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
@@ -212,6 +214,7 @@ namespace XenAdmin
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
             AddTabContents(DockerDetailsPage, TabPageDockerDetails);
             AddTabContents(UsbPage, TabPageUSB);
+            AddTabContents(snapshotPage, TabPageSnapshots);
 
             #endregion
 
@@ -1570,9 +1573,8 @@ namespace XenAdmin
             if(!multi && !SearchMode && isRealVMSelected)
                 newTabs.Add(TabPageSnapshots);
 
-            //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
-            if (!wlb_upsell && !multi && !SearchMode && isPoolSelected)
-                newTabs.Add(TabPageWLB);
+            if (!multi && !SearchMode && isPoolSelected)
+                newTabs.Add(wlb_upsell ? TabPageWLBUpsell : TabPageWLB);
 
             if (!multi && !SearchMode && (isPoolSelected || isPoolOrLiveStandaloneHost))
                 newTabs.Add(ad_upsell ? TabPageADUpsell : TabPageAD);

@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -61,6 +62,8 @@ namespace XenAdmin.TabPages
 
         public override string HelpID => "TabPageDockerProcess";
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DockerContainer DockerContainer
         {
             get

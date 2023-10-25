@@ -71,6 +71,8 @@ namespace XenAdmin.TabPages
 
         public override string HelpID => "TabPagePvs";
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IXenConnection Connection
         {
             get

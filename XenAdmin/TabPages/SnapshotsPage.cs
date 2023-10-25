@@ -115,6 +115,8 @@ namespace XenAdmin.TabPages
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
         public VM VM
         {
             set

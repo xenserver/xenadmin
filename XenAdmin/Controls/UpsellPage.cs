@@ -45,10 +45,10 @@ namespace XenAdmin.Controls
         public UpsellPage()
         {
             InitializeComponent();
-            this.LearnMoreButton.Visible = !HiddenFeatures.LearnMoreButtonHidden;
+            LearnMoreButton.Visible = !HiddenFeatures.LearnMoreButtonHidden;
         }
 
-        public void enableOkButton()
+        public void EnableOkButton()
         {
             OKButton.Visible = true;
         }
@@ -60,11 +60,9 @@ namespace XenAdmin.Controls
                 : value + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand);
         }
 
-        public string LearnMoreUrl { private get; set; } = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL;
-
         private void LearnMoreButton_Clicked(object sender, EventArgs e)
         {
-            NavigateTo(LearnMoreUrl);
+            NavigateTo(InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
         }
 
         private void NavigateTo(string url)

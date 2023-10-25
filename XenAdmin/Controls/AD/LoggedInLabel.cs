@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAPI;
@@ -39,6 +40,9 @@ namespace XenAdmin.Controls
     public partial class LoggedInLabel : UserControl
     {
         private IXenConnection connection;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IXenConnection Connection
         {
             get

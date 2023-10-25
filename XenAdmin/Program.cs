@@ -144,8 +144,11 @@ namespace XenAdmin
         [STAThread]
         public static void Main(string[] args)
         {
-            string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value;
-            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsole, Process.GetCurrentProcess().SessionId, Environment.UserName, appGuid);
+            _pipePath = string.Format(PIPE_PATH_PATTERN,
+                BrandManager.BrandConsole,
+                Process.GetCurrentProcess().SessionId,
+                Environment.UserName,
+                Assembly.GetExecutingAssembly().Location.Replace('\\', '-'));
 
             if (NamedPipes.Pipe.ExistsPipe(_pipePath))
             {

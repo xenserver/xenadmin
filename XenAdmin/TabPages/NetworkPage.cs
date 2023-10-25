@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 using XenAPI;
@@ -44,9 +45,12 @@ namespace XenAdmin.TabPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // We don't rebuild the controls while the tab is not visible, but instead queue it up later for when the page is displayed.
-        private bool refreshNeeded = false;
+        private bool refreshNeeded;
 
         private IXenObject _xenObject;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IXenObject XenObject
         {
             get
