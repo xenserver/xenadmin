@@ -57,7 +57,7 @@ namespace XenAdmin.Actions
         private readonly int _maxNumberOfParallelActions;
         private readonly int _actionsCount;
         private readonly object _lock = new object();
-        private volatile int _completedActionsCount ;
+        private volatile int _completedActionsCount;
 
         /// <summary>
         /// Use this constructor to create a cross connection ParallelAction.
@@ -124,7 +124,10 @@ namespace XenAdmin.Actions
 
             lock (_lock)
             {
-                Monitor.Wait(_lock);
+                // CA-379971: There is a chance that all actions have completed before we
+                // hit the Wait call, we need to make sure we don't hit a deadlock
+                if (_completedActionsCount != _actionsCount)
+                    Monitor.Wait(_lock);
             }
         }
 
@@ -165,7 +168,7 @@ namespace XenAdmin.Actions
 
             foreach (var connection in _actionsByConnection.Keys)
             {
-                foreach (var action in _actionsByConnection[connection]) 
+                foreach (var action in _actionsByConnection[connection])
                     total += action.PercentComplete;
             }
 
@@ -180,7 +183,7 @@ namespace XenAdmin.Actions
             sender.Completed -= action_Completed;
             lock (_lock)
             {
-                _completedActionsCount++;
+                _completedActionsCount = _completedActionsCount + 1;
                 if (_completedActionsCount == _actionsCount)
                 {
                     Monitor.Pulse(_lock);
