@@ -38,6 +38,7 @@ using XenAdmin.Actions.GUIActions;
 using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.WarningDialogs;
 using XenCenterLib;
 
 namespace XenAdmin.Alerts
@@ -124,10 +125,13 @@ namespace XenAdmin.Alerts
 
             if (currentTasks)
             {
-                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
+                using (var dlg = new CloseXenCenterWarningDialog(true))
                 {
-                    downloadAndInstallClientAction.ReleaseDownloadedContent();
-                    return;
+                    if (dlg.ShowDialog(parent) != DialogResult.OK)
+                    {
+                        downloadAndInstallClientAction.ReleaseDownloadedContent();
+                        return;
+                    }
                 }
             }
 
@@ -153,40 +157,30 @@ namespace XenAdmin.Alerts
             // If no update no need to show where to save dialog
             var clientVersion = Updates.ClientVersions.FirstOrDefault();
 
-            DownloadSourceAction downloadSourceAction;
             if (clientVersion == null)
             {
-                // There is no XCupdates.xml so direct to website.
+                // There is no XCUpdates.xml so direct to website.
                 Program.OpenURL(InvisibleMessages.WEBSITE_DOWNLOADS);
-                return;
             }
             else
             {
                 string outputPathAndFileName;
                 using (var saveSourceDialog = new SaveFileDialog())
                 {
-                    saveSourceDialog.FileName = string.Format(Messages.SOURCE_FILE_NAME, BrandManager.BrandConsole, clientVersion.Version) + ".zip";
+                    saveSourceDialog.FileName = $"{BrandManager.BrandConsole}-v{clientVersion.Version}-source.zip";
                     saveSourceDialog.DefaultExt = "zip";
                     saveSourceDialog.Filter = "(*.zip)|*.zip|All files (*.*)|*.*";
                     saveSourceDialog.InitialDirectory = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
 
-                    if (saveSourceDialog.ShowDialog() != DialogResult.OK)
+                    if (saveSourceDialog.ShowDialog(parent) != DialogResult.OK)
                     {
                         return;
                     }
                     outputPathAndFileName = saveSourceDialog.FileName;
                 }
 
-                downloadSourceAction = new DownloadSourceAction(clientVersion.Name, clientVersion.Version, new Uri(clientVersion.SourceUrl), outputPathAndFileName);
-
-                using (var dlg = new ActionProgressDialog(downloadSourceAction, ProgressBarStyle.Continuous))
-                {
-                    dlg.ShowCancel = true;
-                    dlg.ShowDialog(parent);
-                }
-
-                if (!downloadSourceAction.Succeeded)
-                    return;
+                var downloadSourceAction = new DownloadSourceAction(clientVersion.Name, new Uri(clientVersion.SourceUrl), outputPathAndFileName);
+                downloadSourceAction.RunAsync();
             }           
         }
     }

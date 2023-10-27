@@ -2719,12 +2719,12 @@ namespace XenAdmin
             if (updateAlert != null)
             {
                 relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
-                downloadSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, updateAlert.NewVersion.Version);
+                downloadSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, BrandManager.BrandConsole, updateAlert.NewVersion.Version);
             }
-            var clientVersion = Updates.ClientVersions.FirstOrDefault();            
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();
             downloadLatestSourceToolStripMenuItem.Text = clientVersion != null
-                ? string.Format(Messages.DOWNLOAD_SOURCE, clientVersion.Version)
-                : Messages.DOWNLOAD_LATEST_SOURCE;
+                ? string.Format(Messages.DOWNLOAD_SOURCE, BrandManager.BrandConsole, clientVersion.Version)
+                : string.Format(Messages.DOWNLOAD_LATEST_SOURCE, BrandManager.BrandConsole);
             updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 

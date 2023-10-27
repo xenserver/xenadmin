@@ -14050,11 +14050,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading {0} installer ({1} of {2})....
+        ///   Looks up a localized string similar to Downloading {0} installer.
         /// </summary>
-        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION {
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION {
             get {
-                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} installer.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE", resourceCulture);
             }
         }
         
@@ -14068,11 +14077,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} source code.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_SOURCE_ACTION_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_SOURCE_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} source code.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_SOURCE_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_SOURCE_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download....
         /// </summary>
         public static string DOWNLOAD_ELLIPSES {
             get {
                 return ResourceManager.GetString("DOWNLOAD_ELLIPSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The downloaded file can no longer be found..
+        /// </summary>
+        public static string DOWNLOAD_FILE_ACTION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_FILE_ACTION_NOT_FOUND", resourceCulture);
             }
         }
         
@@ -14086,16 +14122,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The downloaded file can no longer be found..
-        /// </summary>
-        public static string DOWNLOAD_FILE_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("DOWNLOAD_FILE_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download latest source.
+        ///   Looks up a localized string similar to Download latest {0} source code.
         /// </summary>
         public static string DOWNLOAD_LATEST_SOURCE {
             get {
@@ -14113,20 +14140,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download v{0} source.
+        ///   Looks up a localized string similar to Download {0} v{1} source code.
         /// </summary>
         public static string DOWNLOAD_SOURCE {
             get {
                 return ResourceManager.GetString("DOWNLOAD_SOURCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading {0}.
-        /// </summary>
-        public static string DOWNLOADING_FILE {
-            get {
-                return ResourceManager.GetString("DOWNLOADING_FILE", resourceCulture);
             }
         }
         
@@ -35386,15 +35404,6 @@ namespace XenAdmin {
         public static string SOME_ERRORS_ENCOUNTERED {
             get {
                 return ResourceManager.GetString("SOME_ERRORS_ENCOUNTERED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}-v{1}-source.
-        /// </summary>
-        public static string SOURCE_FILE_NAME {
-            get {
-                return ResourceManager.GetString("SOURCE_FILE_NAME", resourceCulture);
             }
         }
         

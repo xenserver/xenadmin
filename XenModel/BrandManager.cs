@@ -31,7 +31,6 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
-using System.Web.UI;
 using XenAdmin.Properties;
 
 
@@ -113,8 +112,6 @@ namespace XenAdmin.Core
         public static readonly string XcUpdatesUrl;
 
         public static readonly string CfuUrl;
-
-        public static readonly string SourceUrl;
 
         public static readonly string VmTools;
 
