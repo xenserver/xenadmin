@@ -2866,7 +2866,7 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
   </data>
-  <data name="CHECKING_HA_STATUS" xml:space="preserve">
+  <data name="CHECKING_HA_AND_WLB_STATUS" xml:space="preserve">
     <value>Checking HA and WLB status</value>
   </data>
   <data name="CHECKING_HEALTH_CHECK_SERVICE" xml:space="preserve">
@@ -6580,6 +6580,9 @@ not currently live:
   <data name="HA_CANNOT_EVACUATE_COORDINATOR" xml:space="preserve">
     <value>Server '{0}' cannot be placed in Maintenance Mode because it is the coordinator of an HA-enabled pool.</value>
   </data>
+  <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>HA check</value>
+  </data>
   <data name="HA_CHOOSESR_PAGE_PAGETITLE" xml:space="preserve">
     <value>Choose a heartbeat SR</value>
   </data>
@@ -6816,9 +6819,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review configuration and activate HA</value>
-  </data>
-  <data name="HA_WLB_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>HA and WLB check</value>
   </data>
   <data name="HAS_CUSTOM_FIELDS" xml:space="preserve">
     <value>Has any custom field</value>
@@ -13136,6 +13136,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
 
 Check your settings and try again.</value>
   </data>
+  <data name="UPDATES_WIZARD_HA_AND_WLB_ON_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because HA and WLB are enabled on pool {1}.</value>
+  </data>
   <data name="UPDATES_WIZARD_HA_ON_DESCRIPTION" xml:space="preserve">
     <value>Pool '{0}' cannot have HA enabled.</value>
   </data>
@@ -14300,6 +14303,9 @@ Schedule:
   </data>
   <data name="WLB_AUTOMATION_SUBTEXT" xml:space="preserve">
     <value>Configure WLB Automation</value>
+  </data>
+  <data name="WLB_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>WLB check</value>
   </data>
   <data name="WLB_COMMAND_MENU_ITEM" xml:space="preserve">
     <value>Workload &amp;Balancing</value>

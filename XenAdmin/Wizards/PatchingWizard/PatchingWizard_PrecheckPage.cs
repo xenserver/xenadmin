@@ -359,13 +359,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
-            //HA checks
+            //HA and WLB checks
 
-            var haChecks = new List<Check>();
+            var haWlbChecks = new List<Check>();
             foreach (Pool pool in SelectedPools)
-                haChecks.Add(new HaWlbOffCheck(pool));
+            {
+                haWlbChecks.Add(new HaOffCheck(pool));
+                haWlbChecks.Add(new WlbOffCheck(pool));
+            }
 
-            groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
+            groups.Add(new CheckGroup(Messages.CHECKING_HA_AND_WLB_STATUS, haWlbChecks));
 
             //PBDsPluggedCheck
             var pbdChecks = new List<Check>();

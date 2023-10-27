@@ -28,7 +28,6 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
 using XenAPI;
@@ -36,25 +35,37 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class HaWlbOffCheck : PoolCheck
+    internal class HaOffCheck : PoolCheck
     {
-        public HaWlbOffCheck(Pool pool)
+        public HaOffCheck(Pool pool)
             : base(pool)
         {
         }
 
         protected override Problem RunCheck()
         {
-            if (Pool.ha_enabled)
-                return new HAEnabledProblem(this, Pool);
-
-            if (Helpers.WlbEnabled(Pool.Connection))
-                return new WLBEnabledProblem(this, Pool);
-
-            return null;
+            return Pool.ha_enabled ? new HAEnabledProblem(this, Pool) : null;
         }
 
-        public override string Description => Messages.HA_WLB_CHECK_DESCRIPTION;
+        public override string Description => Messages.HA_CHECK_DESCRIPTION;
+
+        public override string SuccessfulCheckDescription => string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK, Pool.Name(), Description);
+    }
+
+
+    internal class WlbOffCheck : PoolCheck
+    {
+        public WlbOffCheck(Pool pool)
+            : base(pool)
+        {
+        }
+
+        protected override Problem RunCheck()
+        {
+            return Pool.wlb_enabled ? new WLBEnabledProblem(this, Pool) : null;
+        }
+
+        public override string Description => Messages.WLB_CHECK_DESCRIPTION;
 
         public override string SuccessfulCheckDescription => string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK, Pool.Name(), Description);
     }
