@@ -42,7 +42,7 @@ namespace XenAdmin.SettingsPanels
 {
     public partial class NRPEEditPage : UserControl, IEditPage
     {
-        private static readonly Regex REGEX_IPV4 = new Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)");
+        private static readonly Regex REGEX_IPV4 = new Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$");
         private static readonly Regex REGEX_IPV4_CIDR = new Regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$");
         private static readonly Regex REGEX_DOMAIN = new Regex("^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$");
 
@@ -313,16 +313,6 @@ namespace XenAdmin.SettingsPanels
                         _invalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_SAME_ADDRESS;
                         return false;
                     }
-                }
-            }
-            foreach (string host in hostArray)
-            {
-                if (!REGEX_IPV4.Match(host.Trim()).Success &&
-                    !REGEX_IPV4_CIDR.Match(host.Trim()).Success &&
-                    !REGEX_DOMAIN.Match(host.Trim()).Success)
-                {
-                    _invalidParamToolTipText = Messages.NRPE_ALLOW_HOSTS_FORMAT_ERROR;
-                    return false;
                 }
             }
             return true;
