@@ -10161,6 +10161,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NRPE_INACTIVE" xml:space="preserve">
     <value>NRPE service is inactive</value>
   </data>
+  <data name="NRPE_METRIC_TOOLTIP" xml:space="preserve">
+    <value>NRPE check name: {0}</value>
+  </data>
   <data name="NRPE_RETRIEVE_FAILED" xml:space="preserve">
     <value>Failed to retrieve NRPE configuration, please check XenCenter logs.</value>
   </data>
