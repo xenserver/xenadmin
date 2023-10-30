@@ -53,7 +53,7 @@ namespace XenAdmin.SettingsPanels
             public CheckGroup(string name, string labelName)
             {
                 Name = name;
-                NameCell = new DataGridViewTextBoxCell { Value = labelName };
+                NameCell = new DataGridViewTextBoxCell { Value = labelName, ToolTipText = string.Format(Messages.NRPE_METRIC_TOOLTIP, name) };
                 WarningThresholdCell = new DataGridViewTextBoxCell { Value = "" };
                 CriticalThresholdCell = new DataGridViewTextBoxCell { Value = "" };
                 CheckThresholdRow = new DataGridViewRow();

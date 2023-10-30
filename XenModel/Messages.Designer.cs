@@ -29286,6 +29286,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NRPE check name: {0}.
+        /// </summary>
+        public static string NRPE_METRIC_TOOLTIP {
+            get {
+                return ResourceManager.GetString("NRPE_METRIC_TOOLTIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to retrieve NRPE configuration, please check XenCenter logs..
         /// </summary>
         public static string NRPE_RETRIEVE_FAILED {
