@@ -105,6 +105,7 @@ namespace XenAdmin.Actions
                     bool latest = false;
                     bool latestCr = false;
                     string url = string.Empty;
+                    string sourceUrl = string.Empty;
                     string timestamp = string.Empty;
                     string checksum = string.Empty;
 
@@ -120,13 +121,15 @@ namespace XenAdmin.Actions
                             latestCr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
+                        else if (attrib.Name == "sourceUrl")
+                            sourceUrl = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
                         else if (attrib.Name == "checksum")
                             checksum = attrib.Value;
                     }
 
-                    ClientVersions.Add(new ClientVersion(versionLang, name, latest, latestCr, url, timestamp, checksum));
+                    ClientVersions.Add(new ClientVersion(versionLang, name, latest, latestCr, url, timestamp, checksum, sourceUrl));
                 }
             }
         }

@@ -43,8 +43,8 @@ namespace XenAdminTests.UnitTests.AlertTests
         public void VerifyStoredDataWithDefaultConstructor()
         {
             var version = new ClientVersion("6.0.2", "xc", true, false, "http://url",
-                new DateTime(2011, 12, 09).ToString(), "abcde");
-
+                new DateTime(2011, 12, 09).ToString(), "abcde", "http://sourceurl");
+            
             ClassVerifiers.VerifyGetters(new ClientUpdateAlert(version),
                 new UpdateAlertClassUnitTestData
                 {

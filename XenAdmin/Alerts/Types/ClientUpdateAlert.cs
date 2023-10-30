@@ -31,13 +31,15 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Actions.GUIActions;
 using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-
+using XenAdmin.Dialogs.WarningDialogs;
+using XenCenterLib;
 
 namespace XenAdmin.Alerts
 {
@@ -123,10 +125,13 @@ namespace XenAdmin.Alerts
 
             if (currentTasks)
             {
-                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
+                using (var dlg = new CloseXenCenterWarningDialog(true))
                 {
-                    downloadAndInstallClientAction.ReleaseInstaller();
-                    return;
+                    if (dlg.ShowDialog(parent) != DialogResult.OK)
+                    {
+                        downloadAndInstallClientAction.ReleaseDownloadedContent();
+                        return;
+                    }
                 }
             }
 
@@ -134,17 +139,49 @@ namespace XenAdmin.Alerts
             {
                 Process.Start(outputPathAndFileName);
                 log.DebugFormat("Update {0} found and install started", updateAlert.Name);
-                downloadAndInstallClientAction.ReleaseInstaller();
+                downloadAndInstallClientAction.ReleaseDownloadedContent();
                 Application.Exit();
             }
             catch (Exception e)
             {
                 log.Error("Exception occurred when starting the installation process.", e);
-                downloadAndInstallClientAction.ReleaseInstaller(true);
+                downloadAndInstallClientAction.ReleaseDownloadedContent(true);
 
                 using (var dlg = new ErrorDialog(Messages.UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH))
                     dlg.ShowDialog(parent);
             }
+        }
+
+        public static void DownloadSource(IWin32Window parent)
+        {
+            // If no update no need to show where to save dialog
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();
+
+            if (clientVersion == null)
+            {
+                // There is no XCUpdates.xml so direct to website.
+                Program.OpenURL(InvisibleMessages.WEBSITE_DOWNLOADS);
+            }
+            else
+            {
+                string outputPathAndFileName;
+                using (var saveSourceDialog = new SaveFileDialog())
+                {
+                    saveSourceDialog.FileName = $"{BrandManager.BrandConsole}-v{clientVersion.Version}-source.zip";
+                    saveSourceDialog.DefaultExt = "zip";
+                    saveSourceDialog.Filter = "(*.zip)|*.zip|All files (*.*)|*.*";
+                    saveSourceDialog.InitialDirectory = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
+
+                    if (saveSourceDialog.ShowDialog(parent) != DialogResult.OK)
+                    {
+                        return;
+                    }
+                    outputPathAndFileName = saveSourceDialog.FileName;
+                }
+
+                var downloadSourceAction = new DownloadSourceAction(clientVersion.Name, new Uri(clientVersion.SourceUrl), outputPathAndFileName);
+                downloadSourceAction.RunAsync();
+            }           
         }
     }
 }

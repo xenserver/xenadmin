@@ -2772,6 +2772,9 @@
   <data name="pluginItemsPlaceHolderToolStripMenuItem8.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
+  <data name="downloadLatestSourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
@@ -2797,16 +2800,22 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="downloadInstallToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="downloadInstallToolStripMenuItem.Text" xml:space="preserve">
     <value>Download and &amp;Install</value>
   </data>
   <data name="relNotesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="relNotesToolStripMenuItem.Text" xml:space="preserve">
     <value>v{0} &amp;Release Notes</value>
+  </data>
+  <data name="downloadSourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="downloadSourceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Download v{0} source</value>
   </data>
   <data name="updateClientToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 20</value>
@@ -4143,6 +4152,12 @@
   <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;downloadLatestSourceToolStripMenuItem.Name" xml:space="preserve">
+    <value>downloadLatestSourceToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;downloadLatestSourceToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;aboutXenSourceAdminToolStripMenuItem.Name" xml:space="preserve">
     <value>aboutXenSourceAdminToolStripMenuItem</value>
   </data>
@@ -4165,6 +4180,12 @@
     <value>relNotesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;relNotesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;downloadSourceToolStripMenuItem.Name" xml:space="preserve">
+    <value>downloadSourceToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;downloadSourceToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;securityGroupsToolStripMenuItem.Name" xml:space="preserve">

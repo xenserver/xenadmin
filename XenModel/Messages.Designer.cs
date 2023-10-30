@@ -14059,15 +14059,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading {0} installer ({1} of {2})....
-        /// </summary>
-        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Download {0} installer.
         /// </summary>
         public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE {
@@ -14086,6 +14077,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} source code.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_SOURCE_ACTION_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_SOURCE_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} source code.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_SOURCE_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_SOURCE_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download....
         /// </summary>
         public static string DOWNLOAD_ELLIPSES {
@@ -14095,11 +14104,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The downloaded file can no longer be found..
+        /// </summary>
+        public static string DOWNLOAD_FILE_ACTION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_FILE_ACTION_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} ({1} of {2})....
+        /// </summary>
+        public static string DOWNLOAD_FILE_ACTION_PROGRESS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_FILE_ACTION_PROGRESS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download latest {0} source code.
+        /// </summary>
+        public static string DOWNLOAD_LATEST_SOURCE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_LATEST_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is now available. Download the latest at the {1} downloads website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {
                 return ResourceManager.GetString("DOWNLOAD_LATEST_XS_BODY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} v{1} source code.
+        /// </summary>
+        public static string DOWNLOAD_SOURCE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_SOURCE", resourceCulture);
             }
         }
         

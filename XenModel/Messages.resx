@@ -4965,20 +4965,35 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION" xml:space="preserve">
     <value>Downloading {0} installer</value>
   </data>
-  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION" xml:space="preserve">
-    <value>Downloading {0} installer ({1} of {2})...</value>
-  </data>
   <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE" xml:space="preserve">
     <value>Download {0} installer</value>
   </data>
   <data name="DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND" xml:space="preserve">
     <value>The downloaded installer can no longer be found.</value>
   </data>
+  <data name="DOWNLOAD_CLIENT_SOURCE_ACTION_DESCRIPTION" xml:space="preserve">
+    <value>Downloading {0} source code</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_SOURCE_ACTION_TITLE" xml:space="preserve">
+    <value>Download {0} source code</value>
+  </data>
   <data name="DOWNLOAD_ELLIPSES" xml:space="preserve">
     <value>Download...</value>
   </data>
+  <data name="DOWNLOAD_FILE_ACTION_NOT_FOUND" xml:space="preserve">
+    <value>The downloaded file can no longer be found.</value>
+  </data>
+  <data name="DOWNLOAD_FILE_ACTION_PROGRESS_DESCRIPTION" xml:space="preserve">
+    <value>Downloading {0} ({1} of {2})...</value>
+  </data>
+  <data name="DOWNLOAD_LATEST_SOURCE" xml:space="preserve">
+    <value>Download latest {0} source code</value>
+  </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
     <value>{0} is now available. Download the latest at the {1} downloads website.</value>
+  </data>
+  <data name="DOWNLOAD_SOURCE" xml:space="preserve">
+    <value>Download {0} v{1} source code</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
     <value>Downloading update from '{0}' ({1} of {2})...</value>

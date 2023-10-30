@@ -42,38 +42,36 @@ using XenCenterLib;
 
 namespace XenAdmin.Actions.Updates
 {
-    public class DownloadAndUpdateClientAction : AsyncAction, IByteProgressAction
+    public class DownloadFileAction : AsyncAction, IByteProgressAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS = 900;
         private const int SLEEP_TIME_BEFORE_RETRY_MS = 5000;
 
-        //If you consider increasing this for any reason (I think 5 is already more than enough), have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
+        //If you consider increasing this for any reason (I think 5 is already more than enough),
+        //have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
         private const int MAX_NUMBER_OF_TRIES = 5;
 
         private readonly Uri _address;
         private readonly string _outputPathAndFileName;
-        private readonly string _updateName;
-        private readonly bool _downloadUpdate;
-        private DownloadState _updateDownloadState;
-        private Exception _updateDownloadError;
-        private readonly string _checksum;
+        private readonly string _fileName;
+        private readonly bool _canDownloadFile;
+        private DownloadState _fileState;
+        private Exception _downloadError;
         private readonly string _authToken;
         private WebClient _client;
-        private FileStream _msiStream;
 
+        protected string OutputPathAndFileName => _outputPathAndFileName;
         public string ByteProgressDescription { get; set; }
 
-        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
-            : base(null, string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE, updateName),
-                string.Empty, true)
+        protected DownloadFileAction(string fileName, Uri uri, string outputFileName, string title, bool suppressHistory)
+            : base(null, title, fileName, suppressHistory)
         {
-            _updateName = updateName;
+            _fileName = fileName;
             _address = uri;
-            _downloadUpdate = _address != null;
+            _canDownloadFile = _address != null;
             _outputPathAndFileName = outputFileName;
-            _checksum = checksum;
             _authToken = XenAdminConfigManager.Provider.GetClientUpdatesQueryParam();
         }
 
@@ -105,7 +103,7 @@ namespace XenAdmin.Actions.Updates
                     _client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
                     //start the download
-                    _updateDownloadState = DownloadState.InProgress;
+                    _fileState = DownloadState.InProgress;
 
                     var uriBuilder = new UriBuilder(_address);
 
@@ -122,7 +120,7 @@ namespace XenAdmin.Actions.Updates
                     bool updateDownloadCancelling = false;
 
                     //wait for the file to be downloaded
-                    while (_updateDownloadState == DownloadState.InProgress)
+                    while (_fileState == DownloadState.InProgress)
                     {
                         if (!updateDownloadCancelling && (Cancelling || Cancelled))
                         {
@@ -134,10 +132,10 @@ namespace XenAdmin.Actions.Updates
                         Thread.Sleep(SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS);
                     }
 
-                    if (_updateDownloadState == DownloadState.Cancelled)
+                    if (_fileState == DownloadState.Cancelled)
                         throw new CancelledException();
 
-                    if (_updateDownloadState == DownloadState.Error)
+                    if (_fileState == DownloadState.Error)
                     {
                         needToRetry = true;
 
@@ -149,10 +147,10 @@ namespace XenAdmin.Actions.Updates
                             "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
                             _address, errorCount, MAX_NUMBER_OF_TRIES);
 
-                        if (_updateDownloadError == null)
+                        if (_downloadError == null)
                             log.Error("An unknown error occurred.");
                         else
-                            log.Error(_updateDownloadError);
+                            log.Error(_downloadError);
                     }
                 } while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry);
             }
@@ -167,30 +165,29 @@ namespace XenAdmin.Actions.Updates
             }
 
             //if this is still the case after having retried MAX_NUMBER_OF_TRIES number of times.
-            if (_updateDownloadState == DownloadState.Error)
+            if (_fileState == DownloadState.Error)
             {
                 log.ErrorFormat("Giving up - Maximum number of retries ({0}) has been reached.", MAX_NUMBER_OF_TRIES);
-                throw _updateDownloadError ?? new Exception(Messages.ERROR_UNKNOWN);
+                throw _downloadError ?? new Exception(Messages.ERROR_UNKNOWN);
             }
         }
 
         private void NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
         {
-            if (!e.IsAvailable && _client != null && _updateDownloadState == DownloadState.InProgress)
+            if (!e.IsAvailable && _client != null && _fileState == DownloadState.InProgress)
             {
-                _updateDownloadError = new WebException(Messages.NETWORK_CONNECTIVITY_ERROR);
-                _updateDownloadState = DownloadState.Error;
+                _downloadError = new WebException(Messages.NETWORK_CONNECTIVITY_ERROR);
+                _fileState = DownloadState.Error;
                 _client.CancelAsync();
             }
         }
 
         protected override void Run()
         {
-            if (!_downloadUpdate)
+            if (!_canDownloadFile)
                 return;
 
-            log.InfoFormat("Downloading '{0}' installer (from '{1}') to '{2}'", _updateName, _address, _outputPathAndFileName);
-            Description = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, _updateName);
+            log.InfoFormat("Downloading '{0}' (from '{1}') to '{2}'", _fileName, _address, _outputPathAndFileName);
             LogDescriptionChanges = false;
             DownloadFile();
             LogDescriptionChanges = true;
@@ -202,23 +199,30 @@ namespace XenAdmin.Actions.Updates
                 throw new CancelledException();
 
             if (!File.Exists(_outputPathAndFileName))
-                throw new Exception(Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND);
+                throw new Exception(GetDownloadedFileNotFoundMessage());
 
-            ValidateMsi();
+            ValidateDownloadedFile();
 
             Description = Messages.COMPLETED;
         }
 
         protected override void CleanOnError()
         {
-            ReleaseInstaller(true);
+            ReleaseDownloadedContent(true);
         }
 
-        public void ReleaseInstaller(bool deleteMsi = false)
+        protected virtual string GetDownloadedFileNotFoundMessage()
         {
-            _msiStream?.Dispose();
+            return Messages.DOWNLOAD_FILE_ACTION_NOT_FOUND;
+        }
 
-            if (!deleteMsi)
+        protected virtual void ValidateDownloadedFile()
+        {
+        }
+
+        public virtual void ReleaseDownloadedContent(bool deleteDownloadedContent = false)
+        {
+            if (!deleteDownloadedContent)
                 return;
 
             try
@@ -232,27 +236,89 @@ namespace XenAdmin.Actions.Updates
             }
         }
 
-        private void ValidateMsi()
+        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            int pc = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
+            
+            var descr = string.Format(Messages.DOWNLOAD_FILE_ACTION_PROGRESS_DESCRIPTION, _fileName, 
+                                            Util.DiskSizeString(e.BytesReceived, "F1"),
+                                            Util.DiskSizeString(e.TotalBytesToReceive));
+            ByteProgressDescription = descr;
+            Tick(pc, descr);
+        }
+
+        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled && _fileState == DownloadState.Error) // cancelled due to network connectivity issue (see NetworkAvailabilityChanged)
+                return;
+
+            if (e.Cancelled)
+            {
+                _fileState = DownloadState.Cancelled;
+                log.DebugFormat("'{0}' download cancelled by the user", _fileName);
+                return;
+            }
+
+            if (e.Error != null)
+            {
+                _downloadError = e.Error;
+                log.DebugFormat("'{0}' download failed", _fileName);
+                _fileState = DownloadState.Error;
+                return;
+            }
+
+            _fileState = DownloadState.Completed;
+            log.DebugFormat("'{0}' download completed successfully", _fileName);
+        }
+
+        public override void RecomputeCanCancel()
+        {
+            CanCancel = !Cancelling && !IsCompleted && _fileState == DownloadState.InProgress;
+        }
+    }
+
+    public class DownloadAndUpdateClientAction : DownloadFileAction
+    {
+        private readonly string _checksum;
+        private FileStream _msiStream;
+
+        public DownloadAndUpdateClientAction(string installerName, Uri uri, string outputFileName, string checksum)
+            : base(installerName,
+                  uri,
+                  outputFileName,
+                  string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE, installerName),
+                  true)
+        {
+            _checksum = checksum;
+            Description = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, installerName);
+        }
+
+        protected override string GetDownloadedFileNotFoundMessage()
+        {
+            return Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND;
+        }
+
+        protected override void ValidateDownloadedFile()
         {
             Description = Messages.UPDATE_CLIENT_VALIDATING_INSTALLER;
 
-            _msiStream = new FileStream(_outputPathAndFileName, FileMode.Open, FileAccess.Read);
+            _msiStream = new FileStream(OutputPathAndFileName, FileMode.Open, FileAccess.Read);
 
-            var calculatedChecksum = string.Empty; 
+            var calculatedChecksum = string.Empty;
 
             var hash = StreamUtilities.ComputeHash(_msiStream, out _);
             if (hash != null)
                 calculatedChecksum = string.Join(string.Empty, hash.Select(b => $"{b:x2}"));
 
-            // Check if calculatedChecksum matches what is in chcupdates.xml
+            // Check if calculatedChecksum matches what is in xcupdates.xml
             if (!_checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))
-                throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
+                throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM);
 
             bool valid;
             try
             {
                 // Check digital signature of .msi
-                using (var basicSigner = X509Certificate.CreateFromSignedFile(_outputPathAndFileName))
+                using (var basicSigner = X509Certificate.CreateFromSignedFile(OutputPathAndFileName))
                 {
                     using (var cert = new X509Certificate2(basicSigner))
                         valid = cert.Verify();
@@ -267,43 +333,23 @@ namespace XenAdmin.Actions.Updates
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
         }
 
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        public override void ReleaseDownloadedContent(bool deleteDownloadedContent = false)
         {
-            int pc = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
-            var descr = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION, _updateName,
-                                            Util.DiskSizeString(e.BytesReceived, "F1"),
-                                            Util.DiskSizeString(e.TotalBytesToReceive));
-            ByteProgressDescription = descr;
-            Tick(pc, descr);
+            _msiStream.Dispose();
+            base.ReleaseDownloadedContent(deleteDownloadedContent);
         }
+    }
 
-        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+    public class DownloadSourceAction : DownloadFileAction
+    {
+        public DownloadSourceAction(string sourceName, Uri uri, string outputFileName)
+            : base(sourceName,
+                  uri,
+                  outputFileName,
+                  string.Format(Messages.DOWNLOAD_CLIENT_SOURCE_ACTION_TITLE, sourceName),
+                  false)
         {
-            if (e.Cancelled && _updateDownloadState == DownloadState.Error) // cancelled due to network connectivity issue (see NetworkAvailabilityChanged)
-                return;
-
-            if (e.Cancelled)
-            {
-                _updateDownloadState = DownloadState.Cancelled;
-                log.DebugFormat("Client update '{0}' download cancelled by the user", _updateName);
-                return;
-            }
-
-            if (e.Error != null)
-            {
-                _updateDownloadError = e.Error;
-                log.DebugFormat("Client update '{0}' download failed", _updateName);
-                _updateDownloadState = DownloadState.Error;
-                return;
-            }
-
-            _updateDownloadState = DownloadState.Completed;
-            log.DebugFormat("Client update '{0}' download completed successfully", _updateName);
-        }
-
-        public override void RecomputeCanCancel()
-        {
-            CanCancel = !Cancelling && !IsCompleted && (_updateDownloadState == DownloadState.InProgress);
+            Description = string.Format(Messages.DOWNLOAD_CLIENT_SOURCE_ACTION_DESCRIPTION, sourceName);
         }
     }
 }

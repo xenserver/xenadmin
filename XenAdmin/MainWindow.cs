@@ -62,6 +62,7 @@ using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Dialogs.ServerUpdates;
 using XenAdmin.Help;
+using XenAdmin.Actions.Updates;
 
 namespace XenAdmin
 {
@@ -269,6 +270,7 @@ namespace XenAdmin
             statusButtonAlerts.Visible = statusButtonUpdates.Visible = statusButtonCdnUpdates.Visible = statusButtonProgress.Visible = statusButtonErrors.Visible = false;
             statusButtonUpdates.ToolTipText = string.Format(statusButtonUpdates.ToolTipText, BrandManager.ProductVersion821);
             statusButtonCdnUpdates.ToolTipText = string.Format(statusButtonCdnUpdates.ToolTipText, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            downloadLatestSourceToolStripMenuItem.Text = Messages.DOWNLOAD_LATEST_SOURCE;
         }
 
         private void RegisterEvents()
@@ -966,7 +968,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate
                     {
                         var msg = string.Format(Messages.GUI_OUT_OF_DATE, BrandManager.BrandConsole, Helpers.GetName(coordinator));
-                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var url = InvisibleMessages.WEBSITE_DOWNLOADS;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
@@ -994,7 +996,7 @@ namespace XenAdmin
                     {
                         var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductVersion712,
                             BrandManager.ProductVersion80, Helpers.GetName(coordinator));
-                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var url = InvisibleMessages.WEBSITE_DOWNLOADS;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
@@ -2715,7 +2717,14 @@ namespace XenAdmin
         {
             updateAlert = Updates.ClientUpdateAlerts.FirstOrDefault();
             if (updateAlert != null)
+            {
                 relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
+                downloadSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, BrandManager.BrandConsole, updateAlert.NewVersion.Version);
+            }
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();
+            downloadLatestSourceToolStripMenuItem.Text = clientVersion != null
+                ? string.Format(Messages.DOWNLOAD_SOURCE, BrandManager.BrandConsole, clientVersion.Version)
+                : string.Format(Messages.DOWNLOAD_LATEST_SOURCE, BrandManager.BrandConsole);
             updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 
@@ -3390,6 +3399,16 @@ namespace XenAdmin
         {
             using (var dialog = new ConfigUpdatesDialog())
                 dialog.ShowDialog(this);
+        }
+
+        private void downloadSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientUpdateAlert.DownloadSource(this);
+        }
+
+        private void downloadLatestSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientUpdateAlert.DownloadSource(this);
         }
     }
 }
