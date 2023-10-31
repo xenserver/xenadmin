@@ -126,12 +126,12 @@ namespace XenAdmin.SettingsPanels
             // 
             this.CheckDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.CheckDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            resources.ApplyResources(this.CheckDataGridView, "CheckDataGridView");
             this.CheckDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.CheckDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CheckColumn,
             this.WarningThresholdColumn,
             this.CriticalThresholdColumn});
+            resources.ApplyResources(this.CheckDataGridView, "CheckDataGridView");
             this.CheckDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.CheckDataGridView.Name = "CheckDataGridView";
             this.CheckDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
