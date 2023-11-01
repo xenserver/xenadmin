@@ -28,9 +28,9 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using XenAPI;
 
 
@@ -104,6 +104,28 @@ namespace XenAdmin.Actions.NRPE
 
         private void SetNRPEStatus(IXenObject host, bool enableNRPE)
         {
+            // Workaround for CA-384579 (caused by CA-384572):
+            // If the certificate used by NRPE was generated in Yangtze it has no permissions. 
+            // We prevent command (start, restart, etc) failures by calling control, which modifies certificate permissions.
+            // After CA-384572 is resolved we will remove this workaround code.
+            if (enableNRPE)
+            {
+                Dictionary<string, string> enableDict = new Dictionary<string, string>
+                {
+                    { "enable", "true" }
+                };
+                try
+                {
+                    string controlResult = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
+                        NRPEHostConfiguration.XAPI_NRPE_CONTROL, enableDict);
+                    log.InfoFormat("Run NRPE {0}, return: {1}", NRPEHostConfiguration.XAPI_NRPE_CONTROL, controlResult);
+                }
+                catch (Exception e)
+                {
+                    log.ErrorFormat("Run NRPE {0} failed, error: {1}", NRPEHostConfiguration.XAPI_NRPE_CONTROL, e.Message);
+                }
+            }
+
             string nrpeUpdateStatusMethod = enableNRPE ?
                 NRPEHostConfiguration.XAPI_NRPE_ENABLE : NRPEHostConfiguration.XAPI_NRPE_DISABLE;
             string result = Host.call_plugin(host.Connection.Session, host.opaque_ref, NRPEHostConfiguration.XAPI_NRPE_PLUGIN_NAME,
