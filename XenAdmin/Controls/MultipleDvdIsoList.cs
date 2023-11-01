@@ -251,17 +251,26 @@ namespace XenAdmin.Controls
             cdChanger1.Drive = (comboBoxDrive.SelectedItem as VbdCombiItem)?.Vbd;
         }
 
-
         private void newCDLabel_Click(object sender, EventArgs e)
         {
-            if (VM != null)
-            {
-                var createDriveAction = new CreateCdDriveAction(VM);
-                createDriveAction.ShowUserInstruction += CreateDriveAction_ShowUserInstruction;
+            if (VM == null)
+                return;
 
-                using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
-                    dlg.ShowDialog(this);
+            if (VM.IsHVM())
+            {
+                using (var dialog = new WarningDialog(
+                           string.Format(Messages.NEW_DVD_DRIVE_CREATE_CONFIRMATION, VM.Name()),
+                           new ThreeButtonDialog.TBDButton(Messages.NEW_DVD_DRIVE_CREATE_YES_BUTTON, DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                           ThreeButtonDialog.ButtonNo))
+                    if (dialog.ShowDialog(Program.MainWindow) != DialogResult.Yes)
+                        return;
             }
+
+            var createDriveAction = new CreateCdDriveAction(VM);
+            createDriveAction.ShowUserInstruction += CreateDriveAction_ShowUserInstruction;
+
+            using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
+                dlg.ShowDialog(this);
         }
 
         private void CreateDriveAction_ShowUserInstruction(string message)
