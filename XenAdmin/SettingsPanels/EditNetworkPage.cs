@@ -366,7 +366,7 @@ namespace XenAdmin.SettingsPanels
             foreach (VIF v in network.Connection.ResolveAll<VIF>(network.VIFs))
             {
                 VM vm = network.Connection.Resolve<VM>(v.VM);
-                if (vm.power_state != vm_power_state.Running || vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                if (vm.power_state != vm_power_state.Running || vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
                     continue;
 
                 runningVMsWithoutTools = true;

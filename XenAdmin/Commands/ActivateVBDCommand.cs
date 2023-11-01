@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            return !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
+            return !vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.IoDriversInstalled);
         }
 
         private bool CanRun(VBD vbd)
@@ -139,7 +139,7 @@ namespace XenAdmin.Commands
                 return Messages.TOOLTIP_DEACTIVATE_SYSVDI;
 
             if (AreIODriversNeededAndMissing(vm))
-                return vm.HasNewVirtualisationStates()
+                return vm.HasNewVirtualizationStates()
                     ? string.Format(Messages.CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS, Helpers.GetName(vm).Ellipsise(50))
                     : string.Format(Messages.CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS, BrandManager.VmTools, Helpers.GetName(vm).Ellipsise(50));
               

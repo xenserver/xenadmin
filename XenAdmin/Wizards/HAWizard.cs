@@ -124,21 +124,21 @@ namespace XenAdmin.Wizards
                 xenTabPageHaFinish.Ntol = xenTabPageAssignPriorities.Ntol;
 
                 int alwaysRestartHighPriority = 0, alwaysRestart = 0, bestEffort = 0, doNotRestart = 0;
-                foreach (VM.HA_Restart_Priority priority in xenTabPageAssignPriorities.CurrentSettings.Values)
+                foreach (VM.HaRestartPriority priority in xenTabPageAssignPriorities.CurrentSettings.Values)
                 {
                     switch (priority)
                     {
-                        case VM.HA_Restart_Priority.AlwaysRestartHighPriority:
+                        case VM.HaRestartPriority.AlwaysRestartHighPriority:
                             alwaysRestartHighPriority++;
                             break;
-                        case VM.HA_Restart_Priority.AlwaysRestart:
-                        case VM.HA_Restart_Priority.Restart:
+                        case VM.HaRestartPriority.AlwaysRestart:
+                        case VM.HaRestartPriority.Restart:
                             alwaysRestart++;
                             break;
-                        case VM.HA_Restart_Priority.BestEffort:
+                        case VM.HaRestartPriority.BestEffort:
                             bestEffort++;
                             break;
-                        case VM.HA_Restart_Priority.DoNotRestart:
+                        case VM.HaRestartPriority.DoNotRestart:
                             doNotRestart++;
                             break;
                     }

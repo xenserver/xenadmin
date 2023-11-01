@@ -785,9 +785,9 @@ namespace XenAdmin.XenSearch
                     new GroupQuery(
                         new QueryFilter[] {
                             new EnumPropertyQuery<vm_power_state>(PropertyNames.power_state, vm_power_state.Running, true),
-                            new EnumPropertyQuery<VM.VirtualisationStatus>(PropertyNames.virtualisation_status, VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED, false)
+                            new EnumPropertyQuery<VM.VirtualizationStatus>(PropertyNames.virtualisation_status, VM.VirtualizationStatus.IoDriversInstalled | VM.VirtualizationStatus.ManagementInstalled, false)
                         }, GroupQuery.GroupQueryType.And)),
-                new PropertyGrouping<VM.VirtualisationStatus>(PropertyNames.virtualisation_status, null),
+                new PropertyGrouping<VM.VirtualizationStatus>(PropertyNames.virtualisation_status, null),
                 string.Format(Messages.DEFAULT_SEARCH_VMS_WO_XS_TOOLS, BrandManager.VmTools),
                 "dead-beef-1234-vmswotools", true
             );

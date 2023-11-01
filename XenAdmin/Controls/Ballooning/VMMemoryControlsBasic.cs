@@ -87,11 +87,11 @@ namespace XenAdmin.Controls.Ballooning
                 {
                     // If all the Virtualisation Statuses are the same, report that reason.
                     // Otherwise give a generic message.
-                    VM.VirtualisationStatus vs0 = vm0.GetVirtualisationStatus(out _);
+                    VM.VirtualizationStatus vs0 = vm0.GetVirtualizationStatus(out _);
                     bool identical = true;
                     foreach (VM vm in vms)
                     {
-                        if (vm.GetVirtualisationStatus(out _) != vs0)
+                        if (vm.GetVirtualizationStatus(out _) != vs0)
                         {
                             identical = false;
                             break;
@@ -99,14 +99,14 @@ namespace XenAdmin.Controls.Ballooning
                     }
                     if (identical)
                     {
-                        var status = vm0.GetVirtualisationStatus(out _);
-                        if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                        var status = vm0.GetVirtualizationStatus(out _);
+                        if (status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL;
-                        else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                            labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates()
+                        else if (!status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
+                            labelDMCUnavailable.Text = vm0.HasNewVirtualizationStates()
                                 ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL
                                 : string.Format(Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL, BrandManager.VmTools);
-                        else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                        else if (status.HasFlag(VM.VirtualizationStatus.PvDriversOutOfDate))
                             labelDMCUnavailable.Text = string.Format(Messages.DMC_UNAVAILABLE_OLDTOOLS_PLURAL, BrandManager.VmTools);
                         else
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
@@ -123,15 +123,15 @@ namespace XenAdmin.Controls.Ballooning
                 }
                 else
                 {
-                    var status = vm0.GetVirtualisationStatus(out _);
+                    var status = vm0.GetVirtualizationStatus(out _);
 
-                    if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                    if (status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED;
-                    else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                        labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates()
+                    else if (!status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
+                        labelDMCUnavailable.Text = vm0.HasNewVirtualizationStates()
                             ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT
                             : string.Format(Messages.DMC_UNAVAILABLE_NOTOOLS, BrandManager.VmTools);
-                    else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                    else if (status.HasFlag(VM.VirtualizationStatus.PvDriversOutOfDate))
                             labelDMCUnavailable.Text = string.Format(Messages.DMC_UNAVAILABLE_OLDTOOLS, BrandManager.VmTools);
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VM;

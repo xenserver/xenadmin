@@ -178,9 +178,9 @@ namespace XenAdmin.XenSearch
         private static Dictionary<PropertyNames, Func<IXenObject, IComparable>> properties = new Dictionary<PropertyNames, Func<IXenObject, IComparable>>();
 
         public static readonly Dictionary<String, vm_power_state> VM_power_state_i18n = new Dictionary<string, vm_power_state>();
-        public static readonly Dictionary<String, VM.VirtualisationStatus> VirtualisationStatus_i18n = new Dictionary<string, VM.VirtualisationStatus>();
+        public static readonly Dictionary<String, VM.VirtualizationStatus> VirtualisationStatus_i18n = new Dictionary<string, VM.VirtualizationStatus>();
         public static readonly Dictionary<String, ObjectTypes> ObjectTypes_i18n = new Dictionary<string, ObjectTypes>();
-        public static readonly Dictionary<String, VM.HA_Restart_Priority> HARestartPriority_i18n = new Dictionary<string, VM.HA_Restart_Priority>();
+        public static readonly Dictionary<String, VM.HaRestartPriority> HARestartPriority_i18n = new Dictionary<string, VM.HaRestartPriority>();
         public static readonly Dictionary<String, SR.SRTypes> SRType_i18n = new Dictionary<string, SR.SRTypes>();
 
         public static readonly Dictionary<PropertyNames, String> PropertyNames_i18n = new Dictionary<PropertyNames, string>();
@@ -198,12 +198,12 @@ namespace XenAdmin.XenSearch
             foreach (SR.SRTypes type in Enum.GetValues(typeof(SR.SRTypes)))
                 SRType_i18n[SR.GetFriendlyTypeName(type)] = type;
 
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED] = VM.VirtualisationStatus.NOT_INSTALLED;
-            VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-            VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY] = VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED] = VM.VirtualizationStatus.NotInstalled;
+            VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualizationStatus.PvDriversOutOfDate;
+            VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualizationStatus.Unknown;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY] = VM.VirtualizationStatus.IoDriversInstalled;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY] = VM.VirtualizationStatus.ManagementInstalled;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_OPTIMIZED] = VM.VirtualizationStatus.IoDriversInstalled | VM.VirtualizationStatus.ManagementInstalled;
 
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
             ObjectTypes_i18n[string.Format(Messages.XENSERVER_TEMPLATES, BrandManager.ProductBrand)] = ObjectTypes.DefaultTemplate;
@@ -220,7 +220,7 @@ namespace XenAdmin.XenSearch
         	ObjectTypes_i18n[Messages.VM_APPLIANCE] = ObjectTypes.Appliance;
 
 
-            foreach (VM.HA_Restart_Priority p in VM.GetAvailableRestartPriorities(null)) //CA-57600 - From Boston onwards, the HA restart priorities list contains Restart instead of AlwaysRestartHighPriority and AlwaysRestart
+            foreach (VM.HaRestartPriority p in VM.GetAvailableRestartPriorities(null)) //CA-57600 - From Boston onwards, the HA restart priorities list contains Restart instead of AlwaysRestartHighPriority and AlwaysRestart
             {
                 HARestartPriority_i18n[Helpers.RestartPriorityI18n(p)] = p;
             }
@@ -284,11 +284,11 @@ namespace XenAdmin.XenSearch
             property_types.Add(PropertyNames.host, typeof(Host));
             property_types.Add(PropertyNames.os_name, typeof(string));
             property_types.Add(PropertyNames.power_state, typeof(vm_power_state));
-            property_types.Add(PropertyNames.virtualisation_status, typeof(VM.VirtualisationStatus));
+            property_types.Add(PropertyNames.virtualisation_status, typeof(VM.VirtualizationStatus));
             property_types.Add(PropertyNames.type, typeof(ObjectTypes));
             property_types.Add(PropertyNames.networks, typeof(XenAPI.Network));
             property_types.Add(PropertyNames.storage, typeof(SR));
-            property_types.Add(PropertyNames.ha_restart_priority, typeof(VM.HA_Restart_Priority));
+            property_types.Add(PropertyNames.ha_restart_priority, typeof(VM.HaRestartPriority));
             property_types.Add(PropertyNames.read_caching_enabled, typeof(bool));
 			property_types.Add(PropertyNames.appliance, typeof(VM_appliance));
             property_types.Add(PropertyNames.tags, typeof(string));
@@ -304,7 +304,7 @@ namespace XenAdmin.XenSearch
             properties[PropertyNames.os_name] = o => o is VM vm && vm.IsRealVm() ? vm.GetOSName() : null;
             properties[PropertyNames.power_state] = o => o is VM vm && vm.IsRealVm() ? (IComparable)vm.power_state : null;
             properties[PropertyNames.vendor_device_state] = o => o is VM vm && vm.IsRealVm() ? (bool?)vm.WindowsUpdateCapable() : null;
-            properties[PropertyNames.virtualisation_status] = o => o is VM vm && vm.IsRealVm() ? (IComparable)vm.GetVirtualisationStatus(out _) : null;
+            properties[PropertyNames.virtualisation_status] = o => o is VM vm && vm.IsRealVm() ? (IComparable)vm.GetVirtualizationStatus(out _) : null;
             properties[PropertyNames.start_time] = o => o is VM vm && vm.IsRealVm() ? (DateTime?)vm.GetStartTime() : null;
             properties[PropertyNames.read_caching_enabled] = o => o is VM vm && vm.IsRealVm() ? (bool?)vm.ReadCachingEnabled() : null;
 
@@ -343,7 +343,7 @@ namespace XenAdmin.XenSearch
                 {
                     Pool pool = Helpers.GetPool(vm.Connection);
                     if (pool != null && pool.ha_enabled)
-                        return vm.HaPriorityIsRestart() ? VM.HA_Restart_Priority.Restart : vm.HARestartPriority();
+                        return vm.HaPriorityIsRestart() ? VM.HaRestartPriority.Restart : vm.HARestartPriority();
 
                     // CA-57600 - From Boston onwards, the HA_restart_priority enum contains Restart instead of
                     // AlwaysRestartHighPriority and AlwaysRestart. When searching in a pre-Boston pool for VMs
@@ -465,7 +465,7 @@ namespace XenAdmin.XenSearch
             {
                 return vm.IsRealVm() &&
                        vm.power_state == vm_power_state.Running &&
-                       vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                       vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.ManagementInstalled)
                     ? PropertyAccessorHelper.vmMemoryUsageString(vm)
                     : null;
             }
@@ -487,7 +487,7 @@ namespace XenAdmin.XenSearch
             {
                 return vm.IsRealVm() &&
                        vm.power_state == vm_power_state.Running &&
-                       vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                       vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.ManagementInstalled)
                     ? (IComparable)PropertyAccessorHelper.vmMemoryUsageRank(vm)
                     : null;
             }
@@ -509,7 +509,7 @@ namespace XenAdmin.XenSearch
                 {
                     return vm.IsRealVm() &&
                            vm.power_state == vm_power_state.Running &&
-                           vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                           vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.ManagementInstalled)
                         ? (IComparable)PropertyAccessorHelper.vmMemoryUsageValue(vm)
                         : null;
                 }
@@ -531,7 +531,7 @@ namespace XenAdmin.XenSearch
             {
                 return vm.IsRealVm() &&
                        vm.power_state == vm_power_state.Running &&
-                       vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                       vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.IoDriversInstalled)
                     ? PropertyAccessorHelper.vmNetworkUsageString(vm)
                     : null;
             }
@@ -549,7 +549,7 @@ namespace XenAdmin.XenSearch
             return o is VM vm &&
                    vm.IsRealVm() &&
                    vm.power_state == vm_power_state.Running &&
-                   vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                   vm.GetVirtualizationStatus(out _).HasFlag(VM.VirtualizationStatus.IoDriversInstalled)
                 ? PropertyAccessorHelper.vmDiskUsageString(vm)
                 : null;
         }
@@ -1007,12 +1007,12 @@ namespace XenAdmin.XenSearch
                     });
 
                 case PropertyNames.virtualisation_status:
-                    return (Func<VM.VirtualisationStatus, Icons>)(status =>
+                    return (Func<VM.VirtualizationStatus, Icons>)(status =>
                     {
-                        if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                        if (status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled | VM.VirtualizationStatus.ManagementInstalled))
                             return Icons.ToolInstalled;
 
-                        if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                        if (status.HasFlag(VM.VirtualizationStatus.PvDriversOutOfDate))
                             return Icons.ToolsOutOfDate;
 
                         return Icons.ToolsNotInstalled;
@@ -1025,7 +1025,7 @@ namespace XenAdmin.XenSearch
                     return (Func<string, Icons>)(_ => Icons.Tag);
 
                 case PropertyNames.ha_restart_priority:
-                    return (Func<VM.HA_Restart_Priority, Icons>)(_ => Icons.HA);
+                    return (Func<VM.HaRestartPriority, Icons>)(_ => Icons.HA);
 
                 case PropertyNames.read_caching_enabled:
                     return (Func<bool, Icons>)(_ => Icons.VDI);

@@ -275,10 +275,10 @@ namespace XenAdmin.Commands
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Running)
                 return false;
 
-            var vStatus = vm.GetVirtualisationStatus(out _);
+            var vStatus = vm.GetVirtualizationStatus(out _);
 
-            if (vStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) ||
-                vStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && vStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+            if (vStatus.HasFlag(VM.VirtualizationStatus.Unknown) ||
+                vStatus.HasFlag(VM.VirtualizationStatus.IoDriversInstalled) && vStatus.HasFlag(VM.VirtualizationStatus.ManagementInstalled))
                 return false;
 
             var vmHome = vm.Home();

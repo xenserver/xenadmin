@@ -1646,27 +1646,27 @@ namespace XenAdmin.TabPages
             if (vm != null && vm.Connection != null)
             {
                 //For Dundee or higher Windows VMs
-                if (vm.HasNewVirtualisationStates())
+                if (vm.HasNewVirtualizationStates())
                 {
-                    var status = vm.GetVirtualisationStatus(out var statusString);
+                    var status = vm.GetVirtualizationStatus(out var statusString);
 
                     var sb = new StringBuilder();
 
                     if (vm.power_state == vm_power_state.Running)
                     {
-                        if (status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+                        if (status.HasFlag(VM.VirtualizationStatus.Unknown))
                         {
                             sb.AppendLine(statusString);
                         }
                         else
                         {
                             //Row 1 : I/O Drivers
-                            sb.AppendLine(status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                            sb.AppendLine(status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled)
                                 ? Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED
                                 : Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED);
 
                             //Row 2: Management Agent
-                            sb.AppendLine(status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                            sb.AppendLine(status.HasFlag(VM.VirtualizationStatus.ManagementInstalled)
                                 ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED
                                 : Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED);
                         }
@@ -1685,12 +1685,12 @@ namespace XenAdmin.TabPages
                         string installMessage = string.Empty;
                         var canInstall = InstallToolsCommand.CanRun(vm);
 
-                        if (canInstall && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                        if (canInstall && !status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled))
                         {
                             installMessage = Messages.VIRTUALIZATION_STATE_VM_INSTALL_IO_DRIVERS_AND_MANAGEMENT_AGENT;
                         }
-                        else if (canInstall && status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) &&
-                                 !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                        else if (canInstall && status.HasFlag(VM.VirtualizationStatus.IoDriversInstalled) &&
+                                 !status.HasFlag(VM.VirtualizationStatus.ManagementInstalled))
                         {
                             installMessage = Messages.VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT;
                         }
@@ -1721,9 +1721,9 @@ namespace XenAdmin.TabPages
                 //for everything else (All VMs on pre-Dundee hosts & All non-Windows VMs on any host)
                 else if (vm.power_state == vm_power_state.Running)
                 {
-                    var status = vm.GetVirtualisationStatus(out var statusString);
+                    var status = vm.GetVirtualizationStatus(out var statusString);
 
-                    if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                    if (status == VM.VirtualizationStatus.NotInstalled || status.HasFlag(VM.VirtualizationStatus.PvDriversOutOfDate))
                     {
                         if (InstallToolsCommand.CanRun(vm))
                         {

@@ -39,7 +39,7 @@ namespace XenAdmin.Actions
 
         public HAUnprotectVMAction(VM vm)
             : base(vm.Connection, string.Format(Messages.ACTION_HA_UNPROTECT_VM_TITLE, Helpers.GetName(vm),
-            Helpers.RestartPriorityI18n(VM.HA_Restart_Priority.DoNotRestart)), Messages.ACTION_HA_UNPROTECT_VM_DESCRIPTION)
+            Helpers.RestartPriorityI18n(VM.HaRestartPriority.DoNotRestart)), Messages.ACTION_HA_UNPROTECT_VM_DESCRIPTION)
         {
             VM = vm;
             ApiMethodsToRoleCheck.Add("VM.set_ha_restart_priority");
