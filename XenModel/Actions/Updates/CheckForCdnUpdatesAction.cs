@@ -101,6 +101,8 @@ namespace XenAdmin.Actions
                 else
                     throw;
             }
+
+            Description = Messages.COMPLETED;
         }
     }
 }

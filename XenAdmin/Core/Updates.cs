@@ -120,6 +120,17 @@ namespace XenAdmin.Core
             CdnUpdateInfoChanged?.Invoke(connection);
         }
 
+        public static SyncWithCdnAction CreateSyncWithCdnAction(Pool pool)
+        {
+            var syncAction = new SyncWithCdnAction(pool);
+            syncAction.Completed += a =>
+            {
+                if (a.Succeeded)
+                    CheckForCdnUpdates(a.Connection);
+            };
+            return syncAction;
+        }
+
         public static void CheckForCdnUpdates(IXenConnection connection, bool runSynchronous = false)
         {
             var action = new CheckForCdnUpdatesAction(connection);

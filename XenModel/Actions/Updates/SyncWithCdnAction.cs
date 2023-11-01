@@ -49,6 +49,7 @@ namespace XenAdmin.Actions
         {
             RelatedTask = Pool.async_sync_updates(Session, _pool.opaque_ref, false, "", "");
             PollToCompletion();
+            Description = Messages.COMPLETED;
         }
     }
 }
