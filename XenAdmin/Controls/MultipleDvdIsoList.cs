@@ -169,33 +169,14 @@ namespace XenAdmin.Controls
                 }
             }
 
-            if (comboBoxDrive.Items.Count == 0)
-            {
-                comboBoxDrive.Visible = false;
-                cdChanger1.Visible = false;
-                labelSingleDvd.Visible = false;
-                linkLabelEject.Visible = false;
-                newCDLabel.Visible = VM != null && !VM.is_control_domain;
-                
-            }
-            else if (comboBoxDrive.Items.Count == 1)
-            {
-                comboBoxDrive.Visible = false;
-                cdChanger1.Visible = true;
+            labelSingleDvd.Visible = comboBoxDrive.Items.Count == 1;
+            if (labelSingleDvd.Visible)
                 labelSingleDvd.Text = comboBoxDrive.Items[0].ToString();
-                labelSingleDvd.Visible = true;
-                tableLayoutPanel1.ColumnStyles[0].Width = labelSingleDvd.Width;
-                newCDLabel.Visible = false;
-                linkLabelEject.Visible = true;
-            }
-            else
-            {
-                comboBoxDrive.Visible = true;
-                cdChanger1.Visible = true;
-                labelSingleDvd.Visible = false;
-                newCDLabel.Visible = false;
-                linkLabelEject.Visible = true;
-            }
+
+            comboBoxDrive.Visible = comboBoxDrive.Items.Count > 1;
+            cdChanger1.Visible = comboBoxDrive.Items.Count > 0;
+            linkLabelEject.Visible = comboBoxDrive.Items.Count > 0;
+            newCDLabel.Visible = comboBoxDrive.Items.Count == 0 && VM != null && !VM.is_control_domain;
 
             _inRefresh = false;
 
