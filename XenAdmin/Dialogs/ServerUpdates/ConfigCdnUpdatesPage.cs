@@ -297,8 +297,7 @@ namespace XenAdmin.Dialogs.ServerUpdates
                     if (dlog.ShowDialog(this) == DialogResult.Yes)
                         changedRepoPools.ForEach(p =>
                         {
-                            var syncAction = new SyncWithCdnAction(p);
-                            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                            var syncAction = Updates.CreateSyncWithCdnAction(p);
                             syncAction.RunAsync();
                         });
                 }

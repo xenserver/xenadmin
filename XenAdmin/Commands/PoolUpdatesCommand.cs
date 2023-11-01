@@ -134,8 +134,7 @@ namespace XenAdmin.Commands
 
             foreach (var pool in pools)
             {
-                var syncAction = new SyncWithCdnAction(pool);
-                syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                var syncAction = Updates.CreateSyncWithCdnAction(pool);
                 syncAction.RunAsync();
             }
         }

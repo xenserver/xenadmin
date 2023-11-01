@@ -53,9 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            var syncAction = new SyncWithCdnAction(Pool);
-            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
-            return syncAction;
+            return Updates.CreateSyncWithCdnAction(Pool);
         }
     }
 

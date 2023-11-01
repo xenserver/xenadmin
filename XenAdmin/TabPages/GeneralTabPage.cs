@@ -638,9 +638,8 @@ namespace XenAdmin.TabPages
                     lastSyncTime, Messages.UPDATES_GENERAL_TAB_SYNC_NOW,
                     () =>
                     {
-                        var syncAction = new SyncWithCdnAction(pool);
+                        var syncAction = Updates.CreateSyncWithCdnAction(pool);
                         BuildList();
-                        syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
                         syncAction.RunAsync();
                     }, enabled);
             }

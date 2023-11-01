@@ -317,9 +317,8 @@ namespace XenAdmin.TabPages
 
         private void SyncPool(Pool pool)
         {
-            var syncAction = new SyncWithCdnAction(pool);
+            var syncAction = Updates.CreateSyncWithCdnAction(pool);
             UpdateButtonEnablement();
-            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
             syncAction.RunAsync();
         }
 

@@ -96,8 +96,7 @@ namespace XenAdmin.Alerts
             {
                 return () =>
                 {
-                    var syncAction = new SyncWithCdnAction(_pool);
-                    syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                    var syncAction = Updates.CreateSyncWithCdnAction(_pool);
                     syncAction.RunAsync();
                 };
             }
