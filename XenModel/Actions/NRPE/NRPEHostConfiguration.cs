@@ -44,6 +44,7 @@ namespace XenAdmin.Actions.NRPE
         public const string XAPI_NRPE_SET_CONFIG = "set-config";
         public const string XAPI_NRPE_SET_THRESHOLD = "set-threshold";
         public const string XAPI_NRPE_RESTART = "restart";
+        public const string XAPI_NRPE_CONTROL = "control";
 
         public const string DEBUG_ENABLE = "1";
         public const string DEBUG_DISABLE = "0";
