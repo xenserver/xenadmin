@@ -33,14 +33,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using XenAdmin.Network;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
-    public class UploadSupplementalPackAction : AsyncAction, IByteProgressAction
+    public class UploadUpdateAction : AsyncAction, IByteProgressAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -63,7 +64,7 @@ namespace XenAdmin.Actions
         }
 
 
-        public UploadSupplementalPackAction(IXenConnection connection, List<Host> selectedServers, string path, bool suppressHistory)
+        public UploadUpdateAction(IXenConnection connection, List<Host> selectedServers, string path, bool suppressHistory)
             : base(connection, null, Messages.SUPP_PACK_UPLOADING, suppressHistory)
         {
             Host = Helpers.GetCoordinator(connection) ?? throw new NullReferenceException();

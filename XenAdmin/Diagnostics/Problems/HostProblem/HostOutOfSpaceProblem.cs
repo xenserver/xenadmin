@@ -28,12 +28,11 @@
  * SUCH DAMAGE.
  */
 
-using System.Windows.Forms;
-using XenAdmin.Diagnostics.Checks;
-using XenAPI;
-using XenAdmin.Actions;
-using XenAdmin.Dialogs;
 using System.Diagnostics;
+using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
@@ -41,15 +40,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     public class HostOutOfSpaceProblem : HostProblem
     {
         private readonly DiskSpaceRequirements diskSpaceReq;
-        private readonly Pool_patch patch;
         private readonly Pool_update update;
-
-        public HostOutOfSpaceProblem(Check check, Host host, Pool_patch patch, DiskSpaceRequirements diskSpaceReq)
-            : base(check, host)
-        {
-            this.patch = patch;
-            this.diskSpaceReq = diskSpaceReq;
-        }
 
         public HostOutOfSpaceProblem(Check check, Host host, Pool_update update, DiskSpaceRequirements diskSpaceReq)
             : base(check, host)
@@ -70,11 +61,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             {
                 string name = string.Empty;
 
-                if (patch != null)
-                {
-                    name = patch.Name();
-                }
-                else if (update != null)
+                if (update != null)
                 {
                     name = update.Name();
                 }
@@ -103,34 +90,14 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
-            AsyncAction action = null;
-
-            if (patch != null && diskSpaceReq.CanCleanup)
+            Program.Invoke(Program.MainWindow, delegate ()
             {
-                Program.Invoke(Program.MainWindow, delegate ()
-                {
-                    using (var dlg = new WarningDialog(diskSpaceReq.GetSpaceRequirementsMessage(),
-                        new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, selected: true),
-                        ThreeButtonDialog.ButtonNo))
-                    {
-                        if (dlg.ShowDialog() == DialogResult.Yes)
-                        {
-                            action = new CleanupDiskSpaceAction(this.Server, patch, true);
-                        }
-                    }
-                });
-            }
-            else
-            {
-                Program.Invoke(Program.MainWindow, delegate ()
-                {
-                    using (var dlg = new WarningDialog(diskSpaceReq.GetSpaceRequirementsMessage()))
-                        dlg.ShowDialog();
-                });
-            }
-            cancelled = action == null;
+                using (var dlg = new WarningDialog(diskSpaceReq.GetSpaceRequirementsMessage()))
+                    dlg.ShowDialog();
+            });
 
-            return action;
+            cancelled = true;
+            return null;
         }
 
         public override string HelpMessage => diskSpaceReq.GetMessageForActionLink();

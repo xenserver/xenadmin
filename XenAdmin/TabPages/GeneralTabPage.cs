@@ -1811,7 +1811,6 @@ namespace XenAdmin.TabPages
             return false;
         }
 
-
         private void GenTagRow(PDSection s)
         {
             string[] tags = Tags.GetTags(xenObject);
@@ -1934,13 +1933,6 @@ namespace XenAdmin.TabPages
             return string.Join(Environment.NewLine, result.ToArray());
         }
 
-        private string hostInstalledSuppPacks(Host host)
-        {
-            var result = host.SuppPacks().Select(suppPack => suppPack.LongDescription).ToList();
-            result.Sort(StringUtility.NaturalCompare);
-            return string.Join("\n", result.ToArray());
-        }
-
         private void SetupDeprecationBanner()
         {
             if (xenObject is DockerContainer && !Helpers.ContainerCapability(xenObject.Connection))
@@ -1989,34 +1981,6 @@ namespace XenAdmin.TabPages
             foreach (Host host in xenObject.Connection.Cache.Hosts)
             {
                 warnings.AddRange(CheckHostUpdatesRequiringReboot(host));
-            }
-            return warnings;
-        }
-
-        /// <summary>
-        /// Checks the server has been restarted after any patches that require a restart were applied and returns a list of reboot warnings
-        /// </summary>
-        /// <param name="host"></param>
-        /// <returns></returns>
-        private List<KeyValuePair<String, String>> CheckServerUpdates(Host host)
-        {
-            List<Pool_patch> patches = host.AppliedPatches();
-            List<KeyValuePair<String, String>> warnings = new List<KeyValuePair<String, String>>();
-            double bootTime = host.BootTime();
-            double agentStart = host.AgentStartTime();
-
-            if (bootTime == 0.0 || agentStart == 0.0)
-                return warnings;
-
-            foreach (Pool_patch patch in patches)
-            {
-                double applyTime = Util.ToUnixTime(patch.AppliedOn(host));
-
-                if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) && applyTime > bootTime
-                    || patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI) && applyTime > agentStart)
-                {
-                    warnings.Add(CreateWarningRow(host, patch));
-                }
             }
             return warnings;
         }

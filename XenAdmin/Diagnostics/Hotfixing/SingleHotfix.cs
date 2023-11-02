@@ -66,7 +66,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             {
                 var coordinator = Helpers.GetCoordinator(host.Connection);
                 var filePath = Path.Combine(Program.AssemblyDir, $"{Filename}.iso");
-                var action = new UploadSupplementalPackAction(coordinator.Connection, new List<Host> { coordinator }, filePath, false);
+                var action = new UploadUpdateAction(coordinator.Connection, new List<Host> { coordinator }, filePath, false);
                 action.RunSync(session);
                 update = action.PoolUpdate;
             }

@@ -85,7 +85,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool IsNewGeneration { get; set; }
         public bool ApplyUpdatesToNewVersion { protected get; set; }
 
-        public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
 
         public List<Problem> PrecheckProblemsActuallyResolved
@@ -138,8 +137,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             else
             {
                 string patchName = null;
-                if (Patch != null)
-                    patchName = Patch.Name();
                 if (PoolUpdate != null)
                     patchName = PoolUpdate.Name();
 
@@ -164,9 +161,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
             
-            if (Patch != null)
-                _worker.RunWorkerAsync(Patch);
-            else if (PoolUpdate != null)
+            if (PoolUpdate != null)
                 _worker.RunWorkerAsync(PoolUpdate);
             else
                 _worker.RunWorkerAsync();

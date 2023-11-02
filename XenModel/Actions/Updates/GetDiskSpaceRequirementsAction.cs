@@ -43,19 +43,9 @@ namespace XenAdmin.Actions
 
         private readonly string updateName;
         private readonly long updateSize;
-        private readonly Pool_patch currentPatch;
         private readonly DiskSpaceRequirements.OperationTypes operation = DiskSpaceRequirements.OperationTypes.upload;
 
         public DiskSpaceRequirements DiskSpaceRequirements { get; private set; }
-
-        /// <summary>
-        /// This constructor is used to calculate the disk space requirements for installing or uploading a single patch
-        /// </summary>
-        public GetDiskSpaceRequirementsAction(Host host, Pool_patch patch, bool suppressHistory)
-            : this(host, patch.Name(), patch.size, suppressHistory)
-        {
-            currentPatch = patch;
-        }
 
         /// <summary>
         /// This constructor is used to calculate the disk space when the required space is known only

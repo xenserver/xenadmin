@@ -223,11 +223,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {
-                var patch = PatchingWizard_UploadPage.Patch;
                 var update = PatchingWizard_UploadPage.PoolUpdate;
-                var suppPackVdis = PatchingWizard_UploadPage.SuppPackVdis;
-
-                PatchingWizard_PrecheckPage.Patch = patch;
                 PatchingWizard_PrecheckPage.PoolUpdate = update;
 
                 var srsWithUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
@@ -240,12 +236,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 PatchingWizard_PrecheckPage.SrUploadedUpdates = srsWithUploadedUpdates;
 
-                PatchingWizard_ModePage.Patch = patch;
                 PatchingWizard_ModePage.PoolUpdate = update;
 
-                PatchingWizard_PatchingPage.Patch = patch;
                 PatchingWizard_PatchingPage.PoolUpdate = update;
-                PatchingWizard_PatchingPage.SuppPackVdis = suppPackVdis;
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
             {
@@ -281,7 +274,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Messages.REVERTED_WIZARD_CHANGES,
                 Problem.GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
 
-            CleanUploadedPatches(true);
+            CleanUploadedPatches();
             RemoveDownloadedPatches();
         }
         
@@ -298,32 +291,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             return PatchingWizard_FirstPage.IsNewGeneration ? "PatchingWizard_xs" : "PatchingWizard_ch";
         }
 
-        private void CleanUploadedPatches(bool forceCleanSelectedPatch = false)
+        private void CleanUploadedPatches()
         {
             var list = new List<AsyncAction>();
 
             foreach (var mapping in PatchingWizard_UploadPage.PatchMappings)
             {
-                Pool_patch patch = null;
-                if (mapping is PoolPatchMapping patchMapping)
-                    patch = patchMapping.Pool_patch;
-                else if (mapping is OtherLegacyMapping legacyMapping)
-                    patch = legacyMapping.Pool_patch;
-
-                if (patch != null)
-                {
-                    // exclude the selected patch; either the user wants to keep it or it has already been cleared in the patching page
-                    if (PatchingWizard_UploadPage.Patch == null ||
-                        !string.Equals(patch.uuid, PatchingWizard_UploadPage.Patch.uuid, StringComparison.OrdinalIgnoreCase) ||
-                        forceCleanSelectedPatch)
-                    {
-                        var action = GetCleanActionForPoolPatch(patch);
-                        if (action != null)
-                            list.Add(action);
-                    }
-                    continue;
-                }
-                
                 if (mapping is PoolUpdateMapping updateMapping)
                 {
                     var action = GetCleanActionForPoolUpdate(updateMapping.Pool_update);
@@ -346,17 +319,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, list);
-        }
-
-        private AsyncAction GetCleanActionForPoolPatch(Pool_patch patch)
-        {
-            if (patch == null || patch.Connection == null || !patch.Connection.IsConnected)
-                return null;
-
-            if (patch.HostsAppliedTo().Count == 0)
-                return new RemovePatchAction(patch);
-
-            return new DelegatedAsyncAction(patch.Connection, Messages.REMOVE_PATCH, "", "", session => Pool_patch.async_pool_clean(session, patch.opaque_ref));
         }
 
         private AsyncAction GetCleanActionForPoolUpdate(Pool_update update)

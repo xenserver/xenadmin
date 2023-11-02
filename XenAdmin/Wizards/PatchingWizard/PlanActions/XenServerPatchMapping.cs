@@ -96,54 +96,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             return XenServerPatch.GetHashCode() ^ base.GetHashCode();
         }
     }
-
-
-    public class PoolPatchMapping : XenServerPatchMapping
-    {
-        public readonly Pool_patch Pool_patch;
-
-        public PoolPatchMapping(XenServerPatch xenServerPatch, Pool_patch poolPatch, Host coordinatorHost, List<string> hostsThatNeedEvacuation = null)
-            : base(xenServerPatch, coordinatorHost, hostsThatNeedEvacuation)
-        {
-            Pool_patch = poolPatch ?? throw new ArgumentNullException(nameof(poolPatch));
-        }
-
-        public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch, Pool_patch patch )
-        {
-            return Matches(coordinatorHost, xenServerPatch) && patch != null &&
-                   string.Equals(patch.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is PoolPatchMapping other && Matches(other.CoordinatorHost, other.XenServerPatch, other.Pool_patch);
-        }
-
-        public override int GetHashCode()
-        {
-            return Pool_patch.GetHashCode() ^ base.GetHashCode();
-        }
-
-        public override bool IsValid
-        {
-            get { return Pool_patch != null && Pool_patch.opaque_ref != null; }
-        }
-
-        public override HostUpdateMapping RefreshUpdate()
-        {
-            if (Pool_patch != null)
-            {
-                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u =>
-                    string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
-
-                if (patch != null && patch.opaque_ref != Pool_patch.opaque_ref)
-                    return new PoolPatchMapping(XenServerPatch, patch, CoordinatorHost, HostsThatNeedEvacuation);
-            }
-
-            return this;
-        }
-    }
-
     
     public class PoolUpdateMapping : XenServerPatchMapping
     {
@@ -194,68 +146,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             return this;
         }
     }
-
-
-    public class OtherLegacyMapping : HostUpdateMapping
-    {
-        public readonly string Path;
-        public readonly Pool_patch Pool_patch;
-
-        public OtherLegacyMapping(string path, Pool_patch pool_patch, Host coordinatorHost, List<string> hostsThatNeedEvacuation = null)
-            : base(coordinatorHost, hostsThatNeedEvacuation)
-        {
-            Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException(nameof(path));
-            Pool_patch = pool_patch;
-        }
-
-        public bool Matches(Host coordinatorHost, string path, Pool_patch patch = null)
-        {
-            if (patch == null)
-                return Matches(coordinatorHost) && Path == path;
-
-            return Matches(coordinatorHost) && Path == path && Pool_patch != null &&
-                   string.Equals(patch.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is OtherLegacyMapping other && Matches(other.CoordinatorHost, other.Path, other.Pool_patch);
-        }
-
-        public override int GetHashCode()
-        {
-            if (Pool_patch == null)
-                return Path.GetHashCode() ^ base.GetHashCode();
-
-            return Path.GetHashCode() ^ Pool_patch.GetHashCode() ^ base.GetHashCode();
-        }
-
-        public override bool IsValid
-        {
-            get
-            {
-                if (Pool_patch == null)
-                    return true;
-
-                return Pool_patch.opaque_ref != null;
-            }
-        }
-
-        public override HostUpdateMapping RefreshUpdate()
-        {
-            if (Pool_patch != null)
-            {
-                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u =>
-                    string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
-
-                if (patch != null && patch.opaque_ref != Pool_patch.opaque_ref)
-                    return new OtherLegacyMapping(Path, patch, CoordinatorHost, HostsThatNeedEvacuation);
-            }
-
-            return this;
-        }
-    }
-
 
     public class SuppPackMapping : HostUpdateMapping
     {

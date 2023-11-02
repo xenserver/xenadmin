@@ -55,14 +55,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         #region Accessors
         public List<Host> SelectedServers { private get; set; }
         public UpdateType SelectedUpdateType { private get; set; }
-        public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
 
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { private get; set; }
         public bool IsAutomaticMode { private get; set; }
         public bool RemoveUpdateFile { private get; set; }
         public string SelectedPatchFilePatch { private get; set; }
-        public Dictionary<Host, VDI> SuppPackVdis { private get; set; }
         #endregion
 
         #region XenTabPage overrides
@@ -158,7 +156,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return null;
         }
 
-
         protected override string FailureMessageOnCompletion(bool multiplePools)
         {
             var msg = multiplePools
@@ -174,6 +171,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 : Messages.PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE;
             return string.Format(msg, GetUpdateName());
         }
+
         protected override string UserCancellationMessage()
         {
             return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION;
@@ -207,29 +205,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                             hostplans.Add(new HostPlan(server, null, updateActions, null));
                         }
                 }
-                else if (SuppPackVdis != null) //supp pack
-                {
-                    foreach (var server in SelectedServers)
-                        if (SuppPackVdis.ContainsKey(server) && poolHosts.Contains(server))
-                        {
-                            var updateActions = new List<PlanAction> {new InstallSupplementalPackPlanAction(server, SuppPackVdis[server])};
-                            hostplans.Add(new HostPlan(server, null, updateActions, null));
-                        }
-                }
-            }
-            else // legacy
-            {
-                foreach (var server in SelectedServers)
-                    if (poolHosts.Contains(server))
-                    {
-                        var hostRebootRequired = WizardHelpers.IsHostRebootRequiredForUpdate(server, Patch, LivePatchCodesByHost);
-
-                        var updateActions = new List<PlanAction> { new ApplyPatchPlanAction(server, Patch, hostRebootRequired) };
-                        hostplans.Add(new HostPlan(server, null, updateActions, null));
-                    }
-
-                if (RemoveUpdateFile && hostplans.Count > 0)
-                    hostplans[hostplans.Count - 1].UpdatesPlanActions.Add(new RemoveUpdateFile(pool, Patch));
             }
 
             applicableHosts = hostplans.Select(h => h.Host).ToList();
@@ -257,59 +232,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (poolHosts.Contains(server) && !poolUpdate.AppliedOn(server))
                             hostplans.Add(new HostPlan(server, null, CompilePoolUpdateActionList(server, poolUpdate), null));
                 }
-                else if (SuppPackVdis != null) // supp pack
-                {
-                    foreach (var server in SelectedServers)
-                        if (SuppPackVdis.ContainsKey(server) && poolHosts.Contains(server))
-                        {
-                            var updateActions = new List<PlanAction>
-                            {
-                                new InstallSupplementalPackPlanAction(server, SuppPackVdis[server]),
-                                new RestartHostPlanAction(server, server.GetRunningVMs())
-                            };
-                            hostplans.Add(new HostPlan(server, null, updateActions, null));
-                        }
-                }
-            }
-            else //legacy
-            {
-                var poolPatches = new List<Pool_patch>(pool.Connection.Cache.Pool_patches);
-                var poolPatch = poolPatches.Find(p => Patch != null && string.Equals(p.uuid, Patch.uuid, StringComparison.OrdinalIgnoreCase));
-
-                if (poolPatch != null)
-                {
-                    foreach (Host server in SelectedServers)
-                        if (poolHosts.Contains(server) && poolPatch.AppliedOn(server) == DateTime.MaxValue)
-                            hostplans.Add(new HostPlan(server, null, CompilePatchActionList(server, poolPatch), null));
-                }
-
-                if (RemoveUpdateFile && hostplans.Count > 0)
-                    hostplans[hostplans.Count - 1].UpdatesPlanActions.Add(new RemoveUpdateFile(pool, poolPatch));
             }
 
             applicableHosts = hostplans.Select(h => h.Host).ToList();
             return hostplans;
-        }
-
-        private List<PlanAction> CompilePatchActionList(Host host, Pool_patch patch)
-        {
-            var hostRebootRequired = WizardHelpers.IsHostRebootRequiredForUpdate(host, patch, LivePatchCodesByHost);
-
-            var actions = new List<PlanAction> {new ApplyPatchPlanAction(host, patch, hostRebootRequired) };
-
-            if (hostRebootRequired)
-                actions.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
-
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI))
-                actions.Add(new RestartAgentPlanAction(host));
-
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHVM))
-                actions.Add(new RebootVMsPlanAction(host, host.GetRunningHvmVMs()));
-
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartPV))
-                actions.Add(new RebootVMsPlanAction(host, host.GetRunningPvVMs()));
-
-            return actions;
         }
 
         private List<PlanAction> CompilePoolUpdateActionList(Host host, Pool_update poolUpdate)
@@ -359,9 +285,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (PoolUpdate != null)
                 return PoolUpdate.Name();
-
-            if (Patch != null)
-                return Patch.Name();
 
             try
             {

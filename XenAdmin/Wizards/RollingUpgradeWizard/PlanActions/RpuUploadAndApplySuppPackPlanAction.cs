@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using XenAdmin.Actions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Diagnostics.Checks;
@@ -127,12 +128,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         {
             if (!uploadedSuppPacks.ContainsKey(coordinator))
             {
-                UploadSupplementalPackAction uploadIsoAction;
+                UploadUpdateAction uploadIsoAction;
                 try
                 {
                     AddProgressStep(string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, suppPack, connection.Name));
 
-                    uploadIsoAction = new UploadSupplementalPackAction(connection, new List<Host> { coordinator }, suppPackPath, true);
+                    uploadIsoAction = new UploadUpdateAction(connection, new List<Host> { coordinator }, suppPackPath, true);
                     uploadIsoAction.Changed += uploadAction_Changed;
                     uploadIsoAction.Completed += uploadAction_Completed;
                     uploadIsoAction.RunSync(session);

@@ -36,7 +36,7 @@ using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Dialogs;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Network;
 
 
@@ -114,12 +114,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 UploadUpdate(conn, session, coordinator, path);
             }
-            else if (updateFilePath != null)
+            else if (updateFilePath != null && updateType == UpdateType.ISO)
             {
-                if (updateType == UpdateType.ISO)
-                    UploadSuppPack(conn, session, path);
-                else
-                    UploadLegacyPatch(conn, session, path);
+                UploadSuppPack(conn, session, path);
             }
         }
 
@@ -150,7 +147,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         private void UploadUpdate(IXenConnection conn, Session session, Host coordinator, string path)
         {
-            var uploadIsoAction = new UploadSupplementalPackAction(conn, new List<Host> { coordinator }, path, true);
+            var uploadIsoAction = new UploadUpdateAction(conn, new List<Host> { coordinator }, path, true);
             uploadIsoAction.Changed += uploadAction_Changed;
             uploadIsoAction.Completed += uploadAction_Completed;
             inProgressAction = uploadIsoAction;
@@ -173,55 +170,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 mappings.Add(newMapping);
         }
 
-        private void UploadLegacyPatch(IXenConnection conn, Session session, string path)
-        {
-            if (!skipDiskSpaceCheck)
-                CheckDiskSpace(conn, session, path);
-
-            var uploadPatchAction = new UploadPatchAction(conn, path, true, false);
-            uploadPatchAction.Changed += uploadAction_Changed;
-            uploadPatchAction.Completed += uploadAction_Completed;
-            inProgressAction = uploadPatchAction;
-            uploadPatchAction.RunSync(session);
-
-            // this has to be run again to refresh poolPatches (to get the recently uploaded one as well)
-            var poolPatches = new List<Pool_patch>(conn.Cache.Pool_patches);
-
-            Pool_patch poolPatch;
-            if (xenServerPatch != null)
-            {
-                poolPatch = poolPatches.Find(p => string.Equals(p.uuid, xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
-
-                if (poolPatch == null)
-                {
-                    log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).",
-                        xenServerPatch.Uuid, conn);
-                    throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
-                }
-
-                var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetCoordinator(conn));
-                if (!mappings.Contains(newMapping))
-                    mappings.Add(newMapping);
-            }
-            else
-            {
-                poolPatch = uploadPatchAction.Patch;
-                if (poolPatch == null)
-                {
-                    log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch {0} on host (uuid={1}).",
-                        updateFilePath, conn);
-                    throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
-                }
-
-                var newMapping = new OtherLegacyMapping(updateFilePath, poolPatch, Helpers.GetCoordinator(conn));
-                if (!mappings.Contains(newMapping))
-                    mappings.Add(newMapping);
-            }
-        }
-
         private void UploadSuppPack(IXenConnection conn, Session session, string path)
         {
-            var uploadIsoAction = new UploadSupplementalPackAction(conn, selectedServers, path, true);
+            var uploadIsoAction = new UploadUpdateAction(conn, selectedServers, path, true);
             uploadIsoAction.Changed += uploadAction_Changed;
             uploadIsoAction.Completed += uploadAction_Completed;
             inProgressAction = uploadIsoAction;
@@ -243,36 +194,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (!mappings.Contains(newMapping))
                 mappings.Add(newMapping);
-        }
-
-        private void CheckDiskSpace(IXenConnection conn, Session session, string path)
-        {
-            try
-            {
-                var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetCoordinator(conn), path, true);
-                inProgressAction = checkSpaceForUpload;
-                checkSpaceForUpload.RunSync(session);
-            }
-            catch (NotEnoughSpaceException e)
-            {
-                if (!e.DiskSpaceRequirements.CanCleanup)
-                    throw;
-
-                var dialogResult = Program.Invoke(invokingControl, (Func<DialogResult>)(() =>
-                        {
-                            using (var d = new WarningDialog(e.DiskSpaceRequirements.GetSpaceRequirementsMessage(),
-                                ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel))
-                            {
-                                return d.ShowDialog(invokingControl);
-                            }
-                        }
-                    ), null);
-
-                if (dialogResult is DialogResult dr && dr == DialogResult.OK)
-                    new CleanupDiskSpaceAction(e.DiskSpaceRequirements.Host, null, true).RunSync(session);
-                else
-                    throw;
-            }
         }
 
         private void uploadAction_Changed(ActionBase action)

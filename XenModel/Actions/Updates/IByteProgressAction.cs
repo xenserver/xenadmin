@@ -28,27 +28,11 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Actions;
-using XenAPI;
 
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace XenAdmin.Actions.Updates
 {
-    class RemoveUpdateFile : PlanActionWithSession
+    public interface IByteProgressAction
     {
-        private readonly Pool _pool;
-        private readonly Pool_patch _patch;
-
-        public RemoveUpdateFile(Pool pool, Pool_patch patch)
-            : base(pool.Connection)
-        {
-            _pool = pool;
-            _patch = patch;
-        }
-
-        protected override void RunWithSession(ref Session session)
-        {
-            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATE, _patch.Name(), _pool.Name()));
-            new PoolPatchCleanAction(_pool, _patch, true).RunSync(session);
-        }
+        string ByteProgressDescription { get; set; }
     }
 }
