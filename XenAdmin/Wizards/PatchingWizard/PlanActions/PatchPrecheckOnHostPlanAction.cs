@@ -65,9 +65,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var coordinator = Helpers.GetCoordinator(Connection);
 
             HostUpdateMapping mapping = (from HostUpdateMapping hum in mappings
-                let xpm = hum as XenServerPatchMapping
-                where xpm != null && xpm.Matches(coordinator, xenServerPatch)
-                select xpm).FirstOrDefault();
+                let pum = hum as PoolUpdateMapping
+                where pum != null && pum.Matches(coordinator, xenServerPatch)
+                select pum).FirstOrDefault();
 
             if (mapping == null || !mapping.IsValid)
                 return;
