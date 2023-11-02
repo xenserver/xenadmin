@@ -285,6 +285,8 @@ namespace XenAdmin.Controls
         {
             if (cell == null)
                 return;
+            if (cell.OwningRow is DataGridViewExRow row && !row.Enabled)
+                return;
 
             if (cell.Tag is Command command)
                 command.Run();
