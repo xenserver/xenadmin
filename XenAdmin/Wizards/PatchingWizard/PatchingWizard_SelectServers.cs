@@ -922,20 +922,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             public override bool IsCheckable => !HasPool;
 
-            public override bool Enabled
-            {
-                get => base.Enabled;
-                set
-                {
-                    base.Enabled = value;
-                    UpdateDetails();
-                }
-            }
-
-            public int CheckValue => IsPoolOrStandaloneHost
-                ? (int)Cells[POOL_CHECKBOX_COL].Value
-                : (int)Cells[POOL_ICON_HOST_CHECKBOX_COL].Value;
-
             public bool IsSelectableHost => IsAHostRow && Enabled && (_showHostCheckBox || !HasPool);
 
             public bool IsSelectablePool => IsAPoolRow && Enabled;

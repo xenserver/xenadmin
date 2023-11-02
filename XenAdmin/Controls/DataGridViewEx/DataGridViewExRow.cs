@@ -35,38 +35,27 @@ namespace XenAdmin.Controls.DataGridViewEx
 {
     public class DataGridViewExRow : DataGridViewRow, IComparable<DataGridViewExRow>
     {
+        private bool _enabled = true;
+
         public DataGridViewExRow()
-            : this(true)
         {
-
+            UpdateDefaultCellStyle();
         }
-
-        public DataGridViewExRow(bool enabled)
-        {
-            Enabled = enabled;
-        }
-
-        private bool enabled;
 
         public virtual bool Enabled
         {
-            get
-            {
-                return enabled;
-            }
+            get => _enabled;
             set
             {
-                enabled = value;
-
+                _enabled = value;
                 UpdateDefaultCellStyle();
             }
         }
 
         public void UpdateDefaultCellStyle()
         {
-            DataGridViewEx dgv = this.DataGridView as DataGridViewEx;
-            if (dgv != null)
-                DefaultCellStyle = dgv.GetRowCellStyle(enabled, DataGridView != null ? DataGridView.Enabled : true);
+            if (DataGridView is DataGridViewEx dgv)
+                DefaultCellStyle = dgv.GetRowCellStyle(_enabled, DataGridView?.Enabled ?? true);
         }
 
         public int CompareTo(DataGridViewExRow other)
