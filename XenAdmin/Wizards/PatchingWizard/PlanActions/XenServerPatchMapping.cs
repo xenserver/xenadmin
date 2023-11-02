@@ -70,44 +70,24 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public abstract HostUpdateMapping RefreshUpdate();
     }
 
-    
-    public abstract class XenServerPatchMapping : HostUpdateMapping
+    public class PoolUpdateMapping : HostUpdateMapping
     {
         public XenServerPatch XenServerPatch { get; }
-
-        protected XenServerPatchMapping(XenServerPatch xenServerPatch, Host coordinatorHost, List<string> hostsThatNeedEvacuation)
-            : base(coordinatorHost, hostsThatNeedEvacuation)
-        {
-            XenServerPatch = xenServerPatch ?? throw new ArgumentNullException(nameof(xenServerPatch));
-        }
-
-        public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch)
-        {
-            return Matches(coordinatorHost) && XenServerPatch.Equals(xenServerPatch);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is XenServerPatchMapping other && Matches(other.CoordinatorHost, other.XenServerPatch);
-        }
-
-        public override int GetHashCode()
-        {
-            return XenServerPatch.GetHashCode() ^ base.GetHashCode();
-        }
-    }
-    
-    public class PoolUpdateMapping : XenServerPatchMapping
-    {
         public Pool_update PoolUpdate { get; }
         public Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost { get; }
 
         public PoolUpdateMapping(XenServerPatch xenServerPatch, Pool_update poolUpdate, Host coordinatorHost,
             Dictionary<Host, SR> srsWithUploadedUpdatesPerHost, List<string> hostsThatNeedEvacuation = null)
-            : base(xenServerPatch, coordinatorHost, hostsThatNeedEvacuation)
+            : base(coordinatorHost, hostsThatNeedEvacuation)
         {
+            XenServerPatch = xenServerPatch ?? throw new ArgumentNullException(nameof(xenServerPatch));
             PoolUpdate = poolUpdate ?? throw new ArgumentNullException(nameof(poolUpdate));
             SrsWithUploadedUpdatesPerHost = srsWithUploadedUpdatesPerHost ?? new Dictionary<Host, SR>();
+        }
+
+        public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch)
+        {
+            return Matches(coordinatorHost) && XenServerPatch.Equals(xenServerPatch);
         }
 
         public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch, Pool_update update)
