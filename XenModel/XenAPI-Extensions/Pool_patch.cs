@@ -29,13 +29,10 @@
  */
 
 using System;
-using System.Collections.Generic;
-using XenAdmin.Core;
-using XenAdmin.Network;
 
 namespace XenAPI
 {
-    public partial class Pool_patch : IComparable<Pool_patch>
+    public partial class Pool_patch
     {
         public override string Name()
         {
@@ -45,47 +42,6 @@ namespace XenAPI
         public override string Description()
         {
             return name_description;
-        }
-
-        private void AppliedTo(List<XenRef<Host>> appliedHosts)
-        {
-            foreach (Host_patch host_patch in Connection.ResolveAll(host_patches))
-                appliedHosts.Add(host_patch.host);
-        }
-
-        public List<XenRef<Host>> AppliedTo(IEnumerable<IXenConnection> connections)
-        {
-            IEnumerable<Pool_patch> patches = GetAllPatches(uuid, connections);
-            List<XenRef<Host>> hosts = new List<XenRef<Host>>();
-
-            foreach (Pool_patch patch in patches)
-            {
-                patch.AppliedTo(hosts);
-            }
-
-            return hosts;
-        }
-
-        public bool IsAppliedTo(Host host,IEnumerable<IXenConnection> connections)
-        {
-            List<Host> hostsApplied = new List<Host>();
-            foreach (IXenConnection xenConnection in connections)
-            {
-                hostsApplied.AddRange(xenConnection.ResolveAll(AppliedTo(connections)));
-            }
-            if (hostsApplied.Contains(host))
-                return true;
-            return false;
-        }
-
-        public List<Host> HostsAppliedTo()
-        {
-            List<Host> hosts = new List<Host>();
-            foreach (Host_patch patch in Connection.ResolveAll(host_patches))
-            {
-                hosts.Add(Connection.Resolve(patch.host));
-            }
-            return hosts;
         }
 
         public DateTime AppliedOn(Host host)
@@ -105,102 +61,5 @@ namespace XenAPI
 
             return DateTime.MaxValue;
         }
-
-        private static bool FindPatch(Pool_patch patch, IEnumerable<Pool_patch> patches)
-        {
-            foreach (Pool_patch p in patches)
-            {
-                if (string.Equals(p.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase))
-                    return true;
-            }
-
-            return false;
-        }
-
-        public static List<Pool_patch> GetAllThatApply(Host host,IEnumerable<IXenConnection> connections)
-        {
-            List<Pool_patch> patches = new List<Pool_patch>();
-
-            Pool pool = Helpers.GetPoolOfOne(host.Connection);
-            if (pool == null || pool.RollingUpgrade())
-            {
-                foreach (Host_patch hostPatch in host.Connection.ResolveAll(host.patches))
-                {
-                    Pool_patch patch = host.Connection.Resolve(hostPatch.pool_patch);
-                    if (patch == null)
-                        continue;
-
-                    patches.Add(patch);
-                }
-
-                return patches;
-            }
-
-            patches.AddRange(host.Connection.Cache.Pool_patches);
-
-            foreach (IXenConnection connection in connections)
-                foreach (Host otherHost in connection.Cache.Hosts)
-                {
-                    // ignore pools in rolling upgrade
-                    pool = Helpers.GetPoolOfOne(connection);
-                    if (pool != null && pool.RollingUpgrade())
-                        continue;
-
-                    // ignore this host
-                    if (otherHost.opaque_ref == host.opaque_ref)
-                        continue;
-
-                    // ignore hosts of different version
-                    if (Helpers.ProductVersionCompare(Helpers.HostProductVersion(otherHost),
-                            Helpers.HostProductVersion(host)) != 0)
-                        continue;
-
-                    foreach (Host_patch hostPatch in connection.ResolveAll(otherHost.patches))
-                    {
-                        Pool_patch patch = connection.Resolve(hostPatch.pool_patch);
-                        if (patch == null)
-                            continue;
-
-                        if (FindPatch(patch, patches))
-                            continue;
-
-                        patches.Add(patch);
-                    }
-                }
-
-            return patches;
-        }
-        private static IEnumerable<Pool_patch> GetAllPatches(string uuid,IEnumerable<IXenConnection> connections)
-        {
-            List<Pool_patch> patches = new List<Pool_patch>();
-
-            foreach (IXenConnection connection in connections)
-            {
-                foreach (Pool_patch patch in connection.Cache.Pool_patches)
-                {
-                    if (string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
-                        patches.Add(patch);
-                }
-            }
-
-            return patches;
-        }
-
-        public static IEnumerable<Pool_patch> GetAll(IEnumerable<IXenConnection> connections)
-        {
-            List<Pool_patch> patches = new List<Pool_patch>();
-
-            foreach (IXenConnection connection in connections)
-            {
-                foreach (Pool_patch patch in connection.Cache.Pool_patches)
-                {
-                    if (!FindPatch(patch, patches))
-                        patches.Add(patch);
-                }
-            }
-
-            return patches;
-        }
-
     }
 }

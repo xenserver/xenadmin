@@ -57,26 +57,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
         public List<Host> SelectedServers { private get; set; }
 
-        public Pool_patch Patch
-        {
-            get
-            {
-                if (SelectedUpdateAlert != null)
-                    return (from HostUpdateMapping mapping in PatchMappings
-                        let m = mapping as PoolPatchMapping
-                        where m != null && m.XenServerPatch.Equals(SelectedUpdateAlert.Patch)
-                        select m.Pool_patch).FirstOrDefault();
-
-                if (SelectedPatchFilePath != null)
-                    return (from HostUpdateMapping mapping in PatchMappings
-                        let m = mapping as OtherLegacyMapping
-                        where m != null && m.Path.Equals(SelectedPatchFilePath)
-                        select m.Pool_patch).FirstOrDefault();
-
-                return null;
-            }
-        }
-
         public Pool_update PoolUpdate
         {
             get
@@ -95,26 +75,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public Dictionary<Host, VDI> SuppPackVdis
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(SelectedPatchFilePath))
-                    return null;
-
-                var suppPackVdis = new Dictionary<Host, VDI>();
-                foreach (var mapping in PatchMappings)
-                {
-                    if (mapping is SuppPackMapping m && m.Path.Equals(SelectedPatchFilePath))
-                    {
-                        foreach (var kvp in m.SuppPackVdis)
-                            suppPackVdis[kvp.Key] = kvp.Value;
-                    }
-                }
-
-                return suppPackVdis;
-            }
-        }
         #endregion
 
 

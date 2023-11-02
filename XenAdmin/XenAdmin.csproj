@@ -1139,8 +1139,6 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToCoordinatorPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\XenServerPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\UpdateProgressBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -4245,7 +4243,6 @@
     <Compile Include="Wizards\PatchingWizard\PatchingWizard_FirstPage.Designer.cs">
       <DependentUpon>PatchingWizard_FirstPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PatchingWizard.cs">
       <SubType>Form</SubType>
     </Compile>

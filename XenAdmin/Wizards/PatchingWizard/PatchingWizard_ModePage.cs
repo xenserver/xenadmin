@@ -74,27 +74,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             var anyPoolForbidsAutostart = SelectedServers.Select(s => Helpers.GetPoolOfOne(s.Connection)).Any(p => p.IsAutoUpdateRestartsForbidden());
 
             // this will be true if a patch has restartHost guidance or if livepatching fails
-            bool someHostMayRequireRestart;
             bool automaticDisabled;
 
             switch (SelectedUpdateType)
             {
                 case UpdateType.Legacy:
                     if (IsNewGeneration)
-                    {
                         ManualTextInstructions = ModeCdnUpdates();
-                        automaticDisabled = anyPoolForbidsAutostart;
-                    }
-                    else
-                    {
-                        ManualTextInstructions = ModePoolPatch(out someHostMayRequireRestart);
-                        automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
-                    }
-
+                    automaticDisabled = anyPoolForbidsAutostart;
                     break;
                 case UpdateType.ISO:
                     ManualTextInstructions = PoolUpdate != null
-                        ? ModePoolUpdate(out someHostMayRequireRestart)
+                        ? ModePoolUpdate(out var someHostMayRequireRestart)
                         : ModeSuppPack(out someHostMayRequireRestart);
                     automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
                     break;
@@ -182,7 +173,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<Host> SelectedServers { private get; set; }
         public Dictionary<string, livepatch_status> LivePatchCodesByHost { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
-        public Pool_patch Patch { private get; set; }
         public UpdateType SelectedUpdateType { private get; set; }
 
         #endregion
@@ -213,35 +203,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #region Guidance builder
-
-        private Dictionary<Pool, StringBuilder> ModePoolPatch(out bool someHostMayRequireRestart)
-        {
-            someHostMayRequireRestart = false;
-
-            if (Patch == null || Patch.after_apply_guidance == null || Patch.after_apply_guidance.Count == 0)
-                return null;
-
-            var applicableServers = SelectedServers.Where(h => Patch.AppliedOn(h) == DateTime.MaxValue).ToList();
-            var serversPerPool = GroupServersPerPool(SelectedPools, applicableServers);
-
-            var total = new Dictionary<Pool, StringBuilder>();
-
-            foreach (var guide in Patch.after_apply_guidance)
-            {
-                var result = GetGuidanceList(guide, serversPerPool, null, out someHostMayRequireRestart);
-                if (result == null)
-                    continue;
-                foreach (var kvp in result)
-                {
-                    if (total.ContainsKey(kvp.Key))
-                        total[kvp.Key].Append(kvp.Value).AppendLine();
-                    else
-                        total[kvp.Key] = kvp.Value;
-                }
-            }
-
-            return total;
-        }
 
         private Dictionary<Pool, StringBuilder> ModePoolUpdate(out bool someHostMayRequireRestart)
         {
