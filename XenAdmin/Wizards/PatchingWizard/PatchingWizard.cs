@@ -230,9 +230,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var mapping in PatchingWizard_UploadPage.PatchMappings)
                 {
                     if (mapping is PoolUpdateMapping pum)
-                        srsWithUploadedUpdates[pum.Pool_update] = pum.SrsWithUploadedUpdatesPerHost;
-                    else if (mapping is SuppPackMapping spm && spm.Pool_update != null)
-                        srsWithUploadedUpdates[spm.Pool_update] = spm.SrsWithUploadedUpdatesPerHost;
+                        srsWithUploadedUpdates[pum.PoolUpdate] = pum.SrsWithUploadedUpdatesPerHost;
+                    else if (mapping is SuppPackMapping spm && spm.PoolUpdate != null)
+                        srsWithUploadedUpdates[spm.PoolUpdate] = spm.SrsWithUploadedUpdatesPerHost;
                 }
                 PatchingWizard_PrecheckPage.SrUploadedUpdates = srsWithUploadedUpdates;
 
@@ -299,7 +299,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (mapping is PoolUpdateMapping updateMapping)
                 {
-                    var action = GetCleanActionForPoolUpdate(updateMapping.Pool_update);
+                    var action = GetCleanActionForPoolUpdate(updateMapping.PoolUpdate);
                     if (action != null)
                         list.Add(action);
                     continue;
@@ -307,9 +307,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
                 if (mapping is SuppPackMapping suppPackMapping)
                 {
-                    if (suppPackMapping.Pool_update!= null)
+                    if (suppPackMapping.PoolUpdate!= null)
                     {
-                        var action = GetCleanActionForPoolUpdate(suppPackMapping.Pool_update);
+                        var action = GetCleanActionForPoolUpdate(suppPackMapping.PoolUpdate);
                         if (action != null)
                             list.Add(action);
                     }                        
