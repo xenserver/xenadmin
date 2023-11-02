@@ -29250,7 +29250,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Host vGPU Memory Usage (%).
+        ///   Looks up a localized string similar to Host vGPU Usage (%).
         /// </summary>
         public static string NRPE_CHECK_VGPU {
             get {
@@ -29259,7 +29259,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Host vGPU Usage (%).
+        ///   Looks up a localized string similar to Host vGPU Memory Usage (%).
         /// </summary>
         public static string NRPE_CHECK_VGPU_MEMORY {
             get {

@@ -10150,10 +10150,10 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>Dom0 Free Swap (%)</value>
   </data>
   <data name="NRPE_CHECK_VGPU" xml:space="preserve">
-    <value>Host vGPU Memory Usage (%)</value>
+    <value>Host vGPU Usage (%)</value>
   </data>
   <data name="NRPE_CHECK_VGPU_MEMORY" xml:space="preserve">
-    <value>Host vGPU Usage (%)</value>
+    <value>Host vGPU Memory Usage (%)</value>
   </data>
   <data name="NRPE_EDIT_PAGE_TEXT" xml:space="preserve">
     <value>NRPE Configuration</value>
