@@ -65,10 +65,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (mapping is PoolUpdateMapping updateMapping &&
                         SelectedUpdateAlert != null && updateMapping.XenServerPatch.Equals(SelectedUpdateAlert.Patch))
-                        return updateMapping.Pool_update;
+                        return updateMapping.PoolUpdate;
                     
                     if (mapping is SuppPackMapping suppPackMapping && suppPackMapping.Path.Equals(SelectedPatchFilePath))
-                        return suppPackMapping.Pool_update;
+                        return suppPackMapping.PoolUpdate;
                 }
 
                 return null;

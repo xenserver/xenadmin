@@ -84,7 +84,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, xenServerPatch.Name, host.Name()));
 
                 if (mapping is PoolUpdateMapping pum)
-                    ReIntroducePoolUpdate(host, pum.Pool_update, session);
+                    ReIntroducePoolUpdate(host, pum.PoolUpdate, session);
 
                 mapping = mapping.RefreshUpdate();
 
@@ -92,9 +92,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 if (mapping is PoolUpdateMapping updateMapping)
                 {
-                    log.InfoFormat("Running update precheck on '{0}'. Update = '{1}' (uuid = '{2}'; opaque_ref = '{3}'", host.Name(), updateMapping.Pool_update.Name(), updateMapping.Pool_update.uuid, updateMapping.Pool_update.opaque_ref);
-                    problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
-                    updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, updateMapping.Pool_update, livePatchStatus);
+                    log.InfoFormat("Running update precheck on '{0}'. Update = '{1}' (uuid = '{2}'; opaque_ref = '{3}'", host.Name(), updateMapping.PoolUpdate.Name(), updateMapping.PoolUpdate.uuid, updateMapping.PoolUpdate.opaque_ref);
+                    problems = new PatchPrecheckCheck(host, updateMapping.PoolUpdate, livePatchStatus).RunAllChecks();
+                    updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, updateMapping.PoolUpdate, livePatchStatus);
                 }
 
                 Problem problem = null;

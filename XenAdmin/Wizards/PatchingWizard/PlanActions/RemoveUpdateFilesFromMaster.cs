@@ -64,7 +64,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 if (existing is PoolUpdateMapping mapping && mapping.IsValid)
                 {
-                    var poolUpdate = mapping.Pool_update;
+                    var poolUpdate = mapping.PoolUpdate;
                     AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolUpdate.Name()));
 
                     Pool_update.pool_clean(session, poolUpdate.opaque_ref);

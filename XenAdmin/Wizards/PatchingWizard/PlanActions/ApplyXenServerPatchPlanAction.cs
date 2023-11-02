@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     host.Name()));
 
                 if (mapping is PoolUpdateMapping pum)
-                    PatchPrecheckOnHostPlanAction.ReIntroducePoolUpdate(host, pum.Pool_update, session);
+                    PatchPrecheckOnHostPlanAction.ReIntroducePoolUpdate(host, pum.PoolUpdate, session);
 
                 mapping = mapping.RefreshUpdate();
 
@@ -86,8 +86,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 if (mapping is PoolUpdateMapping updateMapping)
                 {
-                    log.InfoFormat("Applying update on '{0}'. Update = '{1}' (uuid = '{2}'; opaque_ref = '{3}')", host.Name(), updateMapping.Pool_update.Name(), updateMapping.Pool_update.uuid, updateMapping.Pool_update.opaque_ref);
-                    task = Pool_update.async_apply(session, updateMapping.Pool_update.opaque_ref, host.opaque_ref);
+                    log.InfoFormat("Applying update on '{0}'. Update = '{1}' (uuid = '{2}'; opaque_ref = '{3}')", host.Name(), updateMapping.PoolUpdate.Name(), updateMapping.PoolUpdate.uuid, updateMapping.PoolUpdate.opaque_ref);
+                    task = Pool_update.async_apply(session, updateMapping.PoolUpdate.opaque_ref, host.opaque_ref);
                 }
 
                 PollTaskForResultAndDestroy(Connection, ref session, task);
