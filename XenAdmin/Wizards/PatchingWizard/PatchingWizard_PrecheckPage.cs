@@ -821,11 +821,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 _solutionCell.Value = Problem == null ? string.Empty : Problem.HelpMessage;
 
-                if (Problem is WarningWithInformationUrl)
-                    _solutionCell.Value = (Problem as WarningWithInformationUrl).LinkText;
+                if (Problem is WarningWithInformationUrl wrn)
+                    _solutionCell.Value = wrn.LinkText;
 
-                if (Problem is ProblemWithInformationUrl)
-                    _solutionCell.Value = (Problem as ProblemWithInformationUrl).LinkText;
+                if (Problem is ProblemWithInformationUrl prb)
+                    _solutionCell.Value = prb.LinkText;
 
                 UpdateSolutionCellStyle();
             }
@@ -834,6 +834,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (_solutionCell == null)
                     return;
+
                 if (Enabled) 
                 {
                     _solutionCell.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
