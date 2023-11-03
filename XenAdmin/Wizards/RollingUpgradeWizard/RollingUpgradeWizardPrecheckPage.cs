@@ -30,14 +30,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Diagnostics.Hotfixing;
+using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
-using System.Linq;
-using XenAdmin.Network;
 using CheckGroup = System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<XenAdmin.Diagnostics.Checks.Check>>;
 
 
@@ -163,7 +163,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var hotfixChecks = new List<Check>();
             foreach (var host in hostsToUpgrade)
             {
-                if (HotfixFactory.IsHotfixRequired(host) && !ManualUpgrade)
+                if (RpuHotfix.Exists(host, out _) && !ManualUpgrade)
                     hotfixChecks.Add(new HostHasHotfixCheck(host));
             }
             if (hotfixChecks.Count > 0)
