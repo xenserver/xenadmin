@@ -32,12 +32,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
-using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.UtilityProblem;
-using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -103,8 +103,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             foreach (var host in Hosts)
             {
-                var hotfix = HotfixFactory.Hotfix(host);
-                if (hotfix != null && hotfix.ShouldBeAppliedTo(host))
+                if (RpuHotfix.Exists(host, out var hotfix) && hotfix.ShouldBeAppliedTo(host))
                     return new HostDoesNotHaveHotfixWarning(this, host);
             }
 

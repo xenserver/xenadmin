@@ -28,29 +28,44 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Actions.Updates;
-using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.HostProblem;
+using System.Collections.Generic;
+using System.IO;
+using XenAdmin.Core;
 using XenAPI;
 
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.Actions.Updates
 {
-    class HostHasHotfixCheck : HostPostLivenessCheck
+    public class ApplyRpuHotfixAction : AsyncAction
     {
-        public HostHasHotfixCheck(Host host)
-            : base(host)
+        private readonly Host _host;
+        private readonly RpuHotfix _hotfix;
+        private readonly string _hotfixDir;
+
+        public ApplyRpuHotfixAction(Host host, RpuHotfix hotfix, string hotfixDir)
+            : base(host.Connection, string.Format(Messages.APPLYING_HOTFIX_TO_HOST, host), true)
         {
+            _host = host;
+            _hotfix = hotfix;
+            _hotfixDir = hotfixDir;
         }
 
-        protected override Problem RunHostCheck()
+        protected override void Run()
         {
-            if (RpuHotfix.Exists(Host, out var hotfix) && hotfix.ShouldBeAppliedTo(Host))
-                return new HostDoesNotHaveHotfix(this, Host, hotfix);
+            var update = _host.Connection.Cache.Find_By_Uuid<Pool_update>(_hotfix.Uuid);
 
-            return null;
+            if (update == null)
+            {
+                var coordinator = Helpers.GetCoordinator(_host.Connection);
+                var path = Path.Combine(_hotfixDir, $"{_hotfix.Name}.iso");
+                var action = new UploadUpdateAction(coordinator.Connection, new List<Host> { coordinator }, path, false);
+                action.RunSync(Session);
+                update = action.PoolUpdate;
+            }
+
+            new ApplyUpdateAction(update, _host, false).RunSync(Session);
+
+            _host.Connection.WaitFor(() => _host.Connection.Cache.Find_By_Uuid<Pool_update>(_hotfix.Uuid) != null, null);
         }
-
-        public override string Description => Messages.HOTFIX_CHECK;
     }
 }

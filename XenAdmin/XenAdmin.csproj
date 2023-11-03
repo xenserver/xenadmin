@@ -3212,10 +3212,6 @@
       <DependentUpon>PoolHostDataGridViewOneCheckbox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewEx\PoolHostDataGridViewOneCheckboxRow.cs" />
-    <Compile Include="Diagnostics\Hotfixing\Hotfix.cs" />
-    <Compile Include="Diagnostics\Hotfixing\MultipleHotfix.cs" />
-    <Compile Include="Diagnostics\Hotfixing\SingleHotfix.cs" />
-    <Compile Include="Diagnostics\Hotfixing\HotfixFactory.cs" />
     <Compile Include="Dialogs\ConnectionLostDialogLauncher.cs" />
     <Compile Include="Dialogs\GraphDetailsDialog.cs">
       <SubType>Form</SubType>

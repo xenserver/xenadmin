@@ -30,8 +30,8 @@
 
 using System;
 using System.Collections.Generic;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
-using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
@@ -85,8 +85,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             if (!_manualUpgrade)
             {
-                var hotfix = HotfixFactory.Hotfix(Host);
-                if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                if (RpuHotfix.Exists(Host, out var hotfix) && hotfix.ShouldBeAppliedTo(Host))
                     return new HostDoesNotHaveHotfixWarning(this, Host);
             }
 

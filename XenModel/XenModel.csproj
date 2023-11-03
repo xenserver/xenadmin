@@ -111,6 +111,8 @@
     <Compile Include="Actions\Pool\PoolAction.cs" />
     <Compile Include="Actions\Pool\SetGpuPlacementPolicyAction.cs" />
     <Compile Include="Actions\Pool\SetSslLegacyAction.cs" />
+    <Compile Include="Actions\Updates\RpuHotfix.cs" />
+    <Compile Include="Actions\Updates\ApplyRpuHotfixAction.cs" />
     <Compile Include="Actions\Updates\GetDiskSpaceRequirementsAction.cs" />
     <Compile Include="Actions\Updates\ApplyUpdateAction.cs" />
     <Compile Include="Actions\PVS\ConfigurePvsSiteAction.cs" />
