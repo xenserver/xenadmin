@@ -23904,24 +23904,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export to Fi&amp;le....
-        /// </summary>
-        public static string MAINWINDOW_EXPORT_VM_AS_BACKUP {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_EXPORT_VM_AS_BACKUP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The VM must be shut down before it can be exported..
-        /// </summary>
-        public static string MAINWINDOW_EXPORT_VM_AS_BACKUP_TOOLTIP {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_EXPORT_VM_AS_BACKUP_TOOLTIP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Force Re&amp;boot.
         /// </summary>
         public static string MAINWINDOW_FORCE_REBOOT {

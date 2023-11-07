@@ -8301,12 +8301,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>&amp;Export to File...</value>
   </data>
-  <data name="MAINWINDOW_EXPORT_VM_AS_BACKUP" xml:space="preserve">
-    <value>Export to Fi&amp;le...</value>
-  </data>
-  <data name="MAINWINDOW_EXPORT_VM_AS_BACKUP_TOOLTIP" xml:space="preserve">
-    <value>The VM must be shut down before it can be exported.</value>
-  </data>
   <data name="MAINWINDOW_FORCE_REBOOT" xml:space="preserve">
     <value>Force Re&amp;boot</value>
   </data>

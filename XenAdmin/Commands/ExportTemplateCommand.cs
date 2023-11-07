@@ -30,7 +30,6 @@
 
 using System.Collections.Generic;
 using XenAPI;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Commands
@@ -38,7 +37,7 @@ namespace XenAdmin.Commands
     /// <summary>
     /// Shows the ExportVMDialog dialog for the selected template.
     /// </summary>
-    internal class ExportTemplateCommand : Command
+    internal class ExportTemplateCommand : ExportVMCommand
     {
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
@@ -53,49 +52,17 @@ namespace XenAdmin.Commands
         {
         }
 
-        public ExportTemplateCommand(IMainWindow mainWindow, VM template)
-            : base(mainWindow, template)
-        {
-        }
-
-        protected override void RunCore(SelectedItemCollection selection)
-        {
-            VM vm = (VM)selection[0].XenObject;
-            Host host = vm.Home();
-            Pool pool = Helpers.GetPool(vm.Connection);
-
-            if (host == null && pool != null)
-            {
-                host = pool.Connection.Resolve(pool.master);
-            }
-
-            new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(vm, selection[0].Connection, host, null)).Run();
-        }
-
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1)
-            {
-                VM vm = selection[0].XenObject as VM;
-
-                if (vm != null && vm.is_a_template && !vm.is_a_snapshot && !vm.Locked)
-                {
-                    if (vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.export))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-
+            return selection.Count == 1 &&
+                   selection[0].XenObject is VM vm &&
+                   vm.is_a_template &&
+                   !vm.is_a_snapshot &&
+                   !vm.Locked &&
+                   vm.allowed_operations != null &&
+                   vm.allowed_operations.Contains(vm_operations.export);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_EXPORT_TEMPLATE;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_EXPORT_TEMPLATE;
     }
 }

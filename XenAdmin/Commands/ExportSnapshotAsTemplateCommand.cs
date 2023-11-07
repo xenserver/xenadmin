@@ -37,16 +37,8 @@ namespace XenAdmin.Commands
     /// <summary>
     /// Shows the ExportVMDialog dialog for the selected snapshot.
     /// </summary>
-    internal class ExportSnapshotAsTemplateCommand : Command
+    internal class ExportSnapshotAsTemplateCommand : ExportVMCommand
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public ExportSnapshotAsTemplateCommand()
-        {
-        }
-
         public ExportSnapshotAsTemplateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
             : base(mainWindow, selection)
         {
@@ -58,37 +50,13 @@ namespace XenAdmin.Commands
 
         }
 
-        private void Run(VM snapshot)
-        {
-            if (snapshot != null)
-            {
-                new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(snapshot, snapshot.Connection, null, null)).Run();
-            }
-        }
-
-        protected override void RunCore(SelectedItemCollection selection)
-        {
-            VM vm = (VM)selection[0].XenObject;
-            Run(vm);
-        }
-
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1)
-            {
-                VM vm = selection[0].XenObject as VM;
-
-                return vm != null && vm.is_a_snapshot;
-            }
-            return false;
+            return selection.Count == 1 &&
+                   selection[0].XenObject is VM vm &&
+                   vm.is_a_snapshot;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.EXPORT_SNAPSHOT_AS_TEMPLATE_MENU_ITEM;
-            }
-        }
+        public override string MenuText => Messages.EXPORT_SNAPSHOT_AS_TEMPLATE_MENU_ITEM;
     }
 }
