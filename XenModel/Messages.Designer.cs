@@ -35282,6 +35282,141 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SNMP.
+        /// </summary>
+        public static string SNMP {
+            get {
+                return ResourceManager.GetString("SNMP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving SNMP configuration.
+        /// </summary>
+        public static string SNMP_ACTION_RETRIEVE {
+            get {
+                return ResourceManager.GetString("SNMP_ACTION_RETRIEVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating SNMP configuration.
+        /// </summary>
+        public static string SNMP_ACTION_UPDATE {
+            get {
+                return ResourceManager.GetString("SNMP_ACTION_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length is between 8 and 32, and it is a combination of: letters, numbers, -.#@=:_.
+        /// </summary>
+        public static string SNMP_ALLOW_AUTH_TEXT {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_AUTH_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication password is invalid.
+        /// </summary>
+        public static string SNMP_ALLOW_AUTH_TITLE {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_AUTH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to select at least one of v2c and v3.
+        /// </summary>
+        public static string SNMP_ALLOW_CHOOSE_TITLE {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_CHOOSE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length is between 6 and 32, and it is a combination of: letters, numbers, -.#@=:_.
+        /// </summary>
+        public static string SNMP_ALLOW_COMMUNITY_TEXT {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_COMMUNITY_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community is invalid.
+        /// </summary>
+        public static string SNMP_ALLOW_COMMUNITY_TITLE {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_COMMUNITY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy password is invalid.
+        /// </summary>
+        public static string SNMP_ALLOW_PRIVACY_TITLE {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_PRIVACY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name is invalid.
+        /// </summary>
+        public static string SNMP_ALLOW_USER_TITLE {
+            get {
+                return ResourceManager.GetString("SNMP_ALLOW_USER_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SNMP configuration.
+        /// </summary>
+        public static string SNMP_EDIT_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("SNMP_EDIT_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve SNMP configuration, please check application logs..
+        /// </summary>
+        public static string SNMP_RETRIEVE_FAILED {
+            get {
+                return ResourceManager.GetString("SNMP_RETRIEVE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurs, please check application logs for details..
+        /// </summary>
+        public static string SNMP_UPDATE_ERROR1 {
+            get {
+                return ResourceManager.GetString("SNMP_UPDATE_ERROR1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter missing error, please check application logs for details..
+        /// </summary>
+        public static string SNMP_UPDATE_ERROR2 {
+            get {
+                return ResourceManager.GetString("SNMP_UPDATE_ERROR2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation error, please check application logs for details..
+        /// </summary>
+        public static string SNMP_UPDATE_ERROR3 {
+            get {
+                return ResourceManager.GetString("SNMP_UPDATE_ERROR3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Software FCoE storage repositories.
         /// </summary>
         public static string SOFTWARE_FCOE_STORAGE_REPOSITORIES {

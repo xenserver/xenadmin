@@ -82,6 +82,7 @@ namespace XenAdmin.Dialogs
         private ClusteringEditPage ClusteringEditPage;
         private SrReadCachingEditPage SrReadCachingEditPage;
         private PoolAdvancedEditPage _poolAdvancedEditPage;
+        private SnmpEditPage SNMPEditPage;
         #endregion
 
         private readonly IXenObject _xenObjectBefore, _xenObjectCopy;
@@ -316,6 +317,11 @@ namespace XenAdmin.Dialogs
                         dialog.ShowCancel = true;
                         dialog.ShowDialog(Program.MainWindow);
                     }
+                }
+                if (isPoolOrStandalone)
+                {
+                    SNMPEditPage = new SnmpEditPage();
+                    ShowTab(SNMPEditPage);
                 }
             }
             finally

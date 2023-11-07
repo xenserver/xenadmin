@@ -492,6 +492,12 @@
     <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\SnmpEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\SnmpEditPage.Designer.cs">
+      <DependentUpon>SnmpEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\SrReadCachingEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2198,6 +2204,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SnmpEditPage.resx">
+      <DependentUpon>SnmpEditPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.resx">
       <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>

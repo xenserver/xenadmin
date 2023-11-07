@@ -120,6 +120,9 @@
     <Compile Include="Actions\PVS\DeletePvsSiteAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyCreateAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyDestroyAction.cs" />
+    <Compile Include="Actions\SNMP\SnmpRetrieveAction.cs" />
+    <Compile Include="Actions\SNMP\SnmpConfiguration.cs" />
+    <Compile Include="Actions\SNMP\SnmpUpdateAction.cs" />
     <Compile Include="Actions\StatusReport\ClientSideStatusReportAction.cs" />
     <Compile Include="Actions\StatusReport\StatusReportAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />

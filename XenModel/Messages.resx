@@ -12205,6 +12205,51 @@ Reverting to this snapshot will revert the VM back to the point in time that the
   <data name="SNAPSHOTTING" xml:space="preserve">
     <value>Creating a snapshot...</value>
   </data>
+  <data name="SNMP" xml:space="preserve">
+    <value>SNMP</value>
+  </data>
+  <data name="SNMP_ACTION_RETRIEVE" xml:space="preserve">
+    <value>Retrieving SNMP configuration</value>
+  </data>
+  <data name="SNMP_ACTION_UPDATE" xml:space="preserve">
+    <value>Updating SNMP configuration</value>
+  </data>
+  <data name="SNMP_ALLOW_AUTH_TEXT" xml:space="preserve">
+    <value>The length is between 8 and 32, and it is a combination of: letters, numbers, -.#@=:_</value>
+  </data>
+  <data name="SNMP_ALLOW_AUTH_TITLE" xml:space="preserve">
+    <value>Authentication password is invalid</value>
+  </data>
+  <data name="SNMP_ALLOW_CHOOSE_TITLE" xml:space="preserve">
+    <value>You need to select at least one of v2c and v3</value>
+  </data>
+  <data name="SNMP_ALLOW_COMMUNITY_TEXT" xml:space="preserve">
+    <value>The length is between 6 and 32, and it is a combination of: letters, numbers, -.#@=:_</value>
+  </data>
+  <data name="SNMP_ALLOW_COMMUNITY_TITLE" xml:space="preserve">
+    <value>Community is invalid</value>
+  </data>
+  <data name="SNMP_ALLOW_PRIVACY_TITLE" xml:space="preserve">
+    <value>Privacy password is invalid</value>
+  </data>
+  <data name="SNMP_ALLOW_USER_TITLE" xml:space="preserve">
+    <value>User name is invalid</value>
+  </data>
+  <data name="SNMP_EDIT_PAGE_TEXT" xml:space="preserve">
+    <value>SNMP configuration</value>
+  </data>
+  <data name="SNMP_RETRIEVE_FAILED" xml:space="preserve">
+    <value>Failed to retrieve SNMP configuration, please check application logs.</value>
+  </data>
+  <data name="SNMP_UPDATE_ERROR1" xml:space="preserve">
+    <value>An error occurs, please check application logs for details.</value>
+  </data>
+  <data name="SNMP_UPDATE_ERROR2" xml:space="preserve">
+    <value>Parameter missing error, please check application logs for details.</value>
+  </data>
+  <data name="SNMP_UPDATE_ERROR3" xml:space="preserve">
+    <value>Validation error, please check application logs for details.</value>
+  </data>
   <data name="SOFTWARE_FCOE_STORAGE_REPOSITORIES" xml:space="preserve">
     <value>Software FCoE storage repositories</value>
   </data>
@@ -15077,7 +15122,7 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
     <value>Normal</value>
   </data>
   <data name="YUM_REPO_PROXY" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="YUM_REPO_SYNC_AFTER_CONFIG" xml:space="preserve">
     <value>{0} recommends that you synchronize the selected pool(s) or standalone host(s) with the specified update channel as soon as possible to retrieve the latest available updates.
