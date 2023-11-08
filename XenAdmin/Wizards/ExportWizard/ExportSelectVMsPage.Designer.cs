@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportSelectVMsPage));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
             this.m_labelIntro = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_buttonSelectAll = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_dataGridView = new System.Windows.Forms.DataGridView();
             this.columnTick = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,14 +122,15 @@
             // 
             this.m_dataGridView.AllowUserToAddRows = false;
             this.m_dataGridView.AllowUserToDeleteRows = false;
-            this.m_dataGridView.AllowUserToOrderColumns = true;
             this.m_dataGridView.AllowUserToResizeRows = false;
             this.m_dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.m_dataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.m_dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.m_dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.m_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.m_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.m_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnTick,
+            this.columnImage,
             this.columnVM,
             this.columnDesc,
             this.columnSize,
@@ -148,6 +151,14 @@
             this.columnTick.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.columnTick, "columnTick");
             this.columnTick.Name = "columnTick";
+            this.columnTick.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // columnImage
+            // 
+            this.columnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            resources.ApplyResources(this.columnImage, "columnImage");
+            this.columnImage.Name = "columnImage";
+            this.columnImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // columnVM
             // 
@@ -163,12 +174,16 @@
             // 
             // columnSize
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.columnSize.DefaultCellStyle = dataGridViewCellStyle1;
+            this.columnSize.FillWeight = 50F;
             resources.ApplyResources(this.columnSize, "columnSize");
             this.columnSize.Name = "columnSize";
             this.columnSize.ReadOnly = true;
             // 
             // columnVapp
             // 
+            this.columnVapp.FillWeight = 50F;
             resources.ApplyResources(this.columnVapp, "columnVapp");
             this.columnVapp.Name = "columnVapp";
             this.columnVapp.ReadOnly = true;
@@ -249,25 +264,26 @@
 
         #endregion
 
-		private XenAdmin.Controls.Common.AutoHeightLabel m_labelIntro;
+        private XenAdmin.Controls.Common.AutoHeightLabel m_labelIntro;
         private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-		private System.Windows.Forms.Button m_buttonSelectAll;
-		private System.Windows.Forms.Button m_buttonClearAll;
-		private System.Windows.Forms.TableLayoutPanel m_tlpInfo;
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
-		private System.Windows.Forms.DataGridView m_dataGridView;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-		private XenAdmin.Controls.SearchTextBox m_searchTextBox;
-		private System.Windows.Forms.Label m_labelCounter;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn columnTick;
-		private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
-		private System.Windows.Forms.DataGridViewTextBoxColumn columnDesc;
-		private System.Windows.Forms.DataGridViewTextBoxColumn columnSize;
-		private System.Windows.Forms.DataGridViewTextBoxColumn columnVapp;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button m_buttonSelectAll;
+        private System.Windows.Forms.Button m_buttonClearAll;
+        private System.Windows.Forms.TableLayoutPanel m_tlpInfo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
+        private System.Windows.Forms.DataGridView m_dataGridView;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private XenAdmin.Controls.SearchTextBox m_searchTextBox;
+        private System.Windows.Forms.Label m_labelCounter;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn columnTick;
+        private System.Windows.Forms.DataGridViewImageColumn columnImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnVapp;
         private System.Windows.Forms.TableLayoutPanel _tlpWarning;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelWarning;
