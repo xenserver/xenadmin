@@ -6208,6 +6208,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FINISH_PAGE_IMAGEPATH" xml:space="preserve">
     <value>Virtual Hard Disk image:</value>
   </data>
+  <data name="FINISH_PAGE_INCLUDE_MEM_SNAPSHOT" xml:space="preserve">
+    <value>Include memory snapshot:</value>
+  </data>
   <data name="FINISH_PAGE_ISOSR" xml:space="preserve">
     <value>Selected ISO SR:</value>
   </data>

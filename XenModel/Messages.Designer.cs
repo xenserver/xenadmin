@@ -17744,6 +17744,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Include memory snapshot:.
+        /// </summary>
+        public static string FINISH_PAGE_INCLUDE_MEM_SNAPSHOT {
+            get {
+                return ResourceManager.GetString("FINISH_PAGE_INCLUDE_MEM_SNAPSHOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selected ISO SR:.
         /// </summary>
         public static string FINISH_PAGE_ISOSR {

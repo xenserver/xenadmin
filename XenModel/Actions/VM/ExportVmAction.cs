@@ -87,6 +87,13 @@ namespace XenAdmin.Actions
             var taskRef = Task.create(Session, "export", $"Exporting {VM.Name()} to backup file");
 
             var totalSize = VM.GetTotalSize();
+            if (_preservePowerState)
+            {
+                var vdi = VM.Connection.Resolve(VM.suspend_VDI);
+                if (vdi != null)
+                    totalSize += (ulong)vdi.virtual_size;
+            }
+
             var pollingRange = _verify ? 50 : 100;
 
             try

@@ -94,7 +94,7 @@ namespace XenAdmin.Wizards.ExportWizard
                 var vm = m_pageExportSelectVMs.VMsToExport.FirstOrDefault();
 
                 if (vm != null)
-                    new ExportVmAction(xenConnection, vm.Home(), vm, filename, m_pageFinish.VerifyExport).RunAsync();
+                    new ExportVmAction(xenConnection, vm.Home(), vm, filename, m_pageFinish.VerifyExport, m_pageExportSelectVMs.IncludeMemorySnapshot).RunAsync();
 			}
 			else
 			{
@@ -222,13 +222,19 @@ namespace XenAdmin.Wizards.ExportWizard
 			return temp;
 		}
 
-		private IEnumerable<Tuple> GetSummaryXva()
-		{
-			var temp = new List<Tuple>();
-			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_APPLIANCE, m_pageExportAppliance.ApplianceFileName));
-			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_DESTINATION, m_pageExportAppliance.ApplianceDirectory));
-			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_VMS, string.Join("\n", m_pageExportSelectVMs.VMsToExport.Select(vm => vm.Name()).ToArray())));
-			return temp;
+        private IEnumerable<Tuple> GetSummaryXva()
+        {
+            var temp = new List<Tuple>
+            {
+                new Tuple(Messages.FINISH_PAGE_REVIEW_APPLIANCE, m_pageExportAppliance.ApplianceFileName),
+                new Tuple(Messages.FINISH_PAGE_REVIEW_DESTINATION, m_pageExportAppliance.ApplianceDirectory),
+                new Tuple(Messages.FINISH_PAGE_REVIEW_VMS, string.Join("\n", m_pageExportSelectVMs.VMsToExport.Select(vm => vm.Name()).ToArray()))
+            };
+
+            if (m_pageExportSelectVMs.IncludeMemorySnapshot)
+                temp.Add(new Tuple(Messages.FINISH_PAGE_INCLUDE_MEM_SNAPSHOT, m_pageExportSelectVMs.IncludeMemorySnapshot.ToYesNoStringI18n()));
+
+            return temp;
         }
     }
 }

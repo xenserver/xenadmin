@@ -53,6 +53,10 @@
             this._tlpWarning = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.groupBoxSuspended = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelSuspended = new System.Windows.Forms.TableLayoutPanel();
+            this.radioButtonDiscardSnapshot = new System.Windows.Forms.RadioButton();
+            this.radioButtonIncludeSnapshot = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel2.SuspendLayout();
             this.m_tlpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,6 +65,8 @@
             this.tableLayoutPanel4.SuspendLayout();
             this._tlpWarning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBoxSuspended.SuspendLayout();
+            this.tableLayoutPanelSuspended.SuspendLayout();
             this.SuspendLayout();
             // 
             // m_ctrlError
@@ -90,13 +96,14 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.m_ctrlError, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.m_ctrlError, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.m_labelIntro, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.m_tlpInfo, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.m_tlpInfo, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.m_dataGridView, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this._tlpWarning, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this._tlpWarning, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.groupBoxSuspended, 0, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // m_tlpInfo
@@ -238,6 +245,34 @@
             resources.ApplyResources(this.labelWarning, "labelWarning");
             this.labelWarning.Name = "labelWarning";
             // 
+            // groupBoxSuspended
+            // 
+            resources.ApplyResources(this.groupBoxSuspended, "groupBoxSuspended");
+            this.groupBoxSuspended.Controls.Add(this.tableLayoutPanelSuspended);
+            this.groupBoxSuspended.Name = "groupBoxSuspended";
+            this.groupBoxSuspended.TabStop = false;
+            // 
+            // tableLayoutPanelSuspended
+            // 
+            resources.ApplyResources(this.tableLayoutPanelSuspended, "tableLayoutPanelSuspended");
+            this.tableLayoutPanelSuspended.Controls.Add(this.radioButtonDiscardSnapshot, 0, 0);
+            this.tableLayoutPanelSuspended.Controls.Add(this.radioButtonIncludeSnapshot, 0, 1);
+            this.tableLayoutPanelSuspended.Name = "tableLayoutPanelSuspended";
+            // 
+            // radioButtonDiscardSnapshot
+            // 
+            resources.ApplyResources(this.radioButtonDiscardSnapshot, "radioButtonDiscardSnapshot");
+            this.radioButtonDiscardSnapshot.Checked = true;
+            this.radioButtonDiscardSnapshot.Name = "radioButtonDiscardSnapshot";
+            this.radioButtonDiscardSnapshot.TabStop = true;
+            this.radioButtonDiscardSnapshot.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonIncludeSnapshot
+            // 
+            resources.ApplyResources(this.radioButtonIncludeSnapshot, "radioButtonIncludeSnapshot");
+            this.radioButtonIncludeSnapshot.Name = "radioButtonIncludeSnapshot";
+            this.radioButtonIncludeSnapshot.UseVisualStyleBackColor = true;
+            // 
             // ExportSelectVMsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -257,6 +292,10 @@
             this._tlpWarning.ResumeLayout(false);
             this._tlpWarning.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBoxSuspended.ResumeLayout(false);
+            this.groupBoxSuspended.PerformLayout();
+            this.tableLayoutPanelSuspended.ResumeLayout(false);
+            this.tableLayoutPanelSuspended.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,5 +326,9 @@
         private System.Windows.Forms.TableLayoutPanel _tlpWarning;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSuspended;
+        private System.Windows.Forms.RadioButton radioButtonDiscardSnapshot;
+        private System.Windows.Forms.RadioButton radioButtonIncludeSnapshot;
+        private System.Windows.Forms.GroupBox groupBoxSuspended;
     }
 }

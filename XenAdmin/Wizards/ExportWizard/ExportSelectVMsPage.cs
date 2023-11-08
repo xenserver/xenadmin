@@ -76,6 +76,8 @@ namespace XenAdmin.Wizards.ExportWizard
 
         public bool ExportAsXva { private get; set; }
 
+        public bool IncludeMemorySnapshot => ExportAsXva && radioButtonIncludeSnapshot.Checked;
+
         #endregion
 
         #region Base class (XenTabPage) overrides
@@ -202,8 +204,17 @@ namespace XenAdmin.Wizards.ExportWizard
 
             foreach (DataGridViewRow row in m_dataGridView.Rows)
             {
-                if (row is VmRow vmRow && vmRow.IsTicked)
-                    spaceNeeded += vmRow.VmTotalSize;
+                if (!(row is VmRow vmRow) || !vmRow.IsTicked)
+                    continue;
+
+                spaceNeeded += vmRow.VmTotalSize;
+
+                if (IncludeMemorySnapshot)
+                {
+                    var vdi = vmRow.Vm.Connection.Resolve(vmRow.Vm.suspend_VDI);
+                    if (vdi != null)
+                        spaceNeeded += (ulong)vdi.virtual_size;
+                }
             }
 
             ulong availableSpace = GetFreeSpace(ApplianceDirectory);
@@ -274,6 +285,7 @@ namespace XenAdmin.Wizards.ExportWizard
                 _tlpWarning.Visible = true;
             }
 
+            groupBoxSuspended.Visible = ExportAsXva && VMsToExport.Any(v => v.power_state == vm_power_state.Suspended);
             m_buttonNextEnabled = ExportAsXva ? count == 1 : count > 0;
             m_buttonClearAll.Enabled = count > 0;
             m_buttonSelectAll.Enabled = count < m_dataGridView.RowCount;
