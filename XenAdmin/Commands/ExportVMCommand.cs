@@ -128,17 +128,17 @@ namespace XenAdmin.Commands
                     }
 
                     ulong freeSpace = diskSpaceInfo.FreeBytesAvailable;
-                    decimal neededSpace = vm.GetRecommendedExportSpace(Properties.Settings.Default.ShowHiddenVMs);
+                    ulong neededSpace = vm.GetTotalSize();
                     ulong spaceLeft = 100 * Util.BINARY_MEGA; // We want the user to be left with some disk space afterwards
 
                     (Func<bool> check, string msg) c1 = (
                         () => neededSpace >= freeSpace - spaceLeft,
-                        string.Format(Messages.CONFIRM_EXPORT_NOT_ENOUGH_MEMORY, Util.DiskSizeString((long)neededSpace), Util.DiskSizeString((long)freeSpace), vm.Name())
+                        string.Format(Messages.CONFIRM_EXPORT_NOT_ENOUGH_MEMORY, Util.DiskSizeString(neededSpace), Util.DiskSizeString((long)freeSpace), vm.Name())
                     );
 
                     (Func<bool> check, string msg) c2 = (
                         () => diskSpaceInfo.IsFAT && neededSpace > 4 * Util.BINARY_GIGA - 1,
-                        string.Format(Messages.CONFIRM_EXPORT_FAT, Util.DiskSizeString((long)neededSpace), Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name())
+                        string.Format(Messages.CONFIRM_EXPORT_FAT, Util.DiskSizeString(neededSpace), Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name())
                     );
 
                     var checksWithMessages = new[] { c1, c2 };

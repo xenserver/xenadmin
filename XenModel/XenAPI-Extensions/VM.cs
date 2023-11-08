@@ -685,22 +685,27 @@ namespace XenAPI
             return "";
         }
 
-        public decimal GetRecommendedExportSpace(bool showHiddenVMs)
+        public ulong GetTotalSize()
         {
-            decimal totalSpace = 0;
+            ulong virtualSize = 0;
 
-            foreach (var vbd in Connection.ResolveAll(VBDs))
-                if (!vbd.IsCDROM())
-                {
-                    var vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi != null && vdi.Show(showHiddenVMs))
-                    {
-                        var theSr = Connection.Resolve(vdi.SR);
-                        if (theSr != null && !theSr.IsToolsSR()) totalSpace += vdi.virtual_size;
-                    }
-                }
+            foreach (var vbdRef in VBDs)
+            {
+                var vbd = Connection.Resolve(vbdRef);
+                if (vbd == null)
+                    continue;
 
-            return totalSpace;
+                if (vbd.type == vbd_type.CD)
+                    continue;
+
+                VDI vdi = Connection.Resolve(vbd.VDI);
+                if (vdi == null)
+                    continue;
+
+                virtualSize += (ulong)vdi.virtual_size;
+            }
+
+            return virtualSize;
         }
 
         public override int CompareTo(VM other)

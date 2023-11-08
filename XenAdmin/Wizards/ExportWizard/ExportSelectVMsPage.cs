@@ -32,7 +32,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using XenAdmin.Commands;
 using XenAdmin.Controls.Common;
@@ -50,16 +49,6 @@ namespace XenAdmin.Wizards.ExportWizard
     /// </summary>
     internal partial class ExportSelectVMsPage : XenTabPage
     {
-        #region Nested classes
-
-        private static class NativeMethods
-        {
-            [DllImport("Kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
-            internal static extern bool GetDiskFreeSpaceEx(string lpszPath, ref long lpFreeBytesAvailable, ref long lpTotalNumberOfBytes, ref long lpTotalNumberOfFreeBytes);
-        }
-
-        #endregion
-
         private bool m_buttonNextEnabled;
 
         public ExportSelectVMsPage()
@@ -208,58 +197,37 @@ namespace XenAdmin.Wizards.ExportWizard
 
         private DataGridViewRow GetDataGridViewRow(VM vm, bool selected)
         {
-            var row = new DataGridViewRow {Tag = vm};
+            var row = new DataGridViewRow { Tag = vm };
             var vmAppliance = Connection.Resolve(vm.appliance);
-            long totalVmSize = GetTotalVmSize(vm);
-            row.Cells.AddRange(new DataGridViewCell[]
-            {
-                new DataGridViewCheckBoxCell {Value = selected},
-                new DataGridViewTextBoxCell {Value = vm.Name()},
-                new DataGridViewTextBoxCell {Value = vm.Description()},
-                new DataGridViewTextBoxCell {Value = Util.DiskSizeString(totalVmSize), Tag = totalVmSize},
-                new DataGridViewTextBoxCell {Value = vmAppliance == null ? Messages.NONE : vmAppliance.Name()}
-            });
+            ulong totalVmSize = vm.GetTotalSize();
+
+            row.Cells.AddRange(
+                new DataGridViewCheckBoxCell { Value = selected },
+                new DataGridViewTextBoxCell { Value = vm.Name() },
+                new DataGridViewTextBoxCell { Value = vm.Description() },
+                new DataGridViewTextBoxCell { Value = Util.DiskSizeString(totalVmSize), Tag = totalVmSize },
+                new DataGridViewTextBoxCell { Value = vmAppliance == null ? Messages.NONE : vmAppliance.Name() }
+            );
             return row;
-        }
-
-        private long GetTotalVmSize(VM vm)
-        {
-            long virtualSize = 0;
-
-            foreach (var vbdRef in vm.VBDs)
-            {
-                var vbd = Connection.Resolve(vbdRef);
-                if (vbd == null)
-                    continue;
-
-                if (vbd.type == vbd_type.CD)
-                    continue;
-
-                VDI vdi = Connection.Resolve(vbd.VDI);
-                if (vdi == null)
-                    continue;
-
-                virtualSize += vdi.virtual_size;
-            }
-
-            return virtualSize;
         }
 
         private bool CheckSpaceRequirements(out string errorMsg)
         {
             errorMsg = string.Empty;
-            long spaceNeeded = 0;
+            ulong spaceNeeded = 0;
 
             foreach (DataGridViewRow row in m_dataGridView.Rows)
             {
                 if ((bool)row.Cells[0].Value)
-                    spaceNeeded += (long)row.Cells[3].Tag;
+                    spaceNeeded += (ulong)row.Cells[3].Tag;
             }
 
-            long availableSpace = GetFreeSpace(ApplianceDirectory);
+            ulong availableSpace = GetFreeSpace(ApplianceDirectory);
+
             if (spaceNeeded > availableSpace)
             {
-                errorMsg = String.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH, Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
+                errorMsg = string.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH,
+                    Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
 
                 return false;
             }
@@ -274,7 +242,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
             foreach (VM vm in VMsToExport)
             {
-                if (!ExportAsXva && GetTotalVmSize(vm) > SR.DISK_MAX_SIZE)
+                if (!ExportAsXva && vm.GetTotalSize() > SR.DISK_MAX_SIZE)
                 {
                     errorMsg = string.Format(Messages.EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF, maxDiskSizeString);
                     return false;
@@ -285,7 +253,7 @@ namespace XenAdmin.Wizards.ExportWizard
         }
 
         //TODO: improve method
-        private long GetFreeSpace(string drivename)
+        private ulong GetFreeSpace(string drivename)
         {
             if (!drivename.EndsWith(@"\"))
                 drivename += @"\";
@@ -294,10 +262,10 @@ namespace XenAdmin.Wizards.ExportWizard
             long lpTotalNumberOfBytes = 0;
             long lpTotalNumberOfFreeBytes = 0;
 
-            if (NativeMethods.GetDiskFreeSpaceEx(drivename, ref space, ref lpTotalNumberOfBytes, ref lpTotalNumberOfFreeBytes))
-                return space;
+            if (Win32.GetDiskFreeSpaceEx(drivename, ref space, ref lpTotalNumberOfBytes, ref lpTotalNumberOfFreeBytes))
+                return (ulong)space;
 
-            return -1;
+            return 0;
         }
 
         private void EnableButtons()

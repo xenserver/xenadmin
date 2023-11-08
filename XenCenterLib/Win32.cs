@@ -505,6 +505,9 @@ namespace XenCenterLib
 
         #region Disk space functions
 
+        [DllImport("Kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern bool GetDiskFreeSpaceEx(string lpszPath, ref long lpFreeBytesAvailable, ref long lpTotalNumberOfBytes, ref long lpTotalNumberOfFreeBytes);
+
         /// <summary>
         /// Will return null if the disk parameters could not be determined.
         /// </summary>
