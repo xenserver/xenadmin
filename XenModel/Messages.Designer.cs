@@ -1305,7 +1305,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verifying Export....
+        ///   Looks up a localized string similar to Verifying Export ({0}% done)....
         /// </summary>
         public static string ACTION_EXPORT_VERIFY {
             get {
@@ -17182,6 +17182,15 @@ namespace XenAdmin {
         public static string EXPORTING_VDI_VERIFICATION_FAILURE {
             get {
                 return ResourceManager.GetString("EXPORTING_VDI_VERIFICATION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting VM &apos;{0}&apos; to &apos;{1}&apos; ({2} of {3})....
+        /// </summary>
+        public static string EXPORTING_VM {
+            get {
+                return ResourceManager.GetString("EXPORTING_VM", resourceCulture);
             }
         }
         

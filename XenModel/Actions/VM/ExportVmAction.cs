@@ -29,9 +29,7 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.IO;
-using System.Threading;
 using CommandLib;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -46,178 +44,134 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly string _filename;
-        private Exception _exception = null;
-        private Export export;
-        private readonly bool verify;
-
-		/// <summary>
-		/// RBAC dependencies needed to import appliance/export an appliance/import disk image.
-		/// </summary>
-		public static RbacMethodList StaticRBACDependencies
-		{
-			get
-			{
-				var list = new RbacMethodList("task.create", "http/get_export");
-				list.AddRange(Role.CommonTaskApiList);
-				list.AddRange(Role.CommonSessionApiList);
-				return list;
-			}
-		}
+        private readonly bool _verify;
+        private readonly bool _preservePowerState;
 
         /// <summary>
-        /// 
+        /// RBAC dependencies needed to import appliance/export an appliance/import disk image.
         /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="host">Used for filtering purposes. May be null.</param>
-        /// <param name="vm"></param>
-        /// <param name="filename"></param>
-        /// <param name="verify"></param>
-        public ExportVmAction(IXenConnection connection, Host host,
-            VM vm, string filename, bool verify)
-            : base(connection, string.Format(Messages.EXPORT_VM_TITLE, vm.Name(), Helpers.GetName(connection)),
-            Messages.ACTION_EXPORT_DESCRIPTION_PREPARING)
+        public static RbacMethodList StaticRBACDependencies
         {
-            #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("task.create");
-            ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
-            ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
+            get
+            {
+                var list = new RbacMethodList("task.create", "http/get_export");
+                list.AddRange(Role.CommonTaskApiList);
+                list.AddRange(Role.CommonSessionApiList);
+                return list;
+            }
+        }
 
-            ApiMethodsToRoleCheck.Add("http/get_export");
-            #endregion
+        public ExportVmAction(IXenConnection connection, Host host, VM vm, string filename, bool verify, bool preservePowerState = false)
+            : base(connection, string.Empty, string.Empty)
+        {
+            Pool = Helpers.GetPool(vm.Connection);
+            Host = host;
+            VM = vm;
 
-            this.Pool = Helpers.GetPool(vm.Connection);
-            this.Host = host;
-            this.VM = vm;
             _filename = filename;
-            this.verify = verify;
+            _verify = verify;
+            _preservePowerState = preservePowerState;
+
+            Title = string.Format(Messages.EXPORT_VM_TITLE, vm.Name(), Helpers.GetName(connection));
+            Description = Messages.ACTION_EXPORT_DESCRIPTION_PREPARING;
+
+            ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
         }
 
         protected override void Run()
         {
             SafeToExit = false;
-            Description = Messages.ACTION_EXPORT_DESCRIPTION_IN_PROGRESS;
-
-            RelatedTask = Task.create(Session, "export", $"Exporting {VM.Name()} to backup file");
-
-            UriBuilder uriBuilder = new UriBuilder(this.Session.Url);
-            uriBuilder.Path = "export";
-            uriBuilder.Query = string.Format("session_id={0}&uuid={1}&task_id={2}",
-                Uri.EscapeDataString(this.Session.opaque_ref),
-                Uri.EscapeDataString(this.VM.uuid),
-                Uri.EscapeDataString(this.RelatedTask.opaque_ref));
 
             log.DebugFormat("Exporting {0} to {1}", VM.Name(), _filename);
 
-            // The DownloadFile call will block, so we need a separate thread to poll for task status.
-            Thread taskThread = new Thread(ProgressPoll);
-            taskThread.Name = "Progress polling thread for ExportVmAction for " + VM.Name().Ellipsise(20);
-            taskThread.IsBackground = true;
-            taskThread.Start();
+            var taskRef = Task.create(Session, "export", $"Exporting {VM.Name()} to backup file");
 
-            // Create the file with a temporary name till it is fully downloaded
-            String tmpFile = _filename + ".tmp";
+            var totalSize = VM.GetTotalSize();
+            var pollingRange = _verify ? 50 : 100;
+
             try
             {
-                HttpGet(tmpFile, uriBuilder.Uri);
-            }
-            catch (Exception e)
-            {
-                if (XenAPI.Task.get_status(this.Session, this.RelatedTask.opaque_ref) == XenAPI.task_status_type.pending
-                    && XenAPI.Task.get_progress(this.Session, this.RelatedTask.opaque_ref) == 0)
-                {
-                    // If task is pending and has zero progress, it probably hasn't been started,
-                    // which probably means there was an exception in the GUI code before the
-                    // action got going. Stop the task so that we don't block forever on
-                    // taskThread.Join(). Brought to light by CA-11100.
-                    DestroyTask();
-                }
-                // Test for null: don't overwrite a previous exception
-                if (_exception == null)
-                    _exception = e;
-            }
+                long oldRead = 0;
+                Description = string.Format(Messages.EXPORTING_VM, VM.Name(), Path.GetFileName(_filename),
+                    Util.DiskSizeString(0, 2, "F2"), Util.DiskSizeString(totalSize));
 
-            taskThread.Join();
-
-            using (FileStream fs = new FileStream(tmpFile, FileMode.Append))
-            {
-                // Flush written data to disk
-                if (!Win32.FlushFileBuffers(fs.SafeFileHandle))
-                {
-                    Win32Exception exn = new Win32Exception(System.Runtime.InteropServices.Marshal.GetLastWin32Error());
-                    log.Error(string.Format("FlushFileBuffers failed in ExportVmAction with NativeErrorCode={0}",
-                        exn.NativeErrorCode), exn);
-                }
-            }
-
-            if (verify && _exception == null)
-            {
-                long read = 0;
-                int i = 0;
-                long filesize = new FileInfo(tmpFile).Length / 50; //Div by 50 to save doing the * 50 in the callback
-
-                void Callback(uint size)
+                HTTP_actions.get_export(b =>
                     {
-                        read += size;
-                        i++;
-
-                        //divide number of updates by 10, so as not to spend all out time redrawing the control
-                        //but try and send an update every second to keep the timer ticking
-                        if (i > 10)
+                        if (b - oldRead > 256 * Util.BINARY_MEGA)
                         {
-                            PercentComplete = 50 + (int)(read / filesize);
-                            i = 0;
-                        }
-                    }
+                            oldRead = b;
+                            int percent = (int)((float)b / totalSize * pollingRange);
 
-                try
+                            Tick(percent, string.Format(Messages.EXPORTING_VM, VM.Name(), Path.GetFileName(_filename),
+                                Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(totalSize)));
+                        }
+                    },
+                    () => Cancelling, XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                    Connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                    _filename, taskRef, Connection.Session.opaque_ref, VM.uuid, null, _preservePowerState);
+
+                if (_verify)
                 {
-                    using (FileStream fs = new FileStream(tmpFile, FileMode.Open, FileAccess.Read))
+                    if (Cancelling)
+                        throw new CancelledException();
+
+                    oldRead = 0;
+                    long read = 0;
+                    long fileSize = new FileInfo(_filename).Length;
+
+                    using (FileStream fs = new FileStream(_filename, FileMode.Open, FileAccess.Read))
                     {
                         log.DebugFormat("Verifying export of {0} in {1}", VM.Name(), _filename);
-                        this.Description = Messages.ACTION_EXPORT_VERIFY;
+                        Description = string.Format(Messages.ACTION_EXPORT_VERIFY, 0);
 
-                        export = new Export();
-                        export.verify(fs, null, () => Cancelling, Callback);
+                        new Export().verify(fs, null,
+                            () => Cancelling,
+                            size =>
+                            {
+                                read += size;
+
+                                if (read - oldRead > 256 * Util.BINARY_MEGA)
+                                {
+                                    oldRead = read;
+                                    int percent = (int)(pollingRange + (float)read / fileSize * pollingRange);
+
+                                    Tick(percent, string.Format(Messages.ACTION_EXPORT_VERIFY, (int)((float)read / fileSize * 100)));
+                                }
+                            });
                     }
                 }
-                catch (Exception e)
-                {
-                    if (_exception == null)
-                        _exception = e;
-                }
-            }
 
-            if (Cancelling || _exception is CancelledException)
+                log.InfoFormat("Export of VM {0} successful", VM.Name());
+                Description = Messages.ACTION_EXPORT_DESCRIPTION_SUCCESSFUL;
+            }
+            catch (HTTP.CancelledException)
             {
                 log.InfoFormat("Export of VM {0} cancelled", VM.Name());
-                this.Description = Messages.ACTION_EXPORT_DESCRIPTION_CANCELLED;
-
-                log.DebugFormat("Deleting {0}", tmpFile);
-                File.Delete(tmpFile);
+                Description = Messages.ACTION_EXPORT_DESCRIPTION_CANCELLED;
                 throw new CancelledException();
             }
-            else if (_exception != null)
+            catch (Exception ex)
             {
-                log.Warn(string.Format("Export of VM {0} failed", VM.Name()), _exception);
+                log.Warn($"Export of VM {VM.Name()} failed", ex);
 
-                if (_exception is HeaderChecksumFailed || _exception is FormatException)
-                    this.Description = Messages.ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED;
-                else if (_exception is BlockChecksumFailed)
-                    this.Description = Messages.ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED;
-                else if (_exception is IOException && Win32.GetHResult(_exception) == Win32.ERROR_DISK_FULL)
-                    this.Description = Messages.ACTION_EXPORT_DESCRIPTION_DISK_FULL;
-                else if (_exception is Failure && ((Failure)_exception).ErrorDescription[0] == Failure.VDI_IN_USE)
-                    this.Description = Messages.ACTION_EXPORT_DESCRIPTION_VDI_IN_USE;
+                if (ex is HeaderChecksumFailed || ex is FormatException)
+                    Description = Messages.ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED;
+                else if (ex is BlockChecksumFailed)
+                    Description = Messages.ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED;
+                else if (ex is IOException && Win32.GetHResult(ex) == Win32.ERROR_DISK_FULL)
+                    Description = Messages.ACTION_EXPORT_DESCRIPTION_DISK_FULL;
+                else if (ex is Failure failure && failure.ErrorDescription[0] == Failure.VDI_IN_USE)
+                    Description = Messages.ACTION_EXPORT_DESCRIPTION_VDI_IN_USE;
                 else
-                    this.Description = Messages.ACTION_EXPORT_DESCRIPTION_FAILED;
+                    Description = Messages.ACTION_EXPORT_DESCRIPTION_FAILED;
 
-                var fi = new FileInfo(tmpFile);
-                log.DebugFormat("Progress of the action until exception: {0}", PercentComplete);
-                log.DebugFormat("Size file exported until exception: {0}", fi.Length);
+                var fi = new FileInfo(_filename);
+                log.DebugFormat("Progress of the action until exception: {0}. Size file exported until exception: {1}",
+                    PercentComplete, fi.Length);
 
                 try
                 {
-                    using (Stream stream = new FileStream(tmpFile, FileMode.Open, FileAccess.Read))
+                    using (Stream stream = new FileStream(_filename, FileMode.Open, FileAccess.Read))
                     using (var iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, stream))
                     {
                         while (iterator.HasNext())
@@ -229,55 +183,25 @@ namespace XenAdmin.Actions
                     // ignored
                 }
 
-                log.DebugFormat("Deleting {0}", tmpFile);
-                File.Delete(tmpFile);
                 throw new Exception(Description);
             }
-            else
-            {
-                log.InfoFormat("Export of VM {0} successful", VM.Name());
-                this.Description = Messages.ACTION_EXPORT_DESCRIPTION_SUCCESSFUL;
-
-                log.DebugFormat("Renaming {0} to {1}", tmpFile, _filename);
-                if (File.Exists(_filename))
-                    File.Delete(_filename);
-                File.Move(tmpFile, _filename);
-            }
         }
 
-        private void HttpGet(string filename, Uri uri)
+        public override void RecomputeCanCancel()
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-            {
-                using (Stream http = HTTPHelper.GET(uri, Connection, true))
-                {
-                    new Export().verify(http, fs, () => Cancelling);
-                }
-            }
+            CanCancel = !Cancelling && !IsCompleted;
         }
 
-        private void ProgressPoll()
+        protected override void CleanOnError()
         {
             try
             {
-                PollToCompletion(0, verify ? 50 : 95);
+                log.DebugFormat("Deleting {0}", _filename);
+                File.Delete(_filename);
             }
-            catch (Failure e)
+            catch (Exception)
             {
-                // Don't overwrite a previous exception unless we're sure that the one that
-                // we have here is going to be more useful than the client one.  Sometimes,
-                // the server exception will be "failed to write", which is just in
-                // response to us closing the stream when we run out of disk space or whatever
-                // on the client side.  Other times, it's the server that's got the useful
-                // error message.
-                if (_exception == null || e.ErrorDescription[0] == Failure.VDI_IN_USE)
-                    _exception = e;
-            }
-            catch (Exception e)
-            {
-                // Test for null: don't overwrite a previous exception
-                if (_exception == null)
-                    _exception = e;
+                // ignored
             }
         }
     }

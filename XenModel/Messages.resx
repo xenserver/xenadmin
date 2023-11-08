@@ -534,7 +534,7 @@ This could be because the data source is not generating any data. Ensure the pre
     <value>Exporting {0}</value>
   </data>
   <data name="ACTION_EXPORT_VERIFY" xml:space="preserve">
-    <value>Verifying Export...</value>
+    <value>Verifying Export ({0}% done)...</value>
   </data>
   <data name="ACTION_GET_DATASOURCES" xml:space="preserve">
     <value>Fetch data sources</value>
@@ -6021,6 +6021,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORTING_VDI_VERIFICATION_FAILURE" xml:space="preserve">
     <value>Verification for disk '{0}' failed. See logs for details.</value>
+  </data>
+  <data name="EXPORTING_VM" xml:space="preserve">
+    <value>Exporting VM '{0}' to '{1}' ({2} of {3})...</value>
   </data>
   <data name="EXPORTING_VM_PREPARE" xml:space="preserve">
     <value>Preparing to export VM '{0}'...</value>
