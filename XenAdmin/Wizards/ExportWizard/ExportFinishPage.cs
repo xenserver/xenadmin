@@ -94,8 +94,7 @@ namespace XenAdmin.Wizards.ExportWizard
         private void m_checkBoxVerify_CheckStateChanged(object sender, EventArgs e)
         {
             //verification does not last too long for OVF/OVA
-            warningLabel.Visible = m_checkBoxVerify.Checked && ExportAsXva;
-            warningPicture.Visible = m_checkBoxVerify.Checked && ExportAsXva;
+            tableLayoutPanelWarning.Visible = m_checkBoxVerify.Checked && ExportAsXva;
         }
 	}
 }
