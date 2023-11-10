@@ -1859,6 +1859,9 @@
   <data name="Message.name-wlb_vm_relocation" xml:space="preserve">
     <value>WLB VM Relocation</value>
   </data>
+  <data name="OPERATIONAL_METRICS_HOSTLOAD" xml:space="preserve">
+    <value>Host CPU Load</value>
+  </data>
   <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
     <value>There was an error in preparing the host for upgrade.</value>
   </data>

@@ -480,6 +480,16 @@
     <Compile Include="SettingsPanels\NetworkOptionsEditPage.Designer.cs">
       <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\NRPEEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\NRPEEditPage.Designer.cs">
+      <DependentUpon>NRPEEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\NRPEEditPage.CheckGroup.cs">
+      <DependentUpon>NRPEEditPage.cs</DependentUpon>
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="SettingsPanels\PoolAdvancedEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2106,6 +2116,10 @@
     <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\NRPEEditPage.resx">
+      <DependentUpon>NRPEEditPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PerfmonAlertOptionsPage.resx">
       <SubType>Designer</SubType>

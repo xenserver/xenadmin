@@ -96,9 +96,8 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
-            this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -237,6 +236,7 @@
             // 
             // ColumnDisplayOnGraph
             // 
+            this.ColumnDisplayOnGraph.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.NullValue = false;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
@@ -250,14 +250,12 @@
             // 
             // ColumnName
             // 
-            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.ColumnName, "ColumnName");
             this.ColumnName.Name = "ColumnName";
             this.ColumnName.ReadOnly = true;
             // 
             // Description
             // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.Description, "Description");
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
@@ -271,6 +269,7 @@
             // 
             // ColumnEnabled
             // 
+            this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
             this.ColumnEnabled.Name = "ColumnEnabled";
             this.ColumnEnabled.ReadOnly = true;

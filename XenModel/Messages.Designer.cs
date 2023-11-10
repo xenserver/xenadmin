@@ -29124,6 +29124,294 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NRPE.
+        /// </summary>
+        public static string NRPE {
+            get {
+                return ResourceManager.GetString("NRPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing NRPE configuration.
+        /// </summary>
+        public static string NRPE_ACTION_CHANGING {
+            get {
+                return ResourceManager.GetString("NRPE_ACTION_CHANGING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving NRPE configuration.
+        /// </summary>
+        public static string NRPE_ACTION_RETRIEVING {
+            get {
+                return ResourceManager.GetString("NRPE_ACTION_RETRIEVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NRPE service is active.
+        /// </summary>
+        public static string NRPE_ACTIVE {
+            get {
+                return ResourceManager.GetString("NRPE_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitoring servers should not be empty..
+        /// </summary>
+        public static string NRPE_ALLOW_HOSTS_EMPTY_ERROR {
+            get {
+                return ResourceManager.GetString("NRPE_ALLOW_HOSTS_EMPTY_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitoring servers format is not correct.
+        /// </summary>
+        public static string NRPE_ALLOW_HOSTS_ERROR_TITLE {
+            get {
+                return ResourceManager.GetString("NRPE_ALLOW_HOSTS_ERROR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitoring servers should be comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com.
+        /// </summary>
+        public static string NRPE_ALLOW_HOSTS_FORMAT_ERROR {
+            get {
+                return ResourceManager.GetString("NRPE_ALLOW_HOSTS_FORMAT_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comma separated IP address or domain list, e.g. 192.168.1.1, test.domain.com.
+        /// </summary>
+        public static string NRPE_ALLOW_HOSTS_PLACE_HOLDER {
+            get {
+                return ResourceManager.GetString("NRPE_ALLOW_HOSTS_PLACE_HOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please remove duplicate addresses.
+        /// </summary>
+        public static string NRPE_ALLOW_HOSTS_SAME_ADDRESS {
+            get {
+                return ResourceManager.GetString("NRPE_ALLOW_HOSTS_SAME_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NRPE batch configuration.
+        /// </summary>
+        public static string NRPE_BATCH_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("NRPE_BATCH_CONFIGURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom0 CPU Usage (%).
+        /// </summary>
+        public static string NRPE_CHECK_CPU {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_CPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom0 Log Partition Free Space (%).
+        /// </summary>
+        public static string NRPE_CHECK_DISK_LOG {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_DISK_LOG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom0 Root Partition Free Space (%).
+        /// </summary>
+        public static string NRPE_CHECK_DISK_ROOT {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_DISK_ROOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host CPU Usage (%).
+        /// </summary>
+        public static string NRPE_CHECK_HOST_CPU {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_HOST_CPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host CPU Load.
+        /// </summary>
+        public static string NRPE_CHECK_HOST_LOAD {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_HOST_LOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host Memory Usage (%).
+        /// </summary>
+        public static string NRPE_CHECK_HOST_MEMORY {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_HOST_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom0 CPU Load.
+        /// </summary>
+        public static string NRPE_CHECK_LOAD {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_LOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom0 Memory Usage (%).
+        /// </summary>
+        public static string NRPE_CHECK_MEMORY {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom0 Free Swap (%).
+        /// </summary>
+        public static string NRPE_CHECK_SWAP {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_SWAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host vGPU Usage (%).
+        /// </summary>
+        public static string NRPE_CHECK_VGPU {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host vGPU Memory Usage (%).
+        /// </summary>
+        public static string NRPE_CHECK_VGPU_MEMORY {
+            get {
+                return ResourceManager.GetString("NRPE_CHECK_VGPU_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NRPE Configuration.
+        /// </summary>
+        public static string NRPE_EDIT_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("NRPE_EDIT_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NRPE service is inactive.
+        /// </summary>
+        public static string NRPE_INACTIVE {
+            get {
+                return ResourceManager.GetString("NRPE_INACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NRPE check name: {0}.
+        /// </summary>
+        public static string NRPE_METRIC_TOOLTIP {
+            get {
+                return ResourceManager.GetString("NRPE_METRIC_TOOLTIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve NRPE configuration, please check XenCenter logs..
+        /// </summary>
+        public static string NRPE_RETRIEVE_FAILED {
+            get {
+                return ResourceManager.GetString("NRPE_RETRIEVE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving NRPE configuration....
+        /// </summary>
+        public static string NRPE_RETRIEVING_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("NRPE_RETRIEVING_CONFIGURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold value should range from {0} to {1}..
+        /// </summary>
+        public static string NRPE_THRESHOLD_RANGE_ERROR {
+            get {
+                return ResourceManager.GetString("NRPE_THRESHOLD_RANGE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold value should consist of 3 comma separated numbers..
+        /// </summary>
+        public static string NRPE_THRESHOLD_SHOULD_BE_3_NUMBERS {
+            get {
+                return ResourceManager.GetString("NRPE_THRESHOLD_SHOULD_BE_3_NUMBERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold value should be a number..
+        /// </summary>
+        public static string NRPE_THRESHOLD_SHOULD_BE_NUMBER {
+            get {
+                return ResourceManager.GetString("NRPE_THRESHOLD_SHOULD_BE_NUMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold value should not be empty..
+        /// </summary>
+        public static string NRPE_THRESHOLD_SHOULD_NOT_BE_EMPTY {
+            get {
+                return ResourceManager.GetString("NRPE_THRESHOLD_SHOULD_NOT_BE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning threshold should be greater than critical threshold..
+        /// </summary>
+        public static string NRPE_THRESHOLD_WARNING_SHOULD_BIGGER_THAN_CRITICAL {
+            get {
+                return ResourceManager.GetString("NRPE_THRESHOLD_WARNING_SHOULD_BIGGER_THAN_CRITICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning threshold should be less than critical threshold..
+        /// </summary>
+        public static string NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL {
+            get {
+                return ResourceManager.GetString("NRPE_THRESHOLD_WARNING_SHOULD_LESS_THAN_CRITICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of snapshots to keep.
         /// </summary>
         public static string NUMBER_OF_SNAPSHOTS_TO_KEEP {
