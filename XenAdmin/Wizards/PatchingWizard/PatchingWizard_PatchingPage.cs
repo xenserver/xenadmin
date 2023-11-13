@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -194,6 +195,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (SelectedUpdateType == UpdateType.ISO)
             {
+                Debug.Assert(PoolUpdate != null, "PoolUpdate should not be null!");
+
                 if (PoolUpdate != null) //ely or greater
                 {
                     foreach (var server in SelectedServers)
