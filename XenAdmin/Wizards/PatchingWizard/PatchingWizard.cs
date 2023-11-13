@@ -28,7 +28,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -326,7 +325,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (update == null || update.Connection == null || !update.Connection.IsConnected)
                 return null;
 
-            return new DelegatedAsyncAction(update.Connection, Messages.REMOVE_PATCH, "", "", session =>
+            return new DelegatedAsyncAction(update.Connection, Messages.PATCHINGWIZARD_REMOVE_UPDATE, "", "", session =>
             {
                 try
                 {

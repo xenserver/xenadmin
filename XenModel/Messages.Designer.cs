@@ -421,51 +421,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking disk space on {0}.
-        /// </summary>
-        public static string ACTION_CHECK_DISK_SPACE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_CHECK_DISK_SPACE_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check disk space.
-        /// </summary>
-        public static string ACTION_CHECK_DISK_SPACE_TITLE {
-            get {
-                return ResourceManager.GetString("ACTION_CHECK_DISK_SPACE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cleaning up disk space on {0}.
-        /// </summary>
-        public static string ACTION_CLEANUP_DISK_SPACE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_CLEANUP_DISK_SPACE_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Successfully cleaned up disk space on {0}.
-        /// </summary>
-        public static string ACTION_CLEANUP_DISK_SPACE_SUCCESS {
-            get {
-                return ResourceManager.GetString("ACTION_CLEANUP_DISK_SPACE_SUCCESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clean up disk space.
-        /// </summary>
-        public static string ACTION_CLEANUP_DISK_SPACE_TITLE {
-            get {
-                return ResourceManager.GetString("ACTION_CLEANUP_DISK_SPACE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Configuring PVS-Accelerator.
         /// </summary>
         public static string ACTION_CONFUGURE_PVS_SITE_DESCRIPTION {
@@ -5473,15 +5428,6 @@ namespace XenAdmin {
         public static string ALL_TYPES_AND_FOLDERS {
             get {
                 return ResourceManager.GetString("ALL_TYPES_AND_FOLDERS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to All Updates Applied.
-        /// </summary>
-        public static string ALL_UPDATES_APPLIED {
-            get {
-                return ResourceManager.GetString("ALL_UPDATES_APPLIED", resourceCulture);
             }
         }
         
@@ -30031,6 +29977,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Update.
+        /// </summary>
+        public static string PATCHINGWIZARD_REMOVE_UPDATE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_REMOVE_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete update installation files.
         /// </summary>
         public static string PATCHINGWIZARD_REMOVE_UPDATES {
@@ -32766,15 +32721,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Update.
-        /// </summary>
-        public static string REMOVE_PATCH {
-            get {
-                return ResourceManager.GetString("REMOVE_PATCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Remove Server....
         /// </summary>
         public static string REMOVE_SERVER {
@@ -32955,15 +32901,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed update &apos;{0}&apos;.
-        /// </summary>
-        public static string REMOVED_UPDATE {
-            get {
-                return ResourceManager.GetString("REMOVED_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Removed from vApp .
         /// </summary>
         public static string REMOVED_VMS_FROM_APPLIANCE {
@@ -33005,15 +32942,6 @@ namespace XenAdmin {
         public static string REMOVING_SERVERS_FROM_POOL {
             get {
                 return ResourceManager.GetString("REMOVING_SERVERS_FROM_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removing Update &apos;{0}&apos;....
-        /// </summary>
-        public static string REMOVING_UPDATE {
-            get {
-                return ResourceManager.GetString("REMOVING_UPDATE", resourceCulture);
             }
         }
         
@@ -36358,17 +36286,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to install supplemental pack &apos;{0}&apos; on &apos;{1}&apos;.
-        ///
-        ///Refer to the &quot;{2} Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a server..
-        /// </summary>
-        public static string SUPP_PACK_INSTALL_FAILED {
-            get {
-                return ResourceManager.GetString("SUPP_PACK_INSTALL_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} (not installed on {1}).
         /// </summary>
         public static string SUPP_PACK_MISSING_ON {
@@ -36383,33 +36300,6 @@ namespace XenAdmin {
         public static string SUPP_PACK_TEMP_VDI_DESCRIPTION {
             get {
                 return ResourceManager.GetString("SUPP_PACK_TEMP_VDI_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File uploaded to &apos;{0}&apos;.
-        /// </summary>
-        public static string SUPP_PACK_UPLOADED {
-            get {
-                return ResourceManager.GetString("SUPP_PACK_UPLOADED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading file.
-        /// </summary>
-        public static string SUPP_PACK_UPLOADING {
-            get {
-                return ResourceManager.GetString("SUPP_PACK_UPLOADING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading update &apos;{0}&apos; to &apos;{1}&apos;.
-        /// </summary>
-        public static string SUPP_PACK_UPLOADING_TO {
-            get {
-                return ResourceManager.GetString("SUPP_PACK_UPLOADING_TO", resourceCulture);
             }
         }
         
@@ -37864,15 +37754,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing update on {0} servers....
-        /// </summary>
-        public static string UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Installing updates on {0}... .
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN {
@@ -38381,15 +38262,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting update installation file {0} from {1}... .
-        /// </summary>
-        public static string UPDATES_WIZARD_REMOVING_UPDATE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_REMOVING_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Removing update file {0}....
         /// </summary>
         public static string UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL {
@@ -38743,65 +38615,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Completed.
+        ///   Looks up a localized string similar to Update uploaded to &apos;{0}&apos;.
         /// </summary>
-        public static string UPLOAD_PATCH_UPLOADED_DESCRIPTION {
+        public static string UPLOAD_UPDATE_UPLOADED {
             get {
-                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADED_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("UPLOAD_UPDATE_UPLOADED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading update {0}....
+        ///   Looks up a localized string similar to Uploading update.
         /// </summary>
-        public static string UPLOAD_PATCH_UPLOADING_DESCRIPTION {
+        public static string UPLOAD_UPDATE_UPLOADING {
             get {
-                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADING_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("UPLOAD_UPDATE_UPLOADING", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading update {0} ({1} of {2})....
+        ///   Looks up a localized string similar to Uploading update &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
-        public static string UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION {
+        public static string UPLOAD_UPDATE_UPLOADING_TO_SR {
             get {
-                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("UPLOAD_UPDATE_UPLOADING_TO_SR", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Uploading update &apos;{0}&apos; to &apos;{1}&apos; ({2} of {3})....
         /// </summary>
-        public static string UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION {
+        public static string UPLOAD_UPDATE_UPLOADING_TO_SR_PROGRESS_DESCRIPTION {
             get {
-                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading Update....
-        /// </summary>
-        public static string UPLOADING_PATCH {
-            get {
-                return ResourceManager.GetString("UPLOADING_PATCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading - {0}%.
-        /// </summary>
-        public static string UPLOADING_PATCH_PROGRESS {
-            get {
-                return ResourceManager.GetString("UPLOADING_PATCH_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading to server &apos;{0}&apos;....
-        /// </summary>
-        public static string UPLOADING_PATCH_TO {
-            get {
-                return ResourceManager.GetString("UPLOADING_PATCH_TO", resourceCulture);
+                return ResourceManager.GetString("UPLOAD_UPDATE_UPLOADING_TO_SR_PROGRESS_DESCRIPTION", resourceCulture);
             }
         }
         

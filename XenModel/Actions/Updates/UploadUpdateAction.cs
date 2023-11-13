@@ -58,14 +58,11 @@ namespace XenAdmin.Actions
         public string ByteProgressDescription { get; set; }
 
         private Pool_update poolUpdate;
-        public Pool_update PoolUpdate
-        {
-            get { return poolUpdate; }
-        }
+        public Pool_update PoolUpdate => poolUpdate;
 
 
         public UploadUpdateAction(IXenConnection connection, List<Host> selectedServers, string path, bool suppressHistory)
-            : base(connection, null, Messages.SUPP_PACK_UPLOADING, suppressHistory)
+            : base(connection, null, Messages.UPLOAD_UPDATE_UPLOADING, suppressHistory)
         {
             Host = Helpers.GetCoordinator(connection) ?? throw new NullReferenceException();
 
@@ -104,7 +101,7 @@ namespace XenAdmin.Actions
 
         private string UploadSupplementalPack(SR sr)
         {
-            this.Description = String.Format(Messages.SUPP_PACK_UPLOADING_TO, _updateName, sr.Name());
+            this.Description = String.Format(Messages.UPLOAD_UPDATE_UPLOADING_TO_SR, _updateName, sr.Name());
             log.DebugFormat("Creating vdi of size {0} bytes on SR '{1}'", _totalUpdateSize, sr.Name());
 
             VDI vdi = NewVDI(sr);
@@ -134,7 +131,7 @@ namespace XenAdmin.Actions
                 HTTP.UpdateProgressDelegate progressDelegate = delegate(int percent)
                 {
                     var sr1 = sr;
-                    var descr = string.Format(Messages.UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION, _updateName, sr1.Name(),
+                    var descr = string.Format(Messages.UPLOAD_UPDATE_UPLOADING_TO_SR_PROGRESS_DESCRIPTION, _updateName, sr1.Name(),
                         Util.DiskSizeString(percent * _totalUpdateSize / 100, "F1"), Util.DiskSizeString(_totalUpdateSize));
 
                     var actionPercent = (int)((totalUploaded * 100 + percent) / totalCount);
@@ -228,7 +225,7 @@ namespace XenAdmin.Actions
                     VdiRefsPerHost.Add(server, vdiRef);
 
             totalUploaded++;
-            Description = string.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
+            Description = string.Format(Messages.UPLOAD_UPDATE_UPLOADED, sr.Name());
 
             foreach (Host host in servers)
                 SrsWithUploadedUpdatesPerHost[host] = sr;

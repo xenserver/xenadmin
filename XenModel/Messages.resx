@@ -237,21 +237,6 @@
   <data name="ACTION_CHANGING_SHADOW_MULTIPLIER_FOR" xml:space="preserve">
     <value>Changing shadow multiplier for '{0}'...</value>
   </data>
-  <data name="ACTION_CHECK_DISK_SPACE_DESCRIPTION" xml:space="preserve">
-    <value>Checking disk space on {0}</value>
-  </data>
-  <data name="ACTION_CHECK_DISK_SPACE_TITLE" xml:space="preserve">
-    <value>Check disk space</value>
-  </data>
-  <data name="ACTION_CLEANUP_DISK_SPACE_DESCRIPTION" xml:space="preserve">
-    <value>Cleaning up disk space on {0}</value>
-  </data>
-  <data name="ACTION_CLEANUP_DISK_SPACE_SUCCESS" xml:space="preserve">
-    <value>Successfully cleaned up disk space on {0}</value>
-  </data>
-  <data name="ACTION_CLEANUP_DISK_SPACE_TITLE" xml:space="preserve">
-    <value>Clean up disk space</value>
-  </data>
   <data name="ACTION_CONFUGURE_PVS_SITE_DESCRIPTION" xml:space="preserve">
     <value>Configuring PVS-Accelerator</value>
   </data>
@@ -1998,9 +1983,6 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   </data>
   <data name="ALL_TYPES_AND_FOLDERS" xml:space="preserve">
     <value>All resources and folders</value>
-  </data>
-  <data name="ALL_UPDATES_APPLIED" xml:space="preserve">
-    <value>All Updates Applied</value>
   </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>&amp;Allow to continue</value>
@@ -10414,6 +10396,9 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TITLE" xml:space="preserve">
     <value>Perform update pre-checks on selected servers</value>
   </data>
+  <data name="PATCHINGWIZARD_REMOVE_UPDATE" xml:space="preserve">
+    <value>Remove Update</value>
+  </data>
   <data name="PATCHINGWIZARD_REMOVE_UPDATES" xml:space="preserve">
     <value>Delete update installation files</value>
   </data>
@@ -11354,9 +11339,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVE_GROUPING" xml:space="preserve">
     <value>Remove Grouping</value>
   </data>
-  <data name="REMOVE_PATCH" xml:space="preserve">
-    <value>Remove Update</value>
-  </data>
   <data name="REMOVE_SERVER" xml:space="preserve">
     <value>&amp;Remove Server...</value>
   </data>
@@ -11417,9 +11399,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVED_FROM_FOLDER" xml:space="preserve">
     <value>Removed from folder</value>
   </data>
-  <data name="REMOVED_UPDATE" xml:space="preserve">
-    <value>Removed update '{0}'</value>
-  </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removed from vApp </value>
   </data>
@@ -11434,9 +11413,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REMOVING_SERVERS_FROM_POOL" xml:space="preserve">
     <value>Removing servers from pool</value>
-  </data>
-  <data name="REMOVING_UPDATE" xml:space="preserve">
-    <value>Removing Update '{0}'...</value>
   </data>
   <data name="REMOVING_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removing from vApp</value>
@@ -12567,25 +12543,11 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
   <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (version {1})</value>
   </data>
-  <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
-    <value>Failed to install supplemental pack '{0}' on '{1}'.
-
-Refer to the "{2} Administrator's Guide" for instructions on how to manually install a supplemental pack on a server.</value>
-  </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
   </data>
   <data name="SUPP_PACK_TEMP_VDI_DESCRIPTION" xml:space="preserve">
     <value>Temporary virtual disk used for the installation of Supplemental Packs</value>
-  </data>
-  <data name="SUPP_PACK_UPLOADED" xml:space="preserve">
-    <value>File uploaded to '{0}'</value>
-  </data>
-  <data name="SUPP_PACK_UPLOADING" xml:space="preserve">
-    <value>Uploading file</value>
-  </data>
-  <data name="SUPP_PACK_UPLOADING_TO" xml:space="preserve">
-    <value>Uploading update '{0}' to '{1}'</value>
   </data>
   <data name="SUPP_PACK_VERSIONS_DIFFER" xml:space="preserve">
     <value>{0} (not the same version on all hosts)</value>
@@ -13077,9 +13039,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
     <value>Installing update {0} on {1}... </value>
   </data>
-  <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
-    <value>Installing update on {0} servers...</value>
-  </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN" xml:space="preserve">
     <value>Installing updates on {0}... </value>
   </data>
@@ -13252,9 +13211,6 @@ Please check your settings and try again.</value>
   <data name="UPDATES_WIZARD_REFRESHING_CDN_UPDATES_LIST" xml:space="preserve">
     <value>Refreshing the updates list for {0}... </value>
   </data>
-  <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
-    <value>Deleting update installation file {0} from {1}... </value>
-  </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
     <value>Removing update file {0}...</value>
   </data>
@@ -13374,26 +13330,17 @@ Please check your settings and try again.</value>
   <data name="UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS" xml:space="preserve">
     <value>{0}: Check skipped because hosts in pool '{1}' have incompatible CPUs</value>
   </data>
-  <data name="UPLOAD_PATCH_UPLOADED_DESCRIPTION" xml:space="preserve">
-    <value>Completed</value>
+  <data name="UPLOAD_UPDATE_UPLOADED" xml:space="preserve">
+    <value>Update uploaded to '{0}'</value>
   </data>
-  <data name="UPLOAD_PATCH_UPLOADING_DESCRIPTION" xml:space="preserve">
-    <value>Uploading update {0}...</value>
+  <data name="UPLOAD_UPDATE_UPLOADING" xml:space="preserve">
+    <value>Uploading update</value>
   </data>
-  <data name="UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION" xml:space="preserve">
-    <value>Uploading update {0} ({1} of {2})...</value>
+  <data name="UPLOAD_UPDATE_UPLOADING_TO_SR" xml:space="preserve">
+    <value>Uploading update '{0}' to '{1}'</value>
   </data>
-  <data name="UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION" xml:space="preserve">
+  <data name="UPLOAD_UPDATE_UPLOADING_TO_SR_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Uploading update '{0}' to '{1}' ({2} of {3})...</value>
-  </data>
-  <data name="UPLOADING_PATCH" xml:space="preserve">
-    <value>Uploading Update...</value>
-  </data>
-  <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
-    <value>Uploading - {0}%</value>
-  </data>
-  <data name="UPLOADING_PATCH_TO" xml:space="preserve">
-    <value>Uploading to server '{0}'...</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
     <value>Upgrade your server license to enable Active Directory.  Active Directory allows you to configure {0} access control by adding named user accounts.</value>
