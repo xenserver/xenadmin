@@ -159,6 +159,12 @@
   <data name="newCDLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -259,7 +265,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>672, 77</value>
+    <value>672, 64</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -277,7 +283,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelSingleDvd" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxDrive" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cdChanger1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelEject" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="newCDLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelSingleDvd" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxDrive" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cdChanger1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelEject" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="newCDLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="newCDLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold, Underline</value>
@@ -286,7 +292,10 @@
     <value>NoControl</value>
   </data>
   <data name="newCDLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 45</value>
+    <value>3, 39</value>
+  </data>
+  <data name="newCDLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 12, 3, 12</value>
   </data>
   <data name="newCDLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>666, 13</value>
@@ -321,8 +330,14 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>672, 77</value>
+    <value>672, 64</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MultipleDvdIsoList</value>

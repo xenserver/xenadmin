@@ -199,7 +199,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 4</value>
+    <value>223, 2</value>
   </data>
   <data name="labelGeneralInformationMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 0</value>
@@ -208,7 +208,7 @@
     <value>0, 30</value>
   </data>
   <data name="labelGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 26</value>
+    <value>205, 30</value>
   </data>
   <data name="labelGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -429,6 +429,42 @@
   <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="toggleConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="toggleConsoleButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toggleConsoleButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>525, 6</value>
+  </data>
+  <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="toggleConsoleButton.Text" xml:space="preserve">
+    <value>Looking for guest console...</value>
+  </data>
+  <data name="toggleConsoleButton.ToolTip" xml:space="preserve">
+    <value>Remote access is not enabled on this guest</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Name" xml:space="preserve">
+    <value>toggleConsoleButton</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="LifeCycleMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>81, 17</value>
   </metadata>
@@ -513,11 +549,11 @@
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <data name="HostLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="HostLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="HostLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="HostLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11.25pt</value>
@@ -526,19 +562,16 @@
     <value>NoControl</value>
   </data>
   <data name="HostLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>3, 8</value>
   </data>
   <data name="HostLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 0, 0, 0</value>
   </data>
   <data name="HostLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>8, 37</value>
+    <value>8, 20</value>
   </data>
   <data name="HostLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="HostLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;HostLabel.Name" xml:space="preserve">
     <value>HostLabel</value>
@@ -553,7 +586,7 @@
     <value>0</value>
   </data>
   <data name="buttonSSH.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Left</value>
   </data>
   <data name="buttonSSH.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -565,13 +598,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSSH.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 6</value>
-  </data>
-  <data name="buttonSSH.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 6, 6</value>
+    <value>397, 7</value>
   </data>
   <data name="buttonSSH.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 23</value>
+    <value>122, 23</value>
   </data>
   <data name="buttonSSH.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -591,56 +621,20 @@
   <data name="&gt;&gt;buttonSSH.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="toggleConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="multipleDvdIsoList1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
-  <data name="toggleConsoleButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="multipleDvdIsoList1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="toggleConsoleButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 6</value>
-  </data>
-  <data name="toggleConsoleButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 6, 6</value>
-  </data>
-  <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 24</value>
-  </data>
-  <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="toggleConsoleButton.Text" xml:space="preserve">
-    <value>Looking for guest console...</value>
-  </data>
-  <data name="toggleConsoleButton.ToolTip" xml:space="preserve">
-    <value>Remote access is not enabled on this guest</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Name" xml:space="preserve">
-    <value>toggleConsoleButton</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="multipleDvdIsoList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="multipleDvdIsoList1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="multipleDvdIsoList1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 3</value>
-  </data>
-  <data name="multipleDvdIsoList1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 12, 3</value>
+    <value>47, 5</value>
   </data>
   <data name="multipleDvdIsoList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 31</value>
+    <value>344, 27</value>
   </data>
   <data name="multipleDvdIsoList1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -649,7 +643,7 @@
     <value>multipleDvdIsoList1</value>
   </data>
   <data name="&gt;&gt;multipleDvdIsoList1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.MultipleDvdIsoList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.MultipleDvdIsoList, [XenCenter], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;multipleDvdIsoList1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -657,26 +651,20 @@
   <data name="&gt;&gt;multipleDvdIsoList1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="pictureBox1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 1</value>
-  </data>
-  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>17, 6</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 35</value>
-  </data>
-  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
+    <value>24, 24</value>
   </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -730,7 +718,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="HostLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonSSH" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="toggleConsoleButton" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="multipleDvdIsoList1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100,Absolute,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="HostLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonSSH" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="toggleConsoleButton" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="multipleDvdIsoList1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100,Absolute,37" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="gradientPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -748,7 +736,7 @@
     <value>gradientPanel1</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.GradientPanel.HorizontalGradientPanel, [XenCenter], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Parent" xml:space="preserve">
     <value>$this</value>

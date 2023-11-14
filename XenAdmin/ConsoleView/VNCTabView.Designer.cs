@@ -57,6 +57,7 @@ namespace XenAdmin.ConsoleView
             this.fullscreenButton = new System.Windows.Forms.Button();
             this.dockButton = new System.Windows.Forms.Button();
             this.tip = new System.Windows.Forms.ToolTip(this.components);
+            this.toggleConsoleButton = new System.Windows.Forms.Button();
             this.LifeCycleMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.powerStateLabel = new System.Windows.Forms.Label();
             this.dedicatedGpuWarning = new System.Windows.Forms.Label();
@@ -64,7 +65,6 @@ namespace XenAdmin.ConsoleView
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.HostLabel = new System.Windows.Forms.Label();
             this.buttonSSH = new System.Windows.Forms.Button();
-            this.toggleConsoleButton = new System.Windows.Forms.Button();
             this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -136,6 +136,14 @@ namespace XenAdmin.ConsoleView
             // 
             this.tip.ShowAlways = true;
             // 
+            // toggleConsoleButton
+            // 
+            resources.ApplyResources(this.toggleConsoleButton, "toggleConsoleButton");
+            this.toggleConsoleButton.Name = "toggleConsoleButton";
+            this.tip.SetToolTip(this.toggleConsoleButton, resources.GetString("toggleConsoleButton.ToolTip"));
+            this.toggleConsoleButton.UseVisualStyleBackColor = true;
+            this.toggleConsoleButton.Click += new System.EventHandler(this.toggleConsoleButton_Click);
+            // 
             // LifeCycleMenuStrip
             // 
             this.LifeCycleMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -180,8 +188,8 @@ namespace XenAdmin.ConsoleView
             // 
             // HostLabel
             // 
-            this.HostLabel.AutoEllipsis = true;
             resources.ApplyResources(this.HostLabel, "HostLabel");
+            this.HostLabel.AutoEllipsis = true;
             this.HostLabel.ForeColor = System.Drawing.Color.White;
             this.HostLabel.Name = "HostLabel";
             // 
@@ -191,14 +199,6 @@ namespace XenAdmin.ConsoleView
             this.buttonSSH.Name = "buttonSSH";
             this.buttonSSH.UseVisualStyleBackColor = true;
             this.buttonSSH.Click += new System.EventHandler(this.buttonSSH_Click);
-            // 
-            // toggleConsoleButton
-            // 
-            resources.ApplyResources(this.toggleConsoleButton, "toggleConsoleButton");
-            this.toggleConsoleButton.Name = "toggleConsoleButton";
-            this.tip.SetToolTip(this.toggleConsoleButton, resources.GetString("toggleConsoleButton.ToolTip"));
-            this.toggleConsoleButton.UseVisualStyleBackColor = true;
-            this.toggleConsoleButton.Click += new System.EventHandler(this.toggleConsoleButton_Click);
             // 
             // multipleDvdIsoList1
             // 
@@ -254,7 +254,6 @@ namespace XenAdmin.ConsoleView
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ContextMenuStrip LifeCycleMenuStrip;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private XenAdmin.Controls.GradientPanel.GradientPanel gradientPanel1;
         private System.Windows.Forms.Label HostLabel;
         private System.Windows.Forms.Button toggleConsoleButton;
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;
@@ -263,5 +262,6 @@ namespace XenAdmin.ConsoleView
         private System.Windows.Forms.Button buttonSSH;
         private System.Windows.Forms.PictureBox pictureBoxGeneralInformationMessage;
         private System.Windows.Forms.Label labelGeneralInformationMessage;
+        private Controls.GradientPanel.HorizontalGradientPanel gradientPanel1;
     }
 }
