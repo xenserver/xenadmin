@@ -3790,7 +3790,7 @@
       <DependentUpon>WlbReportSubscriptionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\ExportWizard\ApplianceChecks\ApplianceExistsCheck.cs" />
-    <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateCanMigrateFilter.cs" />
+    <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateFilter.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateDestinationPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

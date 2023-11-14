@@ -46,7 +46,7 @@ namespace XenAdmin.Commands
     {
         public delegate Host GetHostForVM(VM vm);
 
-        private readonly static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Dictionary<VM, string> _cantBootReasons = new Dictionary<VM, string>();
         private readonly bool _noneCanBoot = true;
         private readonly string _text;
@@ -65,9 +65,7 @@ namespace XenAdmin.Commands
             {
                 VM vm = (VM)item.XenObject;
 
-                string reason = GetVmCannotBootOnHostReason(vm, GetHost(vm), session, operation);
-
-                if (reason == null)
+                if (VmCanBootOnHost(vm, GetHost(vm), session, operation, out var reason))
                     _noneCanBoot = false;
                 else
                     _cantBootReasons[vm] = reason;
@@ -107,26 +105,38 @@ namespace XenAdmin.Commands
             return vm != null && !_cantBootReasons.ContainsKey(vm);
         }
 
-        internal static string GetVmCannotBootOnHostReason(VM vm, Host host, Session session, vm_operations operation)
+        internal static bool VmCanBootOnHost(VM vm, Host host, Session session, vm_operations operation, out string cannotBootReason)
         {
-            Host residentHost = vm.Connection.Resolve(vm.resident_on);
-
             if (host == null)
-                return Messages.NO_HOME_SERVER;
-
-            if (vm.power_state == vm_power_state.Running && residentHost != null
-                && Helpers.ProductVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(residentHost)) < 0)
             {
-                // This will be a migrate menu if powerstate if running
-                return Messages.OLDER_THAN_CURRENT_SERVER;
+                cannotBootReason = Messages.NO_HOME_SERVER;
+                return false;
             }
-            
-            if (vm.power_state == vm_power_state.Running && residentHost != null && host.opaque_ref == residentHost.opaque_ref)
-                return Messages.HOST_MENU_CURRENT_SERVER;
+
+            if (vm.power_state == vm_power_state.Running)
+            {
+                var residentHost = vm.Connection.Resolve(vm.resident_on);
+
+                if (residentHost != null)
+                {
+                    if (host.opaque_ref == residentHost.opaque_ref)
+                    {
+                        cannotBootReason = Messages.HOST_MENU_CURRENT_SERVER;
+                        return false;
+                    }
+
+                    if (Helpers.ProductVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(residentHost)) < 0)
+                    {
+                        cannotBootReason = Messages.OLDER_THAN_CURRENT_SERVER;
+                        return false;
+                    }
+                }
+            }
 
             if ((operation == vm_operations.pool_migrate || operation == vm_operations.resume_on) && VmCpuIncompatibleWithHost(host, vm))
             {
-                return FriendlyErrorNames.VM_INCOMPATIBLE_WITH_THIS_HOST;
+                cannotBootReason = FriendlyErrorNames.VM_INCOMPATIBLE_WITH_THIS_HOST;
+                return false;
             }
 
             try
@@ -137,20 +147,27 @@ namespace XenAdmin.Commands
             {
                 if (f.ErrorDescription.Count > 2 && f.ErrorDescription[0] == Failure.VM_REQUIRES_SR)
                 {
-                    SR sr = host.Connection.Resolve((new XenRef<SR>(f.ErrorDescription[2])));
+                    SR sr = host.Connection.Resolve(new XenRef<SR>(f.ErrorDescription[2]));
 
                     if (sr != null && sr.content_type == SR.Content_Type_ISO)
-                        return Messages.MIGRATE_PLEASE_EJECT_YOUR_CD;
+                    {
+                        cannotBootReason = Messages.MIGRATE_PLEASE_EJECT_YOUR_CD;
+                        return false;
+                    }
                 }
-                return f.ShortMessage;
+
+                cannotBootReason = f.ShortMessage;
+                return false;
             }
             catch (Exception e)
             {
                 log.ErrorFormat("There was an error calling assert_can_boot_here on host {0}: {1}", host.Name(), e.Message);
-                return Messages.HOST_MENU_UNKNOWN_ERROR;
+                cannotBootReason = Messages.HOST_MENU_UNKNOWN_ERROR;
+                return false;
             }
 
-            return null;
+            cannotBootReason = null;
+            return true;
         }
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
@@ -160,8 +177,7 @@ namespace XenAdmin.Commands
 
         protected override string GetCantRunReasonCore(IXenObject item)
         {
-            VM vm = item as VM;
-            if (vm != null && _cantBootReasons.ContainsKey(vm))
+            if (item is VM vm && _cantBootReasons.ContainsKey(vm))
                 return _cantBootReasons[vm];
 
             return base.GetCantRunReasonCore(item);
