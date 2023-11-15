@@ -178,16 +178,16 @@ namespace XenAdmin.SettingsPanels
             // SnmpV3Panel
             // 
             resources.ApplyResources(this.SnmpV3Panel, "SnmpV3Panel");
-            this.SnmpV3Panel.Controls.Add(this.UserNameLabel, 0, 2);
-            this.SnmpV3Panel.Controls.Add(this.UserNameTextBox, 1, 2);
-            this.SnmpV3Panel.Controls.Add(this.AuthenticationPasswordLabel, 0, 3);
-            this.SnmpV3Panel.Controls.Add(this.AuthenticationPasswordLabelTextBox, 1, 3);
-            this.SnmpV3Panel.Controls.Add(this.AuthenticationProtocolLabel, 0, 4);
-            this.SnmpV3Panel.Controls.Add(this.AuthenticationProtocolComboBox, 1, 4);
-            this.SnmpV3Panel.Controls.Add(this.PrivacyPasswordLabel, 0, 5);
-            this.SnmpV3Panel.Controls.Add(this.PrivacyPasswordTextBox, 1, 5);
-            this.SnmpV3Panel.Controls.Add(this.PrivacyProtocolLabel, 0, 6);
-            this.SnmpV3Panel.Controls.Add(this.PrivacyProtocolComboBox, 1, 6);
+            this.SnmpV3Panel.Controls.Add(this.UserNameLabel, 0, 1);
+            this.SnmpV3Panel.Controls.Add(this.UserNameTextBox, 1, 1);
+            this.SnmpV3Panel.Controls.Add(this.AuthenticationPasswordLabel, 0, 2);
+            this.SnmpV3Panel.Controls.Add(this.AuthenticationPasswordLabelTextBox, 1, 2);
+            this.SnmpV3Panel.Controls.Add(this.AuthenticationProtocolLabel, 0, 3);
+            this.SnmpV3Panel.Controls.Add(this.AuthenticationProtocolComboBox, 1, 3);
+            this.SnmpV3Panel.Controls.Add(this.PrivacyPasswordLabel, 0, 4);
+            this.SnmpV3Panel.Controls.Add(this.PrivacyPasswordTextBox, 1, 4);
+            this.SnmpV3Panel.Controls.Add(this.PrivacyProtocolLabel, 0, 5);
+            this.SnmpV3Panel.Controls.Add(this.PrivacyProtocolComboBox, 1, 5);
             this.SnmpV3Panel.Name = "SnmpV3Panel";
             // 
             // UserNameLabel
@@ -226,7 +226,6 @@ namespace XenAdmin.SettingsPanels
             resources.GetString("AuthenticationProtocolComboBox.Items"),
             resources.GetString("AuthenticationProtocolComboBox.Items1")});
             this.AuthenticationProtocolComboBox.Name = "AuthenticationProtocolComboBox";
-            this.AuthenticationProtocolComboBox.SelectedIndex = 0;
             this.AuthenticationProtocolComboBox.SelectedIndexChanged += new System.EventHandler(this.V3Block_Changed);
             // 
             // PrivacyPasswordLabel
@@ -254,7 +253,6 @@ namespace XenAdmin.SettingsPanels
             resources.GetString("PrivacyProtocolComboBox.Items"),
             resources.GetString("PrivacyProtocolComboBox.Items1")});
             this.PrivacyProtocolComboBox.Name = "PrivacyProtocolComboBox";
-            this.PrivacyProtocolComboBox.SelectedIndex = 0;
             this.PrivacyProtocolComboBox.SelectedIndexChanged += new System.EventHandler(this.V3Block_Changed);
             // 
             // RetrieveSnmpPanel
@@ -273,6 +271,7 @@ namespace XenAdmin.SettingsPanels
             // RetrieveSnmpLabel
             // 
             resources.ApplyResources(this.RetrieveSnmpLabel, "RetrieveSnmpLabel");
+            this.RetrieveSnmpLabel.AutoEllipsis = true;
             this.RetrieveSnmpLabel.Name = "RetrieveSnmpLabel";
             // 
             // GeneralConfigureGroupBox

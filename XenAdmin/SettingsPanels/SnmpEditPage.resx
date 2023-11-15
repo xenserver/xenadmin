@@ -135,14 +135,17 @@
   <data name="DescLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
+  <data name="DescLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 10</value>
+  </data>
   <data name="DescLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>579, 26</value>
   </data>
   <data name="DescLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="DescLabel.Text" xml:space="preserve">
-    <value>SNMP (Simple Network Management Protocol) is an application-layer protocol that allows you to trap alerts to NMS. You can modify SNMP v2c and v3 configuration in this page.</value>
+    <value>Simple Network Management Protocol (SNMP) is an application-layer protocol that allows you to trap alerts to a Network Management System (NMS). You can use this page to configure SNMP v2c and v3.</value>
   </data>
   <data name="&gt;&gt;DescLabel.Name" xml:space="preserve">
     <value>DescLabel</value>
@@ -156,9 +159,6 @@
   <data name="&gt;&gt;DescLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="SnmpServiceStatusPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="SnmpServiceStatusPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -168,6 +168,9 @@
   <data name="SnmpServiceStatusPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="EnableSnmpCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="EnableSnmpCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -175,13 +178,13 @@
     <value>3, 3</value>
   </data>
   <data name="EnableSnmpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>479, 17</value>
+    <value>93, 17</value>
   </data>
   <data name="EnableSnmpCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="EnableSnmpCheckBox.Text" xml:space="preserve">
-    <value>Enable SNMP</value>
+    <value>&amp;Enable SNMP</value>
   </data>
   <data name="&gt;&gt;EnableSnmpCheckBox.Name" xml:space="preserve">
     <value>EnableSnmpCheckBox</value>
@@ -196,7 +199,7 @@
     <value>0</value>
   </data>
   <data name="ServiceStatusPicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Right</value>
+    <value>Left</value>
   </data>
   <data name="ServiceStatusPicture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -204,14 +207,8 @@
   <data name="ServiceStatusPicture.Location" type="System.Drawing.Point, System.Drawing">
     <value>490, 3</value>
   </data>
-  <data name="ServiceStatusPicture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
   <data name="ServiceStatusPicture.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
-  </data>
-  <data name="ServiceStatusPicture.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
   </data>
   <data name="ServiceStatusPicture.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -232,7 +229,7 @@
     <value>1</value>
   </data>
   <data name="ServiceStatusLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Right</value>
+    <value>Left</value>
   </data>
   <data name="ServiceStatusLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -243,14 +240,11 @@
   <data name="ServiceStatusLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>508, 5</value>
   </data>
-  <data name="ServiceStatusLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
   <data name="ServiceStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 13</value>
   </data>
   <data name="ServiceStatusLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="ServiceStatusLabel.Text" xml:space="preserve">
     <value>Service failed.</value>
@@ -273,8 +267,11 @@
   <data name="&gt;&gt;ServiceStatusLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="SnmpServiceStatusPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="SnmpServiceStatusPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 26</value>
+    <value>0, 36</value>
   </data>
   <data name="SnmpServiceStatusPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -286,7 +283,7 @@
     <value>585, 23</value>
   </data>
   <data name="SnmpServiceStatusPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;SnmpServiceStatusPanel.Name" xml:space="preserve">
     <value>SnmpServiceStatusPanel</value>
@@ -306,23 +303,20 @@
   <data name="DebugLogCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="DebugLogCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="DebugLogCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="DebugLogCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
+    <value>3, 62</value>
   </data>
   <data name="DebugLogCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 17</value>
+    <value>208, 17</value>
   </data>
   <data name="DebugLogCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="DebugLogCheckBox.Text" xml:space="preserve">
-    <value>Record debugging message to syslog</value>
+    <value>&amp;Record debugging messages to syslog</value>
   </data>
   <data name="&gt;&gt;DebugLogCheckBox.Name" xml:space="preserve">
     <value>DebugLogCheckBox</value>
@@ -343,16 +337,19 @@
     <value>NoControl</value>
   </data>
   <data name="SupportV2cCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 75</value>
+    <value>3, 94</value>
+  </data>
+  <data name="SupportV2cCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 12, 3, 3</value>
   </data>
   <data name="SupportV2cCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 17</value>
   </data>
   <data name="SupportV2cCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="SupportV2cCheckBox.Text" xml:space="preserve">
-    <value>Support SNMPv2c</value>
+    <value>Support SNMPv&amp;2c</value>
   </data>
   <data name="&gt;&gt;SupportV2cCheckBox.Name" xml:space="preserve">
     <value>SupportV2cCheckBox</value>
@@ -368,6 +365,9 @@
   </data>
   <data name="SnmpV2cGroupBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="SnmpV2cGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="SnmpV2cPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -388,13 +388,13 @@
     <value>3, 6</value>
   </data>
   <data name="CommunityLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>61, 13</value>
   </data>
   <data name="CommunityLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="CommunityLabel.Text" xml:space="preserve">
-    <value>Community</value>
+    <value>&amp;Community:</value>
   </data>
   <data name="&gt;&gt;CommunityLabel.Name" xml:space="preserve">
     <value>CommunityLabel</value>
@@ -412,13 +412,13 @@
     <value>Left, Right</value>
   </data>
   <data name="CommunityTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 3</value>
+    <value>70, 3</value>
   </data>
   <data name="CommunityTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
+    <value>500, 20</value>
   </data>
   <data name="CommunityTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="CommunityTextBox.Text" xml:space="preserve">
     <value>public</value>
@@ -436,25 +436,19 @@
     <value>1</value>
   </data>
   <data name="SnmpV2cPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>Top</value>
   </data>
   <data name="SnmpV2cPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="SnmpV2cPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="SnmpV2cPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 5</value>
+    <value>3, 13</value>
   </data>
   <data name="SnmpV2cPanel.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="SnmpV2cPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 31</value>
+    <value>573, 26</value>
   </data>
   <data name="SnmpV2cPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;SnmpV2cPanel.Name" xml:space="preserve">
     <value>SnmpV2cPanel</value>
@@ -469,22 +463,22 @@
     <value>0</value>
   </data>
   <data name="SnmpV2cPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="CommunityLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CommunityTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,180,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="CommunityLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CommunityTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="SnmpV2cGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="SnmpV2cGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 98</value>
+    <value>3, 117</value>
   </data>
   <data name="SnmpV2cGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+    <value>3, 0, 3, 6</value>
   </data>
   <data name="SnmpV2cGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 47</value>
+    <value>579, 45</value>
   </data>
   <data name="SnmpV2cGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>4</value>
   </data>
   <data name="SnmpV2cGroupBox.Text" xml:space="preserve">
     <value>SNMPv2c Settings</value>
@@ -508,16 +502,19 @@
     <value>NoControl</value>
   </data>
   <data name="SupportV3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 151</value>
+    <value>3, 177</value>
+  </data>
+  <data name="SupportV3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 12, 3, 3</value>
   </data>
   <data name="SupportV3CheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 17</value>
   </data>
   <data name="SupportV3CheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="SupportV3CheckBox.Text" xml:space="preserve">
-    <value>Support SNMPv3</value>
+    <value>Support SNMPv&amp;3</value>
   </data>
   <data name="&gt;&gt;SupportV3CheckBox.Name" xml:space="preserve">
     <value>SupportV3CheckBox</value>
@@ -533,6 +530,9 @@
   </data>
   <data name="SnmpV3GroupBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="SnmpV3GroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="SnmpV3Panel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -556,16 +556,13 @@
     <value>3, 6</value>
   </data>
   <data name="UserNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="UserNameLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="UserNameLabel.Text" xml:space="preserve">
-    <value>User Name</value>
-  </data>
-  <data name="UserNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>&amp;Username:</value>
   </data>
   <data name="&gt;&gt;UserNameLabel.Name" xml:space="preserve">
     <value>UserNameLabel</value>
@@ -580,16 +577,16 @@
     <value>0</value>
   </data>
   <data name="UserNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="UserNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 3</value>
+    <value>136, 3</value>
   </data>
   <data name="UserNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
+    <value>434, 20</value>
   </data>
   <data name="UserNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;UserNameTextBox.Name" xml:space="preserve">
     <value>UserNameTextBox</value>
@@ -616,16 +613,13 @@
     <value>3, 32</value>
   </data>
   <data name="AuthenticationPasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 13</value>
+    <value>127, 13</value>
   </data>
   <data name="AuthenticationPasswordLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="AuthenticationPasswordLabel.Text" xml:space="preserve">
-    <value>Authentication Password</value>
-  </data>
-  <data name="AuthenticationPasswordLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>Authentication &amp;Password:</value>
   </data>
   <data name="&gt;&gt;AuthenticationPasswordLabel.Name" xml:space="preserve">
     <value>AuthenticationPasswordLabel</value>
@@ -640,19 +634,19 @@
     <value>2</value>
   </data>
   <data name="AuthenticationPasswordLabelTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="AuthenticationPasswordLabelTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 29</value>
+    <value>136, 29</value>
   </data>
   <data name="AuthenticationPasswordLabelTextBox.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
   </data>
   <data name="AuthenticationPasswordLabelTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
+    <value>434, 20</value>
   </data>
   <data name="AuthenticationPasswordLabelTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;AuthenticationPasswordLabelTextBox.Name" xml:space="preserve">
     <value>AuthenticationPasswordLabelTextBox</value>
@@ -679,16 +673,13 @@
     <value>3, 59</value>
   </data>
   <data name="AuthenticationProtocolLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 13</value>
+    <value>120, 13</value>
   </data>
   <data name="AuthenticationProtocolLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>4</value>
   </data>
   <data name="AuthenticationProtocolLabel.Text" xml:space="preserve">
-    <value>Authentication Protocol</value>
-  </data>
-  <data name="AuthenticationProtocolLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>Au&amp;thentication Protocol:</value>
   </data>
   <data name="&gt;&gt;AuthenticationProtocolLabel.Name" xml:space="preserve">
     <value>AuthenticationProtocolLabel</value>
@@ -703,7 +694,7 @@
     <value>4</value>
   </data>
   <data name="AuthenticationProtocolComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="AuthenticationProtocolComboBox.Items" xml:space="preserve">
     <value>MD5</value>
@@ -712,13 +703,13 @@
     <value>SHA</value>
   </data>
   <data name="AuthenticationProtocolComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 55</value>
+    <value>136, 55</value>
   </data>
   <data name="AuthenticationProtocolComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 21</value>
+    <value>434, 21</value>
   </data>
   <data name="AuthenticationProtocolComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;AuthenticationProtocolComboBox.Name" xml:space="preserve">
     <value>AuthenticationProtocolComboBox</value>
@@ -745,16 +736,13 @@
     <value>3, 85</value>
   </data>
   <data name="PrivacyPasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
+    <value>94, 13</value>
   </data>
   <data name="PrivacyPasswordLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="PrivacyPasswordLabel.Text" xml:space="preserve">
-    <value>Privacy Password</value>
-  </data>
-  <data name="PrivacyPasswordLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>Pr&amp;ivacy Password:</value>
   </data>
   <data name="&gt;&gt;PrivacyPasswordLabel.Name" xml:space="preserve">
     <value>PrivacyPasswordLabel</value>
@@ -769,19 +757,19 @@
     <value>6</value>
   </data>
   <data name="PrivacyPasswordTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="PrivacyPasswordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 82</value>
+    <value>136, 82</value>
   </data>
   <data name="PrivacyPasswordTextBox.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
   </data>
   <data name="PrivacyPasswordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
+    <value>434, 20</value>
   </data>
   <data name="PrivacyPasswordTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;PrivacyPasswordTextBox.Name" xml:space="preserve">
     <value>PrivacyPasswordTextBox</value>
@@ -808,16 +796,13 @@
     <value>3, 112</value>
   </data>
   <data name="PrivacyProtocolLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>87, 13</value>
   </data>
   <data name="PrivacyProtocolLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="PrivacyProtocolLabel.Text" xml:space="preserve">
-    <value>Privacy Protocol</value>
-  </data>
-  <data name="PrivacyProtocolLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>Priva&amp;cy Protocol:</value>
   </data>
   <data name="&gt;&gt;PrivacyProtocolLabel.Name" xml:space="preserve">
     <value>PrivacyProtocolLabel</value>
@@ -832,7 +817,7 @@
     <value>8</value>
   </data>
   <data name="PrivacyProtocolComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="PrivacyProtocolComboBox.Items" xml:space="preserve">
     <value>AES</value>
@@ -841,10 +826,10 @@
     <value>DES</value>
   </data>
   <data name="PrivacyProtocolComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 108</value>
+    <value>136, 108</value>
   </data>
   <data name="PrivacyProtocolComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 21</value>
+    <value>434, 21</value>
   </data>
   <data name="PrivacyProtocolComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -865,19 +850,16 @@
     <value>Top</value>
   </data>
   <data name="SnmpV3Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="SnmpV3Panel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 5</value>
+    <value>3, 13</value>
   </data>
   <data name="SnmpV3Panel.RowCount" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="SnmpV3Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 137</value>
+    <value>573, 132</value>
   </data>
   <data name="SnmpV3Panel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;SnmpV3Panel.Name" xml:space="preserve">
     <value>SnmpV3Panel</value>
@@ -892,22 +874,22 @@
     <value>0</value>
   </data>
   <data name="SnmpV3Panel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UserNameLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="UserNameTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationPasswordLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationPasswordLabelTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationProtocolLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationProtocolComboBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyPasswordLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyPasswordTextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyProtocolLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyProtocolComboBox" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,180,Percent,100" /&gt;&lt;Rows Styles="Absolute,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UserNameLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="UserNameTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationPasswordLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationPasswordLabelTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationProtocolLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AuthenticationProtocolComboBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyPasswordLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyPasswordTextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyProtocolLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PrivacyProtocolComboBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="SnmpV3GroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="SnmpV3GroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 174</value>
+    <value>3, 200</value>
   </data>
   <data name="SnmpV3GroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+    <value>3, 0, 3, 6</value>
   </data>
   <data name="SnmpV3GroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 153</value>
+    <value>579, 151</value>
   </data>
   <data name="SnmpV3GroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>6</value>
   </data>
   <data name="SnmpV3GroupBox.Text" xml:space="preserve">
     <value>SNMPv3 Settings</value>
@@ -927,6 +909,9 @@
   <data name="RetrieveSnmpPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="RetrieveSnmpPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="RetrieveSnmpPicture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhEAAQAIABAAAAAP///yH/C05FVFNDQVBFMi4wAwEAAAAh+QQBCgABACwAAAAAEAAQAAACFoyP
@@ -939,16 +924,10 @@
 </value>
   </data>
   <data name="RetrieveSnmpPicture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 2</value>
-  </data>
-  <data name="RetrieveSnmpPicture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 3</value>
   </data>
   <data name="RetrieveSnmpPicture.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
-  </data>
-  <data name="RetrieveSnmpPicture.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
   </data>
   <data name="RetrieveSnmpPicture.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -966,22 +945,22 @@
     <value>0</value>
   </data>
   <data name="RetrieveSnmpLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Left</value>
+  </data>
+  <data name="RetrieveSnmpLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="RetrieveSnmpLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 0</value>
+    <value>25, 4</value>
   </data>
   <data name="RetrieveSnmpLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>553, 20</value>
+    <value>162, 13</value>
   </data>
   <data name="RetrieveSnmpLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="RetrieveSnmpLabel.Text" xml:space="preserve">
     <value>Retrieving SNMP configuration...</value>
-  </data>
-  <data name="RetrieveSnmpLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;RetrieveSnmpLabel.Name" xml:space="preserve">
     <value>RetrieveSnmpLabel</value>
@@ -995,14 +974,20 @@
   <data name="&gt;&gt;RetrieveSnmpLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="RetrieveSnmpPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="RetrieveSnmpPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 333</value>
+    <value>3, 364</value>
+  </data>
+  <data name="RetrieveSnmpPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 3</value>
   </data>
   <data name="RetrieveSnmpPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 20</value>
+    <value>579, 22</value>
   </data>
   <data name="RetrieveSnmpPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;RetrieveSnmpPanel.Name" xml:space="preserve">
     <value>RetrieveSnmpPanel</value>
@@ -1017,7 +1002,7 @@
     <value>7</value>
   </data>
   <data name="RetrieveSnmpPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="RetrieveSnmpPicture" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="RetrieveSnmpLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Absolute,559" /&gt;&lt;Rows Styles="Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="RetrieveSnmpPicture" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="RetrieveSnmpLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="SnmpTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1025,17 +1010,14 @@
   <data name="SnmpTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="SnmpTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
-  </data>
   <data name="SnmpTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="SnmpTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>585, 380</value>
+    <value>585, 443</value>
   </data>
   <data name="SnmpTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;SnmpTableLayoutPanel.Name" xml:space="preserve">
     <value>SnmpTableLayoutPanel</value>
@@ -1125,7 +1107,7 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>585, 380</value>
+    <value>585, 443</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SnmpEditPage</value>
