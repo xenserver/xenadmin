@@ -10180,7 +10180,7 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>NRPE check name: {0}</value>
   </data>
   <data name="NRPE_RETRIEVE_FAILED" xml:space="preserve">
-    <value>Failed to retrieve NRPE configuration, please check XenCenter logs.</value>
+    <value>Failed to retrieve NRPE configuration, please check the application logs.</value>
   </data>
   <data name="NRPE_RETRIEVING_CONFIGURATION" xml:space="preserve">
     <value>Retrieving NRPE configuration...</value>

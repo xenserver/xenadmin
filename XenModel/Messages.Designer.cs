@@ -29340,7 +29340,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to retrieve NRPE configuration, please check XenCenter logs..
+        ///   Looks up a localized string similar to Failed to retrieve NRPE configuration, please check the application logs..
         /// </summary>
         public static string NRPE_RETRIEVE_FAILED {
             get {
