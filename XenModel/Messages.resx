@@ -9101,8 +9101,16 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEVER" xml:space="preserve">
     <value>Never</value>
   </data>
+  <data name="NEW_DVD_DRIVE_CREATE_CONFIRMATION" xml:space="preserve">
+    <value>Are you sure you want to create a new DVD drive on VM '{0}'?
+
+This action will create a new Virtual Block Device (VBD) that cannot be hot-unplugged.</value>
+  </data>
   <data name="NEW_DVD_DRIVE_CREATE_TITLE" xml:space="preserve">
     <value>Creating new DVD drive on VM {0}</value>
+  </data>
+  <data name="NEW_DVD_DRIVE_CREATE_YES_BUTTON" xml:space="preserve">
+    <value>&amp;Yes, Create</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATING" xml:space="preserve">
     <value>Creating new DVD drive</value>

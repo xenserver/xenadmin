@@ -232,6 +232,8 @@ namespace XenAdmin.Controls
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IXenConnection connection
         {
             set

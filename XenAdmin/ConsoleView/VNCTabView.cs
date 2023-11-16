@@ -1291,10 +1291,12 @@ namespace XenAdmin.ConsoleView
         {
             toggleConsoleButton.Enabled = false;
 
-            VBD cddrive = source.FindVMCDROM();
-            bool allowEject = cddrive != null ? cddrive.allowed_operations.Contains(vbd_operations.eject) : false;
-            bool allowInsert = cddrive != null ? cddrive.allowed_operations.Contains(vbd_operations.insert) : false;
-            multipleDvdIsoList1.Enabled = (source.power_state == vm_power_state.Halted) && (allowEject || allowInsert);
+            VBD cdDrive = source.FindVMCDROM();
+
+            multipleDvdIsoList1.Enabled = cdDrive == null ||
+                                          source.power_state == vm_power_state.Halted &&
+                                          (cdDrive.allowed_operations.Contains(vbd_operations.eject) ||
+                                           cdDrive.allowed_operations.Contains(vbd_operations.insert));
 
             sendCAD.Enabled = false;
         }

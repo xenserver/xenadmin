@@ -26210,11 +26210,31 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to create a new DVD drive on VM &apos;{0}&apos;?
+        ///
+        ///This action will create a new Virtual Block Device (VBD) that cannot be hot-unplugged..
+        /// </summary>
+        public static string NEW_DVD_DRIVE_CREATE_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("NEW_DVD_DRIVE_CREATE_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating new DVD drive on VM {0}.
         /// </summary>
         public static string NEW_DVD_DRIVE_CREATE_TITLE {
             get {
                 return ResourceManager.GetString("NEW_DVD_DRIVE_CREATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Create.
+        /// </summary>
+        public static string NEW_DVD_DRIVE_CREATE_YES_BUTTON {
+            get {
+                return ResourceManager.GetString("NEW_DVD_DRIVE_CREATE_YES_BUTTON", resourceCulture);
             }
         }
         
