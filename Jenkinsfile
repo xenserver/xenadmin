@@ -32,7 +32,7 @@
 
 def XENADMIN_BRANDING_TAG = 'v5.3'
 
-@Library(['PacmanSharedLibrary', "xencenter-pipeline@v4.11"])
+@Library(['PacmanSharedLibrary', "xencenter-pipeline@v4.12"])
 import com.xenserver.pipeline.xencenter.*
 
 properties([
