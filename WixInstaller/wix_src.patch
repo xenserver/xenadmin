@@ -1007,7 +1007,7 @@ diff -ru wixlib/ExitDialog.wxl wixlib/ExitDialog.wxl
 +                <Control Id="OptionalCheckBox" Type="CheckBox" X="135" Y="200" Width="220" Height="10" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT]">
 +                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"</Condition>
                  </Control>
-diff --git wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
+diff -ru wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
 --- wixlib/MsiRMFilesInUse.wxs
 +++ wixlib/MsiRMFilesInUse.wxs
 @@ -6,10 +6,13 @@
@@ -1024,4 +1024,3 @@ diff --git wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
                  </Control>
                  <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
                      <Publish Event="EndDialog" Value="Exit">1</Publish>
- 
