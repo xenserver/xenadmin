@@ -86,6 +86,8 @@ namespace XenCenterLib
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool ChangeClipboardChain(IntPtr hWnd, IntPtr hWndNext);
 
+        #region Constants
+
         /// <summary>
         /// There is not enough space on the disk. See winerror.h.
         /// </summary>
@@ -140,6 +142,14 @@ namespace XenCenterLib
 
         public const int CDN_FILEOK = -606;
         public const int CDN_HELP = -605;
+
+        public const int GWL_WNDPROC = -4;
+        public const int LB_ITEMFROMPOINT = 425;
+        public const int S_OK = 0x0;
+        public const int E_ACCESSDENIED = unchecked((int)0x80070005);
+        public const int INET_E_DEFAULT_ACTION = unchecked((int)0x800C0011);
+
+        #endregion
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetDlgItem(IntPtr hDlg, int nIDDlgItem);
@@ -342,11 +352,6 @@ namespace XenCenterLib
         }
 
         /// <summary>
-        /// See http://msdn2.microsoft.com/en-us/library/e14hhbe6(VS.80).aspx
-        /// </summary>
-        public const int SB_THUMBTRACK = 5;
-
-        /// <summary>
         /// See http://msdn2.microsoft.com/en-us/library/bb787583.aspx and
         /// http://pinvoke.net/default.aspx/user32/GetScrollInfo.html
         /// </summary>
@@ -392,8 +397,6 @@ namespace XenCenterLib
             }
         }
 
-        public const int GWL_WNDPROC = -4;
-
         public delegate IntPtr WndProcDelegate(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
@@ -404,8 +407,6 @@ namespace XenCenterLib
 
         [DllImport("user32.dll")]
         public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-        public const int LB_ITEMFROMPOINT = 425;
 
         [DllImport("user32.dll")]
         public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
@@ -478,10 +479,6 @@ namespace XenCenterLib
             public IntPtr IdFrom;
             public int code;
         }
-
-        public const int S_OK = unchecked((int)0x00000000);
-        public const int E_ACCESSDENIED = unchecked((int)0x80070005);
-        public const int INET_E_DEFAULT_ACTION = unchecked((int)0x800C0011);
 
         [ComImport, Guid("6d5140c1-7436-11ce-8034-00aa006009fa"),
          InterfaceType(ComInterfaceType.InterfaceIsIUnknown),

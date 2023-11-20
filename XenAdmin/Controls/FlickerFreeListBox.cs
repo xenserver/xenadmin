@@ -75,7 +75,7 @@ namespace XenAdmin.Controls
                 si.cbSize = (uint)Marshal.SizeOf(si);
                 Win32.GetScrollInfo(msg.HWnd, 0, ref si);
 
-                if ((msg.WParam.ToInt32() & 0xFF) == Win32.SB_THUMBTRACK)
+                if ((msg.WParam.ToInt32() & 0xFF) == (int)Win32.ScrollBarCommands.SB_THUMBTRACK)
                 {
                     // If the user is in the middle of dragging the scrollbar, we're interested in
                     // the 'track' position
