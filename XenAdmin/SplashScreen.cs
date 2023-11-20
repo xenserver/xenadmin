@@ -32,6 +32,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin
 {
@@ -66,6 +67,25 @@ namespace XenAdmin
 
             timer1.Stop();
             ShowMainWindowRequested?.Invoke();
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            SendToForm(e.Button);
+        }
+
+        private void labelCopyright_MouseDown(object sender, MouseEventArgs e)
+        {
+            SendToForm(e.Button);
+        }
+
+        private void SendToForm(MouseButtons mouseButton)
+        {
+            if (mouseButton == MouseButtons.Left)
+            {
+                Win32.ReleaseCapture();
+                Win32.SendMessage(Handle, Win32.WM_NCLBUTTONDOWN, Win32.HT_CAPTION, 0);
+            }
         }
     }
 }

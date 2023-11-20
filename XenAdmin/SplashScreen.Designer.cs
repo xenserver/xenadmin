@@ -41,6 +41,7 @@
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // timer1
             // 
@@ -52,6 +53,7 @@
             this.labelCopyright.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.labelCopyright, "labelCopyright");
             this.labelCopyright.Name = "labelCopyright";
+            this.labelCopyright.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCopyright_MouseDown);
             // 
             // SplashScreen
             // 

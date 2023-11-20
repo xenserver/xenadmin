@@ -101,6 +101,8 @@ namespace XenCenterLib
         public const int WM_KEYDOWN = 0x100;
 
         // Mouse Hooks
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
         public const int WM_LBUTTONDOWN = 0x201;
         public const int WM_LBUTTONDBLCLK = 0x203;
         public const int WM_MOUSEWHEEL = 0x20A;
@@ -186,11 +188,17 @@ namespace XenCenterLib
         [DllImport("user32.dll")]
         public static extern bool DestroyWindow(IntPtr hwnd);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, string lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, string lParam);
 
         [DllImport("user32.dll")]
         public static extern IntPtr SetFocus(IntPtr hwnd);
