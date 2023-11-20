@@ -82,6 +82,7 @@ namespace XenAdmin.Controls
 
         protected override void WndProc(ref Message m)
         {
+            //Prevent Redraw background on paint
             if (m.Msg == Win32.WM_ERASEBKGND)
             {
                 m.Result = IntPtr.Zero;
@@ -322,16 +323,17 @@ namespace XenAdmin.Controls
                 {
                     if (selectNode)
                         SelectedNode = node;
-                    
+
                     if (expandNode)
-                    node.Expand();
-                    
+                        node.Expand();
+
                     if (ensureNodeVisible)
-                    node.EnsureVisible();
-                    
+                        node.EnsureVisible();
+
                     return true;
                 }
             }
+
             return false;
         }
 

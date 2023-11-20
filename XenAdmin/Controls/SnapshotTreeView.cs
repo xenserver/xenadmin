@@ -288,7 +288,6 @@ namespace XenAdmin.Controls
             {
                 //This is needed to maximize and minimize properly, there is some issue in the ListView Control
                 Win32.POINT pt = new Win32.POINT();
-                IntPtr hResult = SendMessage(Handle, LVM_GETORIGIN, IntPtr.Zero, ref pt);
 
                 origin = pt;
                 root.InvalidateAll();
@@ -328,12 +327,8 @@ namespace XenAdmin.Controls
                 // Debugger.Break();
             }
         }
-        public const int LVM_GETORIGIN = 0x1000 + 41;
 
         private Win32.POINT origin = new Win32.POINT();
-
-        [DllImport("user32.dll")]
-        internal static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref Win32.POINT pt);
 
         #endregion
 
@@ -379,9 +374,6 @@ namespace XenAdmin.Controls
             }
         }
 
-
-
-
         private const int WS_HSCROLL = 0x100000;
         private const int WS_VSCROLL = 0x200000;
         private const int GWL_STYLE = (-16);
@@ -406,7 +398,6 @@ namespace XenAdmin.Controls
             return (GetWindowLong(ctrl.Handle, GWL_STYLE) & WS_HSCROLL) != 0;
         }
 
-
         private void SnapshotTreeView_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
 
@@ -429,34 +420,6 @@ namespace XenAdmin.Controls
                 }
 
             }
-
-        }
-
-        public void DrawRoundRect(Graphics g, Brush b, float x, float y, float width, float height, float radius)
-        {
-
-            GraphicsPath gp = new GraphicsPath();
-
-            gp.AddLine(x + radius, y, x + width - (radius * 2), y); // Line
-
-            gp.AddArc(x + width - (radius * 2), y, radius * 2, radius * 2, 270, 90); // Corner
-
-            gp.AddLine(x + width, y + radius, x + width, y + height - (radius * 2)); // Line
-
-            gp.AddArc(x + width - (radius * 2), y + height - (radius * 2), radius * 2, radius * 2, 0, 90); // Corner
-            gp.AddLine(x + width - (radius * 2), y + height, x + radius, y + height); // Line
-
-            gp.AddArc(x, y + height - (radius * 2), radius * 2, radius * 2, 90, 90); // Corner
-
-            gp.AddLine(x, y + height - (radius * 2), x, y + radius); // Line
-
-            gp.AddArc(x, y, radius * 2, radius * 2, 180, 90); // Corner
-
-            gp.CloseFigure();
-
-
-
-            g.FillPath(b, gp);
 
         }
 
@@ -533,8 +496,6 @@ namespace XenAdmin.Controls
                 //Debugger.Break();
             }
         }
-
-
 
         #endregion
 

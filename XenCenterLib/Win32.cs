@@ -55,7 +55,7 @@ namespace XenCenterLib
         /// - Other USER objects (windows, menus) 
         /// 
         [DllImport("User32")]
-        extern public static int GetGuiResources(IntPtr hProcess, int uiFlags);
+        public static extern int GetGuiResources(IntPtr hProcess, int uiFlags);
 
         public static int GetGuiResourcesGDICount(IntPtr processHandle)
         {
@@ -69,7 +69,7 @@ namespace XenCenterLib
 
         public const int TO_UNICODE_BUFFER_SIZE = 64;
         [DllImport("user32.dll")]
-        public extern static int ToUnicode(uint wVirtKey, uint wScanCode, IntPtr lpKeyState,
+        public static extern int ToUnicode(uint wVirtKey, uint wScanCode, IntPtr lpKeyState,
                                            [Out, MarshalAs(UnmanagedType.LPWStr, SizeConst = TO_UNICODE_BUFFER_SIZE)] StringBuilder pwszBuff,
                                            int cchBuff, uint wFlags);
 
@@ -78,137 +78,30 @@ namespace XenCenterLib
         public static extern bool FlushFileBuffers(Microsoft.Win32.SafeHandles.SafeFileHandle hFile);
 
         [DllImport("user32.dll")]
-        public extern static bool GetKeyboardState(IntPtr lpKeyState);
-
-        // So we can flash minimized windows in the taskbar to alert the user.
-        // See http://pinvoke.net/default.aspx/user32.FlashWindowEx and
-        // http://blogs.msdn.com/hippietim/archive/2006/03/28/563094.aspx
-        [DllImport("user32.dll")]
-        public static extern Int32 FlashWindowEx(ref FLASHWINFO pwfi);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct FLASHWINFO
-        {
-            public UInt32 cbSize;
-            public IntPtr hwnd;
-            public UInt32 dwFlags;
-            public UInt32 uCount;
-            public UInt32 dwTimeout;
-        }
-
-        /// <summary>
-        /// Stop flashing. The system restores the window to its original state.
-        /// </summary>
-        public const UInt32 FLASHW_STOP = 0;
-        /// <summary> 
-        /// Flash the window caption.
-        /// </summary>
-        public const UInt32 FLASHW_CAPTION = 1;
-        /// <summary>
-        /// Flash the taskbar button.
-        /// </summary>
-        public const UInt32 FLASHW_TRAY = 2;
-        /// <summary>
-        /// Flash both the window caption and taskbar button = FLASHW_CAPTION | FLASHW_TRAY flags.
-        /// </summary>
-        public const UInt32 FLASHW_ALL = FLASHW_CAPTION | FLASHW_TRAY;
-        /// <summary>
-        /// Flash continuously, until the FLASHW_STOP flag is set.
-        /// </summary>
-        public const UInt32 FLASHW_TIMER = 4;
-        /// <summary>
-        /// Flash continuously until the window comes to the foreground.
-        /// </summary>
-        public const UInt32 FLASHW_TIMERNOFG = 12;
-
-        /// <summary>
-        /// Flash the taskbar button for the given window.
-        /// </summary>
-        public static void FlashTaskbar(IntPtr hwnd)
-        {
-            FLASHWINFO fwi = new FLASHWINFO();
-            fwi.cbSize = (UInt32)Marshal.SizeOf(typeof(FLASHWINFO));
-            fwi.dwFlags = FLASHW_TRAY;
-            fwi.dwTimeout = 0; // The default, which is the caret blink rate
-            fwi.uCount = 3;
-            fwi.hwnd = hwnd;
-            FlashWindowEx(ref fwi);
-        }
-
-        /// <summary>
-        /// Stop the given window flashing.
-        /// </summary>
-        public static void StopFlashing(IntPtr hwnd)
-        {
-            FLASHWINFO fwi = new FLASHWINFO();
-            fwi.cbSize = (UInt32)Marshal.SizeOf(typeof(FLASHWINFO));
-            fwi.dwFlags = FLASHW_STOP;
-            fwi.dwTimeout = 0;
-            fwi.uCount = 0;
-            fwi.hwnd = hwnd;
-            FlashWindowEx(ref fwi);
-        }
-
-        [DllImport("user32.dll")]
-        public extern static IntPtr GetClipboardViewer();
+        public static extern bool GetKeyboardState(IntPtr lpKeyState);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public extern static IntPtr SetClipboardViewer(IntPtr hWnd);
+        public static extern IntPtr SetClipboardViewer(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public extern static bool ChangeClipboardChain(IntPtr hWnd, IntPtr hWndNext);
+        public static extern bool ChangeClipboardChain(IntPtr hWnd, IntPtr hWndNext);
 
         /// <summary>
         /// There is not enough space on the disk. See winerror.h.
         /// </summary>
-        public const UInt32 ERROR_DISK_FULL = 112;
-
-        public const int CBN_CLOSEUP = 8;
-        public const int EN_KILLFOCUS = 512;
+        public const uint ERROR_DISK_FULL = 112;
 
         public const int WM_DESTROY = 2;
-        public const int WM_ACTIVATE = 6;
-        /// <summary>
-        /// Sent when a control gains focus: see VNCGraphicsClient.
-        /// </summary>
-        public const int WM_SETFOCUS = 7;
-        public const int WM_GETTEXT = 13;
-        public const int WM_GETTEXTLENGTH = 14;
-        public const int WM_PAINT = 15;
-        /// <summary>
-        /// Prevent Redraw background on paint
-        /// </summary>
         public const int WM_ERASEBKGND = 20;
-        public const int WM_ACTIVATEAPP = 28;
-        public const int WM_SETCURSOR = 32;
-        public const int WM_MOUSEACTIVATE = 33;
-        public const int WM_WINDOWPOSCHANGING = 70;
-        public const int WM_WINDOWPOSCHANGED = 71;
         public const int WM_NOTIFY = 78;
-        public const int WM_NCHITTEST = 132;
-        public const int WM_NCPAINT = 133;
-        public const int WM_NCACTIVATE = 134;
-        public const int WM_TIMER = 275;
         public const int WM_VSCROLL = 277;
 
         public const int WM_KEYDOWN = 0x100;
-        public const int WM_KEYUP = 0x101;
 
         // Mouse Hooks
-        public const int HC_ACTION = 0;
-        public const int WH_MOUSE_LL = 14;
-        public const int WM_MOUSEMOVE = 0x200;
         public const int WM_LBUTTONDOWN = 0x201;
-        public const int WM_LBUTTONUP = 0x202;
         public const int WM_LBUTTONDBLCLK = 0x203;
-        public const int WM_RBUTTONDOWN = 0x204;
-        public const int WM_RBUTTONUP = 0x205;
-        public const int WM_RBUTTONDBLCLK = 0x206;
-        public const int WM_MBUTTONDOWN = 0x207;
-        public const int WM_MBUTTONUP = 0x208;
-        public const int WM_MBUTTONDBLCLK = 0x209;
         public const int WM_MOUSEWHEEL = 0x20A;
-        public const int WM_MOUSEHWHEEL = 0x20E;
         public const int WM_SYSKEYDOWN = 0x104;
 
         public const int WM_PARENTNOTIFY = 0x210;
@@ -223,25 +116,17 @@ namespace XenCenterLib
 
         public const int WM_HSCROLL = 0x114;
 
-        public const int OCM_DRAWITEM = 8235;
-        public const int OCM_NOTIFY = 8270;
-
         public const int OFN_ENABLEHOOK = 0x00000020;
         public const int OFN_EXPLORER = 0x00080000;
-        public const int OFN_FILEMUSTEXIST = 0x00001000;
         public const int OFN_HIDEREADONLY = 0x00000004;
-        public const int OFN_CREATEPROMPT = 0x00002000;
         public const int OFN_NOTESTFILECREATE = 0x00010000;
         public const int OFN_OVERWRITEPROMPT = 0x00000002;
         public const int OFN_PATHMUSTEXIST = 0x00000800;
         public const int OFN_SHOWHELP = 0x00000010;
 
-        public const int SWP_NOSIZE = 0x0001;
-        public const int SWP_NOMOVE = 0x0002;
         public const int SWP_NOZORDER = 0x0004;
 
         public const int BS_AUTOCHECKBOX = 0x0003;
-        public const int BS_PUSHBUTTON = 0x0000;
 
         public const int BM_SETCHECK = 0x00f1;
         public const int BM_GETCHECK = 0x00f0;
@@ -287,9 +172,6 @@ namespace XenCenterLib
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetParent(IntPtr hWnd);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern bool SetWindowText(int hWnd, string lpString);
 
         [DllImport("user32.dll")]
         public static extern bool DestroyWindow(IntPtr hwnd);
@@ -378,12 +260,6 @@ namespace XenCenterLib
             return msg.ToString();
         }
 
-        public delegate bool EnumUILanguagesProc(string lpUILanguageString, IntPtr lParam);
-
-        [DllImport("kernel32.dll")]
-        public static extern bool EnumUILanguages(EnumUILanguagesProc pUILanguageEnumProc,
-           uint dwFlags, IntPtr lParam);
-
         [DllImport("user32.dll")]
         public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
 
@@ -465,15 +341,6 @@ namespace XenCenterLib
             SB_BOTH = 3
         }
 
-        public enum ScrollState
-        {
-            AutoScrolling = 0x0001,
-            HScrollVisible = 0x0002,
-            VScrollVisible = 0x0004,
-            UserHasScrolled = 0x0008,
-            FullDrag = 0x0010
-        }
-
         /// <summary>
         /// See http://msdn2.microsoft.com/en-us/library/e14hhbe6(VS.80).aspx
         /// </summary>
@@ -487,18 +354,8 @@ namespace XenCenterLib
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetScrollInfo(IntPtr hWnd, int n, ref ScrollInfo lpScrollInfo);
 
-        [DllImport("user32.dll")]
-        public static extern int SetScrollInfo(IntPtr hwnd, int fnBar, [In] ref ScrollInfo lpsi, bool fRedraw);
-
         #endregion
 
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
-        [return: MarshalAs(UnmanagedType.Bool)]
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-        
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll")] 
         public static extern bool PostMessageA(IntPtr hWnd, int nBar, int wParam, int lParam);
@@ -535,8 +392,6 @@ namespace XenCenterLib
             }
         }
 
-        public const int CP_NOCLOSE_BUTTON = 0x200;
-
         public const int GWL_WNDPROC = -4;
 
         public delegate IntPtr WndProcDelegate(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
@@ -563,10 +418,10 @@ namespace XenCenterLib
         public static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public extern static bool QueryPerformanceCounter(out long x);
+        public static extern bool QueryPerformanceCounter(out long x);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public extern static bool QueryPerformanceFrequency(out long x);
+        public static extern bool QueryPerformanceFrequency(out long x);
 
         public delegate IntPtr OFNHookProcDelegate(IntPtr hdlg, int msg, IntPtr wParam, IntPtr lParam);
 
@@ -614,18 +469,6 @@ namespace XenCenterLib
         public static extern int CommDlgExtendedError();
 
         /// <summary>
-        /// Extended message header for WM_NOTIFY
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        public struct NMHEADER
-        {
-            public NMHDR hdr;
-            public int iItem;
-            public int iButton;
-            public IntPtr pitem;
-        }
-
-        /// <summary>
         /// message header for WM_NOTIFY
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
@@ -634,14 +477,6 @@ namespace XenCenterLib
             public IntPtr HwndFrom;
             public IntPtr IdFrom;
             public int code;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct NMUPDOWN
-        {
-            public NMHDR hdr;
-            public int pos;
-            public int delta;
         }
 
         public const int S_OK = unchecked((int)0x00000000);
