@@ -30,13 +30,12 @@
 
 using System;
 using System.Collections.Generic;
-using XenAPI;
-using XenAdmin.Dialogs;
-using XenAdmin.Core;
+using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenCenterLib;
-using System.IO;
+using XenAdmin.Core;
+using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -111,23 +110,27 @@ namespace XenAdmin.Commands
 
                     // CA-12975: Warn the user if the export operation does not have enough disk space to
                     // complete.  This is an approximation only.
-                    Win32.DiskSpaceInfo diskSpaceInfo = null;
+
+                    ulong freeSpace;
+                    bool isFAT;
                     try
                     {
-                        diskSpaceInfo = Win32.GetDiskSpaceInfo(filename);
+                        string driveLetter = Path.GetPathRoot(filename).TrimEnd('\\');
+                        var o = new System.Management.ManagementObject($"Win32_LogicalDisk.DeviceID=\"{driveLetter}\"");
+
+                        string fsType = o.Properties["FileSystem"].Value.ToString();
+                        isFAT = fsType == "FAT" || fsType == "FAT32";
+                        
+                        freeSpace = ulong.Parse(o.Properties["FreeSpace"].Value.ToString());
                     }
                     catch (Exception exn)
                     {
                         log.Warn(exn, exn);
-                    }
 
-                    if (diskSpaceInfo == null)
-                    {
                         // Could not determine free disk space. Carry on regardless.
                         break;
                     }
 
-                    ulong freeSpace = diskSpaceInfo.FreeBytesAvailable;
                     ulong neededSpace = vm.GetTotalSize();
                     ulong spaceLeft = 100 * Util.BINARY_MEGA; // We want the user to be left with some disk space afterwards
 
@@ -137,7 +140,7 @@ namespace XenAdmin.Commands
                     );
 
                     (Func<bool> check, string msg) c2 = (
-                        () => diskSpaceInfo.IsFAT && neededSpace > 4 * Util.BINARY_GIGA - 1,
+                        () => isFAT && neededSpace > 4 * Util.BINARY_GIGA - 1,
                         string.Format(Messages.CONFIRM_EXPORT_FAT, Util.DiskSizeString(neededSpace), Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name())
                     );
 

@@ -508,36 +508,6 @@ namespace XenCenterLib
         [DllImport("Kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool GetDiskFreeSpaceEx(string lpszPath, ref long lpFreeBytesAvailable, ref long lpTotalNumberOfBytes, ref long lpTotalNumberOfFreeBytes);
 
-        /// <summary>
-        /// Will return null if the disk parameters could not be determined.
-        /// </summary>
-        /// <param name="path">An absolute path</param>
-        /// <exception cref="Exception">May be thrown</exception>>
-        public static DiskSpaceInfo GetDiskSpaceInfo(string path)
-        {
-            string DriveLetter = Path.GetPathRoot(path).TrimEnd('\\');
-            var o = new System.Management.ManagementObject($"Win32_LogicalDisk.DeviceID=\"{DriveLetter}\"");
-            string fsType = o.Properties["FileSystem"].Value.ToString();
-            bool isFAT = (fsType == "FAT" || fsType == "FAT32");
-            UInt64 freeBytes = UInt64.Parse(o.Properties["FreeSpace"].Value.ToString());
-            UInt64 totalBytes = UInt64.Parse(o.Properties["Size"].Value.ToString());
-            return new DiskSpaceInfo(freeBytes, totalBytes, isFAT);
-        }
-
-        public class DiskSpaceInfo
-        {
-            public readonly UInt64 FreeBytesAvailable;
-            public readonly UInt64 TotalBytes;
-            public readonly bool IsFAT;
-
-            public DiskSpaceInfo(UInt64 freeBytesAvailable, UInt64 totalBytes, bool isFAT)
-            {
-                FreeBytesAvailable = freeBytesAvailable;
-                TotalBytes = totalBytes;
-                IsFAT = isFAT;
-            }
-        }
-
         public const int CP_NOCLOSE_BUTTON = 0x200;
 
         public const int GWL_WNDPROC = -4;
