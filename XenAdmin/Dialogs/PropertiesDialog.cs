@@ -318,7 +318,8 @@ namespace XenAdmin.Dialogs
                         dialog.ShowDialog(Program.MainWindow);
                     }
                 }
-                if (isPoolOrStandalone)
+                if (isPoolOrStandalone && Helpers.XapiEqualOrGreater_23_18_0(connection)
+                                       && (connection.Session.IsLocalSuperuser || connection.Session.Roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)))
                 {
                     SNMPEditPage = new SnmpEditPage();
                     ShowTab(SNMPEditPage);

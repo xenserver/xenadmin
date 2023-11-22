@@ -38,12 +38,11 @@ namespace XenAdmin.Actions.SNMP
     public class SnmpRetrieveAction : AsyncAction
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly SnmpConfiguration _snmpConfiguration;
+        public SnmpConfiguration SnmpConfiguration { get; private set; } = new SnmpConfiguration();
 
-        public SnmpRetrieveAction(IXenObject xenObject, SnmpConfiguration snmpConfiguration, bool suppressHistory)
+        public SnmpRetrieveAction(IXenObject xenObject, bool suppressHistory)
             : base(xenObject.Connection, Messages.SNMP_ACTION_RETRIEVE, Messages.SNMP_ACTION_RETRIEVE, suppressHistory)
         {
-            _snmpConfiguration = snmpConfiguration;
             if (xenObject is Pool p)
             {
                 Pool = p;
@@ -61,7 +60,7 @@ namespace XenAdmin.Actions.SNMP
 
         protected override void Run()
         {
-            _snmpConfiguration.IsSuccessful = true;
+            SnmpConfiguration.IsSuccessful = true;
             try
             {
                 InitSnmpGeneralConfiguration(Host);
@@ -70,7 +69,7 @@ namespace XenAdmin.Actions.SNMP
             catch (Exception e)
             {
                 Log.ErrorFormat("Run SNMP plugin failed, failed reason: {0}", e.Message);
-                _snmpConfiguration.IsSuccessful = false;
+                SnmpConfiguration.IsSuccessful = false;
             }
         }
 
@@ -82,20 +81,20 @@ namespace XenAdmin.Actions.SNMP
             var resultObj = JsonConvert.DeserializeObject<SnmpConfigurationRes<GetConfigData>>(resultJson);
             if (resultObj == null || resultObj.code != 0)
             {
-                _snmpConfiguration.IsSuccessful = false;
+                SnmpConfiguration.IsSuccessful = false;
                 return;
             }
             var resultData = resultObj.result;
-            _snmpConfiguration.IsSnmpEnabled = resultData.common.enabled == "yes";
-            _snmpConfiguration.IsLogEnabled = resultData.common.debug_log == "yes";
-            _snmpConfiguration.IsV2CEnabled = resultData.snmpd.v2c == "yes";
-            _snmpConfiguration.IsV3Enabled = resultData.snmpd.v3 == "yes";
-            _snmpConfiguration.Community = resultData.snmpd_v2c.community;
-            _snmpConfiguration.UserName = resultData.snmpd_v3.user_name;
-            _snmpConfiguration.AuthPass = resultData.snmpd_v3.authentication_password;
-            _snmpConfiguration.AuthProtocol = resultData.snmpd_v3.authentication_protocol;
-            _snmpConfiguration.PrivacyPass = resultData.snmpd_v3.privacy_password;
-            _snmpConfiguration.PrivacyProtocol = resultData.snmpd_v3.privacy_protocol;
+            SnmpConfiguration.IsSnmpEnabled = resultData.common.enabled == "yes";
+            SnmpConfiguration.IsLogEnabled = resultData.common.debug_log == "yes";
+            SnmpConfiguration.IsV2CEnabled = resultData.snmpd.v2c == "yes";
+            SnmpConfiguration.IsV3Enabled = resultData.snmpd.v3 == "yes";
+            SnmpConfiguration.Community = resultData.snmpd_v2c.community;
+            SnmpConfiguration.UserName = resultData.snmpd_v3.user_name;
+            SnmpConfiguration.AuthPass = resultData.snmpd_v3.authentication_password;
+            SnmpConfiguration.AuthProtocol = resultData.snmpd_v3.authentication_protocol;
+            SnmpConfiguration.PrivacyPass = resultData.snmpd_v3.privacy_password;
+            SnmpConfiguration.PrivacyProtocol = resultData.snmpd_v3.privacy_protocol;
         }
 
         private void InitSnmpServiceStatus(IXenObject o)
@@ -106,11 +105,11 @@ namespace XenAdmin.Actions.SNMP
             var resultObj = JsonConvert.DeserializeObject<SnmpConfigurationRes<GetServiceStatusData>>(resultJson);
             if (resultObj == null || resultObj.code != 0)
             {
-                _snmpConfiguration.IsSuccessful = false;
+                SnmpConfiguration.IsSuccessful = false;
                 return;
             }
             var resultData = resultObj.result;
-            _snmpConfiguration.ServiceStatus = resultData.enabled == "enabled" && resultData.active == "active";
+            SnmpConfiguration.ServiceStatus = resultData.enabled == "enabled" && resultData.active == "active";
         }
     }
 }

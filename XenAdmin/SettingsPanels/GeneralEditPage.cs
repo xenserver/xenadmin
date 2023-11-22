@@ -250,7 +250,6 @@ namespace XenAdmin.SettingsPanels
                 HelpersGUI.ShowBalloonMessage(txtIQN, InvalidParamToolTip, Messages.GENERAL_EDIT_INVALID_IQN);
             }
         }
-
         public void HideLocalValidationMessages()
         {
             if (txtName != null)

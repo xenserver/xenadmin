@@ -32,6 +32,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Actions.SNMP
@@ -40,28 +41,32 @@ namespace XenAdmin.Actions.SNMP
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly SnmpConfiguration _snmpConfiguration;
-        private readonly IXenObject _clone;
 
-        public SnmpUpdateAction(IXenObject host, SnmpConfiguration snmpConfiguration, bool suppressHistory)
-            : base(host.Connection, Messages.SNMP_ACTION_UPDATE, Messages.SNMP_ACTION_UPDATE, suppressHistory)
+        public SnmpUpdateAction(IXenObject xenObject, SnmpConfiguration snmpConfiguration, bool suppressHistory)
+            : base(xenObject.Connection, Messages.SNMP_ACTION_UPDATE, Messages.SNMP_ACTION_UPDATE, suppressHistory)
         {
-            _clone = host;
             _snmpConfiguration = snmpConfiguration;
+            if (xenObject is Pool p)
+            {
+                Pool = p;
+                Host = Helpers.GetCoordinator(p);
+            }
+            else if (xenObject is Host h)
+            {
+                Host = h;
+            }
+            else
+            {
+                throw new ArgumentException($"{nameof(xenObject)} should be host or pool");
+            }
         }
 
         protected override void Run()
         {
             try
             {
-                if (_clone is Host)
-                {
-                    UpdateSnmpConfigurationForHost(_clone);
-                }
-                else
-                {
-                    List<Host> hostList = ((Pool)_clone).Connection.Cache.Hosts.ToList();
-                    hostList.ForEach(UpdateSnmpConfigurationForHost);
-                }
+                var hostList = Pool.Connection.Cache.Hosts.ToList();
+                hostList.ForEach(UpdateSnmpConfigurationForHost);
             }
             catch (Exception e)
             {

@@ -30,13 +30,12 @@
 
 using System;
 using System.Drawing;
-using System.Windows.Forms;
-using XenAPI;
-using XenAdmin.Actions;
-using XenAdmin.Core;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Actions.SNMP;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using XenAdmin.Core;
+using XenAPI;
 
 namespace XenAdmin.SettingsPanels
 {
@@ -45,17 +44,17 @@ namespace XenAdmin.SettingsPanels
         public override string Text => Messages.SNMP;
         public string SubText => Messages.SNMP_EDIT_PAGE_TEXT;
         public Image Image => Images.StaticImages._000_Network_h32bit_16;
-        private ToolTip _invalidParamToolTip = new ToolTip
+        private readonly ToolTip _invalidParamToolTip = new ToolTip
         {
             IsBalloon = true,
-            ToolTipIcon = ToolTipIcon.Warning,
+            ToolTipIcon = ToolTipIcon.Warning
         };
         private string _invalidParamToolTipText = "";
         private static readonly Regex RegexCommon = new Regex(@"^[a-zA-Z0-9-.\#@=:_]{6,32}$");
         private static readonly Regex RegexEncryptTextBox = new Regex(@"^([a-zA-Z0-9-.\#@=:_]{8,32}|[*]{8})$");
-        private static bool _encryptTextBoxFlag = false;
+        private bool _encryptTextBoxFlag;
         private IXenObject _clone;
-        private readonly SnmpConfiguration _snmpConfiguration = new SnmpConfiguration();
+        private SnmpConfiguration _snmpConfiguration = new SnmpConfiguration();
         private readonly SnmpConfiguration _snmpCurrentConfiguration = new SnmpConfiguration();
 
         public bool HasChanged
@@ -71,14 +70,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                _invalidParamToolTip.Dispose();
-                _invalidParamToolTip = new ToolTip
-                {
-                    IsBalloon = true,
-                    ToolTipIcon = ToolTipIcon.Warning,
-                };
                 _invalidParamToolTipText = " ";
-
                 if (!EnableSnmpCheckBox.Checked)
                 {
                     return true;
@@ -159,18 +151,27 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
+        public AsyncAction SaveSettings()
+        {
+            return new SnmpUpdateAction(_clone, _snmpCurrentConfiguration, true);
+        }
+
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             _clone = clone;
             UpdateAllComponents(false);
-            var action = new SnmpRetrieveAction(_clone, _snmpConfiguration, true);
+            var action = new SnmpRetrieveAction(_clone, true);
             action.Completed += ActionCompleted;
             action.RunAsync();
         }
 
         private void ActionCompleted(ActionBase sender)
         {
-            Program.Invoke(this.Parent, UpdateRetrieveStatus);
+            if (sender is SnmpRetrieveAction a && a.Succeeded)
+            {
+                _snmpConfiguration = a.SnmpConfiguration;
+                Program.Invoke(this.Parent, UpdateRetrieveStatus);
+            }
         }
 
         private void UpdateRetrieveStatus()
@@ -219,11 +220,6 @@ namespace XenAdmin.SettingsPanels
             _snmpCurrentConfiguration.AuthProtocol = AuthenticationProtocolComboBox.Text;
             _snmpCurrentConfiguration.PrivacyPass = PrivacyPasswordTextBox.Text;
             _snmpCurrentConfiguration.PrivacyProtocol = PrivacyProtocolComboBox.Text;
-        }
-
-        public AsyncAction SaveSettings()
-        {
-            return new SnmpUpdateAction(_clone, _snmpCurrentConfiguration, true);
         }
 
         private void UpdateAllComponents(bool status)
