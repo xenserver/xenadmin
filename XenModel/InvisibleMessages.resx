@@ -123,6 +123,12 @@
   <data name="CLIENT_ID_URL" xml:space="preserve">
     <value>https://support.citrix.com/xencenterclientiddownload</value>
   </data>
+  <data name="CONVERSION_DOC_PATH_82" xml:space="preserve">
+    <value>https://docs.xenserver.com/en-us/xencenter/8-2/conversion-manager.html#citrix-hypervisor-environment-considerations</value>
+  </data>
+  <data name="CONVERSION_DOC_PATH_LATEST" xml:space="preserve">
+    <value>https://docs.xenserver.com/en-us/xencenter/current-release/conversion-manager.html#xenserver-environment-considerations</value>
+  </data>
   <data name="CSS_URL" xml:space="preserve">
     <value>https://www.citrix.com/support/programs/</value>
   </data>

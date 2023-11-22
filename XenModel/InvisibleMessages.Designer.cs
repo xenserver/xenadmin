@@ -79,6 +79,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xencenter/8-2/conversion-manager.html#citrix-hypervisor-environment-considerations.
+        /// </summary>
+        public static string CONVERSION_DOC_PATH_82 {
+            get {
+                return ResourceManager.GetString("CONVERSION_DOC_PATH_82", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xencenter/current-release/conversion-manager.html#xenserver-environment-considerations.
+        /// </summary>
+        public static string CONVERSION_DOC_PATH_LATEST {
+            get {
+                return ResourceManager.GetString("CONVERSION_DOC_PATH_LATEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/support/programs/.
         /// </summary>
         public static string CSS_URL {

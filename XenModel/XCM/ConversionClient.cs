@@ -40,6 +40,7 @@ namespace XenAdmin.XCM
     {
         private readonly IConversionProxy _conversionProxy;
         private readonly NetworkCredential _credential;
+        private string _vpxVersion;
 
         public ConversionClient(IXenConnection connection, string vpxIp, bool useSsl)
         {
@@ -63,7 +64,7 @@ namespace XenAdmin.XCM
 
         public string GetVpxVersion()
         {
-            return _conversionProxy.GetVpxVersion();
+            return _vpxVersion ?? (_vpxVersion = _conversionProxy.GetVpxVersion());
         }
 
         public VmInstance[] GetSourceVMs(ServerInfo vmWareServer)

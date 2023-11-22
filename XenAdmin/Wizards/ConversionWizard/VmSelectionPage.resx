@@ -212,7 +212,7 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>518, 268</value>
   </data>
   <data name="dataGridViewVms.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;dataGridViewVms.Name" xml:space="preserve">
     <value>dataGridViewVms</value>
@@ -242,7 +242,7 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>75, 23</value>
   </data>
   <data name="buttonSelectAll.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="buttonSelectAll.Text" xml:space="preserve">
     <value>&amp;Select All</value>
@@ -266,7 +266,7 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>75, 23</value>
   </data>
   <data name="buttonClearAll.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="buttonClearAll.Text" xml:space="preserve">
     <value>&amp;Clear All</value>
@@ -290,7 +290,7 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>75, 23</value>
   </data>
   <data name="buttonRefresh.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="buttonRefresh.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
@@ -350,28 +350,22 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>2</value>
   </data>
   <data name="supportedOSLinkLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+    <value>Left</value>
   </data>
   <data name="supportedOSLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="supportedOSLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 0</value>
-  </data>
-  <data name="supportedOSLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>286, 5</value>
   </data>
   <data name="supportedOSLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 20</value>
+    <value>103, 13</value>
   </data>
   <data name="supportedOSLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="supportedOSLinkLabel.Text" xml:space="preserve">
     <value>Supported guest OS</value>
-  </data>
-  <data name="supportedOSLinkLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;supportedOSLinkLabel.Name" xml:space="preserve">
     <value>supportedOSLinkLabel</value>
@@ -386,7 +380,7 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>0</value>
   </data>
   <data name="showOnlySupportedGuestCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+    <value>Left</value>
   </data>
   <data name="showOnlySupportedGuestCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -394,17 +388,14 @@ Note that only VMs that are currently shut down are listed here.</value>
   <data name="showOnlySupportedGuestCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="showOnlySupportedGuestCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 0, 3</value>
-  </data>
   <data name="showOnlySupportedGuestCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 17</value>
   </data>
   <data name="showOnlySupportedGuestCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="showOnlySupportedGuestCheckBox.Text" xml:space="preserve">
-    <value>Show only guest OS supported in the current version.</value>
+    <value>Show only guest &amp;OS supported in the current version.</value>
   </data>
   <data name="&gt;&gt;showOnlySupportedGuestCheckBox.Name" xml:space="preserve">
     <value>showOnlySupportedGuestCheckBox</value>
@@ -575,7 +566,7 @@ Note that only VMs that are currently shut down are listed here.</value>
     <value>0</value>
   </data>
   <data name="tableLayoutPanelVmSelection.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewVms" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="versionTableLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelError" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelDesc" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewVms" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelButtons" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelVersion" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelError" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="_backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

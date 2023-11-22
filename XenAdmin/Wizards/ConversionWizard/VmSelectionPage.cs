@@ -33,6 +33,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.XCM;
 
 
@@ -44,13 +45,13 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         private bool _buttonNextEnabled;
         private bool _updating;
-        private string _currentConversionVersion;
+        private string _currentXSVersion;
+        private bool _supportVersionChecking;
         
 
         public VmSelectionPage()
         {
             InitializeComponent();
-            tableLayoutPanelError.Visible = false;
         }
 
         #region XenTabPage implementation
@@ -68,7 +69,21 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            _currentConversionVersion = ConversionClient.GetVpxVersion();
+            tableLayoutPanelError.Visible = false;
+            _supportVersionChecking = IsSupportGuestVersionChecking();
+            if (_supportVersionChecking)
+            {
+                tableLayoutPanelVersion.Visible = true;
+                columnRemarks.Visible = true;
+                showOnlySupportedGuestCheckBox.Checked = true;
+            }
+            else
+            {
+                tableLayoutPanelVersion.Visible = false;
+                columnRemarks.Visible = false;
+                showOnlySupportedGuestCheckBox.Checked = false;
+            }
+            _currentXSVersion = Helpers.HostProductVersion(Helpers.GetCoordinator(Connection));
             if (direction == PageLoadedDirection.Forward)
                 Build();
         }
@@ -89,7 +104,7 @@ namespace XenAdmin.Wizards.ConversionWizard
             get
             {
                 return (from SourceVmRow row in dataGridViewVms.Rows
-                    where row.IsChecked
+                    where row.IsChecked && row.Visible
                     select row.Vm).ToArray();
             }
         }
@@ -100,7 +115,7 @@ namespace XenAdmin.Wizards.ConversionWizard
             {
                 foreach (SourceVmRow row in dataGridViewVms.Rows)
                 {
-                    if (row.IsChecked)
+                    if (row.Visible && row.IsChecked)
                         return true;
                 }
 
@@ -109,24 +124,17 @@ namespace XenAdmin.Wizards.ConversionWizard
         }
 
         // The feature of unsupported guest version warning is available on 8.3.1
-        private Version LowestGuestCheckingConversionVersion => new Version("8.3.1");
+        private bool IsSupportGuestVersionChecking()
+        {
+            string currentConversionVersion = ConversionClient.GetVpxVersion();
+            return Version.TryParse(currentConversionVersion, out Version result) 
+                   && result.CompareTo(new Version("8.3.1")) >= 0;
+        }
 
         private void Build()
         {
             try
             {
-                if (Version.TryParse(_currentConversionVersion, out Version result) &&
-                    result.CompareTo(LowestGuestCheckingConversionVersion) >= 0)
-                {
-                    tableLayoutPanelVersion.Visible = true;
-                    columnRemarks.Visible = true;
-                }
-                else
-                {
-                    tableLayoutPanelVersion.Visible = false;
-                    columnRemarks.Visible = false;
-                }
-
                 dataGridViewVms.SuspendLayout();
                 dataGridViewVms.Rows.Clear();
 
@@ -140,12 +148,10 @@ namespace XenAdmin.Wizards.ConversionWizard
                         continue;
                     }
 
-                    bool supported = IsSupportedGuest(vm);
-                    if (showOnlySupportedGuestCheckBox.Checked && !supported)
-                    {
-                        continue;
-                    }
-                    dataGridViewVms.Rows.Add(new SourceVmRow(vm, supported));
+                    bool supported = !_supportVersionChecking || IsSupportedGuest(vm);
+                    SourceVmRow row = new SourceVmRow(vm, supported);
+                    dataGridViewVms.Rows.Add(row);
+                    row.Visible = !showOnlySupportedGuestCheckBox.Checked || supported;
                 }
             }
             finally
@@ -158,6 +164,7 @@ namespace XenAdmin.Wizards.ConversionWizard
         private void UpdateButtons()
         {
             _buttonNextEnabled = SelectedVmsExist;
+            UpdateSelectAllAndClearAllButton();
             OnPageUpdated();
         }
 
@@ -174,17 +181,40 @@ namespace XenAdmin.Wizards.ConversionWizard
             finally
             {
                 _updating = false;
-                SupportedVersionCheck();
+                CheckIfExistUnsupportedVersion();
                 UpdateButtons();
             }
         }
 
-        private void SupportedVersionCheck()
+        private void UpdateSelectAllAndClearAllButton()
         {
-            tableLayoutPanelError.Visible = false;
+            int total = 0;
+            int check = 0;
             foreach (SourceVmRow row in dataGridViewVms.Rows)
             {
-                if (row.IsChecked && !row.IsSupportedGuest())
+                if (row.Visible)
+                {
+                    total++;
+                    if (row.IsChecked)
+                    {
+                        check++;
+                    }
+                }
+            }
+            
+            buttonSelectAll.Enabled = total != check;
+            buttonClearAll.Enabled = check != 0;
+        }
+
+        private void CheckIfExistUnsupportedVersion()
+        {
+            if (!_supportVersionChecking)
+            {
+                return;
+            }
+            foreach (SourceVmRow row in dataGridViewVms.Rows)
+            {
+                if (row.Visible && row.IsChecked && !row.IsSupportedGuest())
                 {
                     pictureBoxError.Image = Images.StaticImages._000_Alert2_h32bit_16;
                     labelError.Text = Messages.CONVERSION_UNSUPPORTED_VM_SELECTED_WARNING;
@@ -192,6 +222,7 @@ namespace XenAdmin.Wizards.ConversionWizard
                     return;
                 }
             }
+            tableLayoutPanelError.Visible = false;
         }
 
         private void UpdateComponentEnabledStatusWhenRefresh(bool enabled)
@@ -210,7 +241,7 @@ namespace XenAdmin.Wizards.ConversionWizard
             }
             foreach (string supportedVersion in vm.SupportedXSVersions)
             {
-                if (_currentConversionVersion.StartsWith(supportedVersion))
+                if (_currentXSVersion.StartsWith(supportedVersion))
                 {
                     return true;
                 }
@@ -291,24 +322,44 @@ namespace XenAdmin.Wizards.ConversionWizard
 
             if (e.ColumnIndex != 0 || e.RowIndex < 0 || e.RowIndex >= dataGridViewVms.RowCount)
                 return;
-            SupportedVersionCheck();
+            CheckIfExistUnsupportedVersion();
             UpdateButtons();
         }
 
         private void showOnlySupportedGuestCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData();
+            bool existCheckedUnsupportedGuest = false;
+            foreach (SourceVmRow row in dataGridViewVms.Rows)
+            {
+                if (!row.IsSupportedGuest())
+                {
+                    row.Visible = !showOnlySupportedGuestCheckBox.Checked;
+                    existCheckedUnsupportedGuest = row.IsChecked;
+                }
+            }
+            if (!showOnlySupportedGuestCheckBox.Checked && existCheckedUnsupportedGuest)
+            {
+                pictureBoxError.Image = Images.StaticImages._000_Alert2_h32bit_16;
+                labelError.Text = Messages.CONVERSION_UNSUPPORTED_VM_SELECTED_WARNING;
+                tableLayoutPanelError.Visible = true;
+            }
+            else
+            {
+                tableLayoutPanelError.Visible = false;
+            }
+
+            UpdateButtons();
         }
 
         private void supportedOSLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (_currentConversionVersion.StartsWith("8.2"))
+            if (_currentXSVersion.StartsWith("8.2"))
             {
-                System.Diagnostics.Process.Start(Messages.CONVERSION_DOC_PATH_82);
+                System.Diagnostics.Process.Start(InvisibleMessages.CONVERSION_DOC_PATH_82);
             }
             else
             {
-                System.Diagnostics.Process.Start(Messages.CONVERSION_DOC_PATH_LATEST);
+                System.Diagnostics.Process.Start(InvisibleMessages.CONVERSION_DOC_PATH_LATEST);
             }
         }
 
