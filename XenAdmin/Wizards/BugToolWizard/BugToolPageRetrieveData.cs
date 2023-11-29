@@ -47,7 +47,7 @@ namespace XenAdmin.Wizards.BugToolWizard
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int MAX_DOWNLOADS_PER_CONNECTION = 3;
-        public string OutputFile { get; set; }
+        private bool _packagedReport;
 
         public BugToolPageRetrieveData()
         {
@@ -80,6 +80,8 @@ namespace XenAdmin.Wizards.BugToolWizard
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             _packagedReport = false;
+            buttonOpenLocation.Visible = false;
+
             if (direction == PageLoadedDirection.Forward)
                 return;
 
@@ -97,7 +99,7 @@ namespace XenAdmin.Wizards.BugToolWizard
         public List<Host> SelectedHosts { private get; set; }
         public List<Capability> CapabilityList { private get; set; }
         public string OutputFolder { get; private set; }
-        private bool _packagedReport;
+        public string OutputFile { get; set; }
         #endregion
 
         /// <summary>
@@ -325,10 +327,12 @@ namespace XenAdmin.Wizards.BugToolWizard
                 else if (!failureExists)
                 {
                     labelError.Text = Messages.ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL;
+                    buttonOpenLocation.Visible = true;
                 }
                 else
                 {
                     labelError.Text = Messages.ACTION_SYSTEM_STATUS_COMPILE_PARTIAL;
+                    buttonOpenLocation.Visible = true;
                 }
                 
                 _packagedReport = false;
@@ -395,6 +399,18 @@ namespace XenAdmin.Wizards.BugToolWizard
                 Log.Error($"Error while opening {InvisibleMessages.CIS_URL}.", exception);
                 using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_OPEN_URL, InvisibleMessages.CIS_URL)))
                     dlg.ShowDialog(Program.MainWindow);
+            }
+        }
+
+        private void buttonOpenLocation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("explorer.exe", $"/select, \"{OutputFile}\"");
+            }
+            catch (Exception ex)
+            {
+                Log.Debug(ex);
             }
         }
     }
