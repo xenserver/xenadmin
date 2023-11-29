@@ -53,19 +53,22 @@ namespace XenAdmin.Wizards.BugToolWizard
             this.labelBlurb = new System.Windows.Forms.Label();
             this.linkLabelBlurb = new System.Windows.Forms.LinkLabel();
             this.labelBlurbCis = new System.Windows.Forms.Label();
+            this.buttonOpenLocation = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEx1)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelError, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewEx1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.linkLabelBlurb, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelBlurbCis, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelError
@@ -77,7 +80,6 @@ namespace XenAdmin.Wizards.BugToolWizard
             // progressBar1
             // 
             resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.tableLayoutPanel1.SetColumnSpan(this.progressBar1, 2);
             this.progressBar1.Name = "progressBar1";
             // 
             // dataGridViewEx1
@@ -153,6 +155,21 @@ namespace XenAdmin.Wizards.BugToolWizard
             resources.ApplyResources(this.labelBlurbCis, "labelBlurbCis");
             this.labelBlurbCis.Name = "labelBlurbCis";
             // 
+            // buttonOpenLocation
+            // 
+            resources.ApplyResources(this.buttonOpenLocation, "buttonOpenLocation");
+            this.buttonOpenLocation.Name = "buttonOpenLocation";
+            this.buttonOpenLocation.UseVisualStyleBackColor = true;
+            this.buttonOpenLocation.Click += new System.EventHandler(this.buttonOpenLocation_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.buttonOpenLocation, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.progressBar1, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
             // BugToolPageRetrieveData
             // 
             this.Controls.Add(this.tableLayoutPanel1);
@@ -162,6 +179,7 @@ namespace XenAdmin.Wizards.BugToolWizard
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEx1)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -179,5 +197,7 @@ namespace XenAdmin.Wizards.BugToolWizard
         private System.Windows.Forms.Label labelBlurb;
         private System.Windows.Forms.LinkLabel linkLabelBlurb;
         private System.Windows.Forms.Label labelBlurbCis;
+        private System.Windows.Forms.Button buttonOpenLocation;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
