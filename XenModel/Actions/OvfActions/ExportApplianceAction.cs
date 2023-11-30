@@ -88,6 +88,17 @@ namespace XenAdmin.Actions.OvfActions
 				VM = m_vmsToExport[0];
 		}
 
+        public static RbacMethodList StaticRBACDependencies
+        {
+            get
+            {
+                var list = new RbacMethodList("task.create", "http/get_export_raw_vdi");
+                list.AddRange(Role.CommonTaskApiList);
+                list.AddRange(Role.CommonSessionApiList);
+                return list;
+            }
+        }
+
         protected override void RunCore()
 		{
 			log.Info($"Exporting VMs to package {m_applianceFileName}");

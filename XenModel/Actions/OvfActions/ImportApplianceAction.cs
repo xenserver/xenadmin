@@ -58,6 +58,21 @@ namespace XenAdmin.Actions.OvfActions
 
 		#endregion
 
+        public static RbacMethodList StaticRBACDependencies = new RbacMethodList(
+            "VM.add_to_other_config",
+            "VM.create",
+            "VM.destroy",
+            "VM.hard_shutdown",
+            "VM.remove_from_other_config",
+            "VM.set_HVM_boot_params",
+            "VM.start",
+            "VDI.create",
+            "VDI.destroy",
+            "VBD.create",
+            "VBD.eject",
+            "VIF.create",
+            "Host.call_plugin");
+
         public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
             bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr, bool startAutomatically)
             : base(connection, string.Empty)

@@ -166,7 +166,7 @@ namespace XenAdmin.Wizards.ExportWizard
         {
             var exportAsXva = m_exportAsXva.HasValue && m_exportAsXva.Value;
 
-            var rbacDependencies = exportAsXva ? ExportVmAction.StaticRBACDependencies : ApplianceAction.StaticRBACDependencies;
+            var rbacDependencies = exportAsXva ? ExportVmAction.StaticRBACDependencies : ExportApplianceAction.StaticRBACDependencies;
             var message = exportAsXva ? Messages.RBAC_WARNING_EXPORT_WIZARD_XVA : Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE;
 
             m_pageRbac.SetPermissionChecks(xenConnection,

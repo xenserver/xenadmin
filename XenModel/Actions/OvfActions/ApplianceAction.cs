@@ -41,23 +41,6 @@ namespace XenAdmin.Actions.OvfActions
         private const int SLEEP_TIME = 900;
         private const int MAX_ITERATIONS = 60 * 60 * 24 / SLEEP_TIME * 1000; //iterations in 24h
 
-		/// <summary>
-		/// RBAC dependencies needed to import appliance/export an appliance/import disk image.
-		/// </summary>
-		public static RbacMethodList StaticRBACDependencies = new RbacMethodList("VM.add_to_other_config",
-																				 "VM.create",
-																				 "VM.destroy",
-																				 "VM.hard_shutdown",
-																				 "VM.remove_from_other_config",
-																				 "VM.set_HVM_boot_params",
-																				 "VM.start",
-																				 "VDI.create",
-																				 "VDI.destroy",
-																				 "VBD.create",
-																				 "VBD.eject",
-																				 "VIF.create",
-																				 "Host.call_plugin");
-
 		protected ApplianceAction(IXenConnection connection, string title)
 			: base(connection, title)
 		{

@@ -524,7 +524,7 @@ namespace XenAdmin.Wizards.ImportWizard
                         var check = m_typeOfImport == ImportType.Ovf
                                         ? new WizardRbacCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_APPLIANCE) {Blocking = true}
                                         : new WizardRbacCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_IMAGE) {Blocking = true};
-                        check.AddApiMethods(ApplianceAction.StaticRBACDependencies);
+                        check.AddApiMethods(ImportApplianceAction.StaticRBACDependencies);
                         m_pageRbac.SetPermissionChecks(selectedConnection, check);
 
                         AddAfterPage(m_pageHost, m_pageRbac);
