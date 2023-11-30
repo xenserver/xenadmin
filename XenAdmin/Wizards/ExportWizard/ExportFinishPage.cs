@@ -50,6 +50,8 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		#region Base class (XenTabPage) overrides
 
+        public override string HelpID => ExportAsXva ? "ExportFinishXva" : "ExportFinishOvf";
+
 		/// <summary>
 		/// The pages' label in the (left hand side) wizard progress panel
 		/// </summary>

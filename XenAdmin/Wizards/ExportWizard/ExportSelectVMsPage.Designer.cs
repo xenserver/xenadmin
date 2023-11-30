@@ -30,14 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportSelectVMsPage));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
             this.m_labelIntro = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_buttonSelectAll = new System.Windows.Forms.Button();
             this.m_buttonClearAll = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.m_tlpInfo = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_dataGridView = new System.Windows.Forms.DataGridView();
             this.columnTick = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
@@ -50,29 +46,17 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.m_searchTextBox = new XenAdmin.Controls.SearchTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this._tlpWarning = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.labelWarning = new System.Windows.Forms.Label();
             this.groupBoxSuspended = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelSuspended = new System.Windows.Forms.TableLayoutPanel();
             this.radioButtonDiscardSnapshot = new System.Windows.Forms.RadioButton();
             this.radioButtonIncludeSnapshot = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel2.SuspendLayout();
-            this.m_tlpInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this._tlpWarning.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBoxSuspended.SuspendLayout();
             this.tableLayoutPanelSuspended.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // m_ctrlError
-            // 
-            resources.ApplyResources(this.m_ctrlError, "m_ctrlError");
-            this.m_ctrlError.Name = "m_ctrlError";
             // 
             // m_labelIntro
             // 
@@ -96,34 +80,12 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.m_ctrlError, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.m_labelIntro, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.m_tlpInfo, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.m_dataGridView, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this._tlpWarning, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.groupBoxSuspended, 0, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // m_tlpInfo
-            // 
-            resources.ApplyResources(this.m_tlpInfo, "m_tlpInfo");
-            this.m_tlpInfo.Controls.Add(this.pictureBox1, 0, 0);
-            this.m_tlpInfo.Controls.Add(this.autoHeightLabel1, 1, 0);
-            this.m_tlpInfo.Name = "m_tlpInfo";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
-            // autoHeightLabel1
-            // 
-            resources.ApplyResources(this.autoHeightLabel1, "autoHeightLabel1");
-            this.autoHeightLabel1.Name = "autoHeightLabel1";
             // 
             // m_dataGridView
             // 
@@ -226,25 +188,6 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // _tlpWarning
-            // 
-            resources.ApplyResources(this._tlpWarning, "_tlpWarning");
-            this._tlpWarning.Controls.Add(this.pictureBox2, 0, 0);
-            this._tlpWarning.Controls.Add(this.labelWarning, 1, 0);
-            this._tlpWarning.Name = "_tlpWarning";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
-            // labelWarning
-            // 
-            resources.ApplyResources(this.labelWarning, "labelWarning");
-            this.labelWarning.Name = "labelWarning";
-            // 
             // groupBoxSuspended
             // 
             resources.ApplyResources(this.groupBoxSuspended, "groupBoxSuspended");
@@ -266,12 +209,14 @@
             this.radioButtonDiscardSnapshot.Name = "radioButtonDiscardSnapshot";
             this.radioButtonDiscardSnapshot.TabStop = true;
             this.radioButtonDiscardSnapshot.UseVisualStyleBackColor = true;
+            this.radioButtonDiscardSnapshot.CheckedChanged += new System.EventHandler(this.radioButtonDiscardSnapshot_CheckedChanged);
             // 
             // radioButtonIncludeSnapshot
             // 
             resources.ApplyResources(this.radioButtonIncludeSnapshot, "radioButtonIncludeSnapshot");
             this.radioButtonIncludeSnapshot.Name = "radioButtonIncludeSnapshot";
             this.radioButtonIncludeSnapshot.UseVisualStyleBackColor = true;
+            this.radioButtonIncludeSnapshot.CheckedChanged += new System.EventHandler(this.radioButtonIncludeSnapshot_CheckedChanged);
             // 
             // ExportSelectVMsPage
             // 
@@ -281,17 +226,11 @@
             this.Name = "ExportSelectVMsPage";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.m_tlpInfo.ResumeLayout(false);
-            this.m_tlpInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this._tlpWarning.ResumeLayout(false);
-            this._tlpWarning.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBoxSuspended.ResumeLayout(false);
             this.groupBoxSuspended.PerformLayout();
             this.tableLayoutPanelSuspended.ResumeLayout(false);
@@ -304,13 +243,9 @@
         #endregion
 
         private XenAdmin.Controls.Common.AutoHeightLabel m_labelIntro;
-        private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button m_buttonSelectAll;
         private System.Windows.Forms.Button m_buttonClearAll;
-        private System.Windows.Forms.TableLayoutPanel m_tlpInfo;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
         private System.Windows.Forms.DataGridView m_dataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -323,9 +258,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVapp;
-        private System.Windows.Forms.TableLayoutPanel _tlpWarning;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label labelWarning;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSuspended;
         private System.Windows.Forms.RadioButton radioButtonDiscardSnapshot;
         private System.Windows.Forms.RadioButton radioButtonIncludeSnapshot;

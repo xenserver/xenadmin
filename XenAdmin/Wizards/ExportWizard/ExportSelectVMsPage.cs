@@ -34,11 +34,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Commands;
-using XenAdmin.Controls.Common;
+using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
-using XenAdmin.Controls;
-using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.ExportWizard
@@ -54,9 +52,6 @@ namespace XenAdmin.Wizards.ExportWizard
         public ExportSelectVMsPage()
         {
             InitializeComponent();
-            m_tlpInfo.Visible = false;
-            _tlpWarning.Visible = false;
-            m_ctrlError.HideError();
         }
 
         #region Accessors
@@ -66,17 +61,13 @@ namespace XenAdmin.Wizards.ExportWizard
         /// </summary>
         public List<VM> VMsToExport { get; } = new List<VM>();
 
-        public string ApplianceDirectory { get; set; }
-
         /// <summary>
         /// The items selected on the main window treeview when the wizard was launched.
         /// These determine the VMs selected by default.
         /// </summary>
         public SelectedItemCollection SelectedItems { private get; set; }
 
-        public bool ExportAsXva { private get; set; }
-
-        public bool IncludeMemorySnapshot => ExportAsXva && radioButtonIncludeSnapshot.Checked;
+        public bool IncludeMemorySnapshot => groupBoxSuspended.Enabled && radioButtonIncludeSnapshot.Checked;
 
         #endregion
 
@@ -85,9 +76,7 @@ namespace XenAdmin.Wizards.ExportWizard
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
-        public override string PageTitle => ExportAsXva
-            ? Messages.EXPORT_SELECTVMS_PAGE_TITLE_XVA
-            : Messages.EXPORT_SELECTVMS_PAGE_TITLE_OVF;
+        public override string PageTitle =>  Messages.EXPORT_SELECTVMS_PAGE_TITLE;
 
         /// <summary>
         /// Gets the page's label in the (left hand side) wizard progress panel
@@ -97,7 +86,7 @@ namespace XenAdmin.Wizards.ExportWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID => ExportAsXva ? "SelectVMsXva" : "SelectVMsOvf";
+        public override string HelpID => "SelectVMs";
 
         protected override bool ImplementsIsDirty()
         {
@@ -106,14 +95,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            m_ctrlError.HideError();
             EnableButtons();
-        }
-
-        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
-        {
-            if (direction == PageLoadedDirection.Forward && IsDirty)
-                cancel = !PerformCheck(CheckDiskSizeForTransfer, CheckSpaceRequirements);
         }
 
         public override void PopulatePage()
@@ -132,18 +114,24 @@ namespace XenAdmin.Wizards.ExportWizard
                 if (SelectedItems != null && SelectedItems.FirstIs<VM_appliance>())
                     applianceVMs.AddRange(((VM_appliance)SelectedItems.FirstAsXenObject).VMs);
 
+                var rows = new List<DataGridViewRow>();
+
                 foreach (var vm in Connection.Cache.VMs.Where(vm => IsVmExportable(vm) && MatchesSearchText(vm)))
                 {
                     VM curVm = vm; //closure below
                     bool selected = SelectedItems != null
                                     && (SelectedItems.AsXenObjects().Contains(vm) || applianceVMs.FirstOrDefault(xenref => xenref.opaque_ref == curVm.opaque_ref) != null);
 
-                    m_dataGridView.Rows.Add(new VmRow(vm, selected));
+                    if (vm.power_state == vm_power_state.Suspended)
+                        groupBoxSuspended.Visible = true;
+
+                    rows.Add(new VmRow(vm, selected));
 
                     if (selected)
                         VMsToExport.Add(vm);
                 }
 
+                m_dataGridView.Rows.AddRange(rows.ToArray());
                 m_dataGridView.Sort(columnTick, ListSortDirection.Descending);
             }
             finally
@@ -163,17 +151,6 @@ namespace XenAdmin.Wizards.ExportWizard
         #endregion
 
         #region Private methods
-
-        /// <summary>
-        /// Performs certain checks on the page's input data and shows/hides an error accordingly
-        /// </summary>
-        /// <param name="checks">The checks to perform</param>
-        private bool PerformCheck(params CheckDelegate[] checks)
-        {
-            m_buttonNextEnabled = m_ctrlError.PerformCheck(checks);
-            OnPageUpdated();
-            return m_buttonNextEnabled;
-        }
 
         private bool IsVmExportable(VM vm)
         {
@@ -197,96 +174,12 @@ namespace XenAdmin.Wizards.ExportWizard
             return m_searchTextBox.Matches(vm.Name());
         }
 
-        private bool CheckSpaceRequirements(out string errorMsg)
-        {
-            errorMsg = string.Empty;
-            ulong spaceNeeded = 0;
-
-            foreach (DataGridViewRow row in m_dataGridView.Rows)
-            {
-                if (!(row is VmRow vmRow) || !vmRow.IsTicked)
-                    continue;
-
-                spaceNeeded += vmRow.VmTotalSize;
-
-                if (IncludeMemorySnapshot)
-                {
-                    var vdi = vmRow.Vm.Connection.Resolve(vmRow.Vm.suspend_VDI);
-                    if (vdi != null)
-                        spaceNeeded += (ulong)vdi.virtual_size;
-                }
-            }
-
-            ulong availableSpace = GetFreeSpace(ApplianceDirectory);
-
-            if (spaceNeeded > availableSpace)
-            {
-                errorMsg = string.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH,
-                    Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
-
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool CheckDiskSizeForTransfer(out string errorMsg)
-        {
-            errorMsg = string.Empty;
-            var maxDiskSizeString = Util.DiskSizeString(SR.DISK_MAX_SIZE, 0);
-
-            foreach (VM vm in VMsToExport)
-            {
-                if (!ExportAsXva && vm.GetTotalSize() > SR.DISK_MAX_SIZE)
-                {
-                    errorMsg = string.Format(Messages.EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF, maxDiskSizeString);
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        //TODO: improve method
-        private ulong GetFreeSpace(string drivename)
-        {
-            if (!drivename.EndsWith(@"\"))
-                drivename += @"\";
-
-            long space = 0;
-            long lpTotalNumberOfBytes = 0;
-            long lpTotalNumberOfFreeBytes = 0;
-
-            if (Win32.GetDiskFreeSpaceEx(drivename, ref space, ref lpTotalNumberOfBytes, ref lpTotalNumberOfFreeBytes))
-                return (ulong)space;
-
-            return 0;
-        }
-
         private void EnableButtons()
         {
             var count = VMsToExport.Count;
-            m_tlpInfo.Visible = ExportAsXva && count > 1;
 
-            if (Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) ||
-                !Helpers.XapiEqualOrGreater_22_26_0(Connection) ||
-                !VMsToExport.Any(v => v.VTPMs.Count > 0))
-            {
-                _tlpWarning.Visible = false;
-            }
-            else if (Helpers.XapiEqualOrGreater_23_9_0(Connection))
-            {
-                labelWarning.Text = Messages.VTPM_EXPORT_UNSUPPORTED_FOR_OVF;
-                _tlpWarning.Visible = !ExportAsXva;
-            }
-            else
-            {
-                labelWarning.Text = Messages.VTPM_EXPORT_UNSUPPORTED_FOR_ALL;
-                _tlpWarning.Visible = true;
-            }
-
-            groupBoxSuspended.Visible = ExportAsXva && VMsToExport.Any(v => v.power_state == vm_power_state.Suspended);
-            m_buttonNextEnabled = ExportAsXva ? count == 1 : count > 0;
+            groupBoxSuspended.Enabled = count == 1 && VMsToExport[0].power_state == vm_power_state.Suspended;
+            m_buttonNextEnabled = count > 0;
             m_buttonClearAll.Enabled = count > 0;
             m_buttonSelectAll.Enabled = count < m_dataGridView.RowCount;
             OnPageUpdated();
@@ -415,7 +308,6 @@ namespace XenAdmin.Wizards.ExportWizard
                 }
             }
 
-            m_ctrlError.HideError();
             UpdateCounterLabel();
             IsDirty = true;
             EnableButtons();
@@ -448,6 +340,18 @@ namespace XenAdmin.Wizards.ExportWizard
                 return;//in all other cases it should be handled automatically
 
             e.Handled = true;
+        }
+
+        private void radioButtonDiscardSnapshot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDiscardSnapshot.Checked)
+                IsDirty = true;
+        }
+
+        private void radioButtonIncludeSnapshot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonIncludeSnapshot.Checked)
+                IsDirty = true;
         }
 
         #endregion

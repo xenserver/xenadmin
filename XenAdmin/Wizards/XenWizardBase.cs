@@ -43,6 +43,7 @@ namespace XenAdmin.Wizards
     public partial class XenWizardBase : Form, IFormWithHelp
     {
         private IXenConnection connection; // connection to use
+        private bool wizardFinished;
 
         protected IXenConnection xenConnection
         {
@@ -74,20 +75,12 @@ namespace XenAdmin.Wizards
         }
 
         /// <summary>
-        /// Add a given page to the end of the wizard's page collection
+        /// Insert a page into the wizard's page collection at the specified index.
+        /// If the index is not specified, the page is added at the end.
         /// </summary>
         /// <param name="page">The page to add</param>
-        protected void AddPage(XenTabPage page)
-        {
-            AddPage(page, -1);
-        }
-
-        /// <summary>
-        /// Insert a page into the wizard's page collection at the specified index
-        /// </summary>
-        /// <param name="page">The page to add</param>
-        /// <param name="index">The index at which the page will be inserted</param>
-        protected void AddPage(XenTabPage page, int index)
+        /// <param name="index">The index at which the page will be inserted.</param>
+        protected void AddPage(XenTabPage page, int index = -1)
         {
             xenTabControlBody.Controls.Add(page);
             page.Dock = DockStyle.Fill;
@@ -243,8 +236,6 @@ namespace XenAdmin.Wizards
             wizardProgress.CurrentStepTabPage.PageCancelled(ref cancel);
             DialogResult = DialogResult.Cancel;
         }
-
-        bool wizardFinished = false;
 
         protected virtual void FinishWizard()
         {

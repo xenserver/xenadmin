@@ -5905,12 +5905,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_PERMISSIONS" xml:space="preserve">
     <value>You do not have write permission on the destination directory.</value>
   </data>
-  <data name="EXPORT_APPLIANCE_PAGE_FORMAT_OVFOVA" xml:space="preserve">
-    <value>OVF/OVA Package (*.ovf, *.ova)</value>
-  </data>
-  <data name="EXPORT_APPLIANCE_PAGE_FORMAT_XVA" xml:space="preserve">
-    <value>XVA File (*.xva)</value>
-  </data>
   <data name="EXPORT_APPLIANCE_PAGE_TEXT" xml:space="preserve">
     <value>Export File Details</value>
   </data>
@@ -5922,6 +5916,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
     <value>VMs with disks greater than {0} cannot be exported as an OVF/OVA package.</value>
+  </data>
+  <data name="EXPORT_ERROR_INCLUDES_SNAPSHOT" xml:space="preserve">
+    <value>A single VM that includes the memory snapshot cannot be exported as an OVF/OVA package.</value>
   </data>
   <data name="EXPORT_EULA_PAGE_FILE_LIMIT_WARNING" xml:space="preserve">
     <value>The maximum number of EULAs that can be included in the appliance is {0}. Selected EULA documents exceeding this number will not be added to the appliance. Click OK to proceed or Cancel to go back and change you selection.</value>
@@ -5977,11 +5974,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_SELECTVMS_PAGE_TEXT" xml:space="preserve">
     <value>Virtual Machines</value>
   </data>
-  <data name="EXPORT_SELECTVMS_PAGE_TITLE_OVF" xml:space="preserve">
-    <value>Confirm which VMs to include in the OVF/OVA package</value>
-  </data>
-  <data name="EXPORT_SELECTVMS_PAGE_TITLE_XVA" xml:space="preserve">
-    <value>Confirm which VM to export</value>
+  <data name="EXPORT_SELECTVMS_PAGE_TITLE" xml:space="preserve">
+    <value>Confirm which VMs to export</value>
   </data>
   <data name="EXPORT_SNAPSHOT_AS_TEMPLATE_MENU_ITEM" xml:space="preserve">
     <value>&amp;Export Snapshot As Template...</value>

@@ -16835,24 +16835,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OVF/OVA Package (*.ovf, *.ova).
-        /// </summary>
-        public static string EXPORT_APPLIANCE_PAGE_FORMAT_OVFOVA {
-            get {
-                return ResourceManager.GetString("EXPORT_APPLIANCE_PAGE_FORMAT_OVFOVA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XVA File (*.xva).
-        /// </summary>
-        public static string EXPORT_APPLIANCE_PAGE_FORMAT_XVA {
-            get {
-                return ResourceManager.GetString("EXPORT_APPLIANCE_PAGE_FORMAT_XVA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Export File Details.
         /// </summary>
         public static string EXPORT_APPLIANCE_PAGE_TEXT {
@@ -16885,6 +16867,15 @@ namespace XenAdmin {
         public static string EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF {
             get {
                 return ResourceManager.GetString("EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A single VM that includes the memory snapshot cannot be exported as an OVF/OVA package..
+        /// </summary>
+        public static string EXPORT_ERROR_INCLUDES_SNAPSHOT {
+            get {
+                return ResourceManager.GetString("EXPORT_ERROR_INCLUDES_SNAPSHOT", resourceCulture);
             }
         }
         
@@ -17051,20 +17042,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm which VMs to include in the OVF/OVA package.
+        ///   Looks up a localized string similar to Confirm which VMs to export.
         /// </summary>
-        public static string EXPORT_SELECTVMS_PAGE_TITLE_OVF {
+        public static string EXPORT_SELECTVMS_PAGE_TITLE {
             get {
-                return ResourceManager.GetString("EXPORT_SELECTVMS_PAGE_TITLE_OVF", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Confirm which VM to export.
-        /// </summary>
-        public static string EXPORT_SELECTVMS_PAGE_TITLE_XVA {
-            get {
-                return ResourceManager.GetString("EXPORT_SELECTVMS_PAGE_TITLE_XVA", resourceCulture);
+                return ResourceManager.GetString("EXPORT_SELECTVMS_PAGE_TITLE", resourceCulture);
             }
         }
         

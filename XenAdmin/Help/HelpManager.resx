@@ -435,8 +435,11 @@
   <data name="EventsPane" xml:space="preserve">
     <value>troubleshooting-eventlog</value>
   </data>
-  <data name="ExportApplianceWizard_AppliancePane" xml:space="preserve">
+  <data name="ExportApplianceWizard_ApplianceOvfPane" xml:space="preserve">
     <value>vms-export-ovf</value>
+  </data>
+  <data name="ExportApplianceWizard_ApplianceXvaPane" xml:space="preserve">
+    <value>vms-export</value>
   </data>
   <data name="ExportApplianceWizard_ExportEulaPane" xml:space="preserve">
     <value>vms-export-ovf</value>
@@ -448,7 +451,7 @@
     <value>vms-export</value>
   </data>
   <data name="ExportApplianceWizard_ExportOptionsPane" xml:space="preserve">
-    <value>vms-exportimport-about</value>
+    <value>vms-export-ovf</value>
   </data>
   <data name="ExportApplianceWizard_RbacExportOvfPane" xml:space="preserve">
     <value>vms-export-ovf</value>
@@ -456,11 +459,8 @@
   <data name="ExportApplianceWizard_RbacExportXvaPane" xml:space="preserve">
     <value>vms-export</value>
   </data>
-  <data name="ExportApplianceWizard_SelectVMsOvfPane" xml:space="preserve">
-    <value>vms-export-ovf</value>
-  </data>
-  <data name="ExportApplianceWizard_SelectVMsXvaPane" xml:space="preserve">
-    <value>vms-export</value>
+  <data name="ExportApplianceWizard_SelectVMsPane" xml:space="preserve">
+    <value>vms-exportimport</value>
   </data>
   <data name="ExportVMDialog" xml:space="preserve">
     <value>vms-export</value>

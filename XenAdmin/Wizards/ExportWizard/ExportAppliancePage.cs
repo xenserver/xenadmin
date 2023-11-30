@@ -29,11 +29,15 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
+using XenAdmin.Core;
 using XenAdmin.Wizards.ExportWizard.ApplianceChecks;
+using XenAPI;
 using XenCenterLib;
 using XenModel;
 
@@ -45,12 +49,19 @@ namespace XenAdmin.Wizards.ExportWizard
 	/// </summary>
 	internal partial class ExportAppliancePage : XenTabPage
 	{
-        private bool m_buttonNextEnabled;
-
 		public ExportAppliancePage()
 		{
 			InitializeComponent();
-		    m_ctrlError.HideError();
+            try
+            {
+                m_textBoxFolderName.Text = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
+            }
+            catch
+            {
+                //ignore
+            }
+
+            m_ctrlError.HideError();
 		}
 
 		#region Accessors
@@ -60,27 +71,18 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// this property is used to deduce space requirements on the target drive before the wizard closes
 		/// and the appliance folder is only created once the wizard finishes.
 		/// </summary>
-		public string ApplianceDirectory { get { return m_textBoxFolderName.Text.Trim(); } }
+		public string ApplianceDirectory => m_textBoxFolderName.Text.Trim();
 
 		/// <summary>
 		/// Gets or sets the exported appliance name (ovf/ova filename without extension).
 		/// </summary>
-		public string ApplianceFileName
-		{
-			get { return m_textBoxApplianceName.Text.Trim(); }
-			set { m_textBoxApplianceName.Text = value; }
-		}
+        public string ApplianceFileName => m_textBoxApplianceName.Text.Trim();
 
-		public bool ExportAsXva
-		{
-			get
-			{
-				var selectedItem = m_comboBoxFormat.SelectedItem as ToStringWrapper<bool>;
-				return selectedItem == null ? false : selectedItem.item;
-			}
-		}
+        public bool ExportAsXva => radioButtonXva.Checked;
 
-		public bool OvfModeOnly { private get; set; }
+        public List<VM> VMsToExport { private get; set; }
+
+        public bool IncludeMemorySnapshot { private get; set; }
 
 		#endregion
 
@@ -89,31 +91,22 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// Gets the page's title (headline)
 		/// </summary>
-		public override string PageTitle { get { return Messages.EXPORT_APPLIANCE_PAGE_TITLE; } }
+        public override string PageTitle => Messages.EXPORT_APPLIANCE_PAGE_TITLE;
 
 		/// <summary>
 		/// Gets the page's label in the (left hand side) wizard progress panel
 		/// </summary>
-		public override string Text { get { return Messages.EXPORT_APPLIANCE_PAGE_TEXT; } }
+        public override string Text => Messages.EXPORT_APPLIANCE_PAGE_TEXT;
 
 		/// <summary>
 		/// Gets the value by which the help files section for this page is identified
 		/// </summary>
-		public override string HelpID { get { return "Appliance"; } }
+        public override string HelpID => ExportAsXva ? "ApplianceXva" : "ApplianceOvf";
 
         protected override bool ImplementsIsDirty()
         {
             return true;
         }
-
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-		{
-            if (direction == PageLoadedDirection.Forward)
-            {
-                m_textBoxFolderName.Text = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
-                PerformCheck(CheckPathValid);
-            }
-		}
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
@@ -121,65 +114,107 @@ namespace XenAdmin.Wizards.ExportWizard
 			{
 				m_textBoxFolderName.Text = m_textBoxFolderName.Text.Trim();
 				m_textBoxApplianceName.Text = m_textBoxApplianceName.Text.Trim();
-                cancel = !PerformCheck(CheckDestinationFolderExists, CheckApplianceExists, CheckPermissions);
+                cancel = !m_ctrlError.PerformCheck(CheckPathValid, CheckDestinationFolderExists, CheckApplianceExists, CheckPermissions, CheckSpaceRequirements);
+                OnPageUpdated();
 			}
 		}
 
         public override void PopulatePage()
-		{
-			m_comboBoxFormat.Items.Clear();
-			var ovfItem = new ToStringWrapper<bool>(false, Messages.EXPORT_APPLIANCE_PAGE_FORMAT_OVFOVA);
-			var xvaItem = new ToStringWrapper<bool>(true, Messages.EXPORT_APPLIANCE_PAGE_FORMAT_XVA);
+        {
+            m_ctrlError.HideError();
 
-			if (OvfModeOnly)
-				m_comboBoxFormat.Items.Add(ovfItem);
-			else
-				m_comboBoxFormat.Items.AddRange(new[] {ovfItem, xvaItem});
+            var bigDiskExists = BigDiskExists();
+            var bigDiskMsg = string.Format(Messages.EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF,
+                Util.DiskSizeString(SR.DISK_MAX_SIZE, 0));
 
-			m_comboBoxFormat.SelectedItem = ovfItem;
-		}
+            if (VMsToExport.Count == 1)
+            {
+                m_textBoxApplianceName.Text = VMsToExport[0].Name();
+                
+                radioButtonXva.Enabled = radioButtonXva.Checked = true;
+                radioButtonOvf.Enabled = !IncludeMemorySnapshot && !bigDiskExists;
+
+                if (IncludeMemorySnapshot)
+                    labelOvf.Text = Messages.EXPORT_ERROR_INCLUDES_SNAPSHOT;
+                else if (bigDiskExists)
+                    labelOvf.Text = bigDiskMsg;
+
+                _tlpInfoXva.Visible = false;
+                _tlpInfoOvf.Visible = !radioButtonOvf.Enabled;
+            }
+            else
+            {
+                var vAppRef = VMsToExport.Select(v => v.appliance).Distinct().FirstOrDefault();
+                var vApp = Connection.Resolve(vAppRef);
+                if (vApp != null)
+                    m_textBoxApplianceName.Text = vApp.Name();
+
+                radioButtonXva.Enabled = false;
+                radioButtonOvf.Enabled = radioButtonOvf.Checked = !bigDiskExists;
+                
+                if (bigDiskExists)
+                    labelOvf.Text = bigDiskMsg;
+                
+                _tlpInfoXva.Visible = true;
+                _tlpInfoOvf.Visible = !radioButtonOvf.Enabled;
+            }
+
+            CheckVtpm();
+            OnPageUpdated();
+        }
+
+        private void CheckVtpm()
+        {
+            if (Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) ||
+                !Helpers.XapiEqualOrGreater_22_26_0(Connection) ||
+                !VMsToExport.Any(v => v.VTPMs.Count > 0))
+            {
+                _tlpWarning.Visible = false;
+            }
+            else if (Helpers.XapiEqualOrGreater_23_9_0(Connection))
+            {
+                labelWarning.Text = Messages.VTPM_EXPORT_UNSUPPORTED_FOR_OVF;
+                _tlpWarning.Visible = radioButtonOvf.Checked;
+            }
+            else
+            {
+                labelWarning.Text = Messages.VTPM_EXPORT_UNSUPPORTED_FOR_ALL;
+                _tlpWarning.Visible = true;
+            }
+        }
 
         public override bool EnableNext()
         {
-            return m_buttonNextEnabled;
+            return (radioButtonXva.Enabled && radioButtonXva.Checked ||
+                    radioButtonOvf.Enabled && radioButtonOvf.Checked) &&
+                   !m_ctrlError.Visible;
         }
 
 		#endregion
 
 		#region Private methods
 
-        /// <summary>
-        /// Performs certain checks on the pages's input data and shows/hides an error accordingly
-        /// </summary>
-        /// <param name="checks">The checks to perform</param>
-        private bool PerformCheck(params CheckDelegate[] checks)
-        {
-            m_buttonNextEnabled = m_ctrlError.PerformCheck(checks);
-            OnPageUpdated();
-            return m_buttonNextEnabled;
-        }
-
 		private bool CheckPathValid(out string error)
 		{
 			error = string.Empty;
 
-			if (String.IsNullOrEmpty(ApplianceFileName))
+			if (string.IsNullOrEmpty(ApplianceFileName))
 				return false;
 
 			if (!PathValidator.IsFileNameValid(ApplianceFileName, out string invalidNameMsg))
 			{
-				error = string.Join(" ", new []{ Messages.EXPORT_APPLIANCE_PAGE_ERROR_INALID_APP , invalidNameMsg});
+				error = string.Join(" ", Messages.EXPORT_APPLIANCE_PAGE_ERROR_INALID_APP, invalidNameMsg);
 				return false;
 			}
 
-			if (String.IsNullOrEmpty(ApplianceDirectory))
+			if (string.IsNullOrEmpty(ApplianceDirectory))
 				return false;
 
-			string path = String.Format("{0}\\{1}", ApplianceDirectory, ApplianceFileName);
+			string path = $"{ApplianceDirectory}\\{ApplianceFileName}";
 
 			if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
 			{
-				error = string.Join(" ", new[] { Messages.EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR, invalidPathMsg });
+				error = string.Join(" ", Messages.EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR, invalidPathMsg);
 				return false;
 			}
 
@@ -219,16 +254,82 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		private bool CheckApplianceExists(out string error)
 		{
-
-		    ApplianceCheck.FileExtension extension = m_comboBoxFormat.SelectedItem.ToString().Contains("xva")
-		                                                 ? ApplianceCheck.FileExtension.xva
-		                                                 : ApplianceCheck.FileExtension.ovaovf;
+            ApplianceCheck.FileExtension extension = radioButtonXva.Checked
+                ? ApplianceCheck.FileExtension.xva
+                : ApplianceCheck.FileExtension.ovaovf;
 
 		    ApplianceCheck check = new ApplianceExistsCheck(ApplianceDirectory, ApplianceFileName, extension);
 		    check.Validate();
 		    error = check.ErrorReason;
 		    return check.IsValid;
 		}
+
+        private bool CheckSpaceRequirements(out string errorMsg)
+        {
+            errorMsg = string.Empty;
+            ulong spaceNeeded = 0;
+
+            foreach (var vm in VMsToExport)
+            {
+                spaceNeeded += vm.GetTotalSize();
+
+                if (IncludeMemorySnapshot)
+                {
+                    var vdi = vm.Connection.Resolve(vm.suspend_VDI);
+                    if (vdi != null)
+                        spaceNeeded += (ulong)vdi.virtual_size;
+                }
+            }
+
+            ulong availableSpace = GetFreeSpace(ApplianceDirectory);
+
+            if (spaceNeeded > availableSpace)
+            {
+                errorMsg = string.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH,
+                    Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool BigDiskExists()
+        {
+            foreach (var vm in VMsToExport)
+            {
+                foreach (var vbdRef in vm.VBDs)
+                {
+                    var vbd = Connection.Resolve(vbdRef);
+                    if (vbd == null)
+                        continue;
+
+                    var vdi = Connection.Resolve(vbd.VDI);
+                    if (vdi == null)
+                        continue;
+
+                    if (vdi.virtual_size > SR.DISK_MAX_SIZE)
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private ulong GetFreeSpace(string drivename)
+        {
+            if (!drivename.EndsWith(@"\"))
+                drivename += @"\";
+
+            long space = 0;
+            long lpTotalNumberOfBytes = 0;
+            long lpTotalNumberOfFreeBytes = 0;
+
+            if (Win32.GetDiskFreeSpaceEx(drivename, ref space, ref lpTotalNumberOfBytes, ref lpTotalNumberOfFreeBytes))
+                return (ulong)space;
+
+            return 0;
+        }
 
 		#endregion
 
@@ -249,21 +350,36 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		private void m_textBoxApplianceName_TextChanged(object sender, EventArgs e)
 		{
-			PerformCheck(CheckPathValid);
-			IsDirty = true;
+            IsDirty = true;
+            m_ctrlError.PerformCheck(CheckPathValid);
+            OnPageUpdated();
 		}
 
 		private void m_textBoxFolderName_TextChanged(object sender, EventArgs e)
 		{
-			PerformCheck(CheckPathValid);
-			IsDirty = true;
+            IsDirty = true;
+            m_ctrlError.PerformCheck(CheckPathValid);
+            OnPageUpdated();
 		}
 
-		private void m_comboBoxFormat_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			IsDirty = true;
-		}
+        private void radioButtonOvf_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonOvf.Checked)
+            {
+                IsDirty = true;
+                CheckVtpm();
+            }
+        }
 
-		#endregion
-	}
+        private void radioButtonXva_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonXva.Checked)
+            {
+                IsDirty = true;
+                CheckVtpm();
+            }
+        }
+
+        #endregion
+    }
 }

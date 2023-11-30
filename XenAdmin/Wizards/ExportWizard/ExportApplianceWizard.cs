@@ -56,8 +56,8 @@ namespace XenAdmin.Wizards.ExportWizard
         private readonly ExportFinishPage m_pageFinish;
         #endregion
 
-        private IXenObject m_selectedObject;
-		private bool? m_exportAsXva;
+        private bool _xvaMode = true;
+        private bool _rbacRequired;
 
 		public ExportApplianceWizard(IXenConnection con, SelectedItemCollection selection)
 			: base(con)
@@ -71,21 +71,25 @@ namespace XenAdmin.Wizards.ExportWizard
 		    m_pageExportOptions = new ExportOptionsPage();
             m_pageFinish = new ExportFinishPage();
 
-			m_selectedObject = selection.FirstAsXenObject;
-
-			if (selection.Count == 1 && (m_selectedObject is VM || m_selectedObject is VM_appliance))
-				m_pageExportAppliance.ApplianceFileName = m_selectedObject.Name();
-
-			m_pageExportAppliance.OvfModeOnly = m_selectedObject is VM_appliance;
 			m_pageFinish.SummaryRetriever = GetSummary;
 			m_pageExportSelectVMs.SelectedItems = selection;
 
-            AddPages(m_pageExportAppliance, m_pageExportSelectVMs, m_pageFinish);
-		}
+            AddPages(m_pageExportSelectVMs, m_pageExportAppliance, m_pageFinish);
+
+            _rbacRequired = Helpers.ConnectionRequiresRbac(xenConnection);
+
+            if (_rbacRequired)
+                AddAfterPage(m_pageExportAppliance, m_pageRbac);
+
+            if (selection.Count == 1 && selection[0].XenObject is VM_appliance || selection.Count > 1)
+                _xvaMode = false;
+
+            UpdateMode();
+        }
 
         protected override void FinishWizard()
 		{
-			if ((bool)m_exportAsXva)
+			if (_xvaMode)
 			{
 				var filename = Path.Combine(m_pageExportAppliance.ApplianceDirectory, m_pageExportAppliance.ApplianceFileName);
 				if (!filename.EndsWith(".xva"))
@@ -120,78 +124,62 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			Type type = page.GetType();
 
-			if (type == typeof(ExportAppliancePage))
-			{
-			    var oldExportasXva = m_exportAsXva;
-			    m_exportAsXva = m_pageExportAppliance.ExportAsXva; //this ensures that m_exportAsXva is assigned a value
+            if (type == typeof(ExportSelectVMsPage))
+            {
+                m_pageExportAppliance.VMsToExport = m_pageExportSelectVMs.VMsToExport;
+                m_pageExportAppliance.IncludeMemorySnapshot = m_pageExportSelectVMs.IncludeMemorySnapshot;
 
-			    var ovfPages = new XenTabPage[] {m_pageExportEula, m_pageExportOptions};
-
-			    if (oldExportasXva != m_exportAsXva)
-			    {
-			        RemovePage(m_pageRbac);
-
-			        if ((bool)m_exportAsXva)
-			        {
-			            Text = Messages.MAINWINDOW_XVA_TITLE;
-			            pictureBoxWizard.Image = Images.StaticImages.export_32;
-			            RemovePages(ovfPages);
-			        }
-			        else
-			        {
-			            Text = Messages.EXPORT_APPLIANCE;
-			            pictureBoxWizard.Image = Images.StaticImages._000_ExportVirtualAppliance_h32bit_32;
-			            AddAfterPage(m_pageExportSelectVMs, ovfPages);
-			        }
-
-                    if (Helpers.ConnectionRequiresRbac(xenConnection))
-                        AddRbacPage();
+                if (_xvaMode && m_pageExportSelectVMs.VMsToExport.Count > 1)
+                {
+                    _xvaMode = false;
+                    UpdateMode();
+                    RemovePages(m_pageFinish);
+                    AddPages(m_pageExportEula, m_pageExportOptions, m_pageFinish);
                 }
 
-			    m_pageExportSelectVMs.ExportAsXva = (bool)m_exportAsXva;
+                NotifyNextPagesOfChange(m_pageExportAppliance);
+            }
+            else if (type == typeof(ExportAppliancePage))
+            {
+                var oldXvaMode = _xvaMode;
+                _xvaMode = m_pageExportAppliance.ExportAsXva; //this ensures that m_exportAsXva is assigned a value
 
-                if (m_pageExportSelectVMs.ApplianceDirectory != m_pageExportAppliance.ApplianceDirectory)
-                    NotifyNextPagesOfChange(m_pageExportSelectVMs);
+                if (_xvaMode != oldXvaMode)
+                {
+                    UpdateMode();
 
-			    m_pageExportSelectVMs.ApplianceDirectory = m_pageExportAppliance.ApplianceDirectory;
+                    if (_xvaMode)
+                    {
+                        RemovePages(m_pageExportEula, m_pageExportOptions);
+                    }
+                    else
+                    {
+                        RemovePages(m_pageFinish);
+                        AddPages(m_pageExportEula, m_pageExportOptions, m_pageFinish);
+                    }
+                }
 
-                m_pageFinish.ExportAsXva = (bool)m_exportAsXva;
+                m_pageFinish.ExportAsXva = _xvaMode;
 			}
 
             if (type != typeof(ExportFinishPage))
 				NotifyNextPagesOfChange(m_pageFinish);
 		}
 
-        private void AddRbacPage()
-        {
-            var exportAsXva = m_exportAsXva.HasValue && m_exportAsXva.Value;
-
-            var rbacDependencies = exportAsXva ? ExportVmAction.StaticRBACDependencies : ExportApplianceAction.StaticRBACDependencies;
-            var message = exportAsXva ? Messages.RBAC_WARNING_EXPORT_WIZARD_XVA : Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE;
-
-            m_pageRbac.SetPermissionChecks(xenConnection,
-                new WizardRbacCheck(message, rbacDependencies) {Blocking = true});
-
-            AddAfterPage(m_pageExportAppliance, m_pageRbac);
-        }
-
         protected override string WizardPaneHelpID()
         {
             var curPageType = CurrentStepTabPage.GetType();
 
             if (curPageType == typeof(RBACWarningPage))
-                return FormatHelpId((bool)m_exportAsXva ? "RbacExportXva" : "RbacExportOvf");
-
-            if (curPageType == typeof(ExportFinishPage))
-               return FormatHelpId((bool)m_exportAsXva ? "ExportFinishXva" : "ExportFinishOvf");
+                return FormatHelpId(_xvaMode ? "RbacExportXva" : "RbacExportOvf");
 
             return base.WizardPaneHelpID();
         }
 
         protected override IEnumerable<Tuple> GetSummary()
-		{
-			return (bool)m_exportAsXva ? GetSummaryXva() : GetSummaryOvf();
-		}
+        {
+            return _xvaMode ? GetSummaryXva() : GetSummaryOvf();
+        }
 
 		private IEnumerable<Tuple> GetSummaryOvf()
 		{
@@ -235,6 +223,29 @@ namespace XenAdmin.Wizards.ExportWizard
                 temp.Add(new Tuple(Messages.FINISH_PAGE_INCLUDE_MEM_SNAPSHOT, m_pageExportSelectVMs.IncludeMemorySnapshot.ToYesNoStringI18n()));
 
             return temp;
+        }
+
+        private void UpdateMode()
+        {
+            Text = _xvaMode ? Messages.MAINWINDOW_XVA_TITLE : Messages.EXPORT_APPLIANCE;
+
+            pictureBoxWizard.Image = _xvaMode
+                ? Images.StaticImages.export_32
+                : Images.StaticImages._000_ExportVirtualAppliance_h32bit_32;
+
+            if (_rbacRequired)
+            {
+                var dependencies = _xvaMode
+                    ? ExportVmAction.StaticRBACDependencies
+                    : ExportApplianceAction.StaticRBACDependencies;
+
+                var message = _xvaMode 
+                    ? Messages.RBAC_WARNING_EXPORT_WIZARD_XVA
+                    : Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE;
+
+                m_pageRbac.SetPermissionChecks(xenConnection,
+                    new WizardRbacCheck(message, dependencies) { Blocking = true });
+            }
         }
     }
 }
