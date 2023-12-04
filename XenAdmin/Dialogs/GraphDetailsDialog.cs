@@ -112,7 +112,7 @@ namespace XenAdmin.Dialogs
                     if (!toolStripMenuItemDisabled.Checked && !dataSourceItem.Enabled)
                         continue;
 
-                    if (!searchTextBox.Matches(dataSourceItem.ToString()))
+                    if (!searchTextBox.Matches(dataSourceItem.FriendlyName))
                         continue;
 
                     var displayOnGraph = _designedGraph.DataSourceItems.Contains(dataSourceItem);
@@ -183,7 +183,7 @@ namespace XenAdmin.Dialogs
                 return;
 
             buttonEnable.Enabled = false;
-            var action = new EnableDataSourceAction(_graphList.XenObject, dataSource, row.Dsi.ToString());
+            var action = new EnableDataSourceAction(_graphList.XenObject, dataSource, row.Dsi.FriendlyName);
 
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee)
             {
@@ -408,8 +408,8 @@ namespace XenAdmin.Dialogs
                 Dsi = dataSourceItem;
 
                 _checkBoxCell.Value = displayOnGraph;
-                _dataSourceCell.Value = Dsi.ToString();
-                _nameDescription.Value = Dsi.DataSource.name_description;
+                _dataSourceCell.Value = Dsi.FriendlyName;
+                _nameDescription.Value = Dsi.FriendlyDescription;
                 _typeCell.Value = Dsi.Category.ToStringI18N();
                 _enabledCell.Value = Dsi.Enabled.ToYesNoStringI18n();
                 _colorCell.Value = Dsi.Color;

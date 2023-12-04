@@ -56,9 +56,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         public DesignedGraph(DesignedGraph sourceGraph) : this()
         {
             DisplayName = sourceGraph.DisplayName;
-            foreach (DataSourceItem dsi in sourceGraph.DataSourceItems)
+            foreach (var dsi in sourceGraph.DataSourceItems)
             {
-                DataSourceItems.Add(new DataSourceItem(dsi.DataSource, dsi.ToString(), dsi.Color, dsi.Id));
+                DataSourceItems.Add(new DataSourceItem(dsi.DataSource, dsi.FriendlyName, dsi.FriendlyDescription, dsi.Color, dsi.Id));
             }
         }
 
@@ -126,17 +126,19 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public bool Enabled { get; set; }
         public bool Hidden { get; }
-        private readonly string friendlyName;
+        public string FriendlyName { get; }
+        public string FriendlyDescription { get; }
         public Color Color;
         public bool ColorChanged;
         public string Id { get; }
         public Helpers.DataSourceCategory Category { get; }
 
-        public DataSourceItem(Data_source ds, string friendlyname, Color color, string id)
+        public DataSourceItem(Data_source ds, string friendlyName, string friendlyDescription, Color color, string id)
         {
             DataSource = ds;
             Enabled = DataSource.enabled;
-            friendlyName = friendlyname;
+            FriendlyName = friendlyName;
+            FriendlyDescription = friendlyDescription;
             Color = color;
             Id = id;
             Hidden = string.IsNullOrEmpty(ds.units) || ds.units == "unknown";
@@ -153,12 +155,12 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public override string ToString()
         {
-            return friendlyName;
+            return FriendlyName;
         }
 
         public int CompareTo(DataSourceItem other)
         {
-            return ToString().CompareTo(other.ToString());
+            return string.Compare(FriendlyName, other.FriendlyName, StringComparison.Ordinal);
         }
 
         public bool Equals(DataSourceItem other)

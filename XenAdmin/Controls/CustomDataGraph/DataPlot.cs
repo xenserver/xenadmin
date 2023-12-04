@@ -392,9 +392,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             SizeF labelsize = new SizeF(0,0);
             if (SelectedPoint != null && DataKey.SelectedDataSet != null)
             {
-                string label = string.Format("{0} - {1} = {2}",
+                var friendlyName = Helpers.GetFriendlyDataSourceName(DataKey.SelectedDataSet.DataSourceName, DataKey.SelectedDataSet.XenObject);
+                var label = string.Format("{0} - {1} = {2}",
                     DataPlotNav.XRange.GetString(SelectedPoint.X + ArchiveMaintainer.ClientServerOffset.Ticks),
-                    DataKey.SelectedDataSet.FriendlyName,
+                    friendlyName,
                     SelectedPoint.Y >= 0 ? SelectedYRange.GetString(SelectedPoint.Y) : Messages.GRAPHS_NO_DATA);
                 labelsize = paintEventArgs.Graphics.MeasureString(label,Palette.LabelFont);
                 paintEventArgs.Graphics.DrawString(label, Palette.LabelFont, Palette.LabelBrush, SlightlySmaller.Right - labelsize.Width, SlightlySmaller.Top - (labelsize.Height + 1));

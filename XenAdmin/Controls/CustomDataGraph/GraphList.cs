@@ -438,7 +438,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         void AddDataSource(string uuid, List<string> dsuuids, DesignedGraph dg)
         {
             dsuuids.Add(uuid);
-            dg.DataSourceItems.Add(new DataSourceItem(new Data_source(), "", Palette.GetColour(uuid), uuid));
+            dg.DataSourceItems.Add(new DataSourceItem(new Data_source(), string.Empty, string.Empty, Palette.GetColour(uuid), uuid));
         }
 
         private string elevatedUsername;

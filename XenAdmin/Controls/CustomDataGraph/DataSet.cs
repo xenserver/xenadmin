@@ -53,31 +53,23 @@ namespace XenAdmin.Controls.CustomDataGraph
         public readonly IXenObject XenObject;
         public readonly string Id = "";
         public readonly string DataSourceName;
-        public string FriendlyName { get; }
         private readonly int _multiplyingFactor = 1;
         public readonly DataRange CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
         public bool Hide { get; }
 
-        public DataSet(IXenObject xo, bool hide, string datasourceName, List<Data_source> datasources)
+        public DataSet(IXenObject xo, bool hide, string dataSourceName, List<Data_source> dataSources)
         {
             XenObject = xo;
-            Hide = datasourceName == "memory" || datasourceName == "memory_total_kib" || hide;
+            Hide = dataSourceName == "memory" || dataSourceName == "memory_total_kib" || hide;
 
-            DataSourceName = datasourceName;
+            DataSourceName = dataSourceName;
 
             if (xo is Host host)
-                Id = $"host:{host.uuid}:{datasourceName}";
+                Id = $"host:{host.uuid}:{dataSourceName}";
             else if (xo is VM vm)
-                Id = $"vm:{vm.uuid}:{datasourceName}";
+                Id = $"vm:{vm.uuid}:{dataSourceName}";
 
-            if (datasourceName == "memory_free_kib")
-                FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", xo);
-            else if (datasourceName == "memory_internal_free")
-                FriendlyName = Helpers.GetFriendlyDataSourceName("memory_internal_used", xo);
-            else
-                FriendlyName = Helpers.GetFriendlyDataSourceName(datasourceName, xo);
-
-            var units = datasources.FirstOrDefault(d => datasourceName == d.name_label)?.units;
+            var units = dataSources.FirstOrDefault(d => dataSourceName == d.name_label)?.units;
 
             switch (units)
             {
@@ -152,7 +144,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     break;
             }
 
-            if (datasourceName == "memory_free_kib" || datasourceName == "memory_internal_free")
+            if (dataSourceName == "memory_free_kib" || dataSourceName == "memory_internal_free")
             {
                 var max = GetMemoryMax(xo);
                 var resolution = GetMemoryResolution(max);
@@ -301,7 +293,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public override string ToString()
         {
-            return FriendlyName;
+            return Helpers.GetFriendlyDataSourceName(DataSourceName, XenObject);
         }
 
         public DataPoint OnMouseMove(MouseActionArgs args)
@@ -558,7 +550,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             int comp = DisplayArea.CompareTo(other.DisplayArea);
             if (comp == 0)
-                return StringUtility.NaturalCompare(FriendlyName, other.FriendlyName);
+                return StringUtility.NaturalCompare(this.ToString(), other.ToString());
             return comp;
         }
 
