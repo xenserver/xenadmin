@@ -42,11 +42,12 @@ namespace XenAdmin.Core
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
-        public static string GetFriendlyName(string s)
+        public static string GetFriendlyName(string s, bool ignoreAssert = false)
         {
             var result = FriendlyNames.GetString(s);
 #if DEBUG
-            Debug.Assert(result != null, $"{s} doesn't exist in FriendlyNames");
+            if(!ignoreAssert)
+                Debug.Assert(result != null, $"{s} doesn't exist in FriendlyNames");
 #endif
             switch (s)
             {

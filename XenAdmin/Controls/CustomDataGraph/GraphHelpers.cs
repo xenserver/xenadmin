@@ -183,16 +183,11 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (dataSource.name_label == "memory_total_kib" || dataSource.name_label == "memory")
                     continue;
 
-                string friendlyName;
-                if (dataSource.name_label == "memory_free_kib" && xenObject is Host)
-                    friendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", xenObject);
-                else if (dataSource.name_label == "memory_internal_free" && xenObject is VM)
-                    friendlyName = Helpers.GetFriendlyDataSourceName("memory_internal_used", xenObject);
-                else
-                    friendlyName = Helpers.GetFriendlyDataSourceName(dataSource.name_label, xenObject);
+                var friendlyName = Helpers.GetFriendlyDataSourceName(dataSource.name_label, xenObject) ?? dataSource.name_label;
+                var friendlyDescription = Helpers.GetFriendlyDataSourceDescription(dataSource.name_label, xenObject) ?? dataSource.name_description;
 
-                string itemUuid = Palette.GetUuid(dataSource.name_label, xenObject);
-                dataSourceItems.Add(new DataSourceItem(dataSource, friendlyName, Palette.GetColour(itemUuid), itemUuid));
+                var itemUuid = Palette.GetUuid(dataSource.name_label, xenObject);
+                dataSourceItems.Add(new DataSourceItem(dataSource, friendlyName, friendlyDescription, Palette.GetColour(itemUuid), itemUuid));
             }
 
             // Filter old datasources only if we have their replacement ones

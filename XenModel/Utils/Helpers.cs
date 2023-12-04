@@ -719,12 +719,34 @@ namespace XenAdmin.Core
             return DataSourceCategory.Custom;
         }
 
+        private static string GetDataSourceId(string originalId)
+        {
+            switch (originalId)
+            {
+                case "memory_free_kib":
+                    return "memory_used_kib";
+                case "memory_internal_free":
+                    return "memory_internal_used";
+                default:
+                    return originalId;
+            }
+        }
+
+        public static string GetFriendlyDataSourceDescription(string name, IXenObject iXenObject)
+        {
+            var id = GetDataSourceId(name);
+            // suppressing the assert check since we don't support localization anymore, so there's no need to override all descriptions.
+            return iXenObject == null ? id : FriendlyNameManager.GetFriendlyName($"Description-performance.{id}", true);
+        }
+
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
         {
+            var id = GetDataSourceId(name);
             if (iXenObject == null)
-                return name;
-            string s = GetFriendlyDataSourceName_(name, iXenObject);
-            return string.IsNullOrEmpty(s) ? name : s;
+                return id;
+
+            var friendlyDataSourceName = GetFriendlyDataSourceName_(id, iXenObject);
+            return string.IsNullOrEmpty(friendlyDataSourceName) ? id : friendlyDataSourceName;
         }
 
         private static string GetFriendlyDataSourceName_(string name, IXenObject iXenObject)

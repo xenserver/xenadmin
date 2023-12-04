@@ -619,6 +619,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Memory used as reported by the guest agent.
+        /// </summary>
+        public static string Description_performance_memory_internal_used {
+            get {
+                return ResourceManager.GetString("Description-performance.memory_internal_used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total amount of used memory.
+        /// </summary>
+        public static string Description_performance_memory_used_kib {
+            get {
+                return ResourceManager.GetString("Description-performance.memory_used_kib", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always try to restart VM.
         /// </summary>
         public static string Description_VM_ha_restart_priority_AlwaysRestart {
