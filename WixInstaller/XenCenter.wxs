@@ -194,7 +194,12 @@
         <Property Id="Install_All" Value="0" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
-        <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
+        <!-- 
+            CA-379341: We use `afterInstallExecute` instead of `afterInstallInitialize` to ensure that `RemoveExistingProducts` doesn't forcibly remove shortcuts on upgrades.
+            Without this change, `RemoveExistingProducts` is executed before we check the conditions of `RemoveShortcuts`, which removes all shortcuts regardless of our options.
+            This is not ideal when upgrading between major versions (e.g.: 2023.1.0 to 2024.1.0).
+        -->
+        <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallExecute" />
         <PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
         <Condition Message="!(loc.Required_For_Installation)">
             <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
@@ -220,7 +225,7 @@
             <ProcessComponents Sequence="1600" />
             <UnpublishFeatures Sequence="1800" />
             <RemoveRegistryValues Sequence="2600" />
-            <RemoveShortcuts Sequence="3200" />
+            <RemoveShortcuts Sequence="3200">(UPGRADINGPRODUCTCODE="") AND (REMOVE="ALL")</RemoveShortcuts>
             <RemoveFiles Sequence="3500" />
             <InstallFiles Sequence="4000" />
             <CreateShortcuts Sequence="4500" />
