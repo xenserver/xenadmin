@@ -1,26 +1,21 @@
 XenCenter
 =========
 
-![Checks](https://github.com/xenserver/xenadmin/actions/workflows/main.yml/badge.svg)
-[![Lines of Code](https://tokei.rs/b1/github/xenserver/xenadmin)](https://github.com/xenserver/xenadmin)
+Please note that as of December 2023 this copy of the XenCenter repository is
+considered archived. As such it will not reflect the latest state of XenCenter
+development, and any pull requests will not be reviewed/merged. If you have any
+feedback regarding XenCenter, please send it to feedback@xenserver.com.
 
-This repository contains the source code for XenCenter.
+---
 
-XenCenter is a Windows-based management tool for XenServer and Citrix Hypervisor environments,
-which enables users to manage and monitor server and resource pools,
+Overview
+--------
+
+XenCenter is a Windows-based management tool for XenServer and Citrix Hypervisor
+environments, which enables users to manage and monitor server and resource pools,
 and to deploy, monitor, manage, and migrate virtual machines.
 
 XenCenter is written in C#.
-
-Contributions
--------------
-
-The preferable way to contribute patches is to fork the repository on Github and
-then submit a pull request. If for some reason you can't use Github to submit a
-pull request, then you may send your patch for review to the
-xs-devel@lists.xenserver.org mailing list, with a link to a public git repository
-for review. Please see the [CONTRIB](CONTRIB) file for some general guidelines
-on submitting changes.
 
 License
 -------
